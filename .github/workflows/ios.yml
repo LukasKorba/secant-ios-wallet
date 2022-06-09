@@ -18,6 +18,6 @@ jobs:
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_13.2.app && /usr/bin/xcodebuild -version
     - name: Resolve dependencies
-      run: xcodebuild -resolvePackageDependencies -clonedSourcePackagesDirPath .
+      run: xcodebuild -resolvePackageDependencies -clonedSourcePackagesDirPath SourcePackages
     - name: Run unit tests
-      run: xcodebuild -resolvePackageDependencies -clonedSourcePackagesDirPath . test -scheme secant-testnet -project secant.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.2' | xcpretty && exit ${PIPESTATUS[0]}
+      run: xcodebuild test -scheme secant-testnet -project secant.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.2' -resolvePackageDependencies -clonedSourcePackagesDirPath SourcePackages | xcpretty && exit ${PIPESTATUS[0]}
