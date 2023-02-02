@@ -72,7 +72,7 @@ iOSInjectionProject/
 Pods
 
 # do not commit Google Firebase config PLIST file
-secant/Resources/GoogleService-info.plist
+GoogleService-info.plist
 
 # do not commit generated libraries to this repo
 lib
