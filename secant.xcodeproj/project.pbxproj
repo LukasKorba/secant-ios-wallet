@@ -12,6 +12,10 @@
 		0D185819272723FF0046B928 /* ColoredChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D185818272723FF0046B928 /* ColoredChip.swift */; };
 		0D18581B272728D60046B928 /* PhraseChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D18581A272728D60046B928 /* PhraseChip.swift */; };
 		0D1C1AA327611EFD0004AF6A /* RecoveryPhraseDisplayReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1C1AA227611EFD0004AF6A /* RecoveryPhraseDisplayReducerTests.swift */; };
+		0D26103A298C3DCD00CC9DE9 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0D261039298C3DCD00CC9DE9 /* FirebaseCrashlytics */; };
+		0D26103C298C3E4800CC9DE9 /* CrashReportingInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D26103B298C3E4800CC9DE9 /* CrashReportingInterface.swift */; };
+		0D26103E298C3FA600CC9DE9 /* CrashReporterLiveKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D26103D298C3FA600CC9DE9 /* CrashReporterLiveKey.swift */; };
+		0D261040298C406F00CC9DE9 /* CrashReporterTestKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D26103F298C406F00CC9DE9 /* CrashReporterTestKey.swift */; };
 		0D2ACE8026C2C67100D62E3C /* Zboto.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0D2ACE7F26C2C67100D62E3C /* Zboto.otf */; };
 		0D35CC46277A36E00074316A /* ScrollableWhenScaled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D35CC45277A36E00074316A /* ScrollableWhenScaled.swift */; };
 		0D3D04082728B3440032ABC1 /* RecoveryPhraseDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3D04072728B3440032ABC1 /* RecoveryPhraseDisplayView.swift */; };
@@ -313,6 +317,9 @@
 		0D185818272723FF0046B928 /* ColoredChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredChip.swift; sourceTree = "<group>"; };
 		0D18581A272728D60046B928 /* PhraseChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhraseChip.swift; sourceTree = "<group>"; };
 		0D1C1AA227611EFD0004AF6A /* RecoveryPhraseDisplayReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryPhraseDisplayReducerTests.swift; sourceTree = "<group>"; };
+		0D26103B298C3E4800CC9DE9 /* CrashReportingInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashReportingInterface.swift; sourceTree = "<group>"; };
+		0D26103D298C3FA600CC9DE9 /* CrashReporterLiveKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashReporterLiveKey.swift; sourceTree = "<group>"; };
+		0D26103F298C406F00CC9DE9 /* CrashReporterTestKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashReporterTestKey.swift; sourceTree = "<group>"; };
 		0D2ACE7F26C2C67100D62E3C /* Zboto.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zboto.otf; sourceTree = "<group>"; };
 		0D35CC45277A36E00074316A /* ScrollableWhenScaled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableWhenScaled.swift; sourceTree = "<group>"; };
 		0D3D04072728B3440032ABC1 /* RecoveryPhraseDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryPhraseDisplayView.swift; sourceTree = "<group>"; };
@@ -599,6 +606,7 @@
 				9E6612312878337F00C75B70 /* Lottie in Frameworks */,
 				0D5D9B8F2914620700DBD03F /* URLRouting in Frameworks */,
 				0DB4E0B42881FD9100947B78 /* ZcashLightClientKit in Frameworks */,
+				0D26103A298C3DCD00CC9DE9 /* FirebaseCrashlytics in Frameworks */,
 				9E2AC0FF27D8EC120042AA47 /* MnemonicSwift in Frameworks */,
 				6654C73A2715A38000901167 /* ComposableArchitecture in Frameworks */,
 				9EAB466D285A0468002904A0 /* Parsing in Frameworks */,
@@ -759,6 +767,16 @@
 				0D18581A272728D60046B928 /* PhraseChip.swift */,
 			);
 			path = Chips;
+			sourceTree = "<group>";
+		};
+		0D767873298C374F0047E085 /* CrashReporter */ = {
+			isa = PBXGroup;
+			children = (
+				0D26103B298C3E4800CC9DE9 /* CrashReportingInterface.swift */,
+				0D26103D298C3FA600CC9DE9 /* CrashReporterLiveKey.swift */,
+				0D26103F298C406F00CC9DE9 /* CrashReporterTestKey.swift */,
+			);
+			path = CrashReporter;
 			sourceTree = "<group>";
 		};
 		0D8A43C2272AEEA7005A6414 /* FontStyles */ = {
@@ -1301,6 +1319,7 @@
 				9EBDF978291F7E85000A1A05 /* AppVersion */,
 				9EBDF962291ECD42000A1A05 /* AudioServices */,
 				9EBDF969291ECEAC000A1A05 /* CaptureDevice */,
+				0D767873298C374F0047E085 /* CrashReporter */,
 				9EBDF94E291E5E5F000A1A05 /* DatabaseFiles */,
 				9EBDF959291E654F000A1A05 /* Deeplink */,
 				9EBDF971291F79C9000A1A05 /* DerivationTool */,
@@ -1838,6 +1857,7 @@
 				9E6612302878337F00C75B70 /* Lottie */,
 				0DB4E0B32881FD9100947B78 /* ZcashLightClientKit */,
 				0D5D9B8E2914620700DBD03F /* URLRouting */,
+				0D261039298C3DCD00CC9DE9 /* FirebaseCrashlytics */,
 			);
 			productName = secant;
 			productReference = 0D4E7A0526B364170058B01E /* secant-testnet.app */;
@@ -1919,6 +1939,7 @@
 				9E66122F2878337F00C75B70 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				0DB4E0B22881FD9100947B78 /* XCRemoteSwiftPackageReference "ZcashLightClientKit" */,
 				0D5D9B8D2914620700DBD03F /* XCRemoteSwiftPackageReference "swift-url-routing" */,
+				0D261038298C3DCD00CC9DE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 0D4E7A0626B364170058B01E /* Products */;
 			projectDirPath = "";
@@ -2028,6 +2049,7 @@
 			files = (
 				2EB660E02747EAB900A06A07 /* OnboardingFlowView.swift in Sources */,
 				9E7FE0DF282D2DD600C374E8 /* ZcashBadge.swift in Sources */,
+				0D261040298C406F00CC9DE9 /* CrashReporterTestKey.swift in Sources */,
 				9EBDF975291F79F9000A1A05 /* DerivationToolInterface.swift in Sources */,
 				660558F8270C862F009D6954 /* XCAssets+Generated.swift in Sources */,
 				9EAFEB902808183D00199FC9 /* SandboxStore.swift in Sources */,
@@ -2040,6 +2062,7 @@
 				9EBDF96E291ECED4000A1A05 /* CaptureDeviceLiveKey.swift in Sources */,
 				9EBDF968291ECDA2000A1A05 /* AudioServicesInterface.swift in Sources */,
 				9EB863BD2923C704003D0F8B /* NotificationCenterTest.swift in Sources */,
+				0D26103E298C3FA600CC9DE9 /* CrashReporterLiveKey.swift in Sources */,
 				9EB863A829239DCB003D0F8B /* RecoveryPhraseRandomizerLiveKey.swift in Sources */,
 				2EDA07A027EDE18C00D6F09B /* TCATextField.swift in Sources */,
 				9EBDF961291E657B000A1A05 /* DeeplinkInterface.swift in Sources */,
@@ -2207,6 +2230,7 @@
 				9EB863D02923D3FC003D0F8B /* SDKSynchronizerMocks.swift in Sources */,
 				9E612C7629880FC900D09B09 /* LogsHandlerTest.swift in Sources */,
 				2EDA07A227EDE1AE00D6F09B /* TextFieldFooter.swift in Sources */,
+				0D26103C298C3E4800CC9DE9 /* CrashReportingInterface.swift in Sources */,
 				F9971A5427680DD000A2DB75 /* ProfileView.swift in Sources */,
 				F9971A6027680DF600A2DB75 /* ScanStore.swift in Sources */,
 				9EB863952922D036003D0F8B /* NumberFormatterTestKey.swift in Sources */,
@@ -2604,6 +2628,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0D261038298C3DCD00CC9DE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 9.6.0;
+			};
+		};
 		0D5D9B8D2914620700DBD03F /* XCRemoteSwiftPackageReference "swift-url-routing" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-url-routing";
@@ -2655,6 +2687,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0D261039298C3DCD00CC9DE9 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0D261038298C3DCD00CC9DE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
 		0D5D9B8E2914620700DBD03F /* URLRouting */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0D5D9B8D2914620700DBD03F /* XCRemoteSwiftPackageReference "swift-url-routing" */;

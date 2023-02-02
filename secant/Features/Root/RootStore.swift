@@ -29,7 +29,8 @@ struct RootReducer: ReducerProtocol {
         case sandbox(SandboxReducer.Action)
         case welcome(WelcomeReducer.Action)
     }
-    
+
+    @Dependency(\.crashReporter) var crashReporter
     @Dependency(\.databaseFiles) var databaseFiles
     @Dependency(\.deeplink) var deeplink
     @Dependency(\.derivationTool) var derivationTool
