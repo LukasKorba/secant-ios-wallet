@@ -199,7 +199,7 @@ extension RootReducer {
                 return .none
 
             case .initialization(.configureCrashReporter):
-                crashReporter.configure()
+                _ = crashReporter.startReporting()
                 return .none
             }
         }

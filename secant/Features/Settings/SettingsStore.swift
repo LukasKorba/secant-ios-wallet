@@ -47,8 +47,10 @@ struct SettingsReducer: ReducerProtocol {
         case quickRescan
         case rescanBlockchain
         case updateDestination(SettingsReducer.State.Destination?)
+        case testCrashReporter // this will crash the app if live.
     }
 
+    @Dependency(\.crashReporter) var crashReporter
     @Dependency(\.localAuthentication) var localAuthentication
     @Dependency(\.mnemonic) var mnemonic
     @Dependency(\.sdkSynchronizer) var sdkSynchronizer
@@ -119,6 +121,9 @@ struct SettingsReducer: ReducerProtocol {
                 
             case .updateDestination(let destination):
                 state.destination = destination
+                return .none
+            case .testCrashReporter:
+                crashReporter.testCrash()
                 return .none
             }
         }
