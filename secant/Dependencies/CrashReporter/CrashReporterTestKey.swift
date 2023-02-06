@@ -10,6 +10,8 @@ extension CrashReporterClient: TestDependencyKey {
     static let testValue: CrashReporterClient = CrashReporterClient(
         canConfigure: { false },
         configure: {},
-        testCrash: {}
+        testCrash: {},
+        optIn: {},
+        optOut: {}
     )
 }

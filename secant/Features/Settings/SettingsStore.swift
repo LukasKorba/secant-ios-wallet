@@ -15,7 +15,9 @@ struct SettingsReducer: ReducerProtocol {
         var isSharingLogs = false
         var phraseDisplayState: RecoveryPhraseDisplayReducer.State
         var rescanDialog: ConfirmationDialogState<SettingsReducer.Action>?
-        
+
+        @BindableState var isCrashReportingOn: Bool
+
         var tempSDKDir: URL {
             let tempDir = FileManager.default.temporaryDirectory
             let sdkFileName = "sdkLogs.txt"
@@ -35,9 +37,10 @@ struct SettingsReducer: ReducerProtocol {
         }
     }
 
-    enum Action: Equatable {
+    enum Action: BindableAction, Equatable {
         case backupWallet
         case backupWalletAccessRequest
+        case binding(BindingAction<SettingsReducer.State>)
         case cancelRescan
         case exportLogs
         case fullRescan
@@ -47,15 +50,17 @@ struct SettingsReducer: ReducerProtocol {
         case quickRescan
         case rescanBlockchain
         case updateDestination(SettingsReducer.State.Destination?)
+        case userOptedOutCrashReporting(Bool)
         case testCrashReporter // this will crash the app if live.
     }
 
-    @Dependency(\.crashReporter) var crashReporter
     @Dependency(\.localAuthentication) var localAuthentication
     @Dependency(\.mnemonic) var mnemonic
     @Dependency(\.sdkSynchronizer) var sdkSynchronizer
     @Dependency(\.logsHandler) var logsHandler
     @Dependency(\.walletStorage) var walletStorage
+    @Dependency(\.userStoredPreferences) var userStoredPreferences
+    @Dependency(\.crashReporter) var crashReporter
 
     var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
@@ -78,6 +83,10 @@ struct SettingsReducer: ReducerProtocol {
                     // TODO: [#221] - merge with issue 221 (https://github.com/zcash/secant-ios-wallet/issues/221) and its Error States
                     return .none
                 }
+
+            case .binding(\.$isCrashReportingOn):
+                state.isCrashReportingOn = !self.userStoredPreferences.isUserOptedOutOfCrashReporting()
+                return .none
                 
             case .cancelRescan, .quickRescan, .fullRescan:
                 state.rescanDialog = nil
@@ -122,8 +131,20 @@ struct SettingsReducer: ReducerProtocol {
             case .updateDestination(let destination):
                 state.destination = destination
                 return .none
+
             case .testCrashReporter:
                 crashReporter.testCrash()
+                return .none
+
+            case .userOptedOutCrashReporting(let optedOut):
+                if optedOut {
+                    crashReporter.optOut()
+                } else {
+                    crashReporter.optIn()
+                }
+                return .none
+
+            case .binding:
                 return .none
             }
         }
@@ -169,7 +190,8 @@ extension SettingsReducer.State {
     static let placeholder = SettingsReducer.State(
         phraseDisplayState: RecoveryPhraseDisplayReducer.State(
             phrase: .placeholder
-        )
+        ),
+        isCrashReportingOn: false
     )
 }
 

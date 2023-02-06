@@ -25,7 +25,13 @@ struct CrashReporterClient {
     /// this will test the crash reporter
     /// - Note: depending of the crash reporter this may or may not crash your app.
     var testCrash: () -> Void
-    
+
+    /// this will tell the crash reporter that the user a has decided to opt-in crash reporting
+    var optIn: () -> Void
+
+    /// this will tell the crash reporter that the user has decided to opt-out of crash reporting
+    var optOut: () -> Void
+ 
     /// Attempts to start the crash reporter if `canConfigure()` returns `true`. Otherwise
     /// will just return `false` without doint anything other than calling that function.
     func startReporting() -> Bool {
@@ -35,4 +41,5 @@ struct CrashReporterClient {
 
         return true
     }
+
 }

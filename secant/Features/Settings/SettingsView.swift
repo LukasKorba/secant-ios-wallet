@@ -6,14 +6,15 @@ struct SettingsView: View {
     
     var body: some View {
         WithViewStore(store) { viewStore in
-            VStack {
+            VStack(spacing: 40) {
+                Toggle("Enable Crash Reporting", isOn: .constant(true))
+
                 Button(
                     action: { viewStore.send(.backupWalletAccessRequest) },
                     label: { Text("Backup Wallet") }
                 )
                 .activeButtonStyle
                 .frame(height: 50)
-                .padding(30)
                 
                 Button(
                     action: { viewStore.send(.rescanBlockchain) },
@@ -21,7 +22,6 @@ struct SettingsView: View {
                 )
                 .primaryButtonStyle
                 .frame(height: 50)
-                .padding(.horizontal, 30)
 
                 Button(
                     action: { viewStore.send(.exportLogs) },
@@ -38,12 +38,11 @@ struct SettingsView: View {
                 )
                 .primaryButtonStyle
                 .frame(height: 50)
-                .padding(.horizontal, 30)
-                .padding(.top, 30)
                 .disabled(viewStore.exportLogsDisabled)
 
                 Spacer()
             }
+            .padding(.horizontal, 30)
             .navigationTitle("Settings")
             .applyScreenBackground()
             .confirmationDialog(
