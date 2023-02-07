@@ -46,11 +46,11 @@ struct SettingsReducer: ReducerProtocol {
         case fullRescan
         case logsExported
         case logsShareFinished
+        case onAppear
         case phraseDisplay(RecoveryPhraseDisplayReducer.Action)
         case quickRescan
         case rescanBlockchain
         case updateDestination(SettingsReducer.State.Destination?)
-        case userOptedOutCrashReporting(Bool)
         case testCrashReporter // this will crash the app if live.
     }
 
@@ -65,6 +65,9 @@ struct SettingsReducer: ReducerProtocol {
     var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
             switch action {
+            case .onAppear:
+                state.isCrashReportingOn = !userStoredPreferences.isUserOptedOutOfCrashReporting()
+                return .none
             case .backupWalletAccessRequest:
                 return .run { send in
                     if await localAuthentication.authenticate() {
@@ -85,8 +88,15 @@ struct SettingsReducer: ReducerProtocol {
                 }
 
             case .binding(\.$isCrashReportingOn):
-                state.isCrashReportingOn = !self.userStoredPreferences.isUserOptedOutOfCrashReporting()
-                return .none
+                if state.isCrashReportingOn {
+                    crashReporter.optOut()
+                } else {
+                    crashReporter.optIn()
+                }
+
+                return .run { [state] send in
+                    await userStoredPreferences.setIsUserOptedOutOfCrashReporting(state.isCrashReportingOn)
+                }
                 
             case .cancelRescan, .quickRescan, .fullRescan:
                 state.rescanDialog = nil
@@ -123,7 +133,7 @@ struct SettingsReducer: ReducerProtocol {
                     ]
                 )
                 return .none
-                
+
             case .phraseDisplay:
                 state.destination = nil
                 return .none
@@ -134,14 +144,6 @@ struct SettingsReducer: ReducerProtocol {
 
             case .testCrashReporter:
                 crashReporter.testCrash()
-                return .none
-
-            case .userOptedOutCrashReporting(let optedOut):
-                if optedOut {
-                    crashReporter.optOut()
-                } else {
-                    crashReporter.optIn()
-                }
                 return .none
 
             case .binding:
@@ -191,7 +193,7 @@ extension SettingsReducer.State {
         phraseDisplayState: RecoveryPhraseDisplayReducer.State(
             phrase: .placeholder
         ),
-        isCrashReportingOn: false
+        isCrashReportingOn: true
     )
 }
 

@@ -8,8 +8,7 @@
 import ComposableArchitecture
 extension CrashReporterClient: TestDependencyKey {
     static let testValue: CrashReporterClient = CrashReporterClient(
-        canConfigure: { false },
-        configure: {},
+        configure: { _ in },
         testCrash: {},
         optIn: {},
         optOut: {}

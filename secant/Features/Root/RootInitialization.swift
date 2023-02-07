@@ -199,7 +199,9 @@ extension RootReducer {
                 return .none
 
             case .initialization(.configureCrashReporter):
-                _ = crashReporter.startReporting()
+                crashReporter.configure(
+                    userStoredPreferences.isUserOptedOutOfCrashReporting()
+                )
                 return .none
             }
         }

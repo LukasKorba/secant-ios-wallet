@@ -7,8 +7,9 @@ struct SettingsView: View {
     var body: some View {
         WithViewStore(store) { viewStore in
             VStack(spacing: 40) {
-                Toggle("Enable Crash Reporting", isOn: .constant(true))
-
+                Toggle("Enable Crash Reporting",
+                       isOn: viewStore.binding(\.$isCrashReportingOn)
+                )
                 Button(
                     action: { viewStore.send(.backupWalletAccessRequest) },
                     label: { Text("Backup Wallet") }
@@ -55,6 +56,7 @@ struct SettingsView: View {
                     RecoveryPhraseDisplayView(store: store.backupPhraseStore())
                 }
             )
+            .onAppear { viewStore.send(.onAppear) }
             
             if viewStore.isSharingLogs {
                 UIShareDialogView(

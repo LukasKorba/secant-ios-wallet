@@ -15,12 +15,9 @@ extension DependencyValues {
 }
 
 struct CrashReporterClient {
-    /// checks whether the pre-conditions are met to configure the crash reporter
-    var canConfigure: () -> Bool
-
     /// Configures the crash reporter if possible.
     /// if it can't be configured this will fail silently
-    var configure: () -> Void
+    var configure: (Bool) -> Void
 
     /// this will test the crash reporter
     /// - Note: depending of the crash reporter this may or may not crash your app.
@@ -31,15 +28,4 @@ struct CrashReporterClient {
 
     /// this will tell the crash reporter that the user has decided to opt-out of crash reporting
     var optOut: () -> Void
- 
-    /// Attempts to start the crash reporter if `canConfigure()` returns `true`. Otherwise
-    /// will just return `false` without doint anything other than calling that function.
-    func startReporting() -> Bool {
-        guard canConfigure() else { return false }
-
-        configure()
-
-        return true
-    }
-
 }
