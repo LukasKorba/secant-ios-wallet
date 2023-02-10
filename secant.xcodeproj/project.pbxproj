@@ -1851,6 +1851,7 @@
 				0D4E7A0126B364170058B01E /* Sources */,
 				0D4E7A0226B364170058B01E /* Frameworks */,
 				0D4E7A0326B364170058B01E /* Resources */,
+				0D300FA72996EAF200576003 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2007,6 +2008,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0D300FA72996EAF200576003 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\n";
+		};
 		0D3B01ED298DB0FE007EBCDA /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -2489,6 +2508,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 37;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"secant/Preview Content\"";
 				DEVELOPMENT_TEAM = RLPRR8CPQG;
 				ENABLE_BITCODE = NO;
