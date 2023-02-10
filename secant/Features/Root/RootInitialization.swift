@@ -200,7 +200,7 @@ extension RootReducer {
 
             case .initialization(.configureCrashReporter):
                 crashReporter.configure(
-                    userStoredPreferences.isUserOptedOutOfCrashReporting()
+                    !userStoredPreferences.isUserOptedOutOfCrashReporting()
                 )
                 return .none
             }

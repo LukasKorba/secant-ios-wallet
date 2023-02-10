@@ -41,6 +41,12 @@ struct SettingsView: View {
                 .frame(height: 50)
                 .disabled(viewStore.exportLogsDisabled)
 
+                Button(
+                    action: { viewStore.send(.testCrashReporter) },
+                    label: { Text("Test Crash Reporter") }
+                )
+                .primaryButtonStyle
+                .frame(height: 50)
                 Spacer()
             }
             .padding(.horizontal, 30)
