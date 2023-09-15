@@ -31,7 +31,8 @@ extension SDKSynchronizerClient: TestDependencyKey {
         getSaplingAddress: XCTUnimplemented("\(Self.self).getSaplingAddress", placeholder: nil),
         sendTransaction: XCTUnimplemented("\(Self.self).sendTransaction", placeholder: .placeholder()),
         shieldFunds: XCTUnimplemented("\(Self.self).shieldFunds", placeholder: .placeholder()),
-        wipe: XCTUnimplemented("\(Self.self).wipe")
+        wipe: XCTUnimplemented("\(Self.self).wipe"),
+        printPrivateWalletDebugOutput: XCTUnimplemented("\(Self.self).printPrivateWalletDebugOutput")
     )
 }
 
@@ -54,7 +55,8 @@ extension SDKSynchronizerClient {
         getSaplingAddress: { _ in return nil },
         sendTransaction: { _, _, _, _ in return .placeholder() },
         shieldFunds: { _, _, _ in return .placeholder() },
-        wipe: { Empty<Void, Error>().eraseToAnyPublisher() }
+        wipe: { Empty<Void, Error>().eraseToAnyPublisher() },
+        printPrivateWalletDebugOutput: { }
     )
 
     public static let mock = Self.mocked()
@@ -175,7 +177,8 @@ extension SDKSynchronizerClient {
                 zecAmount: Zatoshi(10)
             )
         },
-        wipe: @escaping () -> AnyPublisher<Void, Error>? = { Fail(error: "Error").eraseToAnyPublisher() }
+        wipe: @escaping () -> AnyPublisher<Void, Error>? = { Fail(error: "Error").eraseToAnyPublisher() },
+        printPrivateWalletDebugOutput: @escaping () -> Void = { }
     ) -> SDKSynchronizerClient {
         SDKSynchronizerClient(
             stateStream: stateStream,
@@ -195,7 +198,8 @@ extension SDKSynchronizerClient {
             getSaplingAddress: getSaplingAddress,
             sendTransaction: sendTransaction,
             shieldFunds: shieldFunds,
-            wipe: wipe
+            wipe: wipe,
+            printPrivateWalletDebugOutput: printPrivateWalletDebugOutput
         )
     }
 }

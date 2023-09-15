@@ -102,7 +102,8 @@ extension SDKSynchronizerClient {
                 )
                 return TransactionState(transaction: pendingTransaction)
             },
-            wipe: { synchronizer.wipe() }
+            wipe: { synchronizer.wipe() },
+            printPrivateWalletDebugOutput: { try await synchronizer.printPrivateWalletOutput() }
         )
     }
 }

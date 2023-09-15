@@ -99,6 +99,7 @@ public struct SettingsReducer: ReducerProtocol {
                     let phraseWords = mnemonic.asWords(storedWallet.seedPhrase.value())
                     let recoveryPhrase = RecoveryPhrase(words: phraseWords.map { $0.redacted })
                     state.phraseDisplayState.phrase = recoveryPhrase
+                    state.phraseDisplayState.birthday = storedWallet.birthday?.value()
                     return EffectTask(value: .updateDestination(.backupPhrase))
                 } catch {
                     state.alert = AlertState.cantBackupWallet(error.toZcashError())
@@ -232,7 +233,8 @@ extension SettingsReducer.State {
         exportLogsState: .placeholder,
         isCrashReportingOn: true,
         phraseDisplayState: RecoveryPhraseDisplayReducer.State(
-            phrase: .placeholder
+            phrase: .placeholder,
+            birthday: nil
         )
     )
 }

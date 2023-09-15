@@ -43,4 +43,6 @@ public struct SDKSynchronizerClient {
     public let shieldFunds: (UnifiedSpendingKey, Memo, Zatoshi) async throws -> TransactionState
 
     public let wipe: () -> AnyPublisher<Void, Error>?
+    
+    public let printPrivateWalletDebugOutput: () async throws -> Void
 }
