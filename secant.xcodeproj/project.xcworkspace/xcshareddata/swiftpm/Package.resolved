@@ -379,12 +379,12 @@
       }
     },
     {
-      "identity" : "zcash-swift-wallet-sdk",
+      "identity" : "zcashlightclientkit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Electric-Coin-Company/zcash-swift-wallet-sdk",
+      "location" : "https://github.com/LukasKorba/ZcashLightClientKit",
       "state" : {
-        "revision" : "8fa86ff37f85c74bd6585d59f38db2593e11d802",
-        "version" : "2.1.3"
+        "branch" : "1177-Remove-globalDBLock",
+        "revision" : "b5a269f6ec690de83f2a8886330f453c735623e7"
       }
     }
   ],
