@@ -105,7 +105,8 @@ extension BalanceBreakdownView {
                     fontName: FontFamily.Archivo.semiBold.name,
                     mostSignificantFontSize: 16,
                     leastSignificantFontSize: 8,
-                    format: .expanded
+                    format: .expanded,
+                    couldBeHidden: true
                 )
                 
                 Asset.Assets.shield.image
@@ -125,7 +126,8 @@ extension BalanceBreakdownView {
                     fontName: FontFamily.Archivo.semiBold.name,
                     mostSignificantFontSize: 16,
                     leastSignificantFontSize: 8,
-                    format: .expanded
+                    format: .expanded,
+                    couldBeHidden: true
                 )
                 .foregroundColor(Asset.Colors.shade47.color)
                 .padding(.trailing, viewStore.changePending.amount > 0 ? 0 : 21)
@@ -147,7 +149,8 @@ extension BalanceBreakdownView {
                     fontName: FontFamily.Archivo.semiBold.name,
                     mostSignificantFontSize: 16,
                     leastSignificantFontSize: 8,
-                    format: .expanded
+                    format: .expanded,
+                    couldBeHidden: true
                 )
                 .foregroundColor(Asset.Colors.shade47.color)
                 .padding(.trailing, viewStore.pendingTransactions.amount > 0 ? 0 : 21)
@@ -197,7 +200,8 @@ extension BalanceBreakdownView {
                     fontName: FontFamily.Archivo.semiBold.name,
                     mostSignificantFontSize: 16,
                     leastSignificantFontSize: 8,
-                    format: .expanded
+                    format: .expanded,
+                    couldBeHidden: true
                 )
                 .foregroundColor(Asset.Colors.shade47.color)
             }
