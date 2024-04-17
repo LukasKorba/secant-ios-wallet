@@ -501,8 +501,9 @@ let package = Package(
             dependencies: [
                 "AudioServices",
                 "BalanceFormatter",
-                "Generated",
                 "DerivationTool",
+                "Generated",
+                "LocalAuthenticationHandler",
                 "MnemonicClient",
                 "Models",
                 "PartialProposalError",

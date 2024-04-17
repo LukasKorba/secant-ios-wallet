@@ -21,6 +21,7 @@ import Models
 import Generated
 import BalanceFormatter
 import WalletBalances
+import LocalAuthenticationHandler
 
 public typealias SendFlowStore = Store<SendFlowReducer.State, SendFlowReducer.Action>
 public typealias SendFlowViewStore = ViewStore<SendFlowReducer.State, SendFlowReducer.Action>
@@ -154,6 +155,7 @@ public struct SendFlowReducer: Reducer {
     
     @Dependency(\.audioServices) var audioServices
     @Dependency(\.derivationTool) var derivationTool
+    @Dependency(\.localAuthentication) var localAuthentication
     @Dependency(\.mainQueue) var mainQueue
     @Dependency(\.mnemonic) var mnemonic
     @Dependency(\.sdkSynchronizer) var sdkSynchronizer
@@ -253,6 +255,10 @@ public struct SendFlowReducer: Reducer {
                 state.address = state.transactionAddressInputState.textFieldState.text.data
                 
                 return .run { send in
+                    if await !localAuthentication.authenticate() {
+                        return
+                    }
+
                     do {
                         let storedWallet = try walletStorage.exportWallet()
                         let seedBytes = try mnemonic.toSeed(storedWallet.seedPhrase.value())
