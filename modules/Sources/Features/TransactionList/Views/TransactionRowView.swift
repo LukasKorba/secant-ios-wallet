@@ -52,7 +52,7 @@ public struct TransactionRowView: View {
             
             if transaction.isExpanded {
                 Group {
-                    if !transaction.isTransparentRecipient {
+                    if !transaction.isTransparentRecipient && !transaction.isShieldingTransaction {
                         MessageView(
                             store: store,
                             messages: transaction.textMemos,
@@ -61,12 +61,17 @@ public struct TransactionRowView: View {
                         )
                     }
                     
-                    TransactionIdView(
-                        store: store,
-                        transaction: transaction
-                    )
-                    
-                    if transaction.isSpending {
+//                    if !transaction.isShieldingTransaction {
+                        TransactionIdView(
+                            store: store,
+                            transaction: transaction
+                        )
+//                    } else {
+//                        ShieldedAmountView(amount: transaction.fee ?? .zero)
+//                            .padding(.vertical, 10)
+//                    }
+
+                    if transaction.isSpending || transaction.isShieldingTransaction {
                         TransactionFeeView(fee: transaction.fee ?? .zero)
                             .padding(.vertical, 10)
                     }
@@ -89,6 +94,22 @@ public struct TransactionRowView: View {
         TransactionRowView(
             store: .placeholder,
             transaction: .mockedFailed,
+            tokenName: "ZEC"
+        )
+        .listRowSeparator(.hidden)
+        .listRowInsets(EdgeInsets())
+
+        TransactionRowView(
+            store: .placeholder,
+            transaction: .mockedShielded,
+            tokenName: "ZEC"
+        )
+        .listRowSeparator(.hidden)
+        .listRowInsets(EdgeInsets())
+
+        TransactionRowView(
+            store: .placeholder,
+            transaction: .mockedShieldedExpanded,
             tokenName: "ZEC"
         )
         .listRowSeparator(.hidden)
