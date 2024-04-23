@@ -68,6 +68,8 @@ extension SDKSynchronizerClient: DependencyKey {
                         memos: clearedTransaction.memoCount > 0 ? try await synchronizer.getMemos(for: clearedTransaction) : nil,
                         latestBlockHeight: try await SDKSynchronizerClient.latestBlockHeight(synchronizer: synchronizer)
                     )
+                    
+                    transaction.isShieldingTransaction = true
 
                     let recipients = await synchronizer.getRecipients(for: clearedTransaction)
                     let addresses = recipients.compactMap {

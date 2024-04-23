@@ -51,7 +51,7 @@ public struct TransactionRowView: View {
 
         if transaction.isExpanded {
             Group {
-                if !transaction.isTransparentRecipient {
+                if !transaction.isTransparentRecipient && !transaction.isShieldingTransaction {
                     MessageView(
                         viewStore: viewStore,
                         message: transaction.textMemo?.toString(),
@@ -60,12 +60,17 @@ public struct TransactionRowView: View {
                     )
                 }
 
-                TransactionIdView(
-                    viewStore: viewStore,
-                    transaction: transaction
-                )
+                if !transaction.isShieldingTransaction {
+                    TransactionIdView(
+                        viewStore: viewStore,
+                        transaction: transaction
+                    )
+                } else {
+                    ShieldedAmountView(amount: transaction.fee ?? .zero)
+                        .padding(.vertical, 10)
+                }
 
-                if transaction.isSpending {
+                if transaction.isSpending || transaction.isShieldingTransaction {
                     TransactionFeeView(fee: transaction.fee ?? .zero)
                         .padding(.vertical, 10)
                 }
@@ -87,6 +92,22 @@ public struct TransactionRowView: View {
         TransactionRowView(
             viewStore: ViewStore(.placeholder, observe: { $0 }),
             transaction: .mockedFailed,
+            tokenName: "ZEC"
+        )
+        .listRowSeparator(.hidden)
+        .listRowInsets(EdgeInsets())
+
+        TransactionRowView(
+            viewStore: ViewStore(.placeholder, observe: { $0 }),
+            transaction: .mockedShielded,
+            tokenName: "ZEC"
+        )
+        .listRowSeparator(.hidden)
+        .listRowInsets(EdgeInsets())
+
+        TransactionRowView(
+            viewStore: ViewStore(.placeholder, observe: { $0 }),
+            transaction: .mockedShieldedExpanded,
             tokenName: "ZEC"
         )
         .listRowSeparator(.hidden)

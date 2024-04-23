@@ -40,11 +40,15 @@ struct TransactionHeaderView: View {
 
                         titleText()
                         
-                        addressArea()
+                        if !transaction.isShieldingTransaction {
+                            addressArea()
                         
-                        Spacer(minLength: 60)
-                        
-                        balanceView()
+                            Spacer(minLength: 60)
+                            
+                            balanceView()
+                        } else {
+                            Spacer()
+                        }
                     }
                     .padding(.trailing, 30)
                     
@@ -138,6 +142,11 @@ extension TransactionHeaderView {
                     .resizable()
                     .frame(width: 20, height: 16)
 
+            case .shielded, .shielding:
+                Asset.Assets.shieldedFunds.image
+                    .resizable()
+                    .frame(width: 20, height: 19)
+
             case .received, .receiving:
                 if transaction.isUnread {
                     Asset.Assets.flyReceivedFilled.image
@@ -184,7 +193,13 @@ extension TransactionHeaderView {
             transaction: .mockedSending
         )
         .listRowSeparator(.hidden)
-        
+
+        TransactionHeaderView(
+            viewStore: ViewStore(.placeholder, observe: { $0 }),
+            transaction: .mockedShielded
+        )
+        .listRowSeparator(.hidden)
+
         TransactionHeaderView(
             viewStore: ViewStore(.placeholder, observe: { $0 }),
             transaction: .mockedReceiving

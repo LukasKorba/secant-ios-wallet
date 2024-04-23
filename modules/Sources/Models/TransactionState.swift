@@ -18,6 +18,8 @@ public struct TransactionState: Equatable, Identifiable {
         case received
         case receiving
         case sending
+        case shielding
+        case shielded
     }
 
     public var errorMessage: String?
@@ -27,6 +29,7 @@ public struct TransactionState: Equatable, Identifiable {
     public var shielded = true
     public var zAddress: String?
     public var isSentTransaction: Bool
+    public var isShieldingTransaction: Bool
     public var isTransparentRecipient: Bool
 
     public var fee: Zatoshi?
@@ -89,6 +92,7 @@ public struct TransactionState: Equatable, Identifiable {
     public var title: String {
         switch status {
         case .failed:
+            // TODO: failed shileded is not covered!
             return isSentTransaction
             ? L10n.Transaction.failedSend
             : L10n.Transaction.failedReceive
@@ -100,6 +104,10 @@ public struct TransactionState: Equatable, Identifiable {
             return L10n.Transaction.receiving
         case .sending:
             return L10n.Transaction.sending
+        case .shielding:
+            return L10n.Transaction.shieldingFunds
+        case .shielded:
+            return L10n.Transaction.shieldedFunds
         }
     }
 
@@ -123,6 +131,10 @@ public struct TransactionState: Equatable, Identifiable {
             return true
         case .sending:
             return true
+        case .shielded:
+            return false
+        case .shielding:
+            return true
         }
     }
 
@@ -132,6 +144,8 @@ public struct TransactionState: Equatable, Identifiable {
         case .paid, .sending:
             return true
         case .received, .receiving:
+            return false
+        case .shielded, .shielding:
             return false
         case .failed:
             return isSentTransaction
@@ -172,6 +186,7 @@ public struct TransactionState: Equatable, Identifiable {
         timestamp: TimeInterval? = nil,
         zecAmount: Zatoshi,
         isSentTransaction: Bool = false,
+        isShieldingTransaction: Bool = false,
         isTransparentRecipient: Bool = false,
         isAddressExpanded: Bool = false,
         isExpanded: Bool = false,
@@ -190,6 +205,7 @@ public struct TransactionState: Equatable, Identifiable {
         self.timestamp = timestamp
         self.zecAmount = zecAmount
         self.isSentTransaction = isSentTransaction
+        self.isShieldingTransaction = isShieldingTransaction
         self.isTransparentRecipient = isTransparentRecipient
         self.isAddressExpanded = isAddressExpanded
         self.isExpanded = isExpanded
@@ -225,26 +241,30 @@ extension TransactionState {
         fee = transaction.fee
         id = transaction.rawID.toHexStringTxId()
         timestamp = transaction.blockTime
-        zecAmount = transaction.isSentTransaction ? Zatoshi(-transaction.value.amount) : transaction.value
         isSentTransaction = transaction.isSentTransaction
+        // TODO: just hardcoded until it comes from the SDK
+        isShieldingTransaction = true
+        zecAmount = isSentTransaction ? Zatoshi(-transaction.value.amount) : transaction.value
         isTransparentRecipient = false
         isAddressExpanded = false
         isExpanded = false
         isIdExpanded = false
         self.memos = memos
 
+        // TODO: [#1313] SDK improvements so a client doesn't need to determing if the transaction isPending
+        // https://github.com/zcash/ZcashLightClientKit/issues/1313
+        // The only reason why `latestBlockHeight` is provided here is to determine pending
+        // state of the transaction. SDK knows the latestBlockHeight so ideally ZcashTransaction.Overview
+        // already knows and provides isPending as a bool value.
+        // Once SDK's #1313 is done, adopt the SDK and remove latestBlockHeight here.
+        let isPending = transaction.isPending(currentHeight: latestBlockHeight)
+
         // failed check
         if let expiryHeight = transaction.expiryHeight, expiryHeight <= latestBlockHeight && minedHeight == nil {
             status = .failed
+        } else if isShieldingTransaction {
+            status = isPending ? .shielding : .shielded
         } else {
-            // TODO: [#1313] SDK improvements so a client doesn't need to determing if the transaction isPending
-            // https://github.com/zcash/ZcashLightClientKit/issues/1313
-            // The only reason why `latestBlockHeight` is provided here is to determine pending
-            // state of the transaction. SDK knows the latestBlockHeight so ideally ZcashTransaction.Overview
-            // already knows and provides isPending as a bool value.
-            // Once SDK's #1313 is done, adopt the SDK and remove latestBlockHeight here.
-            let isPending = transaction.isPending(currentHeight: latestBlockHeight)
-            
             switch (isSentTransaction, isPending) {
             case (true, true): status = .sending
             case (true, false): status = .paid
@@ -362,6 +382,34 @@ extension TransactionState {
         isSentTransaction: false,
         isAddressExpanded: false,
         isExpanded: false,
+        isIdExpanded: false
+    )
+    
+    public static let mockedShielded = TransactionState(
+        minedHeight: BlockHeight(1),
+        zAddress: "utest1vergg5jkp4xy8sqfasw6s5zkdpnxvfxlxh35uuc3me7dp596y2r05t6dv9htwe3pf8ksrfr8ksca2lskzjanqtl8uqp5vln3zyy246ejtx86vqftp73j7jg9099jxafyjhfm6u956j3",
+        fee: Zatoshi(10_000),
+        id: "t1vergg5jkp4wy8sqfasw6s5zkdpnxvfxlxh35uuc3me7dp596y2r05t6dv9htwe3pf8ksrfr8ksca2lskzja",
+        status: .shielded,
+        timestamp: 1699290621,
+        zecAmount: Zatoshi(25_000_000),
+        isShieldingTransaction: true,
+        isAddressExpanded: false,
+        isExpanded: false,
+        isIdExpanded: false
+    )
+    
+    public static let mockedShieldedExpanded = TransactionState(
+        minedHeight: BlockHeight(1),
+        zAddress: "utest1vergg5jkp4xy8sqfasw6s5zkdpnxvfxlxh35uuc3me7dp596y2r05t6dv9htwe3pf8ksrfr8ksca2lskzjanqtl8uqp5vln3zyy246ejtx86vqftp73j7jg9099jxafyjhfm6u956j3",
+        fee: Zatoshi(10_000),
+        id: "t1vergg5jkp4wy8sqfasw6s5zkdpnxvfxlxh35uuc3me7dp596y2r05t6dv9htwe3pf8ksrfr8ksca2lskzja",
+        status: .shielded,
+        timestamp: 1699290621,
+        zecAmount: Zatoshi(25_000_000),
+        isShieldingTransaction: true,
+        isAddressExpanded: false,
+        isExpanded: true,
         isIdExpanded: false
     )
 }
