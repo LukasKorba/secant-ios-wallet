@@ -12,12 +12,17 @@ import Pasteboard
 import Generated
 import Utils
 
-public typealias AddressDetailsStore = Store<AddressDetailsReducer.State, AddressDetailsReducer.Action>
-public typealias AddressDetailsViewStore = ViewStore<AddressDetailsReducer.State, AddressDetailsReducer.Action>
-
-public struct AddressDetailsReducer: Reducer {
+@Reducer
+public struct AddressDetails {
+    @ObservableState
     public struct State: Equatable {
+        public enum Selection: Equatable, Hashable {
+            case ua
+            case transparent
+        }
+        
         public var addressToShare: RedactableString?
+        public var selection: Selection
         public var uAddress: UnifiedAddress?
 
         public var unifiedAddress: String {
@@ -44,14 +49,17 @@ public struct AddressDetailsReducer: Reducer {
 
         public init(
             addressToShare: RedactableString? = nil,
+            selection: Selection = .ua,
             uAddress: UnifiedAddress? = nil
         ) {
             self.addressToShare = addressToShare
+            self.selection = selection
             self.uAddress = uAddress
         }
     }
 
-    public enum Action: Equatable {
+    public enum Action: BindableAction, Equatable {
+        case binding(BindingAction<AddressDetails.State>)
         case copyToPastboard(RedactableString)
         case shareFinished
         case shareQR(RedactableString)
@@ -61,39 +69,26 @@ public struct AddressDetailsReducer: Reducer {
 
     public init() { }
 
-    public func reduce(into state: inout State, action: Action) -> ComposableArchitecture.Effect<Action> {
-        switch action {
-        case .copyToPastboard(let text):
-            pasteboard.setString(text)
-            return .none
+    public var body: some Reducer<State, Action> {
+        BindingReducer()
         
-        case .shareFinished:
-            state.addressToShare = nil
-            return .none
+        Reduce { state, action in
+            switch action {
+            case .binding:
+                return .none
 
-        case .shareQR(let text):
-            state.addressToShare = text
-            return .none
+            case .copyToPastboard(let text):
+                pasteboard.setString(text)
+                return .none
+                
+            case .shareFinished:
+                state.addressToShare = nil
+                return .none
+                
+            case .shareQR(let text):
+                state.addressToShare = text
+                return .none
+            }
         }
-    }
-}
-
-// MARK: - Placeholders
-
-extension AddressDetailsReducer.State {
-    public static let initial = AddressDetailsReducer.State()
-    
-    public static let demo = AddressDetailsReducer.State(
-        uAddress: try! UnifiedAddress(
-            encoding: "utest1vergg5jkp4xy8sqfasw6s5zkdpnxvfxlxh35uuc3me7dp596y2r05t6dv9htwe3pf8ksrfr8ksca2lskzjanqtl8uqp5vln3zyy246ejtx86vqftp73j7jg9099jxafyjhfm6u956j3",
-            network: .testnet)
-    )
-}
-
-extension AddressDetailsStore {
-    public static let placeholder = AddressDetailsStore(
-        initialState: .initial
-    ) {
-        AddressDetailsReducer()
     }
 }
