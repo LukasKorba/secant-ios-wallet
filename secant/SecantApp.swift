@@ -13,6 +13,7 @@ import SDKSynchronizer
 import Utils
 import Root
 import ZcashSDKEnvironment
+import Flexa
 
 @main
 struct SecantApp: App {
@@ -21,6 +22,14 @@ struct SecantApp: App {
     
     init() {
         FontFamily.registerAllCustomFonts()
+        
+        Flexa.initialize(
+            FXClient(
+                publishableKey: "{publishable_test_P5RP3Cc7W7rj266j92PRMQ9HXfhqg6P4rCF2f4MxxP6Q4WVMP834HGpPRgh2xcXQ39cjqpxGXHmG4rMv27RxVC}",
+                appAccounts: [],
+                theme: .default
+            )
+        )
     }
 
     var body: some Scene {

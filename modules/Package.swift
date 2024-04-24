@@ -75,6 +75,7 @@ let package = Package(
         .library(name: "ZcashSDKEnvironment", targets: ["ZcashSDKEnvironment"])
     ],
     dependencies: [
+        .package(url: "https://github.com/flexa/flexa-ios.git", from: "0.1.0-beta.1"),
         .package(url: "https://github.com/pointfreeco/swift-custom-dump.git", from: "1.3.0"),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.11.1"),
         .package(url: "https://github.com/pointfreeco/swift-case-paths", from: "1.4.2"),
@@ -622,7 +623,8 @@ let package = Package(
                 "SupportDataGenerator",
                 "UIComponents",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-                .product(name: "ZcashLightClientKit", package: "zcash-swift-wallet-sdk")
+                .product(name: "ZcashLightClientKit", package: "zcash-swift-wallet-sdk"),
+                .product(name: "Flexa", package: "flexa-ios")
             ],
             path: "Sources/Features/Settings"
         ),

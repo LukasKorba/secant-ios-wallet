@@ -7,8 +7,12 @@ import RecoveryPhraseDisplay
 import UIComponents
 import PrivateDataConsent
 import ServerSetup
+import Flexa
 
 public struct SettingsView: View {
+    @State var isFlexa = false
+    //var flexaSpend = Flexa.buildSpend().build().open()
+    
     let store: SettingsStore
     
     public init(store: SettingsStore) {
@@ -47,7 +51,34 @@ public struct SettingsView: View {
                 .padding(.bottom, 25)
 
                 Spacer()
+
+//                ManageFlexaIDModal(
+//                    isShowing: $isFlexa,
+//                    name: "Zashi Flexa",
+//                    joinedDate: "some date",
+//                    email: "lukas@zcash.com") {
+//                        print("did cancel flexa")
+//                    } didSignOut: {
+//                        print("did signed out flexa")
+//                    }
+
+                Button("Flexa") {
+                    Flexa.buildSpend().build().open()
+                }
                 
+//                NavigationLink {
+//                    //flexaSpend
+//
+//                } label: {
+//                    Text("Flexa")
+//                }
+                
+//                Button("Flexa") {
+////                    isFlexa = true
+//                }
+//                .zcashStyle()
+//                .padding(.bottom, 25)
+
                 Button(L10n.Settings.about.uppercased()) {
                     viewStore.send(.updateDestination(.about))
                 }
