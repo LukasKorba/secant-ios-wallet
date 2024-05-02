@@ -12,6 +12,8 @@ import Utils
 import ComposableArchitecture
 import BalanceFormatter
 import XCTestDynamicOverlay
+import HideBalances
+import Combine
 
 public struct ZatoshiRepresentationView: View {
     let zatoshiStringRepresentation: ZatoshiStringRepresentation
@@ -21,7 +23,11 @@ public struct ZatoshiRepresentationView: View {
     let format: ZatoshiStringRepresentation.Format
     let strikethrough: Bool
     let isFee: Bool
-
+    
+    @Dependency(\.hideBalances) var hideBalances
+    @State var isHidden = false
+    @State private var cancellable: AnyCancellable?
+    
     public init(
         balance: Zatoshi,
         fontName: String,
@@ -57,23 +63,37 @@ public struct ZatoshiRepresentationView: View {
     
     public var body: some View {
         HStack {
-            if isFee {
-                Text(zatoshiStringRepresentation.feeFormat)
+            if isHidden {
+                Text(L10n.General.hideBalances)
                     .font(.custom(fontName, size: mostSignificantFontSize))
+                    .offset(y: mostSignificantFontSize * 0.225)
             } else {
-                if format == .expanded {
-                    Text(zatoshiStringRepresentation.mostSignificantDigits)
+                if isFee {
+                    Text(zatoshiStringRepresentation.feeFormat)
                         .font(.custom(fontName, size: mostSignificantFontSize))
-                        .conditionalStrikethrough(strikethrough)
-                    + Text(zatoshiStringRepresentation.leastSignificantDigits)
-                        .font(.custom(fontName, size: leastSignificantFontSize))
-                        .conditionalStrikethrough(strikethrough)
                 } else {
-                    Text(zatoshiStringRepresentation.mostSignificantDigits)
-                        .font(.custom(fontName, size: mostSignificantFontSize))
-                        .conditionalStrikethrough(strikethrough)
+                    if format == .expanded {
+                        Text(zatoshiStringRepresentation.mostSignificantDigits)
+                            .font(.custom(fontName, size: mostSignificantFontSize))
+                            .conditionalStrikethrough(strikethrough)
+                        + Text(zatoshiStringRepresentation.leastSignificantDigits)
+                            .font(.custom(fontName, size: leastSignificantFontSize))
+                            .conditionalStrikethrough(strikethrough)
+                    } else {
+                        Text(zatoshiStringRepresentation.mostSignificantDigits)
+                            .font(.custom(fontName, size: mostSignificantFontSize))
+                            .conditionalStrikethrough(strikethrough)
+                    }
                 }
             }
+        }
+        .onAppear {
+            cancellable = hideBalances.value().sink { val in
+                isHidden = val
+            }
+        }
+        .onDisappear {
+            cancellable?.cancel()
         }
     }
 }
