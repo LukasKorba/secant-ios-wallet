@@ -14,44 +14,58 @@ import UIComponents
 import Utils
 
 public struct AddressDetailsView: View {
-    let store: AddressDetailsStore
+    @Perception.Bindable var store: StoreOf<AddressDetails>
     let networkType: NetworkType
     
-    public init(store: AddressDetailsStore, networkType: NetworkType) {
+    public init(store: StoreOf<AddressDetails>, networkType: NetworkType) {
         self.store = store
         self.networkType = networkType
     }
     
     public var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
-            ScrollView {
-                addressBlock(L10n.AddressDetails.ua, viewStore.unifiedAddress) {
-                    viewStore.send(.copyToPastboard(viewStore.unifiedAddress.redacted))
-                } shareAction: {
-                    viewStore.send(.shareQR(viewStore.unifiedAddress.redacted))
+        WithPerceptionTracking {
+            VStack {
+                Picker("", selection: $store.selection) {
+                    Text(L10n.AddressDetails.ua).tag(AddressDetails.State.Selection.ua)
+                    Text(L10n.AddressDetails.ta).tag(AddressDetails.State.Selection.transparent)
                 }
-                .frame(maxWidth: .infinity)
+                .pickerStyle(.segmented)
+                .padding(.horizontal, 50)
                 .padding(.top, 20)
-                
-#if DEBUG
-                if networkType == .testnet {
-                    addressBlock(L10n.AddressDetails.sa, viewStore.saplingAddress) {
-                        viewStore.send(.copyToPastboard(viewStore.saplingAddress.redacted))
-                    } shareAction: {
-                        viewStore.send(.shareQR(viewStore.saplingAddress.redacted))
+
+                ScrollView {
+                    Group {
+                        if store.selection == .ua {
+                            addressBlock(L10n.AddressDetails.ua, store.unifiedAddress) {
+                                store.send(.copyToPastboard(store.unifiedAddress.redacted))
+                            } shareAction: {
+                                store.send(.shareQR(store.unifiedAddress.redacted))
+                            }
+                        } else {
+                            addressBlock(L10n.AddressDetails.ta, store.transparentAddress) {
+                                store.send(.copyToPastboard(store.transparentAddress.redacted))
+                            } shareAction: {
+                                store.send(.shareQR(store.transparentAddress.redacted))
+                            }
+                        }
                     }
-                }
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 20)
+                    
+#if DEBUG
+                    if networkType == .testnet {
+                        addressBlock(L10n.AddressDetails.sa, store.saplingAddress) {
+                            store.send(.copyToPastboard(store.saplingAddress.redacted))
+                        } shareAction: {
+                            store.send(.shareQR(store.saplingAddress.redacted))
+                        }
+                    }
 #endif
-                
-                addressBlock(L10n.AddressDetails.ta, viewStore.transparentAddress) {
-                    viewStore.send(.copyToPastboard(viewStore.transparentAddress.redacted))
-                } shareAction: {
-                    viewStore.send(.shareQR(viewStore.transparentAddress.redacted))
+                    
+                    shareLogsView(store)
                 }
-                
-                shareLogsView(viewStore)
+//                .padding(.vertical, 1)
             }
-            .padding(.vertical, 1)
             .applyScreenBackground()
         }
     }
@@ -63,9 +77,9 @@ public struct AddressDetailsView: View {
         shareAction: @escaping () -> Void
     ) -> some View {
         VStack {
-            Text(title)
-                .font(.custom(FontFamily.Archivo.semiBold.name, size: 16))
-                .padding(.bottom, 20)
+//            Text(title)
+//                .font(.custom(FontFamily.Archivo.semiBold.name, size: 16))
+//                .padding(.bottom, 20)
             
             qrCode(address)
                 .frame(width: 270, height: 270)
@@ -126,11 +140,11 @@ extension AddressDetailsView {
         }
     }
     
-    @ViewBuilder func shareLogsView(_ viewStore: AddressDetailsViewStore) -> some View {
-        if let addressToShare = viewStore.addressToShare,
+    @ViewBuilder func shareLogsView(_ store: StoreOf<AddressDetails>) -> some View {
+        if let addressToShare = store.addressToShare,
            let cgImg = QRCodeGenerator.generate(from: addressToShare.data) {
             UIShareDialogView(activityItems: [UIImage(cgImage: cgImg)]) {
-                viewStore.send(.shareFinished)
+                store.send(.shareFinished)
             }
             // UIShareDialogView only wraps UIActivityViewController presentation
             // so frame is set to 0 to not break SwiftUIs layout
@@ -143,6 +157,26 @@ extension AddressDetailsView {
 
 #Preview {
     NavigationView {
-        AddressDetailsView(store: .placeholder, networkType: .testnet)
+        AddressDetailsView(store: AddressDetails.placeholder, networkType: .testnet)
+    }
+}
+
+// MARK: - Placeholders
+
+extension AddressDetails.State {
+    public static let initial = AddressDetails.State()
+    
+    public static let demo = AddressDetails.State(
+        uAddress: try! UnifiedAddress(
+            encoding: "utest1vergg5jkp4xy8sqfasw6s5zkdpnxvfxlxh35uuc3me7dp596y2r05t6dv9htwe3pf8ksrfr8ksca2lskzjanqtl8uqp5vln3zyy246ejtx86vqftp73j7jg9099jxafyjhfm6u956j3",
+            network: .testnet)
+    )
+}
+
+extension AddressDetails {
+    public static let placeholder = StoreOf<AddressDetails>(
+        initialState: .initial
+    ) {
+        AddressDetails()
     }
 }
