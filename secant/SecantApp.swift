@@ -41,6 +41,7 @@ struct SecantApp: App {
                 appDelegate.scheduleBackgroundTask()
                 appDelegate.scheduleSchedulerBackgroundTask()
             }
+            .preferredColorScheme(.dark)
         }
     }
 }
