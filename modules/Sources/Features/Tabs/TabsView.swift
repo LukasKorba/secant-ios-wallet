@@ -123,7 +123,7 @@ public struct TabsView: View {
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarItems(trailing: settingsButton(store))
-                .navigationBarItems(leading: hideBalancesButton(store))
+                .navigationBarItems(leading: hideBalancesButton(store, tab: tab.state))
                 .zashiTitle { navBarView(tab.state) }
                 .restoringWalletBadge(isOn: isRestoringWallet.state)
                 .task { await store.send(.restoreWalletTask).finish() }
@@ -169,19 +169,24 @@ public struct TabsView: View {
         }
     }
     
-    func hideBalancesButton(_ store: TabsStore) -> some View {
+    @ViewBuilder
+    func hideBalancesButton(_ store: TabsStore, tab: TabsReducer.State.Tab) -> some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            Button {
-                var prevValue = hideBalances.value().value
-                prevValue.toggle()
-                areBalancesHidden = prevValue
-                hideBalances.updateValue(areBalancesHidden)
-            } label: {
-                Image(systemName: areBalancesHidden ? "eye.slash" : "eye")
-                    .resizable()
-                    .frame(width: 21, height: 15)
-                    .padding(15)
-                    .tint(Asset.Colors.primary.color)
+            if tab == .account || tab == .balances {
+                Button {
+                    var prevValue = hideBalances.value().value
+                    prevValue.toggle()
+                    areBalancesHidden = prevValue
+                    hideBalances.updateValue(areBalancesHidden)
+                } label: {
+                    Image(systemName: areBalancesHidden ? "eye.slash" : "eye")
+                        .resizable()
+                        .frame(width: 21, height: 15)
+                        .padding(15)
+                        .tint(Asset.Colors.primary.color)
+                }
+            } else {
+                EmptyView()
             }
         }
     }

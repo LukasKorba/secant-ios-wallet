@@ -164,7 +164,7 @@ public struct AddressDetailsView: View {
         )
         .border(Asset.Colors.pickerBcg.color, width: 4)
         .frame(width: 270)
-        .padding(.top, 20)
+        .padding(.top, 50)
     }
 }
 
