@@ -37,6 +37,7 @@ let package = Package(
         .library(name: "NumberFormatter", targets: ["NumberFormatter"]),
         .library(name: "OnboardingFlow", targets: ["OnboardingFlow"]),
         .library(name: "PartialProposalError", targets: ["PartialProposalError"]),
+        .library(name: "PartnerKeys", targets: ["PartnerKeys"]),
         .library(name: "Pasteboard", targets: ["Pasteboard"]),
         .library(name: "PrivateDataConsent", targets: ["PrivateDataConsent"]),
         .library(name: "QRImageDetector", targets: ["QRImageDetector"]),
@@ -82,6 +83,7 @@ let package = Package(
             name: "AddressDetails",
             dependencies: [
                 "Generated",
+                "PartnerKeys",
                 "Pasteboard",
                 "UIComponents",
                 "Utils",
@@ -355,6 +357,10 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Features/PartialProposalError"
+        ),
+        .target(
+            name: "PartnerKeys",
+            path: "Sources/Dependencies/PartnerKeys"
         ),
         .target(
             name: "Pasteboard",

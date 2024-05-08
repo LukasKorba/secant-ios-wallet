@@ -12,6 +12,7 @@ import ZcashLightClientKit
 import Generated
 import UIComponents
 import Utils
+import PartnerKeys
 
 public struct AddressDetailsView: View {
     public enum AddressType: Equatable {
@@ -33,8 +34,10 @@ public struct AddressDetailsView: View {
     public var body: some View {
         WithPerceptionTracking {
             VStack {
+                Text("KEY: \(PartnerKeys.coinbaseAPIKey)")
+                
                 zashiPicker()
-
+                
                 ScrollView {
                     Group {
                         if store.selection == .ua {
