@@ -83,6 +83,9 @@
 		9E5AAEC12A67CEC4003F283D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E5AAEBF2A67CEC4003F283D /* Colors.xcassets */; };
 		9E5B8E742B46E04E00CA3616 /* RestoreWalletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5B8E732B46E04E00CA3616 /* RestoreWalletTests.swift */; };
 		9E683E472B0377F0002E7B5D /* WalletNukeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E683E462B0377F0002E7B5D /* WalletNukeTests.swift */; };
+		9E6C98552BF7416A00EACDCB /* PartnerKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E6C98542BF7416A00EACDCB /* PartnerKeys.plist */; };
+		9E6C98562BF7416A00EACDCB /* PartnerKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E6C98542BF7416A00EACDCB /* PartnerKeys.plist */; };
+		9E6C98572BF7416A00EACDCB /* PartnerKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E6C98542BF7416A00EACDCB /* PartnerKeys.plist */; };
 		9E74CCD029DC0628003D6E32 /* ReviewRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E74CCCF29DC0628003D6E32 /* ReviewRequestTests.swift */; };
 		9E9075022A2681F700269308 /* Generated in Frameworks */ = {isa = PBXBuildFile; productRef = 9E9075012A2681F700269308 /* Generated */; };
 		9E9075042A2681FF00269308 /* Generated in Frameworks */ = {isa = PBXBuildFile; productRef = 9E9075032A2681FF00269308 /* Generated */; };
@@ -164,6 +167,7 @@
 		9E66129D288938A300C75B70 /* SettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTests.swift; sourceTree = "<group>"; };
 		9E6713F02897F81B00A6796F /* MultiLineTextFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLineTextFieldTests.swift; sourceTree = "<group>"; };
 		9E683E462B0377F0002E7B5D /* WalletNukeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletNukeTests.swift; sourceTree = "<group>"; };
+		9E6C98542BF7416A00EACDCB /* PartnerKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PartnerKeys.plist; sourceTree = "<group>"; };
 		9E7225F02889539300DF7F17 /* SettingsSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSnapshotTests.swift; sourceTree = "<group>"; };
 		9E74CCCF29DC0628003D6E32 /* ReviewRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRequestTests.swift; sourceTree = "<group>"; };
 		9E7CB6112869882D00A02233 /* TransactionListSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListSnapshotTests.swift; sourceTree = "<group>"; };
@@ -535,6 +539,7 @@
 		9E7FE0B6282D1D9800C374E8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9E6C98542BF7416A00EACDCB /* PartnerKeys.plist */,
 				9E90751D2A269BE300269308 /* Assets.xcassets */,
 				0D3B01EB298DAF89007EBCDA /* GoogleService-Info.plist */,
 				9E5AAEBF2A67CEC4003F283D /* Colors.xcassets */,
@@ -815,6 +820,7 @@
 				9E90751F2A269BE300269308 /* Assets.xcassets in Resources */,
 				0D26AF8C299E8196005260EE /* GoogleService-Info.plist in Resources */,
 				9EDDAF6E2BA2D71700A69A07 /* PrivacyInfo.xcprivacy in Resources */,
+				9E6C98562BF7416A00EACDCB /* PartnerKeys.plist in Resources */,
 				9E5AAEC12A67CEC4003F283D /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -828,6 +834,7 @@
 				9E90751E2A269BE300269308 /* Assets.xcassets in Resources */,
 				0D3B01EC298DAF89007EBCDA /* GoogleService-Info.plist in Resources */,
 				9EDDAF6D2BA2D71700A69A07 /* PrivacyInfo.xcprivacy in Resources */,
+				9E6C98552BF7416A00EACDCB /* PartnerKeys.plist in Resources */,
 				9E5AAEC02A67CEC4003F283D /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -855,6 +862,7 @@
 				9E4AB2B12BA1BEE900F5D6DB /* Assets.xcassets in Resources */,
 				9E4AB2B22BA1BEE900F5D6DB /* GoogleService-Info.plist in Resources */,
 				9EDDAF6F2BA2D71700A69A07 /* PrivacyInfo.xcprivacy in Resources */,
+				9E6C98572BF7416A00EACDCB /* PartnerKeys.plist in Resources */,
 				9E4AB2B32BA1BEE900F5D6DB /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

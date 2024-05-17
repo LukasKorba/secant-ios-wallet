@@ -15,6 +15,7 @@ let package = Package(
         .library(name: "BalanceBreakdown", targets: ["BalanceBreakdown"]),
         .library(name: "BalanceFormatter", targets: ["BalanceFormatter"]),
         .library(name: "CaptureDevice", targets: ["CaptureDevice"]),
+        .library(name: "CoinbaseClient", targets: ["CoinbaseClient"]),
         .library(name: "CrashReporter", targets: ["CrashReporter"]),
         .library(name: "DatabaseFiles", targets: ["DatabaseFiles"]),
         .library(name: "Date", targets: ["Date"]),
@@ -37,6 +38,7 @@ let package = Package(
         .library(name: "NumberFormatter", targets: ["NumberFormatter"]),
         .library(name: "OnboardingFlow", targets: ["OnboardingFlow"]),
         .library(name: "PartialProposalError", targets: ["PartialProposalError"]),
+        .library(name: "PartnerKeys", targets: ["PartnerKeys"]),
         .library(name: "Pasteboard", targets: ["Pasteboard"]),
         .library(name: "PrivateDataConsent", targets: ["PrivateDataConsent"]),
         .library(name: "QRImageDetector", targets: ["QRImageDetector"]),
@@ -144,6 +146,13 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Dependencies/CaptureDevice"
+        ),
+        .target(
+            name: "CoinbaseClient",
+            dependencies: [
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/Dependencies/Partners/CoinbaseClient"
         ),
         .target(
             name: "CrashReporter",
@@ -356,6 +365,10 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Features/PartialProposalError"
+        ),
+        .target(
+            name: "PartnerKeys",
+            path: "Sources/Dependencies/PartnerKeys"
         ),
         .target(
             name: "Pasteboard",
