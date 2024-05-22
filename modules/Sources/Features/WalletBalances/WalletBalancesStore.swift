@@ -19,6 +19,7 @@ public struct WalletBalances {
 
     @ObservableState
     public struct State: Equatable {
+        public var currencyConversion: CurrencyConversion?
         public var isAvailableBalanceTappable = true
         public var migratingDatabase = false
         public var shieldedBalance: Zatoshi
@@ -34,7 +35,12 @@ public struct WalletBalances {
             return totalBalance.amount != shieldedBalance.amount && shieldedBalance.amount == 0
         }
 
+        public var currencyValue: String {
+            currencyConversion?.convert(totalBalance) ?? ""
+        }
+        
         public init(
+            currencyConversion: CurrencyConversion? = nil,
             isAvailableBalanceTappable: Bool = true,
             migratingDatabase: Bool = false,
             shieldedBalance: Zatoshi = .zero,
@@ -42,6 +48,7 @@ public struct WalletBalances {
             totalBalance: Zatoshi = .zero,
             transparentBalance: Zatoshi = .zero
         ) {
+            self.currencyConversion = currencyConversion
             self.isAvailableBalanceTappable = isAvailableBalanceTappable
             self.migratingDatabase = migratingDatabase
             self.shieldedBalance = shieldedBalance
@@ -70,6 +77,7 @@ public struct WalletBalances {
         Reduce { state, action in
             switch action {
             case .onAppear:
+                state.currencyConversion = CurrencyConversion(.usd, ratio: 20, timestamp: 1715255999)
                 return .merge(
                     .send(.updateBalances),
                     .publisher {

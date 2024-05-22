@@ -29,6 +29,7 @@ public enum Asset {
     public static let welcomeScreenLogo = ImageAsset(name: "WelcomeScreenLogo")
     public static let zashiLogo = ImageAsset(name: "ZashiLogo")
     public static let alertIcon = ImageAsset(name: "alertIcon")
+    public static let convertIcon = ImageAsset(name: "convertIcon")
     public static let copy = ImageAsset(name: "copy")
     public static let eyeOff = ImageAsset(name: "eyeOff")
     public static let eyeOn = ImageAsset(name: "eyeOn")

@@ -39,6 +39,18 @@ public struct WalletBalancesView: View {
                     }
 #endif
 
+                if store.currencyConversion != nil {
+                    Text(store.currencyValue)
+                        .hiddenIfSet()
+                        .font(.custom(FontFamily.Inter.bold.name, size: 14))
+                    .padding(.top, 10)
+                } else {
+                    ProgressView()
+                        .scaleEffect(0.7)
+                        .frame(width: 11, height: 14)
+                        .padding(.top, 10)
+                }
+
                 if store.migratingDatabase {
                     Text(L10n.Home.migratingDatabases)
                         .font(.custom(FontFamily.Inter.regular.name, size: 14))

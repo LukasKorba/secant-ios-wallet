@@ -542,6 +542,7 @@ let package = Package(
                 "LocalAuthenticationHandler",
                 "MnemonicClient",
                 "Models",
+                "NumberFormatter",
                 "PartialProposalError",
                 "Scan",
                 "SDKSynchronizer",

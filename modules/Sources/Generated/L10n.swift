@@ -125,6 +125,8 @@ public enum L10n {
     public enum TransactionAmount {
       /// Amount:
       public static let amount = L10n.tr("Localizable", "field.transactionAmount.amount", fallback: "Amount:")
+      /// 10000.00
+      public static let currencyAmount = L10n.tr("Localizable", "field.transactionAmount.currencyAmount", fallback: "10000.00")
       /// %@ Amount
       public static func zecAmount(_ p1: Any) -> String {
         return L10n.tr("Localizable", "field.transactionAmount.zecAmount", String(describing: p1), fallback: "%@ Amount")

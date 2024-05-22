@@ -263,3 +263,4 @@ Sharing this private data is irrevocable — once you have shared this private d
 
 "field.transactionAmount.zecAmount" = "%@ Amount";
 "field.transactionAmount.amount" = "Amount:";
+"field.transactionAmount.currencyAmount" = "10000.00";

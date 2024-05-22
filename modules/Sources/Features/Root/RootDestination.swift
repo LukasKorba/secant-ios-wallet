@@ -89,7 +89,7 @@ extension RootReducer {
                 state.destinationState.destination = .tabs
                 state.tabsState.selectedTab = .send
                 state.tabsState.sendState.amount = amount
-                state.tabsState.sendState.address = address
+                state.tabsState.sendState.address = address.redacted
                 state.tabsState.sendState.memoState.text = memo.redacted
                 return .none
 

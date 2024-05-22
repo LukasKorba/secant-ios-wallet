@@ -18,6 +18,7 @@ import Settings
 import ZcashLightClientKit
 import RestoreWalletStorage
 import SendConfirmation
+import Utils
 
 public typealias TabsStore = Store<TabsReducer.State, TabsReducer.Action>
 public typealias TabsViewStore = ViewStore<TabsReducer.State, TabsReducer.Action>
@@ -157,10 +158,11 @@ public struct TabsReducer: Reducer {
 
             case .send(.sendConfirmationRequired):
                 state.sendConfirmationState.amount = state.sendState.amount
-                state.sendConfirmationState.address = state.sendState.address
+                state.sendConfirmationState.address = state.sendState.address.data
                 state.sendConfirmationState.proposal = state.sendState.proposal
                 state.sendConfirmationState.feeRequired = state.sendState.feeRequired
                 state.sendConfirmationState.message = state.sendState.message
+                state.sendConfirmationState.currencyAmount = state.sendState.currencyConversion?.convert(state.sendState.amount).redacted ?? .empty
                 return .send(.updateDestination(.sendConfirmation))
                                 
             case .send:
