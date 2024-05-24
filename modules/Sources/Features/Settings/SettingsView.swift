@@ -7,6 +7,7 @@ import RecoveryPhraseDisplay
 import UIComponents
 import PrivateDataConsent
 import ServerSetup
+import CoinbaseOnramp
 
 public struct SettingsView: View {
     let store: SettingsStore
@@ -36,12 +37,24 @@ public struct SettingsView: View {
                         AdvancedSettingsView(store: store.advancedSettingsStore())
                     }
                 )
+                .navigationLinkEmpty(
+                    isActive: viewStore.bindingForCoinbase,
+                    destination: {
+                        CoinbaseOnrampView(store: store.coinbaseStore())
+                    }
+                )
                 .onAppear {
                     viewStore.send(.onAppear)
                 }
 
                 Button(L10n.Settings.advanced.uppercased()) {
                     viewStore.send(.updateDestination(.advanced))
+                }
+                .zcashStyle()
+                .padding(.bottom, 25)
+
+                Button("Coinbase".uppercased()) {
+                    viewStore.send(.updateDestination(.coinbase))
                 }
                 .zcashStyle()
                 .padding(.bottom, 25)

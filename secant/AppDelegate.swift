@@ -14,6 +14,8 @@ import Utils
 import Root
 import BackgroundTasks
 
+//import OAuthSwift
+
 final class AppDelegate: NSObject, UIApplicationDelegate {
     private let bcgTaskId = "co.electriccoin.power_wifi_sync"
     private let bcgSchedulerTaskId = "co.electriccoin.scheduler"
@@ -52,6 +54,13 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         shouldAllowExtensionPointIdentifier extensionPointIdentifier: UIApplication.ExtensionPointIdentifier
     ) -> Bool {
         return extensionPointIdentifier != UIApplication.ExtensionPointIdentifier.keyboard
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+//        if url.host == "callback" {
+//            OAuthSwift.handle(url: url)
+//        }
+        return true
     }
 }
 

@@ -12,6 +12,7 @@ import Deeplink
 import DerivationTool
 
 import SwiftUI
+import OAuthSwift
 
 /// In this file is a collection of helpers that control all state and action related operations
 /// for the `Root` with a connection to the UI navigation.
@@ -150,7 +151,11 @@ extension StoreOf<Root> {
     }
     
     public func goToDeeplink(_ deeplink: URL) {
-        send(.destination(.deeplink(deeplink)))
+        if deeplink.host == "callback" {
+            OAuthSwift.handle(url: deeplink)
+        } else {
+            send(.destination(.deeplink(deeplink)))
+        }
     }
 }
 

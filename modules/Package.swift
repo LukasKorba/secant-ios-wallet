@@ -17,6 +17,8 @@ let package = Package(
         .library(name: "BalanceBreakdown", targets: ["BalanceBreakdown"]),
         .library(name: "BalanceFormatter", targets: ["BalanceFormatter"]),
         .library(name: "CaptureDevice", targets: ["CaptureDevice"]),
+        .library(name: "CoinbaseClient", targets: ["CoinbaseClient"]),
+        .library(name: "CoinbaseOnramp", targets: ["CoinbaseOnramp"]),
         .library(name: "CrashReporter", targets: ["CrashReporter"]),
         .library(name: "DatabaseFiles", targets: ["DatabaseFiles"]),
         .library(name: "Date", targets: ["Date"]),
@@ -39,6 +41,7 @@ let package = Package(
         .library(name: "NumberFormatter", targets: ["NumberFormatter"]),
         .library(name: "OnboardingFlow", targets: ["OnboardingFlow"]),
         .library(name: "PartialProposalError", targets: ["PartialProposalError"]),
+        .library(name: "PartnerKeys", targets: ["PartnerKeys"]),
         .library(name: "Pasteboard", targets: ["Pasteboard"]),
         .library(name: "PrivateDataConsent", targets: ["PrivateDataConsent"]),
         .library(name: "QRImageDetector", targets: ["QRImageDetector"]),
@@ -79,9 +82,12 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.11.1"),
         .package(url: "https://github.com/pointfreeco/swift-case-paths", from: "1.4.2"),
         .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.0"),
-        .package(url: "https://github.com/zcash-hackworks/MnemonicSwift", from: "2.2.4"),
+        .package(url: "https://github.com/LukasKorba/MnemonicSwift", branch: "update-swift-crypto"),
         .package(url: "https://github.com/Electric-Coin-Company/zcash-swift-wallet-sdk", from: "2.1.10"),
-        .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "10.27.0")
+        .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "10.27.0"),
+        .package(url: "https://github.com/OAuthSwift/OAuthSwift.git", .upToNextMajor(from: "2.2.0")),
+        .package(url: "https://github.com/vapor/jwt-kit.git", exact: "5.0.0-beta.4"),
+        .package(url: "https://github.com/IBM-Swift/Swift-JWT", from: "4.0.1")
     ],
     targets: [
         .target(
@@ -171,6 +177,33 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Dependencies/CaptureDevice"
+        ),
+        .target(
+            name: "CoinbaseClient",
+            dependencies: [
+                "PartnerKeys",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "ZcashLightClientKit", package: "zcash-swift-wallet-sdk"),
+                .product(name: "OAuthSwift", package: "OAuthSwift"),
+                .product(name: "SwiftJWT", package: "Swift-JWT")
+//                .product(name: "JWTKit", package: "jwt-kit")
+            ],
+            path: "Sources/Dependencies/Partners/CoinbaseClient"
+        ),
+        .target(
+            name: "CoinbaseOnramp",
+            dependencies: [
+                "Generated",
+                "CoinbaseClient",
+                "PartnerKeys",
+                "UIComponents",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "ZcashLightClientKit", package: "zcash-swift-wallet-sdk"),
+                .product(name: "OAuthSwift", package: "OAuthSwift"),
+                .product(name: "SwiftJWT", package: "Swift-JWT")
+//                .product(name: "JWTKit", package: "jwt-kit")
+            ],
+            path: "Sources/Features/CoinbaseOnramp"
         ),
         .target(
             name: "CrashReporter",
@@ -387,6 +420,10 @@ let package = Package(
             path: "Sources/Features/PartialProposalError"
         ),
         .target(
+            name: "PartnerKeys",
+            path: "Sources/Dependencies/PartnerKeys"
+        ),
+        .target(
             name: "Pasteboard",
             dependencies: [
                 "Utils",
@@ -484,7 +521,8 @@ let package = Package(
                 "Welcome",
                 "ZcashSDKEnvironment",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-                .product(name: "ZcashLightClientKit", package: "zcash-swift-wallet-sdk")
+                .product(name: "ZcashLightClientKit", package: "zcash-swift-wallet-sdk"),
+                .product(name: "OAuthSwift", package: "OAuthSwift")
             ],
             path: "Sources/Features/Root"
         ),
@@ -610,6 +648,7 @@ let package = Package(
             dependencies: [
                 "About",
                 "AppVersion",
+                "CoinbaseOnramp",
                 "DeleteWallet",
                 "Generated",
                 "LocalAuthenticationHandler",

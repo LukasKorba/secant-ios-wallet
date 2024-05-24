@@ -9,6 +9,7 @@ import Models
 import Pasteboard
 import SupportDataGenerator
 import ZcashLightClientKit
+import CoinbaseOnramp
 
 public typealias SettingsStore = Store<SettingsReducer.State, SettingsReducer.Action>
 public typealias SettingsViewStore = ViewStore<SettingsReducer.State, SettingsReducer.Action>
@@ -18,6 +19,7 @@ public struct SettingsReducer: Reducer {
         public enum Destination {
             case about
             case advanced
+            case coinbase
         }
 
         public var aboutState: About.State
@@ -25,6 +27,7 @@ public struct SettingsReducer: Reducer {
         @PresentationState public var alert: AlertState<Action>?
         public var appVersion = ""
         public var appBuild = ""
+        public var coinbaseOnrampState: CoinbaseOnramp.State
         public var destination: Destination?
         public var supportData: SupportData?
         
@@ -33,6 +36,7 @@ public struct SettingsReducer: Reducer {
             advancedSettingsState: AdvancedSettings.State,
             appVersion: String = "",
             appBuild: String = "",
+            coinbaseOnrampState: CoinbaseOnramp.State = .initial,
             destination: Destination? = nil,
             supportData: SupportData? = nil
         ) {
@@ -40,6 +44,7 @@ public struct SettingsReducer: Reducer {
             self.advancedSettingsState = advancedSettingsState
             self.appVersion = appVersion
             self.appBuild = appBuild
+            self.coinbaseOnrampState = coinbaseOnrampState
             self.destination = destination
             self.supportData = supportData
         }
@@ -49,6 +54,7 @@ public struct SettingsReducer: Reducer {
         case about(About.Action)
         case advancedSettings(AdvancedSettings.Action)
         case alert(PresentationAction<Action>)
+        case coinbaseOnramp(CoinbaseOnramp.Action)
         case copyEmail
         case onAppear
         case sendSupportMail
@@ -70,6 +76,10 @@ public struct SettingsReducer: Reducer {
             AdvancedSettings()
         }
 
+        Scope(state: \.coinbaseOnrampState, action: /Action.coinbaseOnramp) {
+            CoinbaseOnramp()
+        }
+
         Reduce { state, action in
             switch action {
             case .onAppear:
@@ -80,6 +90,9 @@ public struct SettingsReducer: Reducer {
             case .about:
                 return .none
             
+            case .coinbaseOnramp:
+                return .none
+                
             case .copyEmail:
                 pasteboard.setString(SupportDataGenerator.Constants.email.redacted)
                 return .none
@@ -134,11 +147,18 @@ extension SettingsViewStore {
             embed: { $0 ? .advanced : nil }
         )
     }
-
+    
     var bindingForAbout: Binding<Bool> {
         self.destinationBinding.map(
             extract: { $0 == .about },
             embed: { $0 ? .about : nil }
+        )
+    }
+    
+    var bindingForCoinbase: Binding<Bool> {
+        self.destinationBinding.map(
+            extract: { $0 == .coinbase },
+            embed: { $0 ? .coinbase : nil }
         )
     }
 }
@@ -157,6 +177,13 @@ extension SettingsStore {
         self.scope(
             state: \.aboutState,
             action: SettingsReducer.Action.about
+        )
+    }
+    
+    func coinbaseStore() -> StoreOf<CoinbaseOnramp> {
+        self.scope(
+            state: \.coinbaseOnrampState,
+            action: SettingsReducer.Action.coinbaseOnramp
         )
     }
 }
