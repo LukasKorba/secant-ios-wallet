@@ -12,6 +12,7 @@ import ZcashLightClientKit
 import Generated
 import UIComponents
 import Utils
+import RequestPayment
 
 public struct AddressDetailsView: View {
     public enum AddressType: Equatable {
@@ -33,7 +34,7 @@ public struct AddressDetailsView: View {
     public var body: some View {
         WithPerceptionTracking {
             VStack {
-                zashiPicker()
+                zashiPicker(store.selection)
 
                 ScrollView {
                     Group {
@@ -64,10 +65,28 @@ public struct AddressDetailsView: View {
                     }
 #endif
                     
+                    Button("ZASHI ME") {
+                        store.send(.requestPaymentTapped)
+                    }
+                    .zcashStyle()
+                    .padding(.horizontal, 65)
+                    .padding(.bottom, 30)
+                    
                     shareView()
                 }
             }
             .applyScreenBackground()
+            .navigationLinkEmpty(
+                isActive: $store.requestPaymentViewBinding,
+                destination: {
+                    RequestPaymentView(
+                        store: store.scope(
+                            state: \.requestPaymentState,
+                            action: \.requestPayment
+                        )
+                    )
+                }
+            )
         }
     }
     
@@ -128,7 +147,7 @@ public struct AddressDetailsView: View {
         .padding(.bottom, 40)
     }
     
-    @ViewBuilder private func zashiPicker() -> some View {
+    @ViewBuilder private func zashiPicker(_ selection: AddressDetails.State.Selection) -> some View {
         ZashiPicker(
             AddressDetails.State.Selection.allCases,
             selection: store.selection,
@@ -141,7 +160,7 @@ public struct AddressDetailsView: View {
                       : AddressDetails.State.Selection.transparent
                 )
                 .foregroundColor(
-                    store.selection == item
+                    selection == item
                     ? Asset.Colors.pickerTitleSelected.color
                     : Asset.Colors.pickerTitleUnselected.color
                 )
@@ -156,7 +175,7 @@ public struct AddressDetailsView: View {
                     }
                 }
                 .background(
-                    store.selection == item
+                    selection == item
                     ? Asset.Colors.pickerSelection.color
                     : Asset.Colors.pickerBcg.color
                 )
@@ -224,9 +243,10 @@ extension AddressDetailsView {
 // MARK: - Placeholders
 
 extension AddressDetails.State {
-    public static let initial = AddressDetails.State()
+    public static let initial = AddressDetails.State(requestPaymentState: .initial)
     
     public static let demo = AddressDetails.State(
+        requestPaymentState: .initial,
         uAddress: try! UnifiedAddress(
             encoding: "utest1vergg5jkp4xy8sqfasw6s5zkdpnxvfxlxh35uuc3me7dp596y2r05t6dv9htwe3pf8ksrfr8ksca2lskzjanqtl8uqp5vln3zyy246ejtx86vqftp73j7jg9099jxafyjhfm6u956j3",
             network: .testnet)

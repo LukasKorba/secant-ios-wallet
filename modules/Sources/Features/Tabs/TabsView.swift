@@ -131,6 +131,15 @@ public struct TabsView: View {
                                 )
                             }
                         )
+                        .navigationLinkEmpty(
+                            isActive: viewStore.bindingForDestination(.requestPaymentConfirmation),
+                            destination: {
+                                RequestPaymentConfirmationView(
+                                    store: store.sendConfirmationStore(),
+                                    tokenName: tokenName
+                                )
+                            }
+                        )
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(trailing: settingsButton(store))

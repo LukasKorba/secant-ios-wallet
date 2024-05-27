@@ -25,6 +25,7 @@ public typealias TabsViewStore = ViewStore<TabsReducer.State, TabsReducer.Action
 public struct TabsReducer: Reducer {
     public struct State: Equatable {
         public enum Destination: Equatable {
+            case requestPaymentConfirmation
             case sendConfirmation
             case settings
         }
@@ -155,13 +156,13 @@ public struct TabsReducer: Reducer {
                 state.isRestoringWallet = value
                 return .none
 
-            case .send(.sendConfirmationRequired):
+            case .send(.confirmationRequired(let type)):
                 state.sendConfirmationState.amount = state.sendState.amount
                 state.sendConfirmationState.address = state.sendState.address
                 state.sendConfirmationState.proposal = state.sendState.proposal
                 state.sendConfirmationState.feeRequired = state.sendState.feeRequired
                 state.sendConfirmationState.message = state.sendState.message
-                return .send(.updateDestination(.sendConfirmation))
+                return .send(.updateDestination(type == .send ? .sendConfirmation : .requestPaymentConfirmation))
                                 
             case .send:
                 return .none
