@@ -16,7 +16,7 @@ public typealias SettingsViewStore = ViewStore<SettingsReducer.State, SettingsRe
 
 public struct SettingsReducer: Reducer {
     public struct State: Equatable {
-        public enum Destination {
+        public enum Destination: Equatable {
             case about
             case advanced
         }
@@ -51,6 +51,7 @@ public struct SettingsReducer: Reducer {
 
     public enum Action: Equatable {
         case about(About.Action)
+        case addressBookButtonTapped
         case advancedSettings(AdvancedSettings.Action)
         case alert(PresentationAction<Action>)
         case copyEmail
@@ -86,7 +87,10 @@ public struct SettingsReducer: Reducer {
             
             case .about:
                 return .none
-            
+                
+            case .addressBookButtonTapped:
+                return .none
+                
             case .copyEmail:
                 pasteboard.setString(SupportDataGenerator.Constants.email.redacted)
                 return .none

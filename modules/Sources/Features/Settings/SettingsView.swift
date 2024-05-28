@@ -50,6 +50,12 @@ public struct SettingsView: View {
                 .zcashStyle()
                 .padding(.bottom, 25)
 
+                Button("Address Book".uppercased()) {
+                    viewStore.send(.addressBookButtonTapped)
+                }
+                .zcashStyle()
+                .padding(.bottom, 25)
+
                 Spacer()
                 
                 Button(L10n.Settings.about.uppercased()) {

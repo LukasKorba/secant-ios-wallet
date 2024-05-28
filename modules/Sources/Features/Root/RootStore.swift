@@ -25,7 +25,7 @@ import RestoreWalletStorage
 import Utils
 import UserDefaults
 import HideBalances
-import URIParser
+import AddressBook
 
 public typealias RootStore = Store<RootReducer.State, RootReducer.Action>
 public typealias RootViewStore = ViewStore<RootReducer.State, RootReducer.Action>
@@ -38,6 +38,8 @@ public struct RootReducer: Reducer {
     let DidFinishLaunchingId = UUID()
 
     public struct State: Equatable {
+        public var addressBookBinding: Bool = false
+        public var addressBookState: AddressBook.State
         @PresentationState public var alert: AlertState<Action>?
         public var appInitializationState: InitializationState = .uninitialized
         public var appStartState: AppStartState = .unknown
@@ -59,6 +61,7 @@ public struct RootReducer: Reducer {
         public var welcomeState: WelcomeReducer.State
         
         public init(
+            addressBookState: AddressBook.State = .initial,
             appInitializationState: InitializationState = .uninitialized,
             appStartState: AppStartState = .unknown,
             debugState: DebugState,
@@ -75,6 +78,7 @@ public struct RootReducer: Reducer {
             walletConfig: WalletConfig,
             welcomeState: WelcomeReducer.State
         ) {
+            self.addressBookState = addressBookState
             self.appInitializationState = appInitializationState
             self.appStartState = appStartState
             self.debugState = debugState
@@ -99,6 +103,8 @@ public struct RootReducer: Reducer {
             case quickRescan
         }
 
+        case addressBook(AddressBook.Action)
+        case addressBookBinding(Bool)
         case alert(PresentationAction<Action>)
         case binding(BindingAction<RootReducer.State>)
         case confirmationDialog(PresentationAction<ConfirmationDialog>)
@@ -150,6 +156,10 @@ public struct RootReducer: Reducer {
             DeeplinkWarning()
         }
 
+        Scope(state: \.addressBookState, action: /Action.addressBook) {
+            AddressBook()
+        }
+        
         Scope(state: \.tabsState, action: /Action.tabs) {
             TabsReducer()
         }
@@ -193,6 +203,14 @@ public struct RootReducer: Reducer {
                 state.alert = nil
                 return .none
 
+            case .addressBookBinding(let newValue):
+                state.addressBookBinding = newValue
+                return .none
+                
+            case .tabs(.settings(.addressBookButtonTapped)):
+                state.addressBookBinding = true
+                return .none
+                
             default: return .none
             }
         }

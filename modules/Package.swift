@@ -10,6 +10,8 @@ let package = Package(
     ],
     products: [
         .library(name: "About", targets: ["About"]),
+        .library(name: "AddressBook", targets: ["AddressBook"]),
+        .library(name: "AddressBookClient", targets: ["AddressBookClient"]),
         .library(name: "AddressDetails", targets: ["AddressDetails"]),
         .library(name: "AppVersion", targets: ["AppVersion"]),
         .library(name: "AudioServices", targets: ["AudioServices"]),
@@ -83,7 +85,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-case-paths", from: "1.3.2"),
         .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.0"),
         .package(url: "https://github.com/zcash-hackworks/MnemonicSwift", from: "2.2.4"),
-        .package(url: "https://github.com/Electric-Coin-Company/zcash-swift-wallet-sdk", from: "2.1.8"),
+        .package(url: "https://github.com/Electric-Coin-Company/zcash-swift-wallet-sdk", from: "2.1.10"),
         .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "10.24.0")
     ],
     targets: [
@@ -95,9 +97,35 @@ let package = Package(
                 "RestoreWalletStorage",
                 "UIComponents",
                 "WhatsNew",
+                "ZcashSDKEnvironment",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ],
             path: "Sources/Features/About"
+        ),
+        .target(
+            name: "AddressBook",
+            dependencies: [
+                "AddressBookClient",
+                "AudioServices",
+                "DerivationTool",
+                "Generated",
+                "Models",
+                "Scan",
+                "UIComponents",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+            ],
+            path: "Sources/Features/AddressBook"
+        ),
+        .target(
+            name: "AddressBookClient",
+            dependencies: [
+                "Models",
+                "UserDefaults",
+                "Utils",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "ZcashLightClientKit", package: "zcash-swift-wallet-sdk")
+            ],
+            path: "Sources/Dependencies/AddressBookClient"
         ),
         .target(
             name: "AddressDetails",
@@ -477,6 +505,7 @@ let package = Package(
         .target(
             name: "Root",
             dependencies: [
+                "AddressBook",
                 "CrashReporter",
                 "DatabaseFiles",
                 "Deeplink",
@@ -578,6 +607,8 @@ let package = Package(
         .target(
             name: "SendConfirmation",
             dependencies: [
+                "AddressBook",
+                "AddressBookClient",
                 "AudioServices",
                 "BalanceFormatter",
                 "DerivationTool",
@@ -601,6 +632,7 @@ let package = Package(
         .target(
             name: "SendFlow",
             dependencies: [
+                "AddressBookClient",
                 "AudioServices",
                 "BalanceFormatter",
                 "DerivationTool",
@@ -720,6 +752,7 @@ let package = Package(
             dependencies: [
                 "BalanceFormatter",
                 "DerivationTool",
+                "FeedbackGenerator",
                 "Generated",
                 "HideBalances",
                 "NumberFormatter",

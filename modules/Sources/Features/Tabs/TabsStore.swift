@@ -55,6 +55,7 @@ public struct TabsReducer: Reducer {
         public var destination: Destination?
         public var homeState: HomeReducer.State
         public var isRestoringWallet = false
+        public var isRPConnected = false
         public var selectedTab: Tab = .account
         public var sendConfirmationState: SendConfirmation.State
         public var sendState: SendFlowReducer.State
@@ -66,6 +67,7 @@ public struct TabsReducer: Reducer {
             destination: Destination? = nil,
             homeState: HomeReducer.State,
             isRestoringWallet: Bool = false,
+            isRPConnected: Bool = false,
             selectedTab: Tab = .account,
             sendConfirmationState: SendConfirmation.State,
             sendState: SendFlowReducer.State,
@@ -76,6 +78,7 @@ public struct TabsReducer: Reducer {
             self.destination = destination
             self.homeState = homeState
             self.isRestoringWallet = isRestoringWallet
+            self.isRPConnected = isRPConnected
             self.selectedTab = selectedTab
             self.sendConfirmationState = sendConfirmationState
             self.sendState = sendState
@@ -157,12 +160,25 @@ public struct TabsReducer: Reducer {
                 return .none
 
             case .send(.confirmationRequired(let type)):
+                state.isRPConnected = type == .requestPayment
                 state.sendConfirmationState.amount = state.sendState.amount
                 state.sendConfirmationState.address = state.sendState.address
-                state.sendConfirmationState.proposal = state.sendState.proposal
                 state.sendConfirmationState.feeRequired = state.sendState.feeRequired
                 state.sendConfirmationState.message = state.sendState.message
+                state.sendConfirmationState.isInsufficientFunds = state.sendState.isInsufficientFunds
                 return .send(.updateDestination(type == .send ? .sendConfirmation : .requestPaymentConfirmation))
+                
+            case .send(.proposal(let proposal)):
+                state.sendConfirmationState.proposal = proposal
+                return .none
+                
+            case .send(.walletBalances(.balancesUpdated)):
+                state.sendConfirmationState.isInsufficientFunds = state.sendState.isInsufficientFunds
+                if state.isRPConnected && !state.sendState.isInsufficientFunds && state.sendConfirmationState.proposal == nil {
+                    state.isRPConnected = false
+                    return .send(.send(.getProposal(.requestPayment)))
+                }
+                return .none
                                 
             case .send:
                 return .none

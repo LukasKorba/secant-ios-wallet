@@ -64,6 +64,12 @@ extension RootReducer {
                 if state.isLockedInKeychainUnavailableState || !sdkSynchronizer.latestState().syncStatus.isPrepared {
                     return .send(.initialization(.initialSetups))
                 } else {
+                    if state.destinationState.isDeeplinkWarningRequest {
+                        return .concatenate(
+                            .send(.destination(.updateDestination(.deeplinkWarning))),
+                            .send(.initialization(.retryStart))
+                        )
+                    }
                     return .send(.initialization(.retryStart))
                 }
                 
@@ -486,7 +492,7 @@ extension RootReducer {
             case .onboarding(.securityWarning(.recoveryPhraseDisplay(.finishedPressed))):
                 return Effect.send(.destination(.updateDestination(.tabs)))
                 
-            case .tabs, .destination, .onboarding, .sandbox, .phraseDisplay, .notEnoughFreeSpace, .deeplinkWarning,
+            case .tabs, .destination, .onboarding, .sandbox, .phraseDisplay, .notEnoughFreeSpace, .deeplinkWarning, .addressBookBinding, .addressBook,
                     .welcome, .binding, .debug, .exportLogs, .alert, .splashFinished, .splashRemovalRequested, .confirmationDialog:
                 return .none
             }

@@ -27,6 +27,8 @@ extension RootReducer {
         }
         
         public var internalDestination: Destination = .welcome
+        public var isDeeplinkWarningRequest = false
+        public var preDeeplinkWarningDestination: Destination? = nil
         public var preNotEnoughFreeSpaceDestination: Destination?
         public var previousDestination: Destination?
 
@@ -52,7 +54,14 @@ extension RootReducer {
         Reduce { state, action in
             switch action {
             case let .destination(.updateDestination(destination)):
-                state.destinationState.destination = destination
+                if state.destinationState.isDeeplinkWarningRequest {
+                    state.destinationState.preDeeplinkWarningDestination = state.destinationState.destination == .welcome ? destination : state.destinationState.destination
+                    state.destinationState.isDeeplinkWarningRequest = false
+                    state.destinationState.destination = .deeplinkWarning
+                } else {
+                    state.destinationState.destination = destination
+                }
+                return .none
 
             case .sandbox(.reset):
                 state.destinationState.destination = .startup
@@ -60,13 +69,22 @@ extension RootReducer {
             case .deeplinkWarning(.gotItTapped):
 //                let destination = state.destinationState.previousDestination ?? state.destinationState.destination
 //                return .send(.destination(.updateDestination(destination)))
-                state.tabsState.selectedTab = .send
-                return .send(.destination(.updateDestination(.tabs)))
+                if let preDeeplink = state.destinationState.preDeeplinkWarningDestination, preDeeplink != .tabs {
+                    return .send(.destination(.updateDestination(preDeeplink)))
+                } else {
+                    state.tabsState.selectedTab = .send
+                    state.tabsState.sendState.transactionAddressInputState.doesButtonPulse = true
+                    state.tabsState.destination = nil
+                    state.tabsState.settingsState.destination = nil
+                    state.tabsState.settingsState.advancedSettingsState.destination = nil
+                    state.tabsState.sendState.destination = nil
+                    return .send(.destination(.updateDestination(.tabs)))
+                }
 
             case .destination(.deeplink(let url)):
                 if let _ = uriParser.checkRP(url.absoluteString) {
                     // The deeplink is some zip321, we ignore it and let users know in a warning screen
-                    return .send(.destination(.updateDestination(.deeplinkWarning)))
+                    state.destinationState.isDeeplinkWarningRequest = true
                 }
                 return .none
 
@@ -99,7 +117,7 @@ extension RootReducer {
 
             case .tabs, .initialization, .onboarding, .sandbox, .updateStateAfterConfigUpdate, .alert, .phraseDisplay, .synchronizerStateChanged,
                     .welcome, .binding, .nukeWalletFailed, .nukeWalletSucceeded, .debug, .walletConfigLoaded, .exportLogs, .confirmationDialog,
-                    .notEnoughFreeSpace:
+                    .notEnoughFreeSpace, .addressBookBinding, .addressBook:
                 return .none
             }
             

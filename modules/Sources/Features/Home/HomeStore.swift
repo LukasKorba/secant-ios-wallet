@@ -54,6 +54,7 @@ public struct HomeReducer: Reducer {
 
     public enum Action: Equatable {
         case alert(PresentationAction<Action>)
+        case connectivityStatusChanged(ConnectionState)
         case foundTransactions
         case onAppear
         case onDisappear
@@ -94,6 +95,9 @@ public struct HomeReducer: Reducer {
 
         Reduce { state, action in
             switch action {
+            case .connectivityStatusChanged(let newValue):
+                return .none
+                
             case .onAppear:
                 state.walletBalancesState.migratingDatabase = state.migratingDatabase
                 state.migratingDatabase = false
@@ -103,6 +107,8 @@ public struct HomeReducer: Reducer {
                             .compactMap {
                                 if case SynchronizerEvent.foundTransactions = $0 {
                                     return HomeReducer.Action.foundTransactions
+                                } else if case SynchronizerEvent.connectionStateChanged(let newState) = $0 {
+                                    return HomeReducer.Action.connectivityStatusChanged(newState)
                                 }
                                 return nil
                             }
