@@ -2,6 +2,7 @@ import ComposableArchitecture
 import ZcashLightClientKit
 import DatabaseFiles
 import Deeplink
+import DeeplinkWarning
 import DiskSpaceChecker
 import ZcashSDKEnvironment
 import WalletStorage
@@ -24,6 +25,7 @@ import RestoreWalletStorage
 import Utils
 import UserDefaults
 import HideBalances
+import URIParser
 
 public typealias RootStore = Store<RootReducer.State, RootReducer.Action>
 public typealias RootViewStore = ViewStore<RootReducer.State, RootReducer.Action>
@@ -42,6 +44,7 @@ public struct RootReducer: Reducer {
         public var bgTask: BGProcessingTask?
         @PresentationState public var confirmationDialog: ConfirmationDialogState<Action.ConfirmationDialog>?
         public var debugState: DebugState
+        public var deeplinkWarningState: DeeplinkWarning.State
         public var destinationState: DestinationState
         public var exportLogsState: ExportLogsReducer.State
         public var isLockedInKeychainUnavailableState = false
@@ -59,6 +62,7 @@ public struct RootReducer: Reducer {
             appInitializationState: InitializationState = .uninitialized,
             appStartState: AppStartState = .unknown,
             debugState: DebugState,
+            deeplinkWarningState: DeeplinkWarning.State = .initial,
             destinationState: DestinationState,
             exportLogsState: ExportLogsReducer.State,
             isLockedInKeychainUnavailableState: Bool = false,
@@ -74,6 +78,7 @@ public struct RootReducer: Reducer {
             self.appInitializationState = appInitializationState
             self.appStartState = appStartState
             self.debugState = debugState
+            self.deeplinkWarningState = deeplinkWarningState
             self.destinationState = destinationState
             self.exportLogsState = exportLogsState
             self.isLockedInKeychainUnavailableState = isLockedInKeychainUnavailableState
@@ -98,6 +103,7 @@ public struct RootReducer: Reducer {
         case binding(BindingAction<RootReducer.State>)
         case confirmationDialog(PresentationAction<ConfirmationDialog>)
         case debug(DebugAction)
+        case deeplinkWarning(DeeplinkWarning.Action)
         case destination(DestinationAction)
         case exportLogs(ExportLogsReducer.Action)
         case tabs(TabsReducer.Action)
@@ -126,19 +132,24 @@ public struct RootReducer: Reducer {
     @Dependency(\.mnemonic) var mnemonic
     @Dependency(\.numberFormatter) var numberFormatter
     @Dependency(\.pasteboard) var pasteboard
+    @Dependency(\.readTransactionsStorage) var readTransactionsStorage
+    @Dependency(\.restoreWalletStorage) var restoreWalletStorage
     @Dependency(\.sdkSynchronizer) var sdkSynchronizer
+    @Dependency(\.uriParser) var uriParser
     @Dependency(\.userDefaults) var userDefaults
     @Dependency(\.userStoredPreferences) var userStoredPreferences
     @Dependency(\.walletConfigProvider) var walletConfigProvider
     @Dependency(\.walletStorage) var walletStorage
-    @Dependency(\.readTransactionsStorage) var readTransactionsStorage
-    @Dependency(\.restoreWalletStorage) var restoreWalletStorage
     @Dependency(\.zcashSDKEnvironment) var zcashSDKEnvironment
 
     public init() { }
     
     @ReducerBuilder<State, Action>
     var core: some Reducer<State, Action> {
+        Scope(state: \.deeplinkWarningState, action: /Action.deeplinkWarning) {
+            DeeplinkWarning()
+        }
+
         Scope(state: \.tabsState, action: /Action.tabs) {
             TabsReducer()
         }

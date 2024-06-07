@@ -12,6 +12,7 @@ import Sandbox
 import Tabs
 import ZcashLightClientKit
 import UIComponents
+import DeeplinkWarning
 
 public struct RootView: View {
     @Environment(\.scenePhase) var scenePhase
@@ -64,6 +65,20 @@ private extension RootView {
         WithViewStore(store, observe: { $0 }) { viewStore in
             Group {
                 switch viewStore.destinationState.destination {
+                case .deeplinkWarning:
+                    NavigationView {
+                        DeeplinkWarningView(
+                            store: store.scope(
+                                state: \.deeplinkWarningState,
+                                action: RootReducer.Action.deeplinkWarning
+                            )
+                        )
+                    }
+                    .navigationViewStyle(.stack)
+                    .overlayedWithSplash(viewStore.splashAppeared) {
+                        viewStore.send(.splashRemovalRequested)
+                    }
+                    
                 case .notEnoughFreeSpace:
                     NavigationView {
                         NotEnoughFreeSpaceView(

@@ -486,7 +486,7 @@ extension RootReducer {
             case .onboarding(.securityWarning(.recoveryPhraseDisplay(.finishedPressed))):
                 return Effect.send(.destination(.updateDestination(.tabs)))
                 
-            case .tabs, .destination, .onboarding, .sandbox, .phraseDisplay, .notEnoughFreeSpace,
+            case .tabs, .destination, .onboarding, .sandbox, .phraseDisplay, .notEnoughFreeSpace, .deeplinkWarning,
                     .welcome, .binding, .debug, .exportLogs, .alert, .splashFinished, .splashRemovalRequested, .confirmationDialog:
                 return .none
             }
