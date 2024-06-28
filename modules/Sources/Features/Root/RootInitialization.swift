@@ -298,6 +298,7 @@ extension RootReducer {
                 
             case .initialization(.initializationSuccessfullyDone(let uAddress)):
                 state.tabsState.addressDetailsState.uAddress = uAddress
+                state.tabsState.settingsState.advancedSettingsState.uAddress = uAddress
                 return .send(.initialization(.registerForSynchronizersUpdate))
                 
             case .initialization(.checkBackupPhraseValidation):
