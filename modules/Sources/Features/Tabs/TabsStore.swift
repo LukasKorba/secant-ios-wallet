@@ -18,6 +18,7 @@ import Settings
 import ZcashLightClientKit
 import RestoreWalletStorage
 import SendConfirmation
+import RequestPayment
 
 public typealias TabsStore = Store<TabsReducer.State, TabsReducer.Action>
 public typealias TabsViewStore = ViewStore<TabsReducer.State, TabsReducer.Action>
@@ -26,6 +27,7 @@ public struct TabsReducer: Reducer {
     public struct State: Equatable {
         public enum Destination: Equatable {
             case requestPaymentConfirmation
+            case requestPaymentForm
             case sendConfirmation
             case settings
         }
@@ -56,6 +58,7 @@ public struct TabsReducer: Reducer {
         public var homeState: HomeReducer.State
         public var isRestoringWallet = false
         public var isRPConnected = false
+        public var requestPaymentState: RequestPayment.State
         public var selectedTab: Tab = .account
         public var sendConfirmationState: SendConfirmation.State
         public var sendState: SendFlowReducer.State
@@ -68,6 +71,7 @@ public struct TabsReducer: Reducer {
             homeState: HomeReducer.State,
             isRestoringWallet: Bool = false,
             isRPConnected: Bool = false,
+            requestPaymentState: RequestPayment.State,
             selectedTab: Tab = .account,
             sendConfirmationState: SendConfirmation.State,
             sendState: SendFlowReducer.State,
@@ -79,6 +83,7 @@ public struct TabsReducer: Reducer {
             self.homeState = homeState
             self.isRestoringWallet = isRestoringWallet
             self.isRPConnected = isRPConnected
+            self.requestPaymentState = requestPaymentState
             self.selectedTab = selectedTab
             self.sendConfirmationState = sendConfirmationState
             self.sendState = sendState
@@ -90,6 +95,7 @@ public struct TabsReducer: Reducer {
         case addressDetails(AddressDetails.Action)
         case balanceBreakdown(BalanceBreakdownReducer.Action)
         case home(HomeReducer.Action)
+        case requestPayment(RequestPayment.Action)
         case restoreWalletTask
         case restoreWalletValue(Bool)
         case selectedTabChanged(State.Tab)
@@ -125,15 +131,29 @@ public struct TabsReducer: Reducer {
             HomeReducer()
         }
 
+        Scope(state: \.requestPaymentState, action: /Action.requestPayment) {
+            RequestPayment()
+        }
+
         Scope(state: \.settingsState, action: /Action.settings) {
             SettingsReducer()
         }
 
         Reduce { state, action in
             switch action {
+            case .addressDetails(.requestPaymentTapped):
+                if state.addressDetailsState.selection == .transparent {
+                    state.requestPaymentState.toAddress = state.addressDetailsState.transparentAddress
+                    state.requestPaymentState.isMemoPossible = false
+                } else {
+                    state.requestPaymentState.toAddress = state.addressDetailsState.unifiedAddress
+                    state.requestPaymentState.isMemoPossible = true
+                }
+                return .send(.updateDestination(.requestPaymentForm))
+                
             case .addressDetails:
                 return .none
-            
+
             case .balanceBreakdown(.shieldFundsSuccess):
                 return .none
             
@@ -159,6 +179,9 @@ public struct TabsReducer: Reducer {
                 state.isRestoringWallet = value
                 return .none
 
+            case .requestPayment:
+                return .none
+                
             case .send(.confirmationRequired(let type)):
                 state.isRPConnected = type == .requestPayment
                 state.sendConfirmationState.amount = state.sendState.amount
@@ -246,6 +269,13 @@ extension TabsStore {
             action: TabsReducer.Action.sendConfirmation
         )
     }
+    
+    func requestPaymentStore() -> StoreOf<RequestPayment> {
+        self.scope(
+            state: \.requestPaymentState,
+            action: TabsReducer.Action.requestPayment
+        )
+    }
 }
 
 // MARK: - ViewStore
@@ -267,6 +297,7 @@ extension TabsReducer.State {
         balanceBreakdownState: .initial,
         destination: nil,
         homeState: .initial,
+        requestPaymentState: .initial,
         selectedTab: .account,
         sendConfirmationState: .initial,
         sendState: .initial,

@@ -721,6 +721,7 @@ let package = Package(
                 "Generated",
                 "HideBalances",
                 "Home",
+                "RequestPayment",
                 "RestoreWalletStorage",
                 "SendConfirmation",
                 "SendFlow",
