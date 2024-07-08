@@ -41,6 +41,95 @@ public struct ServerSetupView: View {
                             .frame(height: 1)
                         
                         ScrollView {
+                            if store.topKServers.isEmpty {
+                                HStack(spacing: 5) {
+                                    Text("evaluating performance of servers")
+                                        .font(.custom(FontFamily.Inter.medium.name, size: 14))
+                                        .foregroundColor(Asset.Colors.shade30.color)
+                                    ProgressView()
+                                }
+                                .padding(.vertical, 15)
+                            } else {
+                                HStack {
+                                    Text("The fastest servers")
+                                        .font(.custom(FontFamily.Inter.medium.name, size: 18))
+                                        .foregroundColor(Asset.Colors.shade30.color)
+
+                                    Spacer()
+                                    
+                                    Button {
+                                        store.send(.refreshServersTapped)
+                                    } label: {
+                                        HStack(spacing: 4) {
+                                            Text("Refresh")
+                                                .font(.custom(FontFamily.Inter.bold.name, size: 12))
+                                                .foregroundColor(Asset.Colors.shade30.color)
+
+                                            Image(systemName: "arrow.clockwise")
+                                                .renderingMode(.template)
+                                                .resizable()
+                                                .frame(width: 8, height: 10)
+                                                .foregroundColor(Asset.Colors.shade30.color)
+
+                                        }
+                                        .padding(5)
+                                    }
+                                }
+                                .padding(.horizontal, 35)
+
+                                ForEach(store.topKServers, id: \.self) { server in
+                                    WithPerceptionTracking {
+                                        VStack {
+                                            HStack(spacing: 0) {
+                                                Button {
+                                                    store.send(.someServerTapped(server))
+                                                } label: {
+                                                    HStack(spacing: 10) {
+                                                        WithPerceptionTracking {
+                                                            if server.value(for: store.network) == store.selectedServer {
+                                                                Circle()
+                                                                    .fill(Asset.Colors.primary.color)
+                                                                    .frame(width: 20, height: 20)
+                                                                    .overlay {
+                                                                        Circle()
+                                                                            .fill(Asset.Colors.secondary.color)
+                                                                            .frame(width: 8, height: 8)
+                                                                    }
+                                                            } else {
+                                                                Circle()
+                                                                    .stroke(Asset.Colors.primary.color)
+                                                                    .frame(width: 20, height: 20)
+                                                            }
+                                                        }
+                                                        
+                                                        Text(server.name(for: store.network)).tag(server)
+                                                            .font(.custom(FontFamily.Inter.medium.name, size: 14))
+                                                            .foregroundColor(Asset.Colors.shade30.color)
+                                                            .multilineTextAlignment(.leading)
+                                                    }
+                                                }
+                                                .padding(.vertical, 6)
+                                                
+                                                Spacer()
+                                            }
+                                            .frame(maxWidth: .infinity)
+                                        }
+                                        .padding(.horizontal, 35)
+                                        .id(server.value(for: store.network) == store.selectedServer ? InputID.selection : nil)
+                                    }
+                                }
+                            }
+
+                            HStack {
+                                Text("All servers")
+                                    .font(.custom(FontFamily.Inter.medium.name, size: 18))
+                                    .foregroundColor(Asset.Colors.shade30.color)
+
+                                Spacer()
+                            }
+                            .padding(.horizontal, 35)
+                            .padding(.top, store.topKServers.isEmpty ? 0 : 15)
+
                             ForEach(store.servers, id: \.self) { server in
                                 WithPerceptionTracking {
                                     VStack {
@@ -99,7 +188,6 @@ public struct ServerSetupView: View {
                                     .id(server.value(for: store.network) == store.selectedServer ? InputID.selection : nil)
                                 }
                             }
-                            .padding(.vertical, 20)
                             .task { @MainActor in
                                 try? await Task.sleep(nanoseconds: Constants.delayBeforeScroll)
                                 withAnimation {
@@ -107,7 +195,8 @@ public struct ServerSetupView: View {
                                 }
                             }
                         }
-                        
+                        .padding(.vertical, 1)
+
                         Asset.Colors.shade30.color
                             .frame(maxWidth: .infinity)
                             .frame(height: 1)
@@ -139,9 +228,7 @@ public struct ServerSetupView: View {
                         Text(L10n.ServerSetup.title.uppercased())
                             .font(.custom(FontFamily.Archivo.bold.name, size: 14))
                     }
-                    .onAppear {
-                        store.send(.onAppear)
-                    }
+                    .onAppear { store.send(.onAppear) }
                     .alert($store.scope(state: \.alert, action: \.alert))
                 }
             }

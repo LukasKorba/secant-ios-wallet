@@ -14,41 +14,57 @@ import SDKSynchronizer
 import UserPreferencesStorage
 import ZcashSDKEnvironment
 
+extension LightWalletEndpoint: Equatable {
+    public static func == (lhs: LightWalletEndpoint, rhs: LightWalletEndpoint) -> Bool {
+        lhs.host == rhs.host
+        && lhs.port == rhs.port
+        && lhs.streamingCallTimeoutInMillis == rhs.streamingCallTimeoutInMillis
+        && lhs.singleCallTimeoutInMillis == rhs.singleCallTimeoutInMillis
+        && lhs.secure == rhs.secure
+    }
+}
+
 @Reducer
 public struct ServerSetup {
     let streamingCallTimeoutInMillis = ZcashSDKEnvironment.ZcashSDKConstants.streamingCallTimeoutInMillis
-    
+
     @ObservableState
     public struct State: Equatable {
         @Presents var alert: AlertState<Action>?
+        var customServer: String
         var isUpdatingServer = false
         var initialServer: String
         var network: NetworkType = .mainnet
         var selectedServer: String
         var servers: [ZcashSDKEnvironment.Server]
-        var customServer: String
+        var topKServers: [ZcashSDKEnvironment.Server]
         
         public init(
+            customServer: String = "",
             isUpdatingServer: Bool = false,
             initialServer: String = "",
             network: NetworkType = .mainnet,
             selectedServer: String = "",
             servers: [ZcashSDKEnvironment.Server] = [],
-            customServer: String = ""
+            topKServers: [ZcashSDKEnvironment.Server] = []
         ) {
+            self.customServer = customServer
             self.isUpdatingServer = isUpdatingServer
             self.initialServer = initialServer
             self.network = network
             self.selectedServer = selectedServer
             self.servers = servers
-            self.customServer = customServer
+            self.topKServers = topKServers
         }
     }
     
     public enum Action: Equatable, BindableAction {
         case alert(PresentationAction<Action>)
         case binding(BindingAction<State>)
+        case evaluatedServers([LightWalletEndpoint])
+        case evaluateServers
         case onAppear
+        case refreshServersTapped
         case setServerTapped
         case someServerTapped(ZcashSDKEnvironment.Server)
         case switchFailed(ZcashError)
@@ -79,8 +95,9 @@ public struct ServerSetup {
                 } else {
                     state.initialServer = serverConfig.serverString()
                 }
+                
                 state.selectedServer = state.initialServer
-                return .none
+                return state.topKServers.isEmpty ? .send(.evaluateServers) : .none
                 
             case .alert(.dismiss):
                 state.alert = nil
@@ -92,6 +109,30 @@ public struct ServerSetup {
             case .binding:
                 return .none
             
+            case .evaluateServers:
+                return .run { send in
+                    let kBestServers = await sdkSynchronizer.evaluateBestOf(
+                        ZcashSDKEnvironment.endpoints(),
+                        300.0,
+                        60.0,
+                        100,
+                        3,
+                        .mainnet
+                    )
+                    
+                    await send(.evaluatedServers(kBestServers))
+                }
+                
+            case .evaluatedServers(let bestServers):
+                state.topKServers = bestServers.map {
+                    ZcashSDKEnvironment.Server.hardcoded("\($0.host):\($0.port)")
+                }
+                return .none
+                
+            case .refreshServersTapped:
+                state.topKServers.removeAll()
+                return .send(.evaluateServers)
+
             case .setServerTapped:
                 guard state.initialServer != state.selectedServer || state.selectedServer == L10n.ServerSetup.custom else {
                     return .none
