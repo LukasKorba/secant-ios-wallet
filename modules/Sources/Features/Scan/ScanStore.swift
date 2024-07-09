@@ -116,6 +116,8 @@ public struct Scan {
                 
                 if uriParser.isValidURI(code, zcashSDKEnvironment.network.networkType) {
                     return .send(.found(code.redacted))
+                } else if let data = uriParser.checkRP(code) {
+                    return .send(.foundRP(data))
                 } else {
                     return .send(.scanFailed(.noQRCodeFound))
                 }
