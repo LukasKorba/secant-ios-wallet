@@ -15,6 +15,8 @@ import UIComponents
 import PrivateDataConsent
 import ServerSetup
 
+import Flexa
+
 public struct AdvancedSettingsView: View {
     @Perception.Bindable var store: StoreOf<AdvancedSettings>
     
@@ -87,7 +89,23 @@ public struct AdvancedSettingsView: View {
                     .zcashStyle()
                     .padding(.horizontal, 70)
                 }
+                
+                Button {
+                    store.send(.flexaTapped)
+                } label: {
+                    Text("Flexa")
+                }
+                .zcashStyle()
+                .padding(.horizontal, 70)
 
+//                if store.isFlexaOn {
+//                    Flexa.sections([.spend])
+////                        .appAccounts(appAccounts) // Optional
+////                        .selectedAsset(selectedAccountId, selectedAssetId) // Optional
+//                        .onTransactionRequest(onTransactionRequest)
+//                        .open()
+//                }
+                
                 Spacer()
                 
                 Button(L10n.Settings.deleteZashi.uppercased()) {
@@ -121,6 +139,21 @@ public struct AdvancedSettingsView: View {
                 .foregroundColor(Asset.Colors.primary.color)
         }
     }
+    
+    // Callback handler
+    func onTransactionRequest(result: Result<FXTransaction, Error>) {
+        debugPrint(result)
+//        switch result {
+//        case .success(let transaction):
+            // Sign and send the transaction
+            // Once the transaction is sent the parent application can pass the signature (String) to Flexa through Flexa.transactionSent
+//            let signature = ...
+//            Flexa.transactionSent(commerceSessionId: transaction.commerceSessionId, signature: signature)
+//        default:
+//            break
+//        }
+    }
+
 }
 
 // MARK: - Previews

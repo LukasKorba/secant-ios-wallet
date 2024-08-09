@@ -74,6 +74,11 @@ public enum Asset {
     public static let shade97 = ColorAsset(name: "shade97")
     public static let splash = ColorAsset(name: "splash")
     public static let syncProgresBcg = ColorAsset(name: "syncProgresBcg")
+    public enum Test {
+      public static let a = ColorAsset(name: "a")
+      public static let b = ColorAsset(name: "b")
+      public static let mix = ColorAsset(name: "mix")
+    }
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

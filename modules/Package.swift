@@ -82,7 +82,8 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.0"),
         .package(url: "https://github.com/zcash-hackworks/MnemonicSwift", from: "2.2.4"),
         .package(url: "https://github.com/Electric-Coin-Company/zcash-swift-wallet-sdk", from: "2.1.12"),
-        .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "10.27.0")
+        .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "10.27.0"),
+        .package(url: "https://github.com/flexa/flexa-ios.git", from: "0.2.0-beta.1")
     ],
     targets: [
         .target(
@@ -628,7 +629,8 @@ let package = Package(
                 "SupportDataGenerator",
                 "UIComponents",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-                .product(name: "ZcashLightClientKit", package: "zcash-swift-wallet-sdk")
+                .product(name: "ZcashLightClientKit", package: "zcash-swift-wallet-sdk"),
+                .product(name: "Flexa", package: "flexa-ios")
             ],
             path: "Sources/Features/Settings"
         ),

@@ -11,6 +11,7 @@ import RecoveryPhraseDisplay
 import ServerSetup
 import ZcashLightClientKit
 import PartnerKeys
+import Flexa
 
 @Reducer
 public struct AdvancedSettings {
@@ -26,6 +27,7 @@ public struct AdvancedSettings {
         public var appId: String?
         public var deleteWallet: DeleteWallet.State
         public var destination: Destination?
+        public var isFlexaOn = false
         public var isInAppBrowserOn = false
         public var phraseDisplayState: RecoveryPhraseDisplay.State
         public var privateDataConsentState: PrivateDataConsentReducer.State
@@ -63,6 +65,7 @@ public struct AdvancedSettings {
         case binding(BindingAction<AdvancedSettings.State>)
         case buyZecTapped
         case deleteWallet(DeleteWallet.Action)
+        case flexaTapped
         case onAppear
         case phraseDisplay(RecoveryPhraseDisplay.Action)
         case privateDataConsent(PrivateDataConsentReducer.Action)
@@ -89,6 +92,23 @@ public struct AdvancedSettings {
                 
             case .buyZecTapped:
                 state.isInAppBrowserOn = true
+                return .none
+                
+            case .flexaTapped:
+                Flexa.initialize(
+                    FXClient(
+                        publishableKey: "{publishable_test_P5RP3Cc7W7rj266j92PRMQ9HXfhqg6P4rCF2f4MxxP6Q4WVMP834HGpPRgh2xcXQ39cjqpxGXHmG4rMv27RxVC}",
+                        appAccounts: [],
+                        theme: .default
+                    )
+                )
+//                state.isFlexaOn = true
+                
+                Flexa.sections([.spend])
+//                    .appAccounts(appAccounts) // Optional
+//                    .selectedAsset(selectedAccountId, selectedAssetId) // Optional
+//                    .onTransactionRequest(onTransactionRequest)
+                    .open()
                 return .none
                 
             case .protectedAccessRequest(let destination):

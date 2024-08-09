@@ -14,6 +14,8 @@ import Utils
 import Root
 import ZcashSDKEnvironment
 
+import Flexa
+
 @main
 struct SecantApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
@@ -40,6 +42,9 @@ struct SecantApp: App {
                 appDelegate.rootStore.send(.initialization(.appDelegate(.didEnterBackground)))
                 appDelegate.scheduleBackgroundTask()
                 appDelegate.scheduleSchedulerBackgroundTask()
+            }
+            .onOpenURL { url in
+                Flexa.processUniversalLink(url: url)
             }
         }
     }
