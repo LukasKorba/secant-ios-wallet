@@ -18,6 +18,7 @@ let package = Package(
         .library(name: "BalanceFormatter", targets: ["BalanceFormatter"]),
         .library(name: "CaptureDevice", targets: ["CaptureDevice"]),
         .library(name: "CrashReporter", targets: ["CrashReporter"]),
+        .library(name: "CurrencyConversionSetup", targets: ["CurrencyConversionSetup"]),
         .library(name: "DatabaseFiles", targets: ["DatabaseFiles"]),
         .library(name: "Date", targets: ["Date"]),
         .library(name: "Deeplink", targets: ["Deeplink"]),
@@ -186,6 +187,18 @@ let package = Package(
             path: "Sources/Dependencies/CrashReporter"
         ),
         .target(
+            name: "CurrencyConversionSetup",
+            dependencies: [
+                "ExchangeRate",
+                "Generated",
+                "SDKSynchronizer",
+                "UIComponents",
+                "UserPreferencesStorage",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/Features/CurrencyConversionSetup"
+        ),
+        .target(
             name: "DatabaseFiles",
             dependencies: [
                 "FileManager",
@@ -244,6 +257,7 @@ let package = Package(
             name: "ExchangeRate",
             dependencies: [
                 "SDKSynchronizer",
+                "UserPreferencesStorage",
                 "ZcashSDKEnvironment",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "ZcashLightClientKit", package: "ZcashLightClientKit")
@@ -631,6 +645,7 @@ let package = Package(
             dependencies: [
                 "About",
                 "AppVersion",
+                "CurrencyConversionSetup",
                 "DeleteWallet",
                 "Generated",
                 "LocalAuthenticationHandler",
@@ -682,6 +697,7 @@ let package = Package(
             dependencies: [
                 "AddressDetails",
                 "BalanceBreakdown",
+                "CurrencyConversionSetup",
                 "ExchangeRate",
                 "Generated",
                 "HideBalances",
@@ -691,6 +707,7 @@ let package = Package(
                 "SendFlow",
                 "Settings",
                 "UIComponents",
+                "UserPreferencesStorage",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "ZcashLightClientKit", package: "ZcashLightClientKit")
             ],
@@ -769,6 +786,7 @@ let package = Package(
                 "Models",
                 "SDKSynchronizer",
                 "UIComponents",
+                "UserPreferencesStorage",
                 "Utils",
                 "ZcashSDKEnvironment",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
