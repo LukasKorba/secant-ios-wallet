@@ -86,7 +86,8 @@ let package = Package(
 //        .package(url: "https://github.com/Electric-Coin-Company/zcash-swift-wallet-sdk", from: "2.1.12"),
 //        .package(url: "https://github.com/Electric-Coin-Company/zcash-swift-wallet-sdk", branch: "rust-logging-and-exchange-rates"),
 //        .package(url: "https://github.com/LukasKorba/ZcashLightClientKit", branch: "always-return-value"),
-        .package(url: "https://github.com/LukasKorba/ZcashLightClientKit", revision: "1ffeff0c4b3fd6c7a60e77c83a00850422c7cffa"),
+//        .package(url: "https://github.com/LukasKorba/ZcashLightClientKit", revision: "1ffeff0c4b3fd6c7a60e77c83a00850422c7cffa"),
+        .package(url: "https://github.com/LukasKorba/ZcashLightClientKit", branch: "1475-Adopt-transaction-data-requests"),
         .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "10.27.0")
     ],
     targets: [
