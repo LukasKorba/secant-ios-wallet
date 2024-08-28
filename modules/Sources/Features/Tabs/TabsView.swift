@@ -100,7 +100,7 @@ public struct TabsView: View {
                                                 .foregroundColor(Asset.Colors.primary.color)
                                             Rectangle()
                                                 .frame(height: 2)
-                                                .foregroundColor(Asset.Colors.primaryTint.color)
+                                                .foregroundColor(Design.Surfaces.brandBg.color)
                                                 .matchedGeometryEffect(id: "Tabs", in: tabsID, properties: .frame)
                                         } else {
                                             Text("\(item.title)")
@@ -165,81 +165,6 @@ public struct TabsView: View {
                         }
                     }
                 }
-//                .overlayPreferenceValue(ExchangeRateFeaturePreferenceKey.self) { preferences in
-//                    if viewStore.isRateEducationEnabled {
-//                        GeometryReader { geometry in
-//                            preferences.map {
-//                                VStack(alignment: .leading, spacing: 0) {
-//                                    HStack(alignment: .top, spacing: 0) {
-//                                        Asset.Assets.coinsSwap.image
-//                                            .renderingMode(.template)
-//                                            .resizable()
-//                                            .frame(width: 20, height: 20)
-//                                            .foregroundColor(Asset.Colors.CurrencyConversion.optionTint.color)
-//                                            .padding(10)
-//                                            .background {
-//                                                Circle()
-//                                                    .fill(Asset.Colors.CurrencyConversion.optionBcg.color)
-//                                            }
-//                                            .padding(.trailing, 16)
-//                                        
-//                                        VStack(alignment: .leading, spacing: 5) {
-//                                            Text(L10n.CurrencyConversion.cardTitle)
-//                                                .font(.custom(FontFamily.Inter.regular.name, size: 14))
-//                                                .foregroundColor(Asset.Colors.CurrencyConversion.tertiary.color)
-//
-//                                            Text(L10n.CurrencyConversion.title)
-//                                                .font(.custom(FontFamily.Inter.semiBold.name, size: 16))
-//                                                .foregroundColor(Asset.Colors.CurrencyConversion.primary.color)
-//                                                .lineLimit(1)
-//                                                .minimumScaleFactor(0.5)
-//                                        }
-//
-//                                        Spacer(minLength: 0)
-//
-//                                        Button {
-//                                            viewStore.send(.currencyConversionCloseTapped)
-//                                        } label: {
-//                                            Asset.Assets.buttonCloseX.image
-//                                                .renderingMode(.template)
-//                                                .resizable()
-//                                                .frame(width: 20, height: 20)
-//                                                .foregroundColor(Asset.Colors.CurrencyConversion.Card.close.color)
-//                                        }
-//                                        .padding(20)
-//                                        .offset(x: 20, y: -20)
-//                                    }
-//
-//                                    Button {
-//                                        viewStore.send(.updateDestination(.currencyConversionSetup))
-//                                    } label: {
-//                                        Text(L10n.CurrencyConversion.cardButton)
-//                                            .font(.custom(FontFamily.Inter.semiBold.name, size: 16))
-//                                            .foregroundColor(Asset.Colors.CurrencyConversion.primary.color)
-//                                            .frame(height: 24)
-//                                            .frame(maxWidth: .infinity)
-//                                            .padding(.vertical, 12)
-//                                            .background {
-//                                                RoundedRectangle(cornerRadius: 12)
-//                                                    .fill(Asset.Colors.CurrencyConversion.btnPrimaryDisabled.color)
-//                                            }
-//                                    }
-//                                }
-//                                .padding(24)
-//                                .background {
-//                                    RoundedRectangle(cornerRadius: 12)
-//                                        .fill(Asset.Colors.V2.bgPrimary.color)
-//                                        .background {
-//                                            RoundedRectangle(cornerRadius: 12)
-//                                                .stroke(Asset.Colors.CurrencyConversion.Card.outline.color)
-//                                        }
-//                                }
-//                                .frame(width: geometry.size.width - 40)
-//                                .offset(x: 20, y: geometry[$0].minY + geometry[$0].height)
-//                            }
-//                        }
-//                    }
-//                }
                 .overlayPreferenceValue(ExchangeRateFeaturePreferenceKey.self) { preferences in
                     if viewStore.isRateEducationEnabled {
                         GeometryReader { geometry in
@@ -250,22 +175,22 @@ public struct TabsView: View {
                                             .renderingMode(.template)
                                             .resizable()
                                             .frame(width: 20, height: 20)
-                                            .foregroundColor(Asset.Colors.CurrencyConversion.optionTint.color)
+                                            .foregroundColor(Design.Text.primary.color)
                                             .padding(10)
                                             .background {
                                                 Circle()
-                                                    .fill(Asset.Colors.CurrencyConversion.optionBcg.color)
+                                                    .fill(Design.Surfaces.bgTertiary.color)
                                             }
                                             .padding(.trailing, 16)
                                         
                                         VStack(alignment: .leading, spacing: 5) {
                                             Text(L10n.CurrencyConversion.cardTitle)
                                                 .font(.custom(FontFamily.Inter.regular.name, size: 14))
-                                                .foregroundColor(Asset.Colors.CurrencyConversion.tertiary.color)
+                                                .foregroundColor(Design.Text.tertiary.color)
 
                                             Text(L10n.CurrencyConversion.title)
                                                 .font(.custom(FontFamily.Inter.semiBold.name, size: 16))
-                                                .foregroundColor(Asset.Colors.CurrencyConversion.primary.color)
+                                                .foregroundColor(Design.Text.primary.color)
                                                 .lineLimit(nil)
                                         }
                                         .padding(.trailing, 16)
@@ -279,7 +204,7 @@ public struct TabsView: View {
                                                 .renderingMode(.template)
                                                 .resizable()
                                                 .frame(width: 20, height: 20)
-                                                .foregroundColor(Asset.Colors.CurrencyConversion.Card.close.color)
+                                                .foregroundColor(Design.HintTooltips.defaultFg.color)
                                         }
                                         .padding(20)
                                         .offset(x: 20, y: -20)
@@ -290,23 +215,23 @@ public struct TabsView: View {
                                     } label: {
                                         Text(L10n.CurrencyConversion.cardButton)
                                             .font(.custom(FontFamily.Inter.semiBold.name, size: 16))
-                                            .foregroundColor(Asset.Colors.CurrencyConversion.primary.color)
+                                            .foregroundColor(Design.Btns.Tertiary.fg.color)
                                             .frame(height: 24)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 12)
                                             .background {
                                                 RoundedRectangle(cornerRadius: 12)
-                                                    .fill(Asset.Colors.CurrencyConversion.btnPrimaryDisabled.color)
+                                                    .fill(Design.Btns.Tertiary.bg.color)
                                             }
                                     }
                                 }
                                 .padding(24)
                                 .background {
                                     RoundedRectangle(cornerRadius: 12)
-                                        .fill(Asset.Colors.V2.bgPrimary.color)
+                                        .fill(Design.Surfaces.bgPrimary.color)
                                         .background {
                                             RoundedRectangle(cornerRadius: 12)
-                                                .stroke(Asset.Colors.V2.strokeSecondary.color)
+                                                .stroke(Design.Surfaces.strokeSecondary.color)
                                         }
                                 }
                                 .frame(width: geometry.size.width - 40)
