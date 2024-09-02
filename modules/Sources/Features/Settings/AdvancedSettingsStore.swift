@@ -36,9 +36,11 @@ public struct AdvancedSettings {
         public var uAddress: UnifiedAddress? = nil
         
         public var inAppBrowserURL: String? {
+#if SECANT_MAINNET
             if let address = try? uAddress?.transparentReceiver().stringEncoded, let appId {
                 return L10n.Partners.coinbaseOnrampUrl(appId, address)
             }
+#endif
             
             return nil
         }

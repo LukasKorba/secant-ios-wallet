@@ -128,6 +128,14 @@ public struct ServerSetup {
                 return .none
             
             case .evaluateServers:
+                guard state.network == .mainnet else {
+                    let endpoint = ZcashSDKEnvironment.defaultEndpoint(for: state.network)
+                    state.topKServers.append(
+                        ZcashSDKEnvironment.Server.hardcoded("\(endpoint.host):\(endpoint.port)")
+                    )
+                    return .none
+                }
+                
                 state.isEvaluatingServers = true
                 return .run { send in
                     let kBestServers = await sdkSynchronizer.evaluateBestOf(

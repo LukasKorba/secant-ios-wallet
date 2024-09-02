@@ -60,9 +60,9 @@ extension ZcashSDKEnvironment {
     public static func servers(for network: NetworkType) -> [Server] {
         var servers = [Server.default]
 
+        servers.append(.custom)
+
         if network == .mainnet {
-            servers.append(.custom)
-            
             let mainnetServers = ZcashSDKEnvironment.endpoints(skipDefault: true).map {
                 Server.hardcoded("\($0.host):\($0.port)")
             }
