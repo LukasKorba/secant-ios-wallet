@@ -86,8 +86,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/flexa/flexa-ios.git",
       "state" : {
-        "revision" : "ff9a017e54cd0ae2cf499df774b19161f41bbc14",
-        "version" : "1.0.3"
+        "revision" : "aae0c067058946bbeb18be71593e38017c1c5af4",
+        "version" : "1.0.5"
       }
     },
     {
@@ -471,10 +471,10 @@
     {
       "identity" : "zcash-light-client-ffi",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/zcash-hackworks/zcash-light-client-ffi",
+      "location" : "https://github.com/Electric-Coin-Company/zcash-light-client-ffi",
       "state" : {
-        "revision" : "8ed5b08d59ff5e7e11240be29b084dedbdf2f268",
-        "version" : "0.9.1"
+        "revision" : "7029804dc30d33b689fb8da712c1172daf8e402e",
+        "version" : "0.10.2"
       }
     },
     {
@@ -491,8 +491,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Electric-Coin-Company/zcash-swift-wallet-sdk",
       "state" : {
-        "revision" : "af9383b419c2cafe37ac9edecf9d41cf37fbbf45",
-        "version" : "2.2.3"
+        "revision" : "ce25f074b480d46d76c1fc20f0f0fe37d879a2c9",
+        "version" : "2.2.6"
       }
     }
   ],
