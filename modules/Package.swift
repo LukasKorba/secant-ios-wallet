@@ -61,6 +61,7 @@ let package = Package(
         .library(name: "SecItem", targets: ["SecItem"]),
         .library(name: "SecurityWarning", targets: ["SecurityWarning"]),
         .library(name: "SendConfirmation", targets: ["SendConfirmation"]),
+        .library(name: "SendFeedback", targets: ["SendFeedback"]),
         .library(name: "SendFlow", targets: ["SendFlow"]),
         .library(name: "ServerSetup", targets: ["ServerSetup"]),
         .library(name: "Settings", targets: ["Settings"]),
@@ -89,7 +90,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-case-paths", from: "1.5.4"),
         .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.2"),
         .package(url: "https://github.com/zcash-hackworks/MnemonicSwift", from: "2.2.4"),
-        .package(url: "https://github.com/Electric-Coin-Company/zcash-swift-wallet-sdk", exact: "2.2.3"),
+        .package(url: "https://github.com/Electric-Coin-Company/zcash-swift-wallet-sdk", exact: "2.2.5"),
         .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "10.27.0"),
         .package(url: "https://github.com/flexa/flexa-ios.git", from: "1.0.4"),
         .package(url: "https://github.com/pacu/zcash-swift-payment-uri", from: "0.1.0-beta.9")
@@ -102,7 +103,6 @@ let package = Package(
                 "Generated",
                 "Models",
                 "UIComponents",
-                "WhatsNew",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ],
             path: "Sources/Features/About"
@@ -688,6 +688,17 @@ let package = Package(
             path: "Sources/Features/SendConfirmation"
         ),
         .target(
+            name: "SendFeedback",
+            dependencies: [
+                "Generated",
+                "SupportDataGenerator",
+                "UIComponents",
+                "Utils",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/Features/SendFeedback"
+        ),
+        .target(
             name: "SendFlow",
             dependencies: [
                 "AddressBookClient",
@@ -736,9 +747,10 @@ let package = Package(
                 "Pasteboard",
                 "PrivateDataConsent",
                 "RecoveryPhraseDisplay",
+                "SendFeedback",
                 "ServerSetup",
-                "SupportDataGenerator",
                 "UIComponents",
+                "WhatsNew",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "ZcashLightClientKit", package: "zcash-swift-wallet-sdk"),
                 .product(name: "Flexa", package: "flexa-ios")
@@ -913,6 +925,7 @@ let package = Package(
         .target(
             name: "WhatsNew",
             dependencies: [
+                "AppVersion",
                 "Generated",
                 "UIComponents",
                 "WhatsNewProvider",

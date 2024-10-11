@@ -64,6 +64,7 @@ public enum Asset {
       public static let imageLibrary = ImageAsset(name: "imageLibrary")
       public static let integrations = ImageAsset(name: "integrations")
       public static let key = ImageAsset(name: "key")
+      public static let magicWand = ImageAsset(name: "magicWand")
       public static let messageSmile = ImageAsset(name: "messageSmile")
       public static let pencil = ImageAsset(name: "pencil")
       public static let plus = ImageAsset(name: "plus")

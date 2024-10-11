@@ -9,6 +9,9 @@ directly impact users rather than highlighting other crucial architectural updat
 ### Added
 - Flexa integrated into Zashi, users can pay with ZEC for Flexa codes. 
 
+### Changed
+- All settings flow screen have been redesigned
+
 ### Fixed
 - Splash screen animation is blocked by the main thread on iOS 16 and older.
 - Inactive hide balances button on iOS 16 and older.
