@@ -212,6 +212,10 @@ public struct Root {
             Welcome()
         }
 
+        Scope(state: \.phraseDisplayState, action: \.phraseDisplay) {
+            RecoveryPhraseDisplay()
+        }
+
         initializationReduce()
 
         destinationReduce()
