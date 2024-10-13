@@ -172,8 +172,9 @@
 
 // MARK: - Not Enogh Free Space
 "notEnoughFreeSpace.title" = "Not enough free space";
-"notEnoughFreeSpace.message1" = "Zashi requires at\nleast %@ GB of space to\noperate but there is only\n%@ MB available.";
-"notEnoughFreeSpace.message2" = "Go to your device settings and make more space available if you wish to use the Zashi app.";
+"notEnoughFreeSpace.message1" = "Zashi requires %@ GB of space to synchronize the Zcash blockchain but there is only %@ MB available. Syncing will stay paused until more space is available.";
+//"notEnoughFreeSpace.message1" = "Zashi requires at\nleast %@ GB of space to\noperate but there is only\n%@ MB available.";
+"notEnoughFreeSpace.message2" = "~%@ MB of additional space required to continue";
 
 // MARK: - About
 "about.info" = "Send and receive ZEC on Zashi!
