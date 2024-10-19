@@ -407,7 +407,6 @@ let package = Package(
             name: "Models",
             dependencies: [
                 "Utils",
-                "UIComponents",
                 .product(name: "MnemonicSwift", package: "MnemonicSwift"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
@@ -822,6 +821,7 @@ let package = Package(
                 "Generated",
                 "LocalAuthenticationHandler",
                 "NumberFormatter",
+                "Models",
                 "SupportDataGenerator",
                 "Utils",
                 "ZcashSDKEnvironment",

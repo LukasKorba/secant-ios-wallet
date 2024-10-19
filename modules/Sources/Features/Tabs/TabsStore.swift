@@ -85,6 +85,7 @@ public struct Tabs {
         public var receiveState: Receive.State
         public var requestZecState: RequestZec.State
         public var selectedTab: Tab = .account
+        public var selectTextRequest = false
         public var sendConfirmationState: SendConfirmation.State
         public var sendState: SendFlow.State
         public var settingsState: Settings.State
@@ -94,6 +95,7 @@ public struct Tabs {
         public var stackDestinationMaxPrivacyBindingsAlive = 0
         public var stackDestinationRequestPayment: StackDestinationRequestPayment?
         public var stackDestinationRequestPaymentBindingsAlive = 0
+        public var textToSelect = ""
         public var zecKeyboardState: ZecKeyboard.State
         
         public init(
@@ -136,6 +138,7 @@ public struct Tabs {
         case binding(BindingAction<Tabs.State>)
         case currencyConversionCloseTapped
         case currencyConversionSetup(CurrencyConversionSetup.Action)
+        case dismissSelectTextEditor
         case home(Home.Action)
         case onAppear
         case rateTooltipTapped
@@ -307,6 +310,15 @@ public struct Tabs {
                 state.selectedTab = .balances
                 return .none
 
+            case .home(.transactionList(.selectText(let selectText))):
+                state.selectTextRequest = true
+                state.textToSelect = selectText
+                return .none
+                
+            case .dismissSelectTextEditor:
+                state.selectTextRequest = false
+                return .none
+            
             case .home:
                 return .none
             
