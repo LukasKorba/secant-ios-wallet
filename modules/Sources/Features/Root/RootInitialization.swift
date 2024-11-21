@@ -305,18 +305,23 @@ extension Root {
                         var keys = AddressBookEncryptionKeys.empty
                         try keys.cacheFor(
                             seed: seedBytes,
-                            account: 0,
+                            account: state.account,
                             network: zcashSDKEnvironment.network.networkType
                         )
-                        try walletStorage.importAddressBookEncryptionKeys(keys)
+                        
+                        do {
+                            try walletStorage.importAddressBookEncryptionKeys(keys)
+                        } catch {
+                            // TODO: [#1408] error handling https://github.com/Electric-Coin-Company/zashi-ios/issues/1408
+                        }
                     }
 
-                    return .run { send in
+                    return .run { [account = state.account] send in
                         do {
                             try await sdkSynchronizer.prepareWith(seedBytes, birthday, walletMode)
                             try await sdkSynchronizer.start(false)
                             
-                            let uAddress = try? await sdkSynchronizer.getUnifiedAddress(0)
+                            let uAddress = try? await sdkSynchronizer.getUnifiedAddress(account)
                             await send(.initialization(.initializationSuccessfullyDone(uAddress)))
                         } catch {
                             await send(.initialization(.initializationFailed(error.toZcashError())))

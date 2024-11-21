@@ -224,7 +224,7 @@ public struct WalletStorage {
 
         var result: AnyObject?
         let status = secItem.copyMatching(query as CFDictionary, &result)
-        
+
         guard status == errSecSuccess else {
             throw KeychainError.unknown(status)
         }
