@@ -494,7 +494,7 @@ public struct Root {
                 return .none
                 
             case .batteryStateChanged:
-                var leavesScreenOpen = userDefaults.objectForKey(Constants.udLeavesScreenOpen) as? Bool ?? false
+                let leavesScreenOpen = userDefaults.objectForKey(Constants.udLeavesScreenOpen) as? Bool ?? false
                 autolockHandler.value(state.walletStatus == .restoring && leavesScreenOpen)
                 return .none
                 
@@ -507,6 +507,9 @@ public struct Root {
                     .cancel(id: WalletConfigCancelId),
                     .cancel(id: DidFinishLaunchingId)
                 )
+
+            case .onboarding(.newWalletSuccessfulyCreated):
+                return .send(.initialization(.initializeSDK(.newWallet)))
 
             default: return .none
             }

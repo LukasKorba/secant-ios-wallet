@@ -39,7 +39,6 @@ let package = Package(
         .library(name: "FlexaHandler", targets: ["FlexaHandler"]),
         .library(name: "Generated", targets: ["Generated"]),
         .library(name: "Home", targets: ["Home"]),
-        .library(name: "ImportWallet", targets: ["ImportWallet"]),
         .library(name: "KeystoneHandler", targets: ["KeystoneHandler"]),
         .library(name: "LocalAuthenticationHandler", targets: ["LocalAuthenticationHandler"]),
         .library(name: "LogsHandler", targets: ["LogsHandler"]),
@@ -64,7 +63,6 @@ let package = Package(
         .library(name: "Scan", targets: ["Scan"]),
         .library(name: "SDKSynchronizer", targets: ["SDKSynchronizer"]),
         .library(name: "SecItem", targets: ["SecItem"]),
-        .library(name: "SecurityWarning", targets: ["SecurityWarning"]),
         .library(name: "SendConfirmation", targets: ["SendConfirmation"]),
         .library(name: "SendFeedback", targets: ["SendFeedback"]),
         .library(name: "SendForm", targets: ["SendForm"]),
@@ -439,21 +437,6 @@ let package = Package(
             path: "Sources/Features/Home"
         ),
         .target(
-            name: "ImportWallet",
-            dependencies: [
-                "Generated",
-                "MnemonicClient",
-                "RestoreInfo",
-                "UIComponents",
-                "Utils",
-                "WalletStorage",
-                "ZcashSDKEnvironment",
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-                .product(name: "ZcashLightClientKit", package: "ZcashLightClientKit")
-            ],
-            path: "Sources/Features/ImportWallet"
-        ),
-        .target(
             name: "KeystoneHandler",
             dependencies: [
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
@@ -520,10 +503,11 @@ let package = Package(
             dependencies: [
                 "CoordFlows",
                 "Generated",
-                "ImportWallet",
+                "MnemonicSwift",
                 "Models",
-                "SecurityWarning",
                 "UIComponents",
+                "WalletStorage",
+                "ZcashSDKEnvironment",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "ZcashLightClientKit", package: "ZcashLightClientKit")
             ],
@@ -757,23 +741,6 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Dependencies/SecItem"
-        ),
-        .target(
-            name: "SecurityWarning",
-            dependencies: [
-                "AppVersion",
-                "Generated",
-                "MnemonicClient",
-                "Models",
-                "NumberFormatter",
-                "RecoveryPhraseDisplay",
-                "UIComponents",
-                "Utils",
-                "WalletStorage",
-                "ZcashSDKEnvironment",
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
-            ],
-            path: "Sources/Features/SecurityWarning"
         ),
         .target(
             name: "SendConfirmation",
