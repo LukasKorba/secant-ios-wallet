@@ -31,6 +31,7 @@ import OSStatusError
 import AddressBookClient
 import UserMetadataProvider
 import AudioServices
+import LocalNotification
 
 // Screens
 //import About
@@ -239,6 +240,7 @@ public struct Root {
         case flexaTransactionFailed(String)
         case home(Home.Action)
         case initialization(InitializationAction)
+        case localNotificationTapped(String)
         case notEnoughFreeSpace(NotEnoughFreeSpace.Action)
 //        case path(StackActionOf<Path>)
         case resetZashiFinishProcessing
@@ -301,6 +303,7 @@ public struct Root {
     @Dependency(\.exchangeRate) var exchangeRate
     @Dependency(\.flexaHandler) var flexaHandler
     @Dependency(\.localAuthentication) var localAuthentication
+    @Dependency(\.localNotification) var localNotification
     @Dependency(\.mainQueue) var mainQueue
     @Dependency(\.mnemonic) var mnemonic
     @Dependency(\.numberFormatter) var numberFormatter
@@ -485,6 +488,9 @@ public struct Root {
                 //return .send(.tabs(.send(.scan(.found(address.redacted)))))
                 //return
 //                return .none
+                
+            case .localNotificationTapped(let identifier):
+                return .send(.home(.smartBanner(.localNotificationTapped(identifier))))
                 
             case .serverSetup:
                 return .none

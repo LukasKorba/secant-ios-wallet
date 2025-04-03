@@ -199,13 +199,16 @@ extension Root {
                 }
                 
             case .initialization(.registerForSynchronizersUpdate):
-                return .publisher {
-                    sdkSynchronizer.stateStream()
-                        .throttle(for: .seconds(0.2), scheduler: mainQueue, latest: true)
-                        .map { $0.redacted }
-                        .map(Root.Action.synchronizerStateChanged)
-                }
-                .cancellable(id: CancelStateId, cancelInFlight: true)
+                return .merge(
+                    .publisher {
+                        sdkSynchronizer.stateStream()
+                            .throttle(for: .seconds(0.2), scheduler: mainQueue, latest: true)
+                            .map { $0.redacted }
+                            .map(Root.Action.synchronizerStateChanged)
+                    }
+                    .cancellable(id: CancelStateId, cancelInFlight: true),
+                    .send(.home(.smartBanner(.evaluatePriority1)))
+                )
 
             case .initialization(.checkWalletConfig):
                 return .publisher {
@@ -498,6 +501,7 @@ extension Root {
                 }
                 state.splashAppeared = true
                 state.isRestoringWallet = false
+                localNotification.clearNotifications()
                 userDefaults.remove(Constants.udIsRestoringWallet)
                 userDefaults.remove(Constants.udLeavesScreenOpen)
                 flexaHandler.signOut()
