@@ -11,6 +11,7 @@ import Models
 import WalletBalances
 import Scan
 import BalanceBreakdown
+import SmartBanner
 
 public struct HomeView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -88,9 +89,15 @@ public struct HomeView: View {
                 }
                 .zFont(.medium, size: 12, style: Design.Text.primary)
                 .padding(.top, 24)
-                .padding(.bottom, 32)
+//                .padding(.bottom, 32)
                 .screenHorizontalPadding()
 
+                SmartBannerView(
+                    store: store.scope(
+                        state: \.smartBannerState,
+                        action: \.smartBanner
+                    )
+                )
 //                SmartBanner(isOpen: true) {
 ////                    EmptyView()
 //                    HStack(spacing: 0) {
@@ -156,6 +163,7 @@ public struct HomeView: View {
                 }
                 //.padding(.top, 12)
             }
+            
 //            .popover(
 //                isPresented:
 //                    Binding(

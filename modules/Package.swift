@@ -68,6 +68,7 @@ let package = Package(
         .library(name: "SendForm", targets: ["SendForm"]),
         .library(name: "ServerSetup", targets: ["ServerSetup"]),
         .library(name: "Settings", targets: ["Settings"]),
+        .library(name: "SmartBanner", targets: ["SmartBanner"]),
         .library(name: "SupportDataGenerator", targets: ["SupportDataGenerator"]),
         .library(name: "SyncProgress", targets: ["SyncProgress"]),
         .library(name: "ReadTransactionsStorage", targets: ["ReadTransactionsStorage"]),
@@ -424,6 +425,7 @@ let package = Package(
                 "Scan",
                 "Settings",
                 "SDKSynchronizer",
+                "SmartBanner",
                 "SyncProgress",
                 "TransactionList",
                 "UIComponents",
@@ -848,6 +850,20 @@ let package = Package(
                 .product(name: "Flexa", package: "flexa-ios")
             ],
             path: "Sources/Features/Settings"
+        ),
+        .target(
+            name: "SmartBanner",
+            dependencies: [
+                "Generated",
+                "Models",
+                "SDKSynchronizer",
+                "UIComponents",
+                "Utils",
+                "WalletStorage",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "ZcashLightClientKit", package: "ZcashLightClientKit"),
+            ],
+            path: "Sources/Features/SmartBanner"
         ),
         .target(
             name: "SupportDataGenerator",

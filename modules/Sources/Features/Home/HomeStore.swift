@@ -15,6 +15,7 @@ import PartnerKeys
 import UserPreferencesStorage
 import Utils
 import BalanceBreakdown
+import SmartBanner
 
 @Reducer
 public struct Home {
@@ -36,6 +37,7 @@ public struct Home {
         public var isRateTooltipEnabled = false
         public var migratingDatabase = true
         public var moreRequest = false
+        public var smartBannerState = SmartBanner.State.initial
         public var syncProgressState: SyncProgress.State
         public var walletConfig: WalletConfig
 //        public var scanBinding = false
@@ -112,6 +114,7 @@ public struct Home {
         case sendTapped
         case settingsTapped
         case showSynchronizerErrorAlert(ZcashError)
+        case smartBanner(SmartBanner.Action)
         case synchronizerStateChanged(RedactableSynchronizerState)
         case syncFailed(ZcashError)
         case syncProgress(SyncProgress.Action)
@@ -154,6 +157,10 @@ public struct Home {
 
         Scope(state: \.balancesState, action: \.balances) {
             Balances()
+        }
+
+        Scope(state: \.smartBannerState, action: \.smartBanner) {
+            SmartBanner()
         }
 
         Reduce { state, action in
@@ -355,6 +362,9 @@ public struct Home {
                 return .none
                 
             case .walletBalances:
+                return .none
+                
+            case .smartBanner:
                 return .none
             }
         }
