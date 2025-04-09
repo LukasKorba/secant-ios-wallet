@@ -70,6 +70,7 @@ let package = Package(
         .library(name: "SendForm", targets: ["SendForm"]),
         .library(name: "ServerSetup", targets: ["ServerSetup"]),
         .library(name: "Settings", targets: ["Settings"]),
+        .library(name: "ShieldingProcessor", targets: ["ShieldingProcessor"]),
         .library(name: "SmartBanner", targets: ["SmartBanner"]),
         .library(name: "SupportDataGenerator", targets: ["SupportDataGenerator"]),
         .library(name: "SyncProgress", targets: ["SyncProgress"]),
@@ -425,8 +426,9 @@ let package = Package(
                 "PartnerKeys",
                 "ReviewRequest",
                 "Scan",
-                "Settings",
                 "SDKSynchronizer",
+                "Settings",
+                "ShieldingProcessor",
                 "SmartBanner",
                 "SyncProgress",
                 "TransactionList",
@@ -871,6 +873,23 @@ let package = Package(
             path: "Sources/Features/Settings"
         ),
         .target(
+            name: "ShieldingProcessor",
+            dependencies: [
+                "Generated",
+                "DerivationTool",
+                "MnemonicClient",
+                "Models",
+                "SDKSynchronizer",
+                "UIComponents",
+                "Utils",
+                "WalletStorage",
+                "ZcashSDKEnvironment",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "ZcashLightClientKit", package: "ZcashLightClientKit")
+            ],
+            path: "Sources/Dependencies/ShieldingProcessor"
+        ),
+        .target(
             name: "SmartBanner",
             dependencies: [
                 "Generated",
@@ -878,6 +897,7 @@ let package = Package(
                 "Models",
                 "NetworkMonitor",
                 "SDKSynchronizer",
+                "SupportDataGenerator",
                 "UIComponents",
                 "UserPreferencesStorage",
                 "Utils",
