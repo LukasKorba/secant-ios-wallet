@@ -114,6 +114,7 @@ public struct Home {
         case settingsTapped
         case showSynchronizerErrorAlert(ZcashError)
         case smartBanner(SmartBanner.Action)
+        case swapAndPayTapped
         case synchronizerStateChanged(RedactableSynchronizerState)
         case syncFailed(ZcashError)
         case updateTransactionList([TransactionState])
@@ -184,7 +185,11 @@ public struct Home {
             case .sendTapped:
                 state.sendSelectRequest = false
                 return .none
-                
+
+            case .swapAndPayTapped:
+                state.sendSelectRequest = false
+                return .none
+
             case .scanTapped:
                 return .none
 
