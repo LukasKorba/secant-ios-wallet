@@ -14,6 +14,7 @@ import PartnerKeys
 import UserPreferencesStorage
 import Utils
 import SmartBanner
+import Near1Click
 
 @Reducer
 public struct Home {
@@ -128,6 +129,7 @@ public struct Home {
     }
     
     @Dependency(\.mainQueue) var mainQueue
+    @Dependency(\.near1Click) var near1Click
     @Dependency(\.reviewRequest) var reviewRequest
     @Dependency(\.sdkSynchronizer) var sdkSynchronizer
     @Dependency(\.userStoredPreferences) var userStoredPreferences
@@ -194,6 +196,10 @@ public struct Home {
                 return .none
 
             case .moreTapped:
+                return .run { send in
+                    let chainTokens = try? await near1Click.tokens()
+                    print(chainTokens)
+                }
                 state.moreRequest = true
                 return .none
                 
