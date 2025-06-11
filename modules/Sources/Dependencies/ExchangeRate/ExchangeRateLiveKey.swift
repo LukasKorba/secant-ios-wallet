@@ -34,7 +34,7 @@ class ExchangeRateProvider {
         }
     }
     
-    func refreshExchangeRateUSD() {
+    func refreshExchangeRateUSD() async {
         if !_XCTIsTesting {
             // guard the feature is opted-in by a user
             @Dependency(\.userStoredPreferences) var userStoredPreferences
@@ -49,7 +49,7 @@ class ExchangeRateProvider {
             
             @Dependency(\.sdkSynchronizer) var sdkSynchronizer
             
-            sdkSynchronizer.refreshExchangeRateUSD()
+            await sdkSynchronizer.refreshExchangeRateUSD()
         }
     }
     
@@ -59,7 +59,9 @@ class ExchangeRateProvider {
             nilValuesCounter += 1
             
             if nilValuesCounter == 2 {
-                refreshExchangeRateUSD()
+                Task {
+                    await refreshExchangeRateUSD()
+                }
             } else if nilValuesCounter > 2 {
                 eventStream.send(.stale(latestRate))
             }
@@ -113,7 +115,9 @@ class ExchangeRateProvider {
                         self?.staleTimer = nil
                         
                         self?.isStale = true
-                        self?.refreshExchangeRateUSD()
+                        Task {
+                            await self?.refreshExchangeRateUSD()
+                        }
                     }
                 }
             }
@@ -131,7 +135,9 @@ extension ExchangeRateClient: DependencyKey {
         return ExchangeRateClient(
             exchangeRateEventStream: { exchangeRateProvider.eventStream.eraseToAnyPublisher() },
             refreshExchangeRateUSD: {
-                exchangeRateProvider.refreshExchangeRateUSD()
+                Task {
+                    await exchangeRateProvider.refreshExchangeRateUSD()
+                }
             }
         )
     }

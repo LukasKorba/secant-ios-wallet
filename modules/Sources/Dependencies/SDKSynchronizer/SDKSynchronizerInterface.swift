@@ -36,8 +36,6 @@ public struct SDKSynchronizerClient {
     public let prepareWith: ([UInt8], BlockHeight, WalletInitMode, String, String?) async throws -> Void
     public let start: (_ retry: Bool) async throws -> Void
     public let stop: () -> Void
-    public var pause: () -> Void
-    public var resume: () -> Void
     public let isSyncing: () -> Bool
     public let isInitialized: () -> Bool
     public let importAccount: (String, [UInt8]?, Zip32AccountIndex?, AccountPurpose, String, String?) async throws -> AccountUUID?
@@ -65,7 +63,7 @@ public struct SDKSynchronizerClient {
 
     public var isSeedRelevantToAnyDerivedAccount: ([UInt8]) async throws -> Bool
     
-    public var refreshExchangeRateUSD: () -> Void
+    public var refreshExchangeRateUSD: () async -> Void
 
     public var evaluateBestOf: ([LightWalletEndpoint], Double, Double, UInt64, Int, NetworkType) async -> [LightWalletEndpoint] = { _,_,_,_,_,_ in [] }
     

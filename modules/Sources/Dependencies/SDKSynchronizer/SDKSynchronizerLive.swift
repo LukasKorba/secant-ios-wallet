@@ -63,8 +63,6 @@ extension SDKSynchronizerClient: DependencyKey {
             },
             start: { retry in try await synchronizer.start(retry: retry) },
             stop: { synchronizer.stop() },
-            pause: { synchronizer.pause() },
-            resume: { synchronizer.resume() },
             isSyncing: { synchronizer.latestState.syncStatus.isSyncing },
             isInitialized: { synchronizer.latestState.syncStatus != SyncStatus.unprepared },
             importAccount: { ufvk, seedFingerprint, zip32AccountIndex, purpose, name, keySource in
@@ -174,7 +172,7 @@ extension SDKSynchronizerClient: DependencyKey {
                 try await synchronizer.isSeedRelevantToAnyDerivedAccount(seed: seed)
             },
             refreshExchangeRateUSD: {
-                synchronizer.refreshExchangeRateUSD()
+                await synchronizer.refreshExchangeRateUSD()
             },
             evaluateBestOf: { endpoints, latencyThreshold, fetchThreshold, nBlocks, kServers, network in
                 await synchronizer.evaluateBestOf(
