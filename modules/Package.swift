@@ -960,6 +960,7 @@ let package = Package(
                 "Models",
                 "Pasteboard",
                 "SDKSynchronizer",
+                "SwapAndPay",
                 "ReadTransactionsStorage",
                 "UIComponents",
                 "UserMetadataProvider",
