@@ -113,6 +113,7 @@ public enum Asset {
       public static let key = ImageAsset(name: "key")
       public static let loading = ImageAsset(name: "loading")
       public static let lockUnlocked = ImageAsset(name: "lockUnlocked")
+      public static let logOut = ImageAsset(name: "logOut")
       public static let magicWand = ImageAsset(name: "magicWand")
       public static let menu = ImageAsset(name: "menu")
       public static let messageSmile = ImageAsset(name: "messageSmile")
