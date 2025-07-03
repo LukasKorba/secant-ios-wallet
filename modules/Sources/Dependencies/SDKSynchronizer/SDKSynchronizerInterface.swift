@@ -83,4 +83,7 @@ public struct SDKSynchronizerClient {
     
     // UA with custom receivers
     public var getCustomUnifiedAddress: (AccountUUID, Set<ReceiverType>) async throws -> UnifiedAddress?
+    
+    // Tor
+    public var httpRequestOverTor: (URLRequest) async throws -> (Data, HTTPURLResponse)
 }

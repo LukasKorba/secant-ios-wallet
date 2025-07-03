@@ -254,10 +254,18 @@ extension Root {
 
                 // MARK: - Swap and Pay Coord Flow
 
+            case .swapAndPayCoordFlow(.customBackRequired):
+                state.path = nil
+                return .none
+
             case .swapAndPayCoordFlow(.swapAndPay(.customBackRequired)):
                 state.path = nil
                 return .none
-                
+
+            case .swapAndPayCoordFlow(.path(.element(id: _, action: .swapAndPayOptInForced(.customBackRequired)))):
+                state.path = nil
+                return .none
+
             case .swapAndPayCoordFlow(.swapAndPay(.cancelPaymentTapped)):
                 state.path = nil
                 return .none

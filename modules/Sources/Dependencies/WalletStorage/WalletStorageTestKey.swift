@@ -28,7 +28,9 @@ extension WalletStorageClient: TestDependencyKey {
         importWalletBackupAcknowledged: unimplemented("\(Self.self).importWalletBackupAcknowledged"),
         exportWalletBackupAcknowledged: unimplemented("\(Self.self).exportWalletBackupAcknowledged", placeholder: false),
         importShieldingAcknowledged: unimplemented("\(Self.self).importShieldingAcknowledged"),
-        exportShieldingAcknowledged: unimplemented("\(Self.self).exportShieldingAcknowledged", placeholder: false)
+        exportShieldingAcknowledged: unimplemented("\(Self.self).exportShieldingAcknowledged", placeholder: false),
+        importSwapAPIAccess: unimplemented("\(Self.self).importSwapAPIAccess"),
+        exportSwapAPIAccess: unimplemented("\(Self.self).exportSwapAPIAccess", placeholder: .notResolved)
     )
 }
 
@@ -52,6 +54,8 @@ extension WalletStorageClient {
         importWalletBackupAcknowledged: { _ in },
         exportWalletBackupAcknowledged: { false },
         importShieldingAcknowledged: { _ in },
-        exportShieldingAcknowledged: { false }
+        exportShieldingAcknowledged: { false },
+        importSwapAPIAccess: { _ in },
+        exportSwapAPIAccess: { .notResolved }
     )
 }

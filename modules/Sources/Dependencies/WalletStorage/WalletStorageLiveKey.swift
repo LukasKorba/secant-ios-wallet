@@ -77,6 +77,12 @@ extension WalletStorageClient: DependencyKey {
             },
             exportShieldingAcknowledged: {
                 walletStorage.exportShieldingAcknowledged()
+            },
+            importSwapAPIAccess: { state in
+                try walletStorage.importSwapAPIAccess(state)
+            },
+            exportSwapAPIAccess: {
+                walletStorage.exportSwapAPIAccess()
             }
         )
     }

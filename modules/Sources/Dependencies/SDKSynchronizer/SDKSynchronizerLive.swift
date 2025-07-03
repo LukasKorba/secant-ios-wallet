@@ -276,6 +276,9 @@ extension SDKSynchronizerClient: DependencyKey {
             },
             getCustomUnifiedAddress: { accountUUID, receivers in
                 try await synchronizer.getCustomUnifiedAddress(accountUUID: accountUUID, receivers: receivers)
+            },
+            httpRequestOverTor: { request in
+                try await synchronizer.httpRequestOverTor(for: request)
             }
         )
     }

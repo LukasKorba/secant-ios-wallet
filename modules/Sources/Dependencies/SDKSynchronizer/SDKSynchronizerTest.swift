@@ -13,6 +13,18 @@ import Models
 import Utils
 import URKit
 
+extension HTTPURLResponse {
+    public static var mockResponse: HTTPURLResponse {
+        let url = URL(string: "https://example.com")!
+        return HTTPURLResponse(
+            url: url,
+            statusCode: 200,
+            httpVersion: "HTTP/1.1",
+            headerFields: ["Content-Type": "application/json"]
+        )!
+    }
+}
+
 extension SDKSynchronizerClient: TestDependencyKey {
     public static let testValue = Self(
         stateStream: unimplemented("\(Self.self).stateStream", placeholder: Empty().eraseToAnyPublisher()),
@@ -49,7 +61,8 @@ extension SDKSynchronizerClient: TestDependencyKey {
         urEncoderForPCZT: unimplemented("\(Self.self).urEncoderForPCZT", placeholder: nil),
         redactPCZTForSigner: unimplemented("\(Self.self).redactPCZTForSigner", placeholder: Pczt()),
         fetchTxidsWithMemoContaining: unimplemented("\(Self.self).fetchTxidsWithMemoContaining", placeholder: []),
-        getCustomUnifiedAddress: unimplemented("\(Self.self).getCustomUnifiedAddress", placeholder: nil)
+        getCustomUnifiedAddress: unimplemented("\(Self.self).getCustomUnifiedAddress", placeholder: nil),
+        httpRequestOverTor: unimplemented("\(Self.self).httpRequestOverTor", placeholder: (Data(), HTTPURLResponse.mockResponse))
     )
 }
 
@@ -89,7 +102,8 @@ extension SDKSynchronizerClient {
         urEncoderForPCZT: { _ in nil },
         redactPCZTForSigner: { _ in Pczt() },
         fetchTxidsWithMemoContaining: { _ in [] },
-        getCustomUnifiedAddress: { _, _ in nil }
+        getCustomUnifiedAddress: { _, _ in nil },
+        httpRequestOverTor: { _ in (data: Data(), response: HTTPURLResponse.mockResponse) }
     )
 
     public static let mock = Self.mocked()
@@ -200,7 +214,10 @@ extension SDKSynchronizerClient {
         urEncoderForPCZT: @escaping (Pczt) -> UREncoder? = { _ in nil },
         redactPCZTForSigner: @escaping (Pczt) async throws -> Pczt = { _ in Pczt() },
         fetchTxidsWithMemoContaining: @escaping (String) async throws -> [Data] = { _ in [] },
-        getCustomUnifiedAddress: @escaping (AccountUUID, Set<ReceiverType>) async throws -> UnifiedAddress? = { _, _ in nil }
+        getCustomUnifiedAddress: @escaping (AccountUUID, Set<ReceiverType>) async throws -> UnifiedAddress? = { _, _ in nil },
+        httpRequestOverTor: @escaping (URLRequest) async throws -> (Data, HTTPURLResponse) = { _ in
+            (Data(), HTTPURLResponse.mockResponse)
+        }
     ) -> SDKSynchronizerClient {
         SDKSynchronizerClient(
             stateStream: stateStream,
@@ -237,7 +254,8 @@ extension SDKSynchronizerClient {
             urEncoderForPCZT: urEncoderForPCZT,
             redactPCZTForSigner: redactPCZTForSigner,
             fetchTxidsWithMemoContaining: fetchTxidsWithMemoContaining,
-            getCustomUnifiedAddress: getCustomUnifiedAddress
+            getCustomUnifiedAddress: getCustomUnifiedAddress,
+            httpRequestOverTor: httpRequestOverTor
         )
     }
 }
