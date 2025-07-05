@@ -501,7 +501,7 @@
       "location" : "https://github.com/LukasKorba/ZcashLightClientKit",
       "state" : {
         "branch" : "1575-GET-and-POST-requests-over-Tor-API",
-        "revision" : "3b5f3f5a5919deee15601c6f26a5ae43b68f8cf6"
+        "revision" : "f3ad241be6ef60769bfdd17f8d4fb69ef5d6023b"
       }
     }
   ],

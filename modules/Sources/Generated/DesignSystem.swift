@@ -12,7 +12,7 @@ public protocol Colorable {
     func color(_ colorScheme: ColorScheme) -> Color
 }
 
-public enum Design {
+public enum Design: Colorable {
 
     case screenBackground
     
