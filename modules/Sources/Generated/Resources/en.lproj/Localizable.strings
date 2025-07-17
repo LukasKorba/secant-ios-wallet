@@ -430,6 +430,7 @@
 "component.lowPrivacy" = "Not Private";
 
 // MARK: - Partners
+//"partners.coinbaseOnrampUrl" = "https://pay.coinbase.com/buy/select-asset?appId=%@&addresses={\"%@\":[\"zcash\"]}";
 "partners.coinbaseOnrampUrl" = "https://pay.coinbase.com/buy/select-asset?appId=%@&addresses={\"%@\":[\"zcash\"]}";
 "partners.flexa.transactionFailedTitle" = "Transaction Failed";
 "partners.flexa.transactionFailedMessage" = "We're sorry but something has failed. Please try again.";

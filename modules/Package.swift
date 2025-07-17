@@ -21,6 +21,7 @@ let package = Package(
         .library(name: "BalanceBreakdown", targets: ["BalanceBreakdown"]),
         .library(name: "BalanceFormatter", targets: ["BalanceFormatter"]),
         .library(name: "CaptureDevice", targets: ["CaptureDevice"]),
+        .library(name: "CoinbaseSession", targets: ["CoinbaseSession"]),
         .library(name: "CoordFlows", targets: ["CoordFlows"]),
         .library(name: "CurrencyConversionSetup", targets: ["CurrencyConversionSetup"]),
         .library(name: "DatabaseFiles", targets: ["DatabaseFiles"]),
@@ -232,6 +233,13 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Dependencies/CaptureDevice"
+        ),
+        .target(
+            name: "CoinbaseSession",
+            dependencies: [
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/Dependencies/CoinbaseSession"
         ),
         .target(
             name: "CoordFlows",
