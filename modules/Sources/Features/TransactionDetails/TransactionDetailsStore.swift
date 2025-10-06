@@ -419,7 +419,7 @@ public struct TransactionDetails {
                 if let account = state.selectedWalletAccount?.account, let umSwapId = state.umSwapId, needsUpdate {
                     userMetadataProvider.update(umSwapId)
                     try? userMetadataProvider.store(account)
-                    _ = state.transaction.checkAndUpdateWith(umSwapId)
+                    state.transaction.checkAndUpdateWith(umSwapId)
                     state.$transactions.withLock { $0[id: state.transaction.id] = state.transaction }
                     return .none
                 }
