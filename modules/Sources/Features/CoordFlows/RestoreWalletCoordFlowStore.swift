@@ -12,6 +12,7 @@ import ZcashLightClientKit
 import MnemonicSwift
 import Pasteboard
 import WalletStorage
+import Generated
 
 // Path
 import RestoreInfo
