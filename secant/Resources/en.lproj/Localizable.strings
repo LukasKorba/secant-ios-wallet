@@ -916,3 +916,14 @@
 
 "deleteWallet.sheet.title" = "Are you sure?";
 "deleteWallet.sheet.msg" = "Resetting the app cannot be undone. You will need to restore your wallet using your secret recovery phrase.";
+
+"texKeystone.title" = "TEX Transfer Not Supported";
+"texKeystone.warn1" = "Keystone doesn't currently support direct TEX transfers.";
+"texKeystone.warn2" = "Please use the steps below to complete your transaction.";
+"texKeystone.workaround" = "Workaround Steps";
+"texKeystone.step" = "Step %@";
+"texKeystone.step1.title" = "Send to Zashi first";
+"texKeystone.step1.desc" = "Transfer ZEC to your Zashi shielded address";
+"texKeystone.step2.title" = "Send from Zashi to TEX address";
+"texKeystone.step2.desc" = "Once received in Zashi, send the tokens to your final TEX destination address";
+"texKeystone.gotIt" = "Got it";
