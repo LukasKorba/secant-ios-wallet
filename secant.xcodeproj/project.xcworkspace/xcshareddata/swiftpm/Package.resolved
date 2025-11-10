@@ -496,12 +496,12 @@
       }
     },
     {
-      "identity" : "zcash-swift-wallet-sdk",
+      "identity" : "zcashlightclientkit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Electric-Coin-Company/zcash-swift-wallet-sdk",
+      "location" : "https://github.com/LukasKorba/ZcashLightClientKit",
       "state" : {
-        "revision" : "1cf8a2375264995224f8282eaf63931439c28368",
-        "version" : "2.4.0"
+        "branch" : "1614-Get-a-time-for-a-blockheight",
+        "revision" : "e4a111893bfc1fb518ac544ac7f9127101eb2098"
       }
     }
   ],
