@@ -927,3 +927,6 @@
 "torSettingsSheet.title" = "Enable Tor Protection";
 "torSettingsSheet.msg" = "If Tor is available in your region, we recommend enabling it for enhanced privacy during wallet restoration. This step is completely optional.";
 "torSettingsSheet.desc" = "Routes your connection through the Tor network for enhanced anonymity and privacy protection.";
+
+"sheet.insufficientBalance.title" = "Insufficient Funds";
+"sheet.insufficientBalance.msg" = "We couldn’t create this transaction for you. Your wallet doesn’t have enough balance to cover both the transaction amount and transaction fees. Please lower the transaction amount to account for the fees. ";
