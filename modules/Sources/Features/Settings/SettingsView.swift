@@ -17,6 +17,9 @@ import ServerSetup
 import SendFeedback
 import WhatsNew
 import TorSetup
+import WalletBirthday
+import ResyncWallet
+import RestoreInfo
 
 public struct SettingsView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -126,6 +129,14 @@ public struct SettingsView: View {
                     TorSetupView(store: store)
                 case let .whatsNew(store):
                     WhatsNewView(store: store)
+                case let .estimateBirthdaysDate(store):
+                    WalletBirthdayEstimateDateView(store: store)
+                case let .estimatedBirthday(store):
+                    WalletBirthdayEstimatedHeightView(store: store)
+                case let .restoreInfo(store):
+                    RestoreInfoView(store: store)
+                case let .resyncWallet(store):
+                    ResyncWalletView(store: store)
                 }
             }
             .applyScreenBackground()

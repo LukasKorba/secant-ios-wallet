@@ -21,6 +21,9 @@ import ServerSetup
 import SendFeedback
 import WhatsNew
 import TorSetup
+import WalletBirthday
+import ResyncWallet
+import RestoreInfo
 
 extension Settings {
     public func coordinatorReduce() -> Reduce<Settings.State, Settings.Action> {
@@ -97,6 +100,8 @@ extension Settings {
                     var torSetupState = TorSetup.State.initial
                     torSetupState.isSettingsView = true
                     state.path.append(.torSetup(torSetupState))
+                case .resyncWallet:
+                    state.path.append(.resyncWallet(ResyncWallet.State.initial))
                 case .resetZashi:
                     state.path.append(.resetZashi(DeleteWallet.State.initial))
                 }

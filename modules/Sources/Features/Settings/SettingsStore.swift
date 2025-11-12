@@ -22,6 +22,9 @@ import ServerSetup
 import SendFeedback
 import WhatsNew
 import TorSetup
+import WalletBirthday
+import ResyncWallet
+import RestoreInfo
 
 @Reducer
 public struct Settings {
@@ -43,6 +46,12 @@ public struct Settings {
         case sendUsFeedback(SendFeedback)
         case torSetup(TorSetup)
         case whatsNew(WhatsNew)
+        
+        // resync wallet
+        case estimateBirthdaysDate(WalletBirthday)
+        case estimatedBirthday(WalletBirthday)
+        case restoreInfo(RestoreInfo)
+        case resyncWallet(ResyncWallet)
     }
     
     @ObservableState

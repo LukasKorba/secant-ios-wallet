@@ -886,6 +886,28 @@ public enum L10n {
       public static let title = L10n.tr("Localizable", "restoreWallet.help.title", fallback: "Need to know more?")
     }
   }
+  public enum ResyncWallet {
+    /// Resync the current wallet without resetting the app. This can be used to troubleshoot issues that would normally require restoring your wallet like fixing your Keystone balance.
+    public static let body1 = L10n.tr("Localizable", "resyncWallet.body1", fallback: "Resync the current wallet without resetting the app. This can be used to troubleshoot issues that would normally require restoring your wallet like fixing your Keystone balance.")
+    /// Unless you specify otherwise below, Zashi will resync from the date displayed. 
+    public static let body2 = L10n.tr("Localizable", "resyncWallet.body2", fallback: "Unless you specify otherwise below, Zashi will resync from the date displayed. ")
+    /// Change
+    public static let change = L10n.tr("Localizable", "resyncWallet.change", fallback: "Change")
+    /// Confirm Resync
+    public static let confirm = L10n.tr("Localizable", "resyncWallet.confirm", fallback: "Confirm Resync")
+    /// Your wallet will be resynced from 
+    public static let heightInfo1 = L10n.tr("Localizable", "resyncWallet.heightInfo1", fallback: "Your wallet will be resynced from ")
+    /// %@ 
+    public static func heightInfo2(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "resyncWallet.heightInfo2", String(describing: p1), fallback: "%@ ")
+    }
+    /// (block %@). Use the button below if you wish to change it.
+    public static func heightInfo3(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "resyncWallet.heightInfo3", String(describing: p1), fallback: "(block %@). Use the button below if you wish to change it.")
+    }
+    /// Resync Wallet
+    public static let title = L10n.tr("Localizable", "resyncWallet.title", fallback: "Resync Wallet")
+  }
   public enum Root {
     public enum Debug {
       /// Startup

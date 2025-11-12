@@ -930,3 +930,19 @@
 
 "sheet.insufficientBalance.title" = "Insufficient Funds";
 "sheet.insufficientBalance.msg" = "We couldn’t create this transaction for you. Your wallet doesn’t have enough balance to cover both the transaction amount and transaction fees. Please lower the transaction amount to account for the fees. ";
+
+// Resync Wallet
+"resyncWallet.title" = "Resync Wallet";
+"resyncWallet.confirm" = "Confirm Resync";
+"resyncWallet.body1" = "Resync the current wallet without resetting the app. This can be used to troubleshoot issues that would normally require restoring your wallet like fixing your Keystone balance.";
+"resyncWallet.body2" = "Unless you specify otherwise below, Zashi will resync from the date displayed. ";
+"resyncWallet.heightInfo1" = "Your wallet will be resynced from ";
+"resyncWallet.heightInfo2" = "%@ ";
+"resyncWallet.heightInfo3" = "(block %@). Use the button below if you wish to change it.";
+"resyncWallet.change" = "Change";
+//"resyncWallet.msg" = "";
+//"resyncWallet.msg" = "";
+//"resyncWallet.msg" = "";
+//"resyncWallet.msg" = "";
+//"resyncWallet.msg" = "";
+

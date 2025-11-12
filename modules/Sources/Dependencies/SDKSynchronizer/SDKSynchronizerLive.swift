@@ -218,6 +218,9 @@ extension SDKSynchronizerClient: DependencyKey {
             estimateBirthdayHeight: { date in
                 synchronizer.estimateBirthdayHeight(for: date)
             },
+            estimateTimestamp: { height in
+                synchronizer.estimateTimestamp(for: height)
+            },
             createPCZTFromProposal: { accountUUID, proposal in
                 try await synchronizer.createPCZTFromProposal(accountUUID: accountUUID, proposal: proposal)
             },

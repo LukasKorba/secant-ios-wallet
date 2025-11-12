@@ -17,6 +17,7 @@ public struct AdvancedSettings {
             case exportTaxFile
             case recoveryPhrase
             case resetZashi
+            case resyncWallet
             case torSetup
         }
         
@@ -42,7 +43,7 @@ public struct AdvancedSettings {
                 switch operation {
                 case .chooseServer, .currencyConversion, .torSetup:
                     return .send(.operationAccessGranted(operation))
-                case .recoveryPhrase, .exportPrivateData, .exportTaxFile, .resetZashi:
+                case .recoveryPhrase, .exportPrivateData, .exportTaxFile, .resetZashi, .resyncWallet:
                     return .run { send in
                         if await localAuthentication.authenticate() {
                             await send(.operationAccessGranted(operation))

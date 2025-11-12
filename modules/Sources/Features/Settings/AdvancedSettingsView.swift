@@ -58,6 +58,13 @@ public struct AdvancedSettingsView: View {
                         }
 
                         ActionRow(
+                            icon: Asset.Assets.Icons.refresh.image,
+                            title: L10n.ResyncWallet.title
+                        ) {
+                            store.send(.operationAccessCheck(.resyncWallet))
+                        }
+
+                        ActionRow(
                             icon: Asset.Assets.Icons.shieldZap.image,
                             title: L10n.Settings.private,
                             divider: store.isEnoughFreeSpaceMode
