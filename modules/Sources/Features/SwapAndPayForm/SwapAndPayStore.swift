@@ -204,10 +204,12 @@ public struct SwapAndPay {
         case binding(BindingAction<SwapAndPay.State>)
         case cancelPaymentTapped
         case cancelSwapTapped
+        case checkServiceStatus
         case closeAssetsSheetTapped
         case closeSlippageSheetTapped
         case confirmButtonTapped
         case confirmWithKeystoneTapped
+        case continueOnAppear
         case customBackRequired
         case dismissRequired
         case dontCancelTapped
@@ -227,6 +229,7 @@ public struct SwapAndPay {
         case refreshSwapAssets
         case scanTapped
         case sendFailed(ZcashError)
+        case serviceUnavailable
         case slippageChipTapped(Int)
         case slippageSetConfirmTapped
         case slippageTapped
@@ -306,6 +309,26 @@ public struct SwapAndPay {
             switch action {
             case .onAppear:
                 state.isQuoteRequestInFlight = false
+                return .send(.checkServiceStatus)
+                
+            case .checkServiceStatus:
+                return .run { send in
+                    do {
+                        let isServiceAvailable = try await swapAndPay.serviceCheck()
+                        if isServiceAvailable {
+                            await send(.continueOnAppear)
+                        } else {
+                            await send(.serviceUnavailable)
+                        }
+                    } catch {
+                        // do nothing
+                    }
+                }
+
+            case .serviceUnavailable:
+                return .send(.continueOnAppear)
+
+            case .continueOnAppear:
                 return .merge(
                     .send(.walletBalances(.onAppear)),
                     .send(.refreshSwapAssets),
