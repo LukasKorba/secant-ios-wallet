@@ -89,6 +89,10 @@ public struct SettingsView: View {
                 }
                 .listStyle(.plain)
                 .applyScreenBackground()
+                .screenTitle("Settings2")
+                .zashiBack() {
+                    store.send(.backToHomeTapped)
+                }
             } destination: { store in
                 switch store.case {
                 case let .about(store):

@@ -134,18 +134,31 @@ public struct HomeView: View {
                 payRequestContent()
                     .applyScreenBackground()
             }
-            .navigationBarItems(
-                leading:
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
                     walletAccountSwitcher()
-            )
-            .navigationBarItems(
-                trailing:
+                }
+                ToolbarItem(placement: .topBarTrailing) {
                     HStack(spacing: 0) {
                         hideBalancesButton()
                         
                         settingsButton()
                     }
-            )
+                }
+            }
+//            .navigationBarItems(
+//                leading:
+//                    walletAccountSwitcher()
+//            )
+//            .navigationBarItems(
+//                trailing:
+//                    HStack(spacing: 0) {
+//                        hideBalancesButton()
+//                        
+//                        settingsButton()
+//                    }
+//            )
             .overlayPreferenceValue(ExchangeRateStaleTooltipPreferenceKey.self) { preferences in
                 WithPerceptionTracking {
                     if store.isRateTooltipEnabled {

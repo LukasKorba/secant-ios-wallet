@@ -13,6 +13,10 @@ extension Root {
         Reduce { state, action in
             switch action {
                 
+            case .settings(.backToHomeTapped):
+                state.path = nil
+                return .none
+                
                 // MARK: - Accounts
 
             case .home(.walletAccountTapped(let walletAccount)):

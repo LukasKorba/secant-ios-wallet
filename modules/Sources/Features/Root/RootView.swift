@@ -26,6 +26,8 @@ public struct RootView: View {
     @Environment(\.scenePhase) var scenePhase
     @State var covered = false
     
+    @State private var selectedTab = 0
+    
     @Perception.Bindable var store: StoreOf<Root>
     let tokenName: String
     let networkType: NetworkType
@@ -116,124 +118,158 @@ private extension RootView {
                     }
 
                 case .home:
-                    NavigationView {
-                        HomeView(
-                            store: store.scope(
-                                state: \.homeState,
-                                action: \.home
-                            ),
-                            tokenName: tokenName
-                        )
-                        .navigationLinkEmpty(isActive: store.bindingFor(.settings)) {
-                            SettingsView(
-                                store:
-                                    store.scope(
-                                        state: \.settingsState,
-                                        action: \.settings)
-                            )
-                        }
-                        .navigationLinkEmpty(isActive: store.bindingFor(.receive)) {
-                            ReceiveView(
-                                store:
-                                    store.scope(
-                                        state: \.receiveState,
-                                        action: \.receive),
-                                networkType: networkType,
+//                    TabView(selection: $selectedTab) {
+                    ZStack {
+                        NavigationStack {
+                            HomeView(
+                                store: store.scope(
+                                    state: \.homeState,
+                                    action: \.home
+                                ),
                                 tokenName: tokenName
                             )
                         }
-                        .navigationLinkEmpty(isActive: store.bindingFor(.requestZecCoordFlow)) {
-                            RequestZecCoordFlowView(
-                                store:
-                                    store.scope(
-                                        state: \.requestZecCoordFlowState,
-                                        action: \.requestZecCoordFlow),
-                                tokenName: tokenName
-                            )
-                        }
-                        .navigationLinkEmpty(isActive: store.bindingFor(.sendCoordFlow)) {
-                            SendCoordFlowView(
-                                store:
-                                    store.scope(
-                                        state: \.sendCoordFlowState,
-                                        action: \.sendCoordFlow),
-                                tokenName: tokenName
-                            )
-                        }
-                        .navigationLinkEmpty(isActive: store.bindingFor(.scanCoordFlow)) {
-                            ScanCoordFlowView(
-                                store:
-                                    store.scope(
-                                        state: \.scanCoordFlowState,
-                                        action: \.scanCoordFlow),
-                                tokenName: tokenName
-                            )
-                        }
-                        .navigationLinkEmpty(isActive: store.bindingFor(.addKeystoneHWWalletCoordFlow)) {
-                            AddKeystoneHWWalletCoordFlowView(
-                                store:
-                                    store.scope(
-                                        state: \.addKeystoneHWWalletCoordFlowState,
-                                        action: \.addKeystoneHWWalletCoordFlow),
-                                tokenName: tokenName
-                            )
-                        }
-                        .navigationLinkEmpty(isActive: store.bindingFor(.transactionsCoordFlow)) {
-                            TransactionsCoordFlowView(
-                                store:
-                                    store.scope(
-                                        state: \.transactionsCoordFlowState,
-                                        action: \.transactionsCoordFlow),
-                                tokenName: tokenName
-                            )
-                        }
-                        .navigationLinkEmpty(isActive: store.bindingFor(.walletBackup)) {
-                            WalletBackupCoordFlowView(
-                                store:
-                                    store.scope(
-                                        state: \.walletBackupCoordFlowState,
-                                        action: \.walletBackupCoordFlow)
-                            )
-                        }
-                        .navigationLinkEmpty(isActive: store.bindingFor(.currencyConversionSetup)) {
-                            CurrencyConversionSetupView(
-                                store:
-                                    store.scope(
-                                        state: \.currencyConversionSetupState,
-                                        action: \.currencyConversionSetup)
-                            )
-                        }
-                        .navigationLinkEmpty(isActive: store.bindingFor(.torSetup)) {
-                            TorSetupView(
-                                store:
-                                    store.scope(
-                                        state: \.torSetupState,
-                                        action: \.torSetup)
-                            )
-                        }
-                        .navigationLinkEmpty(isActive: store.bindingFor(.swapAndPayCoordFlow)) {
-                            SwapAndPayCoordFlowView(
-                                store:
-                                    store.scope(
-                                        state: \.swapAndPayCoordFlowState,
-                                        action: \.swapAndPayCoordFlow),
-                                tokenName: tokenName
-                            )
-                        }
-                        .popover(isPresented: $store.signWithKeystoneCoordFlowBinding) {
-                            SignWithKeystoneCoordFlowView(
-                                store:
-                                    store.scope(
-                                        state: \.signWithKeystoneCoordFlowState,
-                                        action: \.signWithKeystoneCoordFlow),
-                                tokenName: tokenName
-                            )
+                        .offset(x: store.path == nil ? 0 : -200)
+                        .opacity(store.path == nil ? 1 : 0.5)
+                        
+                        if let path = store.path {
+                            if path == .settings {
+                                SettingsView(
+                                    store:
+                                        store.scope(
+                                            state: \.settingsState,
+                                            action: \.settings)
+                                )
+                                .transition(.move(edge: .trailing))
+                                .zIndex(1)
+                            }
                         }
                     }
-                    .navigationViewStyle(.stack)
-                    .overlayedWithSplash(store.splashAppeared) {
-                        store.send(.splashRemovalRequested)
-                    }
+                    //.applyScreenBackground()
+                    .animation(.easeInOut(duration: 0.3), value: store.path)
+//                        .navigationTitle("Home")
+//                        .navigationBarTitleDisplayMode(.inline)
+//                        .tag(0)
+//                    }
+                    
+//                    NavigationView {
+//                        HomeView(
+//                            store: store.scope(
+//                                state: \.homeState,
+//                                action: \.home
+//                            ),
+//                            tokenName: tokenName
+//                        )
+//                        .navigationLinkEmpty(isActive: store.bindingFor(.settings)) {
+//                            SettingsView(
+//                                store:
+//                                    store.scope(
+//                                        state: \.settingsState,
+//                                        action: \.settings)
+//                            )
+//                        }
+//                        .navigationLinkEmpty(isActive: store.bindingFor(.receive)) {
+//                            ReceiveView(
+//                                store:
+//                                    store.scope(
+//                                        state: \.receiveState,
+//                                        action: \.receive),
+//                                networkType: networkType,
+//                                tokenName: tokenName
+//                            )
+//                        }
+//                        .navigationLinkEmpty(isActive: store.bindingFor(.requestZecCoordFlow)) {
+//                            RequestZecCoordFlowView(
+//                                store:
+//                                    store.scope(
+//                                        state: \.requestZecCoordFlowState,
+//                                        action: \.requestZecCoordFlow),
+//                                tokenName: tokenName
+//                            )
+//                        }
+//                        .navigationLinkEmpty(isActive: store.bindingFor(.sendCoordFlow)) {
+//                            SendCoordFlowView(
+//                                store:
+//                                    store.scope(
+//                                        state: \.sendCoordFlowState,
+//                                        action: \.sendCoordFlow),
+//                                tokenName: tokenName
+//                            )
+//                        }
+//                        .navigationLinkEmpty(isActive: store.bindingFor(.scanCoordFlow)) {
+//                            ScanCoordFlowView(
+//                                store:
+//                                    store.scope(
+//                                        state: \.scanCoordFlowState,
+//                                        action: \.scanCoordFlow),
+//                                tokenName: tokenName
+//                            )
+//                        }
+//                        .navigationLinkEmpty(isActive: store.bindingFor(.addKeystoneHWWalletCoordFlow)) {
+//                            AddKeystoneHWWalletCoordFlowView(
+//                                store:
+//                                    store.scope(
+//                                        state: \.addKeystoneHWWalletCoordFlowState,
+//                                        action: \.addKeystoneHWWalletCoordFlow),
+//                                tokenName: tokenName
+//                            )
+//                        }
+//                        .navigationLinkEmpty(isActive: store.bindingFor(.transactionsCoordFlow)) {
+//                            TransactionsCoordFlowView(
+//                                store:
+//                                    store.scope(
+//                                        state: \.transactionsCoordFlowState,
+//                                        action: \.transactionsCoordFlow),
+//                                tokenName: tokenName
+//                            )
+//                        }
+//                        .navigationLinkEmpty(isActive: store.bindingFor(.walletBackup)) {
+//                            WalletBackupCoordFlowView(
+//                                store:
+//                                    store.scope(
+//                                        state: \.walletBackupCoordFlowState,
+//                                        action: \.walletBackupCoordFlow)
+//                            )
+//                        }
+//                        .navigationLinkEmpty(isActive: store.bindingFor(.currencyConversionSetup)) {
+//                            CurrencyConversionSetupView(
+//                                store:
+//                                    store.scope(
+//                                        state: \.currencyConversionSetupState,
+//                                        action: \.currencyConversionSetup)
+//                            )
+//                        }
+//                        .navigationLinkEmpty(isActive: store.bindingFor(.torSetup)) {
+//                            TorSetupView(
+//                                store:
+//                                    store.scope(
+//                                        state: \.torSetupState,
+//                                        action: \.torSetup)
+//                            )
+//                        }
+//                        .navigationLinkEmpty(isActive: store.bindingFor(.swapAndPayCoordFlow)) {
+//                            SwapAndPayCoordFlowView(
+//                                store:
+//                                    store.scope(
+//                                        state: \.swapAndPayCoordFlowState,
+//                                        action: \.swapAndPayCoordFlow),
+//                                tokenName: tokenName
+//                            )
+//                        }
+//                        .popover(isPresented: $store.signWithKeystoneCoordFlowBinding) {
+//                            SignWithKeystoneCoordFlowView(
+//                                store:
+//                                    store.scope(
+//                                        state: \.signWithKeystoneCoordFlowState,
+//                                        action: \.signWithKeystoneCoordFlow),
+//                                tokenName: tokenName
+//                            )
+//                        }
+////                    }
+//                    .navigationViewStyle(.stack)
+//                    .overlayedWithSplash(store.splashAppeared) {
+//                        store.send(.splashRemovalRequested)
+//                    }
 
                 case .onboarding:
                     NavigationView {

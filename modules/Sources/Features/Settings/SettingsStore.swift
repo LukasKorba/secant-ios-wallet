@@ -80,6 +80,8 @@ public struct Settings {
         case path(StackActionOf<Path>)
         case sendUsFeedbackTapped
         case whatsNewTapped
+        
+        case backToHomeTapped
     }
 
     @Dependency(\.appVersion) var appVersion
@@ -122,6 +124,9 @@ public struct Settings {
                 return .none
                 
             case .path:
+                return .none
+                
+            case .backToHomeTapped:
                 return .none
             }
         }
