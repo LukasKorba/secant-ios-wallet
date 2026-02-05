@@ -17,6 +17,7 @@ import SDKSynchronizer
 // Path
 import RestoreInfo
 import WalletBirthday
+import RestoreMigrationData
 
 @Reducer
 public struct RestoreWalletCoordFlow {
@@ -24,6 +25,7 @@ public struct RestoreWalletCoordFlow {
     public enum Path {
         case estimateBirthdaysDate(WalletBirthday)
         case estimatedBirthday(WalletBirthday)
+        case importMigrationData(RestoreMigrationData)
         case restoreInfo(RestoreInfo)
         case walletBirthday(WalletBirthday)
     }
@@ -52,6 +54,7 @@ public struct RestoreWalletCoordFlow {
         case evaluateSeedValidity
         case failedToRecover(ZcashError)
         case helpSheetRequested
+        case importMigarationDataSuccessful
         case nextTapped
         case path(StackActionOf<Path>)
         case resolveRestore

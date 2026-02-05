@@ -57,6 +57,7 @@ let package = Package(
         .library(name: "RemoteStorage", targets: ["RemoteStorage"]),
         .library(name: "RequestZec", targets: ["RequestZec"]),
         .library(name: "RestoreInfo", targets: ["RestoreInfo"]),
+        .library(name: "RestoreMigrationData", targets: ["RestoreMigrationData"]),
         .library(name: "ReviewRequest", targets: ["ReviewRequest"]),
         .library(name: "Root", targets: ["Root"]),
         .library(name: "Scan", targets: ["Scan"]),
@@ -92,6 +93,7 @@ let package = Package(
         .library(name: "Welcome", targets: ["Welcome"]),
         .library(name: "WhatsNew", targets: ["WhatsNew"]),
         .library(name: "WhatsNewProvider", targets: ["WhatsNewProvider"]),
+        .library(name: "Wormhole", targets: ["Wormhole"]),
         .library(name: "ZcashSDKEnvironment", targets: ["ZcashSDKEnvironment"]),
         .library(name: "ZecKeyboard", targets: ["ZecKeyboard"])
     ],
@@ -252,6 +254,7 @@ let package = Package(
                 "RecoveryPhraseDisplay",
                 "RequestZec",
                 "RestoreInfo",
+                "RestoreMigrationData",
                 "Scan",
                 "SDKSynchronizer",
                 "SendConfirmation",
@@ -435,6 +438,7 @@ let package = Package(
                 "UserPreferencesStorage",
                 "Utils",
                 "WalletBalances",
+                "Wormhole",
                 "ZcashSDKEnvironment",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "ZcashLightClientKit", package: "zcash-swift-wallet-sdk")
@@ -558,6 +562,7 @@ let package = Package(
                 "Models",
                 "UIComponents",
                 "Utils",
+                "Wormhole",
                 "ZcashSDKEnvironment",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
@@ -632,6 +637,17 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Features/RestoreInfo"
+        ),
+        .target(
+            name: "RestoreMigrationData",
+            dependencies: [
+                "Generated",
+                "Models",
+                "UIComponents",
+                "Wormhole",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/Features/RestoreMigrationData"
         ),
         .target(
             name: "ReviewRequest",
@@ -1187,6 +1203,20 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Dependencies/WhatsNewProvider"
+        ),
+        .target(
+            name: "Wormhole",
+            dependencies: [
+                "DatabaseFiles",
+                "Generated",
+                "MnemonicClient",
+                "UserMetadataProvider",
+                "WalletStorage",
+                "ZcashSDKEnvironment",
+                .product(name: "ZcashLightClientKit", package: "zcash-swift-wallet-sdk"),
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/Dependencies/Wormhole"
         ),
         .target(
             name: "ZcashSDKEnvironment",

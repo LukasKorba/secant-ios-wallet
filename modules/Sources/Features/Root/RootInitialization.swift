@@ -332,7 +332,6 @@ extension Root {
                             let walletAccounts = try await sdkSynchronizer.walletAccounts()
                             await send(.initialization(.loadedWalletAccounts(walletAccounts)))
                             await send(.resolveMetadataEncryptionKeys)
-                            await send(.loadUserMetadata)
 
                             try await sdkSynchronizer.start(false)
 
@@ -362,8 +361,10 @@ extension Root {
                                     }
                                 }
 
+                                await send(.loadUserMetadata)
                                 await send(.initialization(.initializationSuccessfullyDone))
                             } else {
+                                await send(.loadUserMetadata)
                                 await send(.initialization(.initializationSuccessfullyDone))
                             }
                         } catch {

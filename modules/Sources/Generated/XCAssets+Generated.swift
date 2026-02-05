@@ -111,6 +111,7 @@ public enum Asset {
       public static let expand = ImageAsset(name: "expand")
       public static let file = ImageAsset(name: "file")
       public static let filter = ImageAsset(name: "filter")
+      public static let fingerprint = ImageAsset(name: "fingerprint")
       public static let flashOff = ImageAsset(name: "flashOff")
       public static let flashOn = ImageAsset(name: "flashOn")
       public static let help = ImageAsset(name: "help")
@@ -158,6 +159,7 @@ public enum Asset {
       public static let trIn = ImageAsset(name: "trIn")
       public static let trOut = ImageAsset(name: "trOut")
       public static let trPaid = ImageAsset(name: "trPaid")
+      public static let uploadCloud = ImageAsset(name: "uploadCloud")
       public static let user = ImageAsset(name: "user")
       public static let userPlus = ImageAsset(name: "userPlus")
       public static let wifiOff = ImageAsset(name: "wifiOff")
@@ -178,6 +180,7 @@ public enum Asset {
     public static let shieldTick = ImageAsset(name: "shieldTick")
     public static let surroundedShield = ImageAsset(name: "surroundedShield")
     public static let tooltip = ImageAsset(name: "tooltip")
+    public static let zashiLogoFilled = ImageAsset(name: "zashiLogoFilled")
     public static let zashiTitle = ImageAsset(name: "zashiTitle")
   }
   public enum Colors {

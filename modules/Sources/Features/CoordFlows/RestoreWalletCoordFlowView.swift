@@ -14,6 +14,7 @@ import Generated
 // Path
 import RestoreInfo
 import WalletBirthday
+import RestoreMigrationData
 
 public struct RestoreWalletCoordFlowView: View {
     enum FocusTextField: Hashable {
@@ -204,6 +205,8 @@ public struct RestoreWalletCoordFlowView: View {
                 )
             } destination: { store in
                 switch store.case {
+                case let .importMigrationData(store):
+                    RestoreMigrationDataView(store: store)
                 case let .estimateBirthdaysDate(store):
                     WalletBirthdayEstimateDateView(store: store)
                 case let .estimatedBirthday(store):

@@ -193,7 +193,6 @@
 "settings.feedback" = "Envíanos tus Comentarios";
 "settings.integrations" = "Integraciones";
 "settings.recoveryPhrase" = "Frase de Recuperación de Zashi";
-"settings.exportPrivateData" = "Exportar Datos Privados";
 "settings.exportLogsOnly" = "Exportar solo registros";
 "settings.chooseServer" = "Elegir un Servidor";
 "settings.currencyConversion" = "Conversión de Moneda";
@@ -223,15 +222,6 @@
 "sendFeedback.share.title" = "Mensaje de soporte";
 "sendFeedback.share.desc" = "Zashi";
 "sendFeedback.share.notAppleMailInfo" = "Tu dispositivo no tiene configurado un correo de Apple, así que preparamos este mensaje para que lo envíes usando tu cliente de correo preferido. Por favor, envía este mensaje a:";
-
-// MARK: - Private Data Consent
-"privateDataConsent.title" = "Consentimiento para Exportar Datos Privados";
-"privateDataConsent.message1" = "Al hacer clic en 'Estoy de Acuerdo', das tu consentimiento para exportar todos los datos privados de tus billeteras, como el historial completo de tus billeteras, incluyendo cualquier billetera de hardware conectada. Toda información privada, notas, montos y direcciones de destinatarios, incluso para tus actividades protegidas, serán exportadas.*";
-"privateDataConsent.message2" = "Los datos privados también permiten ver ciertas acciones futuras que realices con Zashi.";
-"privateDataConsent.message3" = "Compartir estos datos privados es irrevocable: una vez que hayas compartido estos datos privados con alguien, no hay forma de revocar su acceso.";
-"privateDataConsent.message4" = "*Ten en cuenta que estos datos privados no les dan la capacidad de gastar tus fondos, solo la capacidad de ver lo que haces con tus fondos.";
-"privateDataConsent.confirmation" = "Acepto las Políticas de Exportación de Datos Privados y la Política de Privacidad de Zashi";
-"privateDataConsent.screenTitle" = "Exportación de Datos";
 
 // MARK: - Sync message
 "sync.message.uptodate" = "Actualizado";
@@ -963,3 +953,15 @@
 "swapAndPay.pendingPayTitle" = "Pago Pendiente";
 
 "tokenOnChain" = "en";
+
+// Migration
+"settings.exportPrivateData" = "Exportar Datos Privados";
+
+// MARK: - Private Data Consent
+"privateDataConsent.title" = "Consentimiento para Exportar Datos Privados";
+"privateDataConsent.message1" = "Al hacer clic en 'Estoy de Acuerdo', das tu consentimiento para exportar todos los datos privados de tus billeteras, como el historial completo de tus billeteras, incluyendo cualquier billetera de hardware conectada. Toda información privada, notas, montos y direcciones de destinatarios, incluso para tus actividades protegidas, serán exportadas.*";
+"privateDataConsent.message2" = "Los datos privados también permiten ver ciertas acciones futuras que realices con Zashi.";
+"privateDataConsent.message3" = "Compartir estos datos privados es irrevocable: una vez que hayas compartido estos datos privados con alguien, no hay forma de revocar su acceso.";
+"privateDataConsent.message4" = "*Ten en cuenta que estos datos privados no les dan la capacidad de gastar tus fondos, solo la capacidad de ver lo que haces con tus fondos.";
+"privateDataConsent.confirmation" = "Acepto las Políticas de Exportación de Datos Privados y la Política de Privacidad de Zashi";
+"privateDataConsent.screenTitle" = "Exportación de Datos";

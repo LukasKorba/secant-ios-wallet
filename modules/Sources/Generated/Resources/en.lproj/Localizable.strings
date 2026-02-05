@@ -224,15 +224,6 @@
 "sendFeedback.share.desc" = "Zashi";
 "sendFeedback.share.notAppleMailInfo" = "Your device doesn’t have an Apple email set up, so we prepared this message for you to send using your preferred email client. Please send this message to:";
 
-// MARK: - Private Data Consent
-"privateDataConsent.title" = "Consent for Exporting Private Data";
-"privateDataConsent.message1" = "By clicking \"I Agree\" below, you give your consent to export all of your wallets’ private data such as the entire history of your wallet(s), including any connected hardware wallets. All private information, memos, amounts, and recipient addresses, even for your shielded activity will be exported.*";
-"privateDataConsent.message2" = "The private data also gives the ability to see certain future actions you take with Zashi.";
-"privateDataConsent.message3" = "Sharing this private data is irrevocable - once you have shared this private data with someone, there is no way to revoke their access.";
-"privateDataConsent.message4" = "*Note that this private data does not give them the ability to spend your funds, only the ability to see what you do with your funds.";
-"privateDataConsent.confirmation" = "I agree to Zashi's Export Private Data Policies and Privacy Policy";
-"privateDataConsent.screenTitle" = "Data Export";
-
 // MARK: - Sync message
 "sync.message.uptodate" = "Up-To-Date";
 "sync.message.unprepared" = "Unprepared";
@@ -963,3 +954,25 @@
 "swapAndPay.pendingPayTitle" = "Payment Pending";
 
 "tokenOnChain" = "on";
+
+// Migration
+"settings.exportPrivateData" = "Export Migration Data";
+
+// MARK: - Private Data Consent
+"privateDataConsent.title" = "Consent for Exporting Migration Data";
+"privateDataConsent.message1" = "By checking \"I Agree\" below, you give your consent to export all of your wallet’s private data such as the entire history of your wallet(s), including any connected hardware wallets. All private information, contacts, memos, amounts, and recipient addresses, even for your shielded activity will be exported.";
+"privateDataConsent.message2" = "The private data also gives the ability to see certain future actions you take with Zashi.";
+"privateDataConsent.message3" = "Sharing this private data is irrevocable – once you have shared this private data with someone, there is no way to revoke their access.";
+"privateDataConsent.message4" = "Note that this private data does not give them the ability to spend your funds, only the ability to see what you do with your funds.";
+"privateDataConsent.confirmation" = "I agree to Zashi’s Export Private Data Policies and Privacy Policy.";
+"privateDataConsent.screenTitle" = "Data Export";
+
+// Import Migration Data
+"migrationData.title" = "Import Backup Data";
+"migrationData.desc" = "Migrating from the Zashi Wallet? Import your backup data to avoid any data loss. You may find this feature in the Advanced Settings - Export Migration Data.";
+"migrationData.point1Title" = "Why import backup data?";
+"migrationData.point1Desc" = "Importing your backup file restores your complete transaction history including swap and payment data, Address Book contacts, transaction notes, memos, and other metadata instantly, without waiting for blockchain sync.";
+"migrationData.point2Title" = "Encrypted and secured";
+"migrationData.point2Desc" = "Your backup file is encrypted with a key derived from your secret recovery phrase, and will only be used to restore your wallet data on this device.";
+"migrationData.skip" = "Skip for now";
+"migrationData.import" = "Import Backup File";

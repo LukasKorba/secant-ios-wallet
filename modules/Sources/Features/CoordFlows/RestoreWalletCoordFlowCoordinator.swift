@@ -11,15 +11,19 @@ import Generated
 // Path
 import RestoreInfo
 import WalletBirthday
+import RestoreMigrationData
 
 extension RestoreWalletCoordFlow {
     public func coordinatorReduce() -> Reduce<RestoreWalletCoordFlow.State, RestoreWalletCoordFlow.Action> {
         Reduce { state, action in
             switch action {
+                
                 // MARK: - Self
 
             case .nextTapped:
-                state.path.append(.walletBirthday(WalletBirthday.State.initial))
+                var restoreMigrationDataState = RestoreMigrationData.State.initial
+                restoreMigrationDataState.seed = state.words.joined(separator: " ")
+                state.path.append(.importMigrationData(restoreMigrationDataState))
                 return .none
 
             case .resolveRestoreTapped:
@@ -59,6 +63,30 @@ extension RestoreWalletCoordFlow {
 
                     // notify user
                     return .send(.successfullyRecovered)
+                } catch {
+                    return .send(.failedToRecover(error.toZcashError()))
+                }
+
+                // MARK: - Restore Migration Data
+
+            case .path(.element(id: _, action: .importMigrationData(.skipTapped))):
+                state.path.append(.walletBirthday(WalletBirthday.State.initial))
+                return .none
+                
+            case .path(.element(id: _, action: .importMigrationData(.importSucceessful))):
+                do {
+                    let seedPhrase = state.words.joined(separator: " ")
+                    
+                    // validate the seed
+                    try mnemonic.isValid(seedPhrase)
+
+                    try walletStorage.importWallet(seedPhrase, nil, .english, false)
+                    
+                    // update the backup phrase validation flag
+                    try walletStorage.markUserPassedPhraseBackupTest(true)
+
+                    // notify user
+                    return .send(.importMigarationDataSuccessful)
                 } catch {
                     return .send(.failedToRecover(error.toZcashError()))
                 }

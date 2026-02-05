@@ -602,6 +602,24 @@ public enum L10n {
     /// Your address is included in the memo
     public static let removeUA = L10n.tr("Localizable", "messageEditor.removeUA", fallback: "Your address is included in the memo")
   }
+  public enum MigrationData {
+    /// Migrating from the Zashi Wallet? Import your backup data to avoid any data loss. You may find this feature in the Advanced Settings - Export Migration Data.
+    public static let desc = L10n.tr("Localizable", "migrationData.desc", fallback: "Migrating from the Zashi Wallet? Import your backup data to avoid any data loss. You may find this feature in the Advanced Settings - Export Migration Data.")
+    /// Import Backup File
+    public static let `import` = L10n.tr("Localizable", "migrationData.import", fallback: "Import Backup File")
+    /// Importing your backup file restores your complete transaction history including swap and payment data, Address Book contacts, transaction notes, memos, and other metadata instantly, without waiting for blockchain sync.
+    public static let point1Desc = L10n.tr("Localizable", "migrationData.point1Desc", fallback: "Importing your backup file restores your complete transaction history including swap and payment data, Address Book contacts, transaction notes, memos, and other metadata instantly, without waiting for blockchain sync.")
+    /// Why import backup data?
+    public static let point1Title = L10n.tr("Localizable", "migrationData.point1Title", fallback: "Why import backup data?")
+    /// Your backup file is encrypted with a key derived from your secret recovery phrase, and will only be used to restore your wallet data on this device.
+    public static let point2Desc = L10n.tr("Localizable", "migrationData.point2Desc", fallback: "Your backup file is encrypted with a key derived from your secret recovery phrase, and will only be used to restore your wallet data on this device.")
+    /// Encrypted and secured
+    public static let point2Title = L10n.tr("Localizable", "migrationData.point2Title", fallback: "Encrypted and secured")
+    /// Skip for now
+    public static let skip = L10n.tr("Localizable", "migrationData.skip", fallback: "Skip for now")
+    /// Import Backup Data
+    public static let title = L10n.tr("Localizable", "migrationData.title", fallback: "Import Backup Data")
+  }
   public enum More {
     /// More Options
     public static let options = L10n.tr("Localizable", "more.options", fallback: "More Options")
@@ -657,20 +675,20 @@ public enum L10n {
     }
   }
   public enum PrivateDataConsent {
-    /// I agree to Zashi's Export Private Data Policies and Privacy Policy
-    public static let confirmation = L10n.tr("Localizable", "privateDataConsent.confirmation", fallback: "I agree to Zashi's Export Private Data Policies and Privacy Policy")
-    /// By clicking "I Agree" below, you give your consent to export all of your wallets’ private data such as the entire history of your wallet(s), including any connected hardware wallets. All private information, memos, amounts, and recipient addresses, even for your shielded activity will be exported.*
-    public static let message1 = L10n.tr("Localizable", "privateDataConsent.message1", fallback: "By clicking \"I Agree\" below, you give your consent to export all of your wallets’ private data such as the entire history of your wallet(s), including any connected hardware wallets. All private information, memos, amounts, and recipient addresses, even for your shielded activity will be exported.*")
+    /// I agree to Zashi’s Export Private Data Policies and Privacy Policy.
+    public static let confirmation = L10n.tr("Localizable", "privateDataConsent.confirmation", fallback: "I agree to Zashi’s Export Private Data Policies and Privacy Policy.")
+    /// By checking "I Agree" below, you give your consent to export all of your wallet’s private data such as the entire history of your wallet(s), including any connected hardware wallets. All private information, contacts, memos, amounts, and recipient addresses, even for your shielded activity will be exported.
+    public static let message1 = L10n.tr("Localizable", "privateDataConsent.message1", fallback: "By checking \"I Agree\" below, you give your consent to export all of your wallet’s private data such as the entire history of your wallet(s), including any connected hardware wallets. All private information, contacts, memos, amounts, and recipient addresses, even for your shielded activity will be exported.")
     /// The private data also gives the ability to see certain future actions you take with Zashi.
     public static let message2 = L10n.tr("Localizable", "privateDataConsent.message2", fallback: "The private data also gives the ability to see certain future actions you take with Zashi.")
-    /// Sharing this private data is irrevocable - once you have shared this private data with someone, there is no way to revoke their access.
-    public static let message3 = L10n.tr("Localizable", "privateDataConsent.message3", fallback: "Sharing this private data is irrevocable - once you have shared this private data with someone, there is no way to revoke their access.")
-    /// *Note that this private data does not give them the ability to spend your funds, only the ability to see what you do with your funds.
-    public static let message4 = L10n.tr("Localizable", "privateDataConsent.message4", fallback: "*Note that this private data does not give them the ability to spend your funds, only the ability to see what you do with your funds.")
+    /// Sharing this private data is irrevocable – once you have shared this private data with someone, there is no way to revoke their access.
+    public static let message3 = L10n.tr("Localizable", "privateDataConsent.message3", fallback: "Sharing this private data is irrevocable – once you have shared this private data with someone, there is no way to revoke their access.")
+    /// Note that this private data does not give them the ability to spend your funds, only the ability to see what you do with your funds.
+    public static let message4 = L10n.tr("Localizable", "privateDataConsent.message4", fallback: "Note that this private data does not give them the ability to spend your funds, only the ability to see what you do with your funds.")
     /// Data Export
     public static let screenTitle = L10n.tr("Localizable", "privateDataConsent.screenTitle", fallback: "Data Export")
-    /// Consent for Exporting Private Data
-    public static let title = L10n.tr("Localizable", "privateDataConsent.title", fallback: "Consent for Exporting Private Data")
+    /// Consent for Exporting Migration Data
+    public static let title = L10n.tr("Localizable", "privateDataConsent.title", fallback: "Consent for Exporting Migration Data")
   }
   public enum ProposalPartial {
     /// Copy transaction IDs
@@ -1256,8 +1274,8 @@ public enum L10n {
     public static let deleteZashiWarning = L10n.tr("Localizable", "settings.deleteZashiWarning", fallback: "You will be asked to confirm on the next screen")
     /// Export logs only
     public static let exportLogsOnly = L10n.tr("Localizable", "settings.exportLogsOnly", fallback: "Export logs only")
-    /// Export Private Data
-    public static let exportPrivateData = L10n.tr("Localizable", "settings.exportPrivateData", fallback: "Export Private Data")
+    /// Export Migration Data
+    public static let exportPrivateData = L10n.tr("Localizable", "settings.exportPrivateData", fallback: "Export Migration Data")
     /// Send Us Feedback
     public static let feedback = L10n.tr("Localizable", "settings.feedback", fallback: "Send Us Feedback")
     /// Pay with Flexa

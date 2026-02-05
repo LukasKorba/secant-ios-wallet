@@ -182,6 +182,9 @@ extension Root {
                 return .send(.initialization(.resetZashiRequest(areMetadataPreserved)))
 
                 // MARK: - Restore Wallet Coord Flow from Onboarding
+                
+            case .onboarding(.restoreWalletCoordFlow(.importMigarationDataSuccessful)):
+                return .send(.initialization(.checkWalletInitialization))
 
             case .onboarding(.restoreWalletCoordFlow(.path(.element(id: _, action: .restoreInfo(.gotItTapped))))):
                 var leavesScreenOpen = false
@@ -195,9 +198,8 @@ extension Root {
                 userDefaults.setValue(true, Constants.udIsRestoringWallet)
                 state.$walletStatus.withLock { $0 = .restoring }
                 return .concatenate(
-                    .send(.initialization(.initializeSDK(.restoreWallet))),
-                    .send(.initialization(.checkBackupPhraseValidation)),
-                    .send(.batteryStateChanged(nil))
+                    .send(.initialization(.initializeSDK(.existingWallet))),
+                    .send(.initialization(.checkBackupPhraseValidation))
                 )
 
                 // MARK: - Scan Coord Flow
