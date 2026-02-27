@@ -70,7 +70,8 @@ struct Near1Click {
     let swapAssets: () async throws -> IdentifiedArrayOf<SwapAsset>
     let quote: (Bool, Bool, Bool, Int, SwapAsset, SwapAsset, String, String, String) async throws -> SwapQuote
     let status: (String, Bool) async throws -> SwapDetails
-    
+    let anyInputQuote: () async throws -> Void
+
     static func getCall(urlString: String, includeJwtKey: Bool = false) async throws -> (Data, URLResponse) {
         @Dependency(\.sdkSynchronizer) var sdkSynchronizer
         @Shared(.inMemory(.swapAPIAccess)) var swapAPIAccess: WalletStorage.SwapAPIAccess = .direct
@@ -235,6 +236,10 @@ extension Near1Click {
             
             let deadline = isoFormatter.string(from: twoHoursLater)
             
+            guard let nearFeeDepositAddress = PartnerKeys.nearFeeDepositAddress else {
+                throw "nearFeeDepositAddress missing"
+            }
+            
             let requestData = SwapQuoteRequest(
                 dry: dry,
                 swapType: isSwapToZec ? Constants.exactInput : exactInput ? Constants.exactInput : Constants.exactOutput,
@@ -252,9 +257,7 @@ extension Near1Click {
                 quoteWaitingTimeMs: 3000,
                 appFees: [
                     AppFee(
-                        recipient: exactInput
-                        ? SwapAndPayClient.Constants.affiliateFeeDepositAddress
-                        : SwapAndPayClient.Constants.affiliateCrossPayFeeDepositAddress,
+                        recipient: nearFeeDepositAddress,
                         fee: SwapAndPayClient.Constants.zashiFeeBps
                     )
                 ]
@@ -467,6 +470,55 @@ extension Near1Click {
                 swapRecipient: swapRecipient,
                 addressToCheckShield: (isSwapToZec ? swapRecipient : refundTo) ?? ""
             )
+        },
+        anyInputQuote: {
+            // Deadline in ISO 8601 UTC format
+            let now = Date()
+            let twoHoursLater = now.addingTimeInterval(120 * 60)
+            let isoFormatter = ISO8601DateFormatter()
+            isoFormatter.formatOptions = [.withInternetDateTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
+            isoFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+            
+            let deadline = isoFormatter.string(from: twoHoursLater)
+            
+            let requestData = SwapQuoteRequest(
+                dry: false,
+                swapType: "ANY_INPUT",
+                slippageTolerance: 0,
+                originAsset: "1cs_v1:any",
+                depositType: "INTENTS",
+                destinationAsset: "nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+                amount: "0",
+                refundTo: SwapAndPayClient.Constants.affiliateFeeDepositAddress,
+                refundType: "INTENTS",
+                recipient: SwapAndPayClient.Constants.affiliateFeeDepositAddress,
+                recipientType: Constants.destinationChain,
+                deadline: deadline,
+                referral: Constants.referral,
+                quoteWaitingTimeMs: 10000,
+                appFees: nil
+            )
+            
+            guard let jsonData = try? JSONEncoder().encode(requestData) else {
+                fatalError("Failed to encode JSON")
+            }
+            
+            let (data, response) = try await Near1Click.postCall(urlString: Constants.quoteUrl, jsonData: jsonData)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw SwapAndPayClient.EndpointError.message("Quote: Invalid response")
+            }
+            
+            guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                throw SwapAndPayClient.EndpointError.message("Quote: Cannot parse response")
+            }
+
+            guard let quote = jsonObject[Constants.quote] as? [String: Any],
+                  let depositAddress = quote[Constants.depositAddress] as? String else {
+                throw SwapAndPayClient.EndpointError.message("Parse of the quote failed.")
+            }
+
+            print("__LD depositAddress \(depositAddress)")
         }
     )
 }
