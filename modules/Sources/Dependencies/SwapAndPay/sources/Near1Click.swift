@@ -70,7 +70,7 @@ struct Near1Click {
     let swapAssets: () async throws -> IdentifiedArrayOf<SwapAsset>
     let quote: (Bool, Bool, Bool, Int, SwapAsset, SwapAsset, String, String, String) async throws -> SwapQuote
     let status: (String, Bool) async throws -> SwapDetails
-    
+
     static func getCall(urlString: String, includeJwtKey: Bool = false) async throws -> (Data, URLResponse) {
         @Dependency(\.sdkSynchronizer) var sdkSynchronizer
         @Shared(.inMemory(.swapAPIAccess)) var swapAPIAccess: WalletStorage.SwapAPIAccess = .direct
@@ -235,6 +235,10 @@ extension Near1Click {
             
             let deadline = isoFormatter.string(from: twoHoursLater)
             
+            guard let nearFeeDepositAddress = PartnerKeys.nearFeeDepositAddress else {
+                throw "nearFeeDepositAddress missing"
+            }
+            
             let requestData = SwapQuoteRequest(
                 dry: dry,
                 swapType: isSwapToZec ? Constants.exactInput : exactInput ? Constants.exactInput : Constants.exactOutput,
@@ -252,9 +256,7 @@ extension Near1Click {
                 quoteWaitingTimeMs: 3000,
                 appFees: [
                     AppFee(
-                        recipient: exactInput
-                        ? SwapAndPayClient.Constants.affiliateFeeDepositAddress
-                        : SwapAndPayClient.Constants.affiliateCrossPayFeeDepositAddress,
+                        recipient: nearFeeDepositAddress,
                         fee: SwapAndPayClient.Constants.zashiFeeBps
                     )
                 ]
