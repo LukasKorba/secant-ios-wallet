@@ -62,7 +62,7 @@ public class UserMetadataStorage {
         guard let filename = umKey.fileIdentifier(account: account) else {
             throw UMError.fileIdentifier
         }
-        
+
         return filename
     }
     

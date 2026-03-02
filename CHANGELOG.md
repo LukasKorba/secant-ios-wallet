@@ -8,6 +8,8 @@ directly impact users rather than highlighting other crucial architectural updat
 
 ### Fixed
 - Missing back buttons at some flows starting on the Home page.
+- Load of activities related to the current account.
+- Load of metadata after wallet restore. 
 
 ## 3.0.0 build 2 (2026-02-26)
 

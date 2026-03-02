@@ -430,6 +430,7 @@ extension Root {
                                             network: zcashSDKEnvironment.network.networkType
                                         )
                                         try walletStorage.importUserMetadataEncryptionKeys(keys, account.account)
+                                        await send(.loadUserMetadata)
                                     } catch {
                                         // TODO: [#1408] error handling https://github.com/Electric-Coin-Company/zashi-ios/issues/1408
                                     }

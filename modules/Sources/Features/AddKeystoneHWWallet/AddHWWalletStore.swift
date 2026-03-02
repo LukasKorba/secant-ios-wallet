@@ -110,7 +110,6 @@ public struct AddKeystoneHWWallet {
                         )
                         if let uuid {
                             await send(.accountImported(uuid))
-                            await send(.accountImportSucceeded)
                         }
                     } catch {
                         // TODO: error handling
@@ -122,6 +121,7 @@ public struct AddKeystoneHWWallet {
                 return .run { send in
                     let walletAccounts = try await sdkSynchronizer.walletAccounts()
                     await send(.loadedWalletAccounts(walletAccounts, uuid))
+                    await send(.accountImportSucceeded)
                 }
                 
             case .accountImportFailed:
