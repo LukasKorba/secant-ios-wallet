@@ -112,7 +112,7 @@ extension Root {
                     }
                 
                 let identifiedArray = IdentifiedArrayOf<TransactionState>(uniqueElements: sortedTransactions)
-                
+
                 // Update transactions
                 if state.transactions != identifiedArray {
                     state.$transactions.withLock {

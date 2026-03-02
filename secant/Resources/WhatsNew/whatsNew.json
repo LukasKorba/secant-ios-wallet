@@ -1,6 +1,21 @@
 {
     "releases": [
         {
+            "version": "3.0.1",
+            "date": "03-03-2026",
+            "timestamp": 1772534007,
+            "sections": [
+                {
+                    "title": "Fixed:",
+                    "bulletpoints": [
+                        "We fixed missing back buttons in some flows starting from the Home screen.",
+                        "We improved loading of activities for the current account.",
+                        "We fixed metadata loading after wallet restore."
+                    ]
+                }
+            ]
+        },
+        {
             "version": "3.0.0",
             "date": "25-02-2026",
             "timestamp": 1772007905,

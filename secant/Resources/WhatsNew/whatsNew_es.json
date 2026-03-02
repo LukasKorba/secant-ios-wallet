@@ -1,6 +1,21 @@
 {
     "releases": [
         {
+            "version": "3.0.1",
+            "date": "03-03-2026",
+            "timestamp": 1772534007,
+            "sections": [
+                {
+                    "title": "Corregido:",
+                    "bulletpoints": [
+                        "Se corrigió la ausencia del botón “Atrás” en algunos flujos iniciados desde la pantalla principal.",
+                        "Mejora en la carga de actividades de la cuenta actual.",
+                        "Corrección en la carga de metadatos después de restaurar la cartera."
+                    ]
+                }
+            ]
+        },
+        {
             "version": "3.0.0",
             "date": "25-02-2026",
             "timestamp": 1772007905,

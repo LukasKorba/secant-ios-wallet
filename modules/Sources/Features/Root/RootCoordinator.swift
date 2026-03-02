@@ -38,8 +38,10 @@ extension Root {
                     .send(.home(.smartBanner(.walletAccountChanged))),
                     .send(.home(.walletBalances(.updateBalances))),
                     .send(.loadContacts),
-                    .send(.resolveMetadataEncryptionKeys),
-                    .send(.loadUserMetadata),
+                    .concatenate(
+                        .send(.resolveMetadataEncryptionKeys),
+                        .send(.loadUserMetadata)
+                    ),
                     .send(.fetchTransactionsForTheSelectedAccount)
                 )
 
@@ -54,8 +56,10 @@ extension Root {
                 state.autoUpdateSwapCandidates.removeAll()
                 return .merge(
                     .send(.loadContacts),
-                    .send(.resolveMetadataEncryptionKeys),
-                    .send(.loadUserMetadata),
+                    .concatenate(
+                        .send(.resolveMetadataEncryptionKeys),
+                        .send(.loadUserMetadata)
+                    ),
                     .send(.fetchTransactionsForTheSelectedAccount)
                 )
                 
@@ -70,8 +74,10 @@ extension Root {
                 state.autoUpdateSwapCandidates.removeAll()
                 return .merge(
                     .send(.loadContacts),
-                    .send(.resolveMetadataEncryptionKeys),
-                    .send(.loadUserMetadata),
+                    .concatenate(
+                        .send(.resolveMetadataEncryptionKeys),
+                        .send(.loadUserMetadata)
+                    ),
                     .send(.fetchTransactionsForTheSelectedAccount)
                 )
                 
