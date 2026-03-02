@@ -7,7 +7,7 @@ directly impact users rather than highlighting other crucial architectural updat
 ## [Unreleased]
 
 ### Fixed
-- Missing back buttons at some flows starting on the Home page.
+- Missing back buttons at some flows starting from the Home screen.
 - Load of activities related to the current account.
 - Load of metadata after wallet restore. 
 
