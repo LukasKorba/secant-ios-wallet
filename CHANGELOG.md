@@ -6,6 +6,8 @@ directly impact users rather than highlighting other crucial architectural updat
 
 ## [Unreleased]
 
+## 3.0.1 build 1 (2026-03-02)
+
 ### Fixed
 - Missing back buttons at some flows starting from the Home screen.
 - Load of activities related to the current account.
