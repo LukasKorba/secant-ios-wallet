@@ -15,10 +15,10 @@ public struct ZashiText: View {
         Text(attributedString)
     }
     
-    public init(withAttributedString attributedString: AttributedString, colorScheme: ColorScheme) {
+    public init(withAttributedString attributedString: AttributedString, colorScheme: ColorScheme, textColor: Color? = nil, textSize: CGFloat? = nil) {
         self.attributedString = AttributedString("")
         
-        self.attributedString = ZashiText.annotateStyle(from: attributedString, colorScheme: colorScheme)
+        self.attributedString = ZashiText.annotateStyle(from: attributedString, colorScheme: colorScheme, textColor: textColor, textSize: textSize)
     }
 
     public init(_ localizedKey: String.LocalizationValue, colorScheme: ColorScheme) {
@@ -28,20 +28,29 @@ public struct ZashiText: View {
             from: AttributedString(localized: localizedKey, including: \.zashiApp), colorScheme: colorScheme)
     }
 
-    private static func annotateStyle(from source: AttributedString, colorScheme: ColorScheme) -> AttributedString {
+    private static func annotateStyle(from source: AttributedString, colorScheme: ColorScheme, textColor: Color? = nil, textSize: CGFloat? = nil) -> AttributedString {
         var attrString = source
         for run in attrString.runs {
             if let zStyle = run.zStyle {
+                var defaultTextSize: CGFloat = 14
+                if let textSize {
+                    defaultTextSize = textSize
+                }
+
                 switch zStyle {
                 case .bold:
-                    attrString[run.range].font = .system(size: 14, weight: .bold)
+                    attrString[run.range].font = .system(size: defaultTextSize, weight: .bold)
                 case .boldPrimary:
-                    attrString[run.range].font = .system(size: 14, weight: .bold)
-                    attrString[run.range].foregroundColor = Design.Text.primary.color(colorScheme)
+                    attrString[run.range].font = .system(size: defaultTextSize, weight: .bold)
+                    if let textColor {
+                        attrString[run.range].foregroundColor = textColor
+                    } else {
+                        attrString[run.range].foregroundColor = Design.Text.primary.color(colorScheme)
+                    }
                 case .italic:
-                    attrString[run.range].font = .system(size: 14).italic()
+                    attrString[run.range].font = .system(size: defaultTextSize).italic()
                 case .boldItalic:
-                    attrString[run.range].font = .system(size: 14, weight: .bold).italic()
+                    attrString[run.range].font = .system(size: defaultTextSize, weight: .bold).italic()
                 case .link:
                     attrString[run.range].underlineStyle = .single
                 }

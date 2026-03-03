@@ -6,6 +6,12 @@ directly impact users rather than highlighting other crucial architectural updat
 
 ## [Unreleased]
 
+### Added
+- Warning about slippage being less then recommended threshold.
+
+### Changed
+- Default slippage updated to 2%.
+
 ## 3.0.1 build 1 (2026-03-02)
 
 ### Fixed

@@ -1694,6 +1694,10 @@ public enum L10n {
     public static let slippageTolerance = L10n.tr("Localizable", "swapAndPay.slippageTolerance", fallback: "Slippage tolerance")
     /// Any unused portion of the slippage fee will be refunded if the swap executes with lower slippage than expected.
     public static let slippageWarn = L10n.tr("Localizable", "swapAndPay.slippageWarn", fallback: "Any unused portion of the slippage fee will be refunded if the swap executes with lower slippage than expected.")
+    /// ^[Warning:](style: 'boldPrimary') Slippage ^[under %@%%](style: 'boldPrimary') increases the chance your swap will be unsuccessful and refunded. Consider using ^[%@%% or higher](style: 'boldPrimary'), especially for larger amounts.
+    public static func smallSlippageWarn(_ p1: Any, _ p2: Any) -> String {
+      return L10n.tr("Localizable", "swapAndPay.smallSlippageWarn", String(describing: p1), String(describing: p2), fallback: "^[Warning:](style: 'boldPrimary') Slippage ^[under %@%%](style: 'boldPrimary') increases the chance your swap will be unsuccessful and refunded. Consider using ^[%@%% or higher](style: 'boldPrimary'), especially for larger amounts.")
+    }
     /// Status
     public static let status = L10n.tr("Localizable", "swapAndPay.status", fallback: "Status")
     /// You successfully initiated a cross-chain payment. Follow its status on the transaction screen.
