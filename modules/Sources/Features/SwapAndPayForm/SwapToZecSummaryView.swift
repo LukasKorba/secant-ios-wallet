@@ -127,19 +127,70 @@ public struct SwapToZecSummaryView: View {
                 shareView()
             }
             .screenHorizontalPadding()
+            .zashiSheet(isPresented: $store.isDepositHelpSheetVisible) {
+                helpSheetContent(colorScheme)
+            }
+            .alert(
+                store: store.scope(
+                    state: \.$alert,
+                    action: \.alert
+                )
+            )
             .navigationBarItems(
                 trailing:
                     Button {
-                        store.send(.helpSheetRequested(3))
+                        store.send(.openDepositHelpSheetTapped)
                     } label: {
                         Asset.Assets.infoCircle.image
                             .zImage(size: 24, style: Design.Text.primary)
                             .padding(Design.Spacing.navBarButtonPadding)
                     }
             )
-            .zashiBack()
+            .zashiBack() { store.send(.depositFundsBackTapped) }
             .screenTitle(L10n.SwapAndPay.swap.uppercased())
             .applyScreenBackground()
+        }
+    }
+    
+    @ViewBuilder private func bulletpoint(_ text: String) -> some View {
+        HStack(alignment: .top) {
+            Circle()
+                .fill(Design.Text.tertiary.color(colorScheme))
+                .frame(width: 4, height: 4)
+                .padding(.top, 7)
+                .padding(.leading, 8)
+
+            Text(text)
+                .zFont(size: 14, style: Design.Text.tertiary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(.bottom, 5)
+    }
+    
+    @ViewBuilder func helpSheetContent(_ colorScheme: ColorScheme) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(L10n.DepositFunds.title)
+                .zFont(.semiBold, size: 20, style: Design.Text.primary)
+                .padding(.top, 32)
+                .padding(.bottom, 12)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Text(L10n.DepositFunds.desc)
+                .zFont(size: 16, style: Design.Text.tertiary)
+                .padding(.bottom, 18)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            bulletpoint(L10n.DepositFunds.bulletPoint1)
+                .padding(.bottom, 24)
+            bulletpoint(L10n.DepositFunds.bulletPoint2)
+                .padding(.bottom, 24)
+            bulletpoint(L10n.DepositFunds.bulletPoint3)
+                .padding(.bottom, 32)
+
+            ZashiButton(L10n.General.ok.uppercased()) {
+                store.send(.closeDepositHelpSheetTapped)
+            }
+            .padding(.bottom, Design.Spacing.sheetBottomSpace)
         }
     }
     

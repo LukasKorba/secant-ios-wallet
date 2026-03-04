@@ -298,6 +298,26 @@ public enum L10n {
       public static let title = L10n.tr("Localizable", "deleteWallet.sheet.title", fallback: "Are you sure?")
     }
   }
+  public enum DepositFunds {
+    /// Send the exact amount of the asset displayed. Sending less will result in a refund.
+    public static let bulletPoint1 = L10n.tr("Localizable", "depositFunds.bulletPoint1", fallback: "Send the exact amount of the asset displayed. Sending less will result in a refund.")
+    /// Double-check that you are sending the correct asset on the correct network (e.g., USDC on Solana).
+    public static let bulletPoint2 = L10n.tr("Localizable", "depositFunds.bulletPoint2", fallback: "Double-check that you are sending the correct asset on the correct network (e.g., USDC on Solana).")
+    /// It’s best to send from a wallet you own. Sending from an exchange may result in delays or refunds.
+    public static let bulletPoint3 = L10n.tr("Localizable", "depositFunds.bulletPoint3", fallback: "It’s best to send from a wallet you own. Sending from an exchange may result in delays or refunds.")
+    /// Swap into ZEC with any NEAR-supported asset. 
+    public static let desc = L10n.tr("Localizable", "depositFunds.desc", fallback: "Swap into ZEC with any NEAR-supported asset. ")
+    /// Deposit Funds
+    public static let title = L10n.tr("Localizable", "depositFunds.title", fallback: "Deposit Funds")
+    public enum Alert {
+      /// Cancel swap
+      public static let cancel = L10n.tr("Localizable", "depositFunds.alert.cancel", fallback: "Cancel swap")
+      /// If you've sent or intend to send the funds, tap 'I've sent the funds.' Or cancel the swap to return to the previous screen.
+      public static let message = L10n.tr("Localizable", "depositFunds.alert.message", fallback: "If you've sent or intend to send the funds, tap 'I've sent the funds.' Or cancel the swap to return to the previous screen.")
+      /// Are you sure you want to exit?
+      public static let title = L10n.tr("Localizable", "depositFunds.alert.title", fallback: "Are you sure you want to exit?")
+    }
+  }
   public enum EnhanceTransaction {
     /// Fetch data
     public static let btn = L10n.tr("Localizable", "enhanceTransaction.btn", fallback: "Fetch data")
