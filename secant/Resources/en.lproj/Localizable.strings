@@ -986,7 +986,3 @@
 "depositFunds.alert.title" = "Are you sure you want to exit?";
 "depositFunds.alert.message" = "If you've sent or intend to send the funds, tap 'I've sent the funds.' Or cancel the swap to return to the previous screen.";
 "depositFunds.alert.cancel" = "Cancel swap";
-
-
-
-
