@@ -111,6 +111,7 @@ public struct TransactionDetails {
             case .success: return L10n.SwapToZec.swapCompleted
             case .failed: return L10n.SwapToZec.swapFailed
             case .pendingDeposit: return L10n.SwapToZec.swapPending
+            case .incompleteDeposit: return L10n.SwapToZec.swapIncomplete
             case .processing: return L10n.SwapToZec.swapProcessing
             case .expired: return L10n.SwapToZec.swapExpired
             }
@@ -478,12 +479,13 @@ extension TransactionDetails.State {
         case .refunded: return .refunded
         case .success: return .success
         case .pendingDeposit: return .pendingDeposit
+        case .incompleteDeposit: return .incompleteDeposit
         case .failed: return .failed
         case .processing: return .processing
         case .expired: return .expired
         }
     }
-    
+
     public var swapSlippage: String? {
         guard let slippage = swapDetails?.slippage else {
             return nil

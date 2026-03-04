@@ -341,12 +341,13 @@ extension Near1Click {
                 case SwapConstants.refunded: .refunded
                 case SwapConstants.success: .success
                 case SwapConstants.failed: .failed
-                case SwapConstants.incompleteDeposit: .pendingDeposit
+                case SwapConstants.incompleteDeposit: .incompleteDeposit
                 case SwapConstants.processing: .processing
                 default: .pending
                 }
             } else {
                 status = switch statusStr {
+                case SwapConstants.incompleteDeposit: .incompleteDeposit
                 case SwapConstants.pendingDeposit: .pending
                 case SwapConstants.refunded: .refunded
                 case SwapConstants.success: .success
@@ -422,7 +423,13 @@ extension Near1Click {
                 refundTo = refundToAddress
             }
 
-            if status == .pending || status == .refunded || status == .pendingDeposit || status == .failed || status == .processing {
+            if status == .pending
+                || status == .refunded
+                || status == .pendingDeposit
+                || status == .failed
+                || status == .processing
+                || status == .incompleteDeposit
+            {
                 if let quoteDict = quoteResponseDict[Constants.quote] as? [String: Any] {
                     if let amountInFormatted = quoteDict[Constants.amountInFormatted] as? String {
                         amountInFormattedDecimal = amountInFormatted.usDecimal

@@ -318,6 +318,10 @@ public enum L10n {
       public static let title = L10n.tr("Localizable", "depositFunds.alert.title", fallback: "Are you sure you want to exit?")
     }
   }
+  public enum Deposits {
+    /// Deposits may take several minutes to confirm.
+    public static let info = L10n.tr("Localizable", "deposits.info", fallback: "Deposits may take several minutes to confirm.")
+  }
   public enum EnhanceTransaction {
     /// Fetch data
     public static let btn = L10n.tr("Localizable", "enhanceTransaction.btn", fallback: "Fetch data")
@@ -1821,6 +1825,8 @@ public enum L10n {
       public static let expired = L10n.tr("Localizable", "swapAndPay.status.expired", fallback: "Expired")
       /// Failed
       public static let failed = L10n.tr("Localizable", "swapAndPay.status.failed", fallback: "Failed")
+      /// Incomplete Deposit
+      public static let incompleteDeposit = L10n.tr("Localizable", "swapAndPay.status.incompleteDeposit", fallback: "Incomplete Deposit")
       /// Pending
       public static let pending = L10n.tr("Localizable", "swapAndPay.status.pending", fallback: "Pending")
       /// Pending Deposit
@@ -1842,12 +1848,16 @@ public enum L10n {
     public static let paymentExpired = L10n.tr("Localizable", "swapStatus.paymentExpired", fallback: "Payment Expired")
     /// Payment Failed
     public static let paymentFailed = L10n.tr("Localizable", "swapStatus.paymentFailed", fallback: "Payment Failed")
+    /// Payment Incomplete
+    public static let paymentIncomplete = L10n.tr("Localizable", "swapStatus.paymentIncomplete", fallback: "Payment Incomplete")
     /// Payment Refunded
     public static let paymentRefunded = L10n.tr("Localizable", "swapStatus.paymentRefunded", fallback: "Payment Refunded")
     /// Swap Expired
     public static let swapExpired = L10n.tr("Localizable", "swapStatus.swapExpired", fallback: "Swap Expired")
     /// Swap Failed
     public static let swapFailed = L10n.tr("Localizable", "swapStatus.swapFailed", fallback: "Swap Failed")
+    /// Swap Incomplete
+    public static let swapIncomplete = L10n.tr("Localizable", "swapStatus.swapIncomplete", fallback: "Swap Incomplete")
     /// Swapped
     public static let swapped = L10n.tr("Localizable", "swapStatus.swapped", fallback: "Swapped")
     /// Swapping
@@ -1888,6 +1898,8 @@ public enum L10n {
     public static let swapExpired = L10n.tr("Localizable", "swapToZec.swapExpired", fallback: "Swap Expired")
     /// Swap Failed
     public static let swapFailed = L10n.tr("Localizable", "swapToZec.swapFailed", fallback: "Swap Failed")
+    /// Swap Incomplete
+    public static let swapIncomplete = L10n.tr("Localizable", "swapToZec.swapIncomplete", fallback: "Swap Incomplete")
     /// Swap Pending
     public static let swapPending = L10n.tr("Localizable", "swapToZec.swapPending", fallback: "Swap Pending")
     /// Swap Processing

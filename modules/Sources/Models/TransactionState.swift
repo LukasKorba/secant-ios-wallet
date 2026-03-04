@@ -115,7 +115,7 @@ public struct TransactionState: Equatable, Identifiable {
         zAddress ?? ""
     }
     
-    public var title: String {
+    public func title(_ detailScreen: Bool = false) -> String {
         if type == .zcash {
             switch status {
             case .failed:
@@ -138,10 +138,16 @@ public struct TransactionState: Equatable, Identifiable {
                 return L10n.Transaction.shieldedFunds
             }
         } else {
-            if swapStatus == .pending {
+            if swapStatus == .pending || (!detailScreen && swapStatus == .incomplete) {
                 switch type {
                 case .swapToZec, .swapFromZec: return L10n.SwapStatus.swapping
                 case .crossPay: return L10n.SwapStatus.paying
+                default: return ""
+                }
+            } else if detailScreen && swapStatus == .incomplete {
+                switch type {
+                case .swapToZec, .swapFromZec: return L10n.SwapStatus.swapIncomplete
+                case .crossPay: return L10n.SwapStatus.paymentIncomplete
                 default: return ""
                 }
             } else if swapStatus == .refunded {
@@ -241,7 +247,7 @@ public struct TransactionState: Equatable, Identifiable {
                 return true
             }
         } else {
-            return swapStatus == .pending
+            return swapStatus == .pending || swapStatus == .incomplete
         }
     }
 

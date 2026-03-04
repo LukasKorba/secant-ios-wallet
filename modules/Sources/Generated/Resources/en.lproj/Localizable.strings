@@ -848,6 +848,7 @@
 "swapToZec.info3" = " wallet to deposit funds. Depositing other assets may result in loss of funds.";
 "swapToZec.swapDetails" = "Swap Details";
 "swapToZec.swapPending" = "Swap Pending";
+"swapToZec.swapIncomplete" = "Swap Incomplete"; // trans
 "swapToZec.swapProcessing" = "Swap Processing";
 "swapToZec.swapCompleted" = "Swap Completed";
 "swapToZec.swapRefunded" = "Swap Refunded";
@@ -860,6 +861,7 @@
 "swapAndPay.status.pendingDeposit" = "Pending Deposit";
 "swapAndPay.status.processing" = "Processing";
 "swapAndPay.status.expired" = "Expired";
+"swapAndPay.status.incompleteDeposit" = "Incomplete Deposit"; // trans
 
 "swapToZec.share.title" = "Swap Deposit Address";
 "swapToZec.share.msg" = "Deposit address for %@ %@ on Near swap to ZEC in Zodl.";
@@ -877,6 +879,8 @@
 
 "swapStatus.swapping" = "Swapping";
 "swapStatus.paying" = "Paying";
+"swapStatus.paymentIncomplete" = "Payment Incomplete"; // trans
+"swapStatus.swapIncomplete" = "Swap Incomplete"; // trans
 "swapStatus.swapRefunded" = "Swap Refunded";
 "swapStatus.paymentRefunded" = "Payment Refunded";
 "swapStatus.swapFailed" = "Swap Failed";
@@ -986,3 +990,5 @@
 "depositFunds.alert.title" = "Are you sure you want to exit?";
 "depositFunds.alert.message" = "If you've sent or intend to send the funds, tap 'I've sent the funds.' Or cancel the swap to return to the previous screen.";
 "depositFunds.alert.cancel" = "Cancel swap";
+
+"deposits.info" = "Deposits may take several minutes to confirm.";

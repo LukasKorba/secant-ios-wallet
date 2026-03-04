@@ -14,6 +14,7 @@ public struct SwapBadge: View {
     
     public enum Status {
         case failed
+        case incompleteDeposit
         case pending
         case pendingDeposit
         case processing
@@ -30,6 +31,7 @@ public struct SwapBadge: View {
             case .failed: return L10n.SwapAndPay.Status.failed
             case .pendingDeposit: return L10n.SwapAndPay.Status.pendingDeposit
             case .expired: return L10n.SwapAndPay.Status.expired
+            case .incompleteDeposit: return L10n.SwapAndPay.Status.incompleteDeposit
             }
         }
         
@@ -40,8 +42,9 @@ public struct SwapBadge: View {
             case .refunded: return Design.Utility.ErrorRed._700
             case .success: return Design.Utility.SuccessGreen._700
             case .failed: return Design.Utility.ErrorRed._700
-            case .pendingDeposit: return Design.Utility.WarningYellow._700
+            case .pendingDeposit: return Design.Utility.HyperBlue._700
             case .expired: return Design.Utility.ErrorRed._700
+            case .incompleteDeposit: return Design.Utility.WarningYellow._700
             }
         }
         
@@ -52,8 +55,9 @@ public struct SwapBadge: View {
             case .refunded: return Design.Utility.ErrorRed._50
             case .success: return Design.Utility.SuccessGreen._50
             case .failed: return Design.Utility.ErrorRed._50
-            case .pendingDeposit: return Design.Utility.WarningYellow._50
+            case .pendingDeposit: return Design.Utility.HyperBlue._50
             case .expired: return Design.Utility.ErrorRed._50
+            case .incompleteDeposit: return Design.Utility.WarningYellow._50
             }
         }
         
@@ -64,8 +68,9 @@ public struct SwapBadge: View {
             case .refunded: return Design.Utility.ErrorRed._200
             case .success: return Design.Utility.SuccessGreen._200
             case .failed: return Design.Utility.ErrorRed._200
-            case .pendingDeposit: return Design.Utility.WarningYellow._200
+            case .pendingDeposit: return Design.Utility.HyperBlue._200
             case .expired: return Design.Utility.ErrorRed._200
+            case .incompleteDeposit: return Design.Utility.WarningYellow._200
             }
         }
     }

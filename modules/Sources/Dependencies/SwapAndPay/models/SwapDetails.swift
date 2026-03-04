@@ -15,6 +15,7 @@ public struct SwapDetails: Codable, Equatable, Hashable {
     public enum Status: Codable, Equatable, Hashable {
         case failed
         case pending
+        case incompleteDeposit
         case pendingDeposit
         case processing
         case refunded
@@ -30,6 +31,7 @@ public struct SwapDetails: Codable, Equatable, Hashable {
             case .failed: return SwapConstants.failed
             case .pending: return SwapConstants.pendingDeposit
             case .pendingDeposit: return SwapConstants.pendingDeposit
+            case .incompleteDeposit: return SwapConstants.incompleteDeposit
             case .processing: return SwapConstants.processing
             case .refunded: return SwapConstants.refunded
             case .success: return SwapConstants.success

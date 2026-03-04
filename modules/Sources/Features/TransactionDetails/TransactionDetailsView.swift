@@ -141,6 +141,22 @@ public struct TransactionDetailsView: View {
                     .frame(maxWidth: .infinity)
                     .screenHorizontalPadding()
                 } else if !store.transaction.isSwapToZec {
+                    if store.swapDetails?.status == .pendingDeposit {
+                        VStack(alignment: .center, spacing: 0) {
+                            HStack(spacing: 0) {
+                                Asset.Assets.infoOutline.image
+                                    .zImage(size: 16, style: Design.Text.tertiary)
+                                    .padding(.trailing, 12)
+                                
+                                Text(L10n.Deposits.info)
+                                    .zFont(size: 12, style: Design.Text.tertiary)
+                            }
+                            .padding(.bottom, 20)
+                            .screenHorizontalPadding()
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
+
                     HStack(spacing: 12) {
                         ZashiButton(
                             store.annotation.isEmpty
@@ -165,6 +181,20 @@ public struct TransactionDetailsView: View {
                     }
                     .padding(.bottom, 24)
                     .screenHorizontalPadding()
+                } else if store.swapDetails?.status == .pendingDeposit {
+                    VStack(alignment: .center, spacing: 0) {
+                        HStack(spacing: 0) {
+                            Asset.Assets.infoOutline.image
+                                .zImage(size: 16, style: Design.Text.tertiary)
+                                .padding(.trailing, 12)
+                            
+                            Text(L10n.Deposits.info)
+                                .zFont(size: 12, style: Design.Text.tertiary)
+                        }
+                        .padding(.bottom, 20)
+                        .screenHorizontalPadding()
+                    }
+                    .frame(maxWidth: .infinity)
                 }
             }
             .zashiBack(hidden: store.isCloseButtonRequired) {
@@ -248,7 +278,7 @@ extension TransactionDetailsView {
             .offset(x: 2)
             .padding(.top, 24)
 
-            Text(store.transaction.title)
+            Text(store.transaction.title(true))
                 .zFont(.medium, size: 18, style: Design.Text.tertiary)
                 .padding(.top, 10)
             
@@ -332,39 +362,19 @@ extension TransactionDetailsView {
                     unknownAsset()
                         .offset(x: -8)
                 }
-                
-//                // ZEC icon
-//                Asset.Assets.Brandmarks.brandmarkMax.image
-//                    .zImage(size: 48, style: Design.Surfaces.brandPrimary)
-//                    .offset(x: -8)
             }
             .offset(x: 4)
             .padding(.top, 24)
 
-//            if let swapTitle = store.swapToZecTitle, (store.transaction.type == .swapToZec || store.transaction.type == .swapFromZec) {
-            if !store.transaction.title.isEmpty {
-                Text(store.transaction.title)
+            if !store.transaction.title(true).isEmpty {
+                Text(store.transaction.title(true))
                     .zFont(.medium, size: 18, style: Design.Text.tertiary)
                     .padding(.top, 10)
             } else {
                 unknownValue()
                     .padding(.top, 10)
             }
-            
-//            Group {
-//                if store.isSensitiveContentHidden {
-//                    Text(L10n.General.hideBalancesMost)
-//                } else {
-//                    if let amount = store.swapAmountOut {
-//                        Text(amount)
-//                        + Text(" \(tokenName)")
-//                            .foregroundColor(Design.Text.quaternary.color(colorScheme))
-//                    } else {
-//                        unknownAmount()
-//                            .padding(.vertical, 2)
-//                    }
-//                }
-//            }
+
             Group {
                 if store.isSensitiveContentHidden {
                     Text(L10n.General.hideBalancesMost)
