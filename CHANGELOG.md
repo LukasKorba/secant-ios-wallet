@@ -8,9 +8,11 @@ directly impact users rather than highlighting other crucial architectural updat
 
 ### Added
 - Warning about slippage being less then recommended threshold.
+- A confirmation dialog when leaving the swap to ZEC deposit screen.
 
 ### Changed
 - Default slippage updated to 2%.
+- Explainer in the swap to ZEC deposit screen.
 
 ## 3.0.1 build 1 (2026-03-02)
 

@@ -976,3 +976,17 @@
 "newZodl.sameMission" = "Same mission";
 "newZodl.sameApp" = "Same app";
 "newZodl.allSame" = "Same wallet, different name and logo.";
+
+// MARK: Deposit funds
+"depositFunds.title" = "Deposit Funds";
+"depositFunds.desc" = "Swap into ZEC with any NEAR-supported asset. ";
+"depositFunds.bulletPoint1" = "Send the exact amount of the asset displayed. Sending less will result in a refund.";
+"depositFunds.bulletPoint2" = "Double-check that you are sending the correct asset on the correct network (e.g., USDC on Solana).";
+"depositFunds.bulletPoint3" = "It’s best to send from a wallet you own. Sending from an exchange may result in delays or refunds.";
+"depositFunds.alert.title" = "Are you sure you want to exit?";
+"depositFunds.alert.message" = "If you've sent or intend to send the funds, tap 'I've sent the funds.' Or cancel the swap to return to the previous screen.";
+"depositFunds.alert.cancel" = "Cancel swap";
+
+
+
+

@@ -42,6 +42,7 @@ public struct SwapAndPay {
 
         public var address = ""
         @Shared(.inMemory(.addressBookContacts)) public var addressBookContacts: AddressBookContacts = .empty
+        @Presents public var alert: AlertState<Action>?
         public var amountAssetText = ""
         public var amountUsdText = ""
         public var amountText = ""
@@ -52,6 +53,7 @@ public struct SwapAndPay {
         public var customSlippage = ""
         public var isAddressBookHintVisible = false
         public var isCancelSheetVisible = false
+        public var isDepositHelpSheetVisible = false
         public var isInputInUsd = false
         public var isInsufficientBalance = false
         public var isNotAddressInAddressBook = false
@@ -207,6 +209,7 @@ public struct SwapAndPay {
     }
 
     public enum Action: BindableAction {
+        case alert(PresentationAction<Action>)
         case assetSelectRequested
         case assetTapped(SwapAsset)
         case backButtonTapped(Bool)
@@ -286,6 +289,11 @@ public struct SwapAndPay {
         case sentTheFundsButtonTapped
         case shareFinished
         case shareQR
+        
+        // deposit funds
+        case closeDepositHelpSheetTapped
+        case depositFundsBackTapped
+        case openDepositHelpSheetTapped
     }
 
     @Dependency(\.addressBook) var addressBook
@@ -324,6 +332,16 @@ public struct SwapAndPay {
                         .send(.refreshSwapAssets)
                     )
                 )
+                
+            case .alert(.presented(let action)):
+                return .send(action)
+
+            case .alert(.dismiss):
+                state.alert = nil
+                return .none
+
+            case .alert:
+                return .none
 
             case .binding(\.customSlippage):
                 if !state.customSlippage.isEmpty {
@@ -398,6 +416,7 @@ public struct SwapAndPay {
                 return .none
 
             case .cancelSwapTapped:
+                state.alert = nil
                 state.isCancelSheetVisible = false
                 state.isSwapCanceled = true
                 return .concatenate(
@@ -1061,6 +1080,7 @@ public struct SwapAndPay {
                 return .none
                 
             case .sentTheFundsButtonTapped:
+                state.alert = nil
                 guard let depositAddress = state.quote?.depositAddress else {
                     return .none
                 }
@@ -1088,6 +1108,20 @@ public struct SwapAndPay {
                 
             case .refundAddressCloseTapped:
                 state.isRefundAddressExplainerEnabled = false
+                return .none
+                
+                // MARK: deposit funds
+                
+            case .depositFundsBackTapped:
+                state.alert = AlertState.confirmCancel()
+                return .none
+                
+            case .openDepositHelpSheetTapped:
+                state.isDepositHelpSheetVisible = true
+                return .none
+
+            case .closeDepositHelpSheetTapped:
+                state.isDepositHelpSheetVisible = false
                 return .none
             }
         }
@@ -1790,5 +1824,24 @@ extension SwapAndPay.State {
         formatter.locale = Locale.current
         
         return formatter
+    }
+}
+
+// MARK: Alerts
+
+extension AlertState where Action == SwapAndPay.Action {
+    public static func confirmCancel() -> AlertState {
+        AlertState {
+            TextState(L10n.DepositFunds.Alert.title)
+        } actions: {
+            ButtonState(role: .destructive, action: .cancelSwapTapped) {
+                TextState(L10n.DepositFunds.Alert.cancel)
+            }
+            ButtonState(role: .cancel, action: .sentTheFundsButtonTapped) {
+                TextState(L10n.SwapToZec.sentTheFunds)
+            }
+        } message: {
+            TextState(L10n.DepositFunds.Alert.message)
+        }
     }
 }
