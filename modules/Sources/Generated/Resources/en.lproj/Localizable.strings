@@ -712,6 +712,7 @@
 "swapAndPay.slippageTolerance" = "Slippage tolerance";
 "swapAndPay.youPay" = "You pay";
 "swapAndPay.slippageDesc" = "This setting determines the maximum allowable difference between the expected price of a swap and the actual price you pay, which is outside of Zodl's control.";
+"swapAndPay.smallSlippageWarn" = "^[Warning:](style: 'boldPrimary') Slippage ^[under %@%%](style: 'boldPrimary') increases the chance your swap will be unsuccessful and refunded. Consider using ^[%@%% or higher](style: 'boldPrimary'), especially for larger amounts."; // trans
 "swapAndPay.quoteUnavailable" = "Quote Unavailable";
 "swapAndPay.cancelPayment" = "Cancel payment";
 "swapAndPay.editPayment" = "Edit payment";

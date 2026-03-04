@@ -31,6 +31,7 @@ import Generated
 public struct SwapAndPay {
     enum Constants {
         static let zecAsset = "zec.zec"
+        static let defaultSlippage = Decimal(2.0)
     }
     
     @ObservableState
@@ -75,8 +76,8 @@ public struct SwapAndPay {
         public var searchTerm = ""
         public var selectedAsset: SwapAsset?
         public var sheetHeight: CGFloat = 0.0
-        public var slippage: Decimal = 1.0
-        public var slippageInSheet: Decimal = 1.0
+        public var slippage: Decimal = Constants.defaultSlippage
+        public var slippageInSheet: Decimal = Constants.defaultSlippage
         public var selectedSlippageChip = 0
         @Shared(.inMemory(.selectedWalletAccount)) public var selectedWalletAccount: WalletAccount? = nil
         @Shared(.appStorage(.sensitiveContent)) var isSensitiveContentHidden = false
@@ -97,6 +98,12 @@ public struct SwapAndPay {
         public var storedQR: CGImage?
         @Shared(.inMemory(.toast)) public var toast: Toast.Edge? = nil
 
+        public var crosspaySlippageWarning: String {
+            !isSwapExperienceEnabled && !isSwapToZecExperienceEnabled
+            ? " \(L10n.SwapAndPay.slippageWarn)"
+            : ""
+        }
+        
         public var uniqueId: String {
             "\(address)-\(selectedAsset?.chain ?? "zcash")"
         }

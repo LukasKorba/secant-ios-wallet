@@ -228,6 +228,7 @@ extension SwapAndPayForm {
                         if store.slippageInSheet > 30.0 {
                             Text(L10n.SwapAndPay.maxAllowedSlippage1)
                             + Text(L10n.SwapAndPay.maxAllowedSlippage2(Constants.maxAllowedSlippage)).bold()
+                            + Text(store.crosspaySlippageWarning)
                         } else if let slippageDiff = store.slippageDiff {
                             Text(L10n.SwapAndPay.slippageSet1)
                             + Text(
@@ -237,15 +238,18 @@ extension SwapAndPayForm {
                                 )
                             ).bold()
                             + Text(L10n.SwapAndPay.slippageSet3)
+                            + Text(store.crosspaySlippageWarning)
                         } else {
                             Text(L10n.SwapAndPay.slippageSet1)
                             + Text(L10n.SwapAndPay.slippageSet2b(store.currentSlippageInSheetString)).bold()
                             + Text(L10n.SwapAndPay.slippageSet3)
+                            + Text(store.crosspaySlippageWarning)
                         }
                     } else {
                         if store.slippageInSheet > 30.0 {
                             Text(L10n.SwapAndPay.maxAllowedSlippage1)
                             + Text(L10n.SwapAndPay.maxAllowedSlippage2(Constants.maxAllowedSlippage)).bold()
+                            + Text(store.crosspaySlippageWarning)
                         } else if let slippageDiff = store.slippageDiff {
                             Text(L10n.Crosspay.slippageSet1)
                             + Text(
@@ -255,10 +259,12 @@ extension SwapAndPayForm {
                                 )
                             ).bold()
                             + Text(L10n.Crosspay.slippageSet3)
+                            + Text(store.crosspaySlippageWarning)
                         } else {
                             Text(L10n.Crosspay.slippageSet1)
                             + Text(L10n.Crosspay.slippageSet2b(store.currentSlippageInSheetString)).bold()
                             + Text(L10n.Crosspay.slippageSet3)
+                            + Text(store.crosspaySlippageWarning)
                         }
                     }
                 }
@@ -275,19 +281,30 @@ extension SwapAndPayForm {
                 .padding(.vertical, 20)
                 
                 Spacer()
-                
-                if !store.isSwapExperienceEnabled && !store.isSwapToZecExperienceEnabled {
-                    HStack(alignment: .top, spacing: 0) {
-                        Asset.Assets.infoOutline.image
-                            .zImage(size: 16, style: Design.Text.tertiary)
-                            .padding(.trailing, 12)
-                        
-                        Text(L10n.SwapAndPay.slippageWarn)
-                            .zFont(size: 12, style: Design.Text.tertiary)
+
+                if store.slippageInSheet < 2.0 {
+                    if let attrText = try? AttributedString(
+                        markdown: L10n.SwapAndPay.smallSlippageWarn(SwapAndPay.Constants.defaultSlippage, SwapAndPay.Constants.defaultSlippage),
+                        including: \.zashiApp
+                    ) {
+                        ZashiText(
+                            withAttributedString: attrText,
+                            colorScheme: colorScheme,
+                            textColor: Design.Utility.WarningYellow._900.color(colorScheme),
+                            textSize: 12
+                        )
+                        .zFont(size: 12, style: Design.Utility.WarningYellow._900)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 16)
+                        .background {
+                            RoundedRectangle(cornerRadius: Design.Radius._lg)
+                                .fill(Design.Utility.WarningYellow._100.color(colorScheme))
+                        }
+                        .padding(.bottom, 24)
                     }
-                    .padding(.bottom, 24)
                 }
-                
+
                 ZashiButton(L10n.General.confirm) {
                     store.send(.slippageSetConfirmTapped)
                 }
