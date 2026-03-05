@@ -314,7 +314,8 @@ extension SwapAndPayCoordFlow {
                 }
 
                 // make the transaction
-                return .run { [depositAddress = state.swapAndPayState.address] send in
+                let depositAddress = state.swapAndPayState.quote?.depositAddress
+                return .run { send in
                     do {
                         let storedWallet = try walletStorage.exportWallet()
                         let seedBytes = try mnemonic.toSeed(storedWallet.seedPhrase.value())
@@ -338,7 +339,7 @@ extension SwapAndPayCoordFlow {
                         case .success(let txIds):
                             await send(.updateTxIdToExpand(txIds.last))
                             await send(.sendDone)
-                            if let txId = txIds.last {
+                            if let txId = txIds.last, let depositAddress {
                                 // inform service to speed up the transaction processing
                                 try? await swapAndPay.submitDepositTxId(txId, depositAddress)
                             }

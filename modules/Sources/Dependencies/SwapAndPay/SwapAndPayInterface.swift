@@ -23,11 +23,7 @@ public struct SwapAndPayClient {
     
     public enum Constants {
         /// Affiliate fee in basis points
-        static public let zashiFeeBps = 50
-        /// Address for the affiliate fees
-        static let affiliateFeeDepositAddress = "zodlswaps.near"
-        /// Address for the affiliate fees for CrossPay
-        static let affiliateCrossPayFeeDepositAddress = "crosspay.near"
+        static public let zashiFeeBps = 67
     }
     
     public let submitDepositTxId: (String, String) async throws -> Void

@@ -14,6 +14,7 @@ public struct PartnerKeys {
         static let flexaPublishableTestKey = "flexaPublishableTestKey"
         static let nearKey = "nearKey"
         static let cmcKey = "cmcKey"
+        static let nearFeeDepositAddress = "nearFeeDepositAddress"
     }
     
     public static var cbProjectId: String? {
@@ -34,6 +35,10 @@ public struct PartnerKeys {
     
     public static var cmcKey: String? {
         PartnerKeys.value(for: Constants.cmcKey)
+    }
+    
+    public static var nearFeeDepositAddress: String? {
+        PartnerKeys.value(for: Constants.nearFeeDepositAddress)
     }
 }
 

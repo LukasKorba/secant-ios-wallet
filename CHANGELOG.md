@@ -13,6 +13,7 @@ directly impact users rather than highlighting other crucial architectural updat
 ### Changed
 - Default slippage updated to 2%.
 - Explainer in the swap to ZEC deposit screen.
+- Near fee setup.
 
 ## 3.0.1 build 1 (2026-03-02)
 
