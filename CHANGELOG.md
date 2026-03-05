@@ -14,6 +14,7 @@ directly impact users rather than highlighting other crucial architectural updat
 - Default slippage updated to 2%.
 - Explainer in the swap to ZEC deposit screen.
 - Near fee setup.
+- Default server set to Stardust.
 
 ## 3.0.1 build 1 (2026-03-02)
 
