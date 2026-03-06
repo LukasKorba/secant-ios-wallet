@@ -54,7 +54,9 @@ struct Near1Click {
         static let amountOutFormatted = "amountOutFormatted"
         static let recipient = "recipient"
         static let deadline = "deadline"
+        static let timestamp = "timestamp"
         static let refundTo = "refundTo"
+        static let depositedAmountFormatted = "depositedAmountFormatted"
 
         // params
         static let exactInput = "EXACT_INPUT"
@@ -393,7 +395,12 @@ extension Near1Click {
                     slippage = Decimal(slippageInt) * 0.01
                 }
             }
-            
+
+            var depositedAmountFormattedDecimal: Decimal?
+            if let depositedAmountFormatted = swapDetailsDict[Constants.depositedAmountFormatted] as? String, status == .incompleteDeposit {
+                depositedAmountFormattedDecimal = depositedAmountFormatted.usDecimal
+            }
+
             var refundedAmountFormattedDecimal: Decimal?
             if let refundedAmountFormatted = swapDetailsDict[Constants.refundedAmountFormatted] as? String, status == .refunded {
                 refundedAmountFormattedDecimal = refundedAmountFormatted.usDecimal
@@ -444,6 +451,20 @@ extension Near1Click {
                 }
             }
             
+            // dates
+            var deadline = ""
+            
+            if let quoteDict = quoteResponseDict[Constants.quote] as? [String: Any] {
+                if let deadlineStr = quoteDict[Constants.deadline] as? String {
+                    deadline = deadlineStr
+                }
+            }
+
+            var whenInitiated = ""
+            if let whenInitiatedStr = quoteResponseDict[Constants.timestamp] as? String {
+                whenInitiated = whenInitiatedStr
+            }
+
             // expired?
             if statusStr == SwapConstants.pendingDeposit {
                 if let quoteDict = quoteResponseDict[Constants.quote] as? [String: Any] {
@@ -474,57 +495,11 @@ extension Near1Click {
                 status: status,
                 refundedAmountFormatted: refundedAmountFormattedDecimal,
                 swapRecipient: swapRecipient,
-                addressToCheckShield: (isSwapToZec ? swapRecipient : refundTo) ?? ""
-            )
-        },
-        anyInputQuote: {
-            // Deadline in ISO 8601 UTC format
-            let now = Date()
-            let twoHoursLater = now.addingTimeInterval(120 * 60)
-            let isoFormatter = ISO8601DateFormatter()
-            isoFormatter.formatOptions = [.withInternetDateTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
-            isoFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-            
-            let deadline = isoFormatter.string(from: twoHoursLater)
-            
-            let requestData = SwapQuoteRequest(
-                dry: false,
-                swapType: "ANY_INPUT",
-                slippageTolerance: 0,
-                originAsset: "1cs_v1:any",
-                depositType: "INTENTS",
-                destinationAsset: "nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
-                amount: "0",
-                refundTo: "zodlswaps.near",
-                refundType: "INTENTS",
-                recipient: "zodlswaps.near",
-                recipientType: Constants.destinationChain,
+                addressToCheckShield: (isSwapToZec ? swapRecipient : refundTo) ?? "",
+                whenInitiated: whenInitiated,
                 deadline: deadline,
-                referral: Constants.referral,
-                quoteWaitingTimeMs: 10000,
-                appFees: nil
+                depositedAmountFormatted: depositedAmountFormattedDecimal
             )
-            
-            guard let jsonData = try? JSONEncoder().encode(requestData) else {
-                fatalError("Failed to encode JSON")
-            }
-            
-            let (data, response) = try await Near1Click.postCall(urlString: Constants.quoteUrl, jsonData: jsonData)
-            
-            guard let httpResponse = response as? HTTPURLResponse else {
-                throw SwapAndPayClient.EndpointError.message("Quote: Invalid response")
-            }
-            
-            guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                throw SwapAndPayClient.EndpointError.message("Quote: Cannot parse response")
-            }
-
-            guard let quote = jsonObject[Constants.quote] as? [String: Any],
-                  let depositAddress = quote[Constants.depositAddress] as? String else {
-                throw SwapAndPayClient.EndpointError.message("Parse of the quote failed.")
-            }
-
-            print("__LD depositAddress \(depositAddress)")
         }
     )
 }

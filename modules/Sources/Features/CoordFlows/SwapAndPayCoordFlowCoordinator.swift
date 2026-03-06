@@ -410,6 +410,10 @@ extension SwapAndPayCoordFlow {
             case .path(.element(id: _, action: .swapToZecSummary(.sentTheFundsButtonTapped))):
                 return .send(.storeLastUsedAsset)
 
+            case .path(.element(id: _, action: .swapToZecSummary(.customBackRequired))):
+                let _ = state.path.popLast()
+                return .send(.storeLastUsedAsset)
+
             default: return .none
             }
         }

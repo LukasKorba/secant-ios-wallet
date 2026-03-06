@@ -297,7 +297,7 @@ extension Root {
                 state.path = nil
                 return .send(.fetchTransactionsForTheSelectedAccount)
 
-            case .swapAndPayCoordFlow(.customBackRequired), .swapAndPayCoordFlow(.path(.element(id: _, action: .swapToZecSummary(.customBackRequired)))):
+            case .swapAndPayCoordFlow(.customBackRequired):
                 state.path = nil
                 return .none
 

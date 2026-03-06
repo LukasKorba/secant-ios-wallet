@@ -36,9 +36,6 @@ extension SwapAndPayClient: DependencyKey {
         },
         status: { depositAddress, isSwapToZec in
             try await Near1Click.liveValue.status(depositAddress, isSwapToZec)
-        },
-        anyInputQuote: {
-            try await Near1Click.liveValue.anyInputQuote()
         }
     )
 }

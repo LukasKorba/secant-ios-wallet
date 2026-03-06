@@ -21,6 +21,8 @@ import AddressBookClient
 import UserMetadataProvider
 import SwapAndPay
 import DerivationTool
+import SupportDataGenerator
+import MessageUI
 
 @Reducer
 public struct TransactionDetails {
@@ -40,22 +42,40 @@ public struct TransactionDetails {
             case short
         }
         
+        public enum FooterState: Equatable {
+            case addNote
+            case contactSupport
+            case depositInfo
+            case none
+            case providerFailure
+        }
+        
+        public struct IncompleteSwap: Equatable {
+            let date: String
+            let missingFunds: String
+            let tokenName: String
+        }
+        
         @Shared(.inMemory(.addressBookContacts)) public var addressBookContacts: AddressBookContacts = .empty
-        public var annotationRequest = false
-        public var areMessagesResolved = false
         public var alias: String?
+        public var annotation = ""
+        public var annotationOrigin = ""
+        public var annotationRequest = false
+        public var annotationToInput = ""
+        public var areMessagesResolved = false
         public var areDetailsExpanded = false
+        public var canSendMail = false
         public var hasInteractedWithBookmark = false
         public var isBookmarked = false
         public var isCloseButtonRequired = false
         public var isEditMode = false
+        public var isReportSwapSheetEnabled = false
         @Shared(.appStorage(.sensitiveContent)) var isSensitiveContentHidden = false
         public var isSwap = false
         public var messageStates: [MessageState] = []
-        public var annotation = ""
-        public var annotationOrigin = ""
-        public var annotationToInput = ""
+        public var messageToBeShared: String?
         @Shared(.inMemory(.selectedWalletAccount)) public var selectedWalletAccount: WalletAccount? = nil
+        public var supportData: SupportData?
         @Shared(.inMemory(.swapAssets)) public var swapAssets: IdentifiedArrayOf<SwapAsset> = []
         public var swapAssetFailedWithRetry: Bool? = nil
         public var swapDetails: SwapDetails?
@@ -65,6 +85,79 @@ public struct TransactionDetails {
         @Shared(.inMemory(.transactionMemos)) public var transactionMemos: [String: [String]] = [:]
         @Shared(.inMemory(.transactions)) public var transactions: IdentifiedArrayOf<TransactionState> = []
         @Shared(.inMemory(.zashiWalletAccount)) public var zashiWalletAccount: WalletAccount? = nil
+        
+        public var incompleteSwapData: IncompleteSwap? {
+            guard let swapDetails else {
+                return nil
+            }
+            
+            let formatter = ISO8601DateFormatter()
+            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+            
+            guard let date = formatter.date(from: swapDetails.deadline) else {
+                return nil
+            }
+
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM d, YYYY '\(L10n.Filter.at)' h:mm a"
+            let dateStr = dateFormatter.string(from: date)
+            
+            return IncompleteSwap(
+                date: dateStr,
+                missingFunds: missingFunds ?? "",
+                tokenName: swapFromAsset?.token ?? ""
+            )
+        }
+        
+        public var isProcessingTooLong: Bool {
+            guard swapStatus == .processing else {
+                return false
+            }
+            
+            guard let swapDetails else {
+                return false
+            }
+            
+            let formatter = ISO8601DateFormatter()
+            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+            
+            guard let date = formatter.date(from: swapDetails.whenInitiated) else {
+                return false
+            }
+
+            let diff = Date().timeIntervalSince1970 - date.timeIntervalSince1970
+            
+            return diff > 3600
+        }
+        
+        public var footerState: FooterState {
+            // Highest priority is a provider failed, no other footer is allowed to appear
+            if let _ = swapAssetFailedWithRetry, transaction.isNonZcashActivity {
+                return .providerFailure
+            }
+
+            // Contact support button in unsuccessful cases
+            if swapStatus == .refunded || swapStatus == .expired || swapStatus == .failed {
+                return .contactSupport
+            }
+
+            // Contact support button in unsuccessful cases
+            if swapStatus == .processing && isProcessingTooLong {
+                return .contactSupport
+            }
+
+            // Regular buttons (Add note and save address)
+            if (!transaction.isSwapToZec && swapStatus == .success) || !isSwap {
+                return .addNote
+            }
+
+            // Nothing happened so far and pending deposit is the state
+            if swapDetails?.status == .pendingDeposit {
+                return .depositInfo
+            }
+
+            return .none
+        }
 
         public var isShielded: Bool {
             guard let swapDetails else {
@@ -133,6 +226,7 @@ public struct TransactionDetails {
         case checkSwapStatus
         case closeDetailTapped
         case compareAndUpdateMetadataOfSwap
+        case contactSupportTapped
         case deleteNoteTapped
         case memosLoaded([Memo])
         case messageTapped(Int)
@@ -140,10 +234,14 @@ public struct TransactionDetails {
         case onAppear
         case onDisappear
         case observeTransactionChange
+        case reportSwapTapped
+        case reportSwapRequested
         case resolveMemos
         case saveAddressTapped
         case saveNoteTapped
         case sendAgainTapped
+        case sendSupportMailFinished
+        case shareFinished
         case showHideButtonTapped
         case swapAssetsFailedWithRetry(Bool)
         case swapAssetsLoaded(IdentifiedArrayOf<SwapAsset>)
@@ -170,6 +268,9 @@ public struct TransactionDetails {
             switch action {
             case .onAppear:
                 // __LD TESTED
+                state.canSendMail = MFMailComposeViewController.canSendMail()
+                state.messageToBeShared = nil
+                state.supportData = nil
                 state.isSwap = userMetadataProvider.isSwapTransaction(state.transaction.zAddress ?? "")
                 state.umSwapId = userMetadataProvider.swapDetailsForTransaction(state.transaction.zAddress ?? "")
                 state.hasInteractedWithBookmark = false
@@ -442,6 +543,49 @@ public struct TransactionDetails {
                     return .none
                 }
                 return .none
+                
+            case .contactSupportTapped:
+                state.isReportSwapSheetEnabled = true
+                return .none
+                
+            case .reportSwapTapped:
+                state.isReportSwapSheetEnabled = false
+                return .run { send in
+                    try? await Task.sleep(for: .seconds(0.3))
+                    await send(.reportSwapRequested)
+                }
+                
+            case .reportSwapRequested:
+                var prefixMessage = "\(L10n.ReportSwap.please)\n\n\n"
+                prefixMessage += "\(L10n.ReportSwap.swapDetails)\n"
+                prefixMessage += "\(L10n.ReportSwap.depositAddress) \(state.transaction.address)\n"
+                prefixMessage += L10n.ReportSwap.sourceAsset(state.swapFromAsset?.token ?? "", state.swapFromAsset?.chainName ?? "")
+                prefixMessage += L10n.ReportSwap.targetAsset(state.swapToAsset?.token ?? "", state.swapToAsset?.chainName ?? "")
+
+                if state.canSendMail {
+                    state.supportData = SupportDataGenerator.generate(prefixMessage)
+                    return .none
+                } else {
+                    let sharePrefix =
+                    """
+                    ===
+                    \(L10n.SendFeedback.Share.notAppleMailInfo) \(SupportDataGenerator.Constants.email)
+                    ===
+                    
+                    \(prefixMessage)
+                    """
+                    let supportData = SupportDataGenerator.generate(sharePrefix)
+                    state.messageToBeShared = supportData.message
+                }
+                return .none
+                
+            case .sendSupportMailFinished:
+                state.supportData = nil
+                return .none
+
+            case .shareFinished:
+                state.messageToBeShared = nil
+                return .none
             }
         }
     }
@@ -593,5 +737,17 @@ extension TransactionDetails.State {
         }
         
         return !(swapStatus == .success)
+    }
+
+    public var missingFunds: String? {
+        guard let amountInFormatted = swapDetails?.amountInFormatted else {
+            return nil
+        }
+
+        guard let depositedAmountFormatted = swapDetails?.depositedAmountFormatted else {
+            return nil
+        }
+
+        return conversionFormatter.string(from: NSDecimalNumber(decimal: amountInFormatted - depositedAmountFormatted))
     }
 }

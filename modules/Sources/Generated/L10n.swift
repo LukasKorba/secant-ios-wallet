@@ -305,8 +305,8 @@ public enum L10n {
     public static let bulletPoint2 = L10n.tr("Localizable", "depositFunds.bulletPoint2", fallback: "Double-check that you are sending the correct asset on the correct network (e.g., USDC on Solana).")
     /// It’s best to send from a wallet you own. Sending from an exchange may result in delays or refunds.
     public static let bulletPoint3 = L10n.tr("Localizable", "depositFunds.bulletPoint3", fallback: "It’s best to send from a wallet you own. Sending from an exchange may result in delays or refunds.")
-    /// Swap into ZEC with any NEAR-supported asset. 
-    public static let desc = L10n.tr("Localizable", "depositFunds.desc", fallback: "Swap into ZEC with any NEAR-supported asset. ")
+    /// Swap into ZEC with any NEAR-supported asset.
+    public static let desc = L10n.tr("Localizable", "depositFunds.desc", fallback: "Swap into ZEC with any NEAR-supported asset.")
     /// Deposit Funds
     public static let title = L10n.tr("Localizable", "depositFunds.title", fallback: "Deposit Funds")
     public enum Alert {
@@ -871,6 +871,32 @@ public enum L10n {
       /// Store it securely
       public static let title = L10n.tr("Localizable", "recoveryPhraseDisplay.warningStore.title", fallback: "Store it securely")
     }
+  }
+  public enum ReportSwap {
+    /// Contact Support
+    public static let contact = L10n.tr("Localizable", "reportSwap.contact", fallback: "Contact Support")
+    /// Deposit Address: 
+    public static let depositAddress = L10n.tr("Localizable", "reportSwap.depositAddress", fallback: "Deposit Address: ")
+    /// Tapping the button below will send details about this swap (like the deposit address and target asset) to the Zodl support team so they can help resolve your issue. The transaction info is included automatically.
+    public static let msg = L10n.tr("Localizable", "reportSwap.msg", fallback: "Tapping the button below will send details about this swap (like the deposit address and target asset) to the Zodl support team so they can help resolve your issue. The transaction info is included automatically.")
+    /// Please describe your issue here: 
+    public static let please = L10n.tr("Localizable", "reportSwap.please", fallback: "Please describe your issue here: ")
+    /// Report Issue
+    public static let report = L10n.tr("Localizable", "reportSwap.report", fallback: "Report Issue")
+    /// Source Asset: %@ on %@
+    /// 
+    public static func sourceAsset(_ p1: Any, _ p2: Any) -> String {
+      return L10n.tr("Localizable", "reportSwap.sourceAsset", String(describing: p1), String(describing: p2), fallback: "Source Asset: %@ on %@\n")
+    }
+    /// Swap Details:
+    public static let swapDetails = L10n.tr("Localizable", "reportSwap.swapDetails", fallback: "Swap Details:")
+    /// Target Asset: %@ on %@
+    /// 
+    public static func targetAsset(_ p1: Any, _ p2: Any) -> String {
+      return L10n.tr("Localizable", "reportSwap.targetAsset", String(describing: p1), String(describing: p2), fallback: "Target Asset: %@ on %@\n")
+    }
+    /// Report Swap Issue
+    public static let title = L10n.tr("Localizable", "reportSwap.title", fallback: "Report Swap Issue")
   }
   public enum RequestZec {
     /// Payment Request
@@ -1630,6 +1656,14 @@ public enum L10n {
     public static let enterAddress = L10n.tr("Localizable", "swapAndPay.enterAddress", fallback: "Enter address...")
     /// Realized slippage
     public static let executedSlippage = L10n.tr("Localizable", "swapAndPay.executedSlippage", fallback: "Realized slippage")
+    /// This swap expired after its 24-hour validity window. If you didn't send funds, no action is needed. If you did send funds, contact support so we can help.
+    public static let expiredMsg = L10n.tr("Localizable", "swapAndPay.expiredMsg", fallback: "This swap expired after its 24-hour validity window. If you didn't send funds, no action is needed. If you did send funds, contact support so we can help.")
+    /// Swap Expired
+    public static let expiredTitle = L10n.tr("Localizable", "swapAndPay.expiredTitle", fallback: "Swap Expired")
+    /// This swap could not be completed. If you deposited funds and didn't receive your swap, contact support so we can help resolve it.
+    public static let failedMsg = L10n.tr("Localizable", "swapAndPay.failedMsg", fallback: "This swap could not be completed. If you deposited funds and didn't receive your swap, contact support so we can help resolve it.")
+    /// Swap Failed
+    public static let failedTitle = L10n.tr("Localizable", "swapAndPay.failedTitle", fallback: "Swap Failed")
     /// There was an error initiating a cross-chain payment. Try it again, please.
     public static let failurePayInfo = L10n.tr("Localizable", "swapAndPay.failurePayInfo", fallback: "There was an error initiating a cross-chain payment. Try it again, please.")
     /// There was an error initiating a swap. Try it again, please.
@@ -1640,6 +1674,10 @@ public enum L10n {
     public static let from = L10n.tr("Localizable", "swapAndPay.from", fallback: "From")
     /// Get a quote
     public static let getQuote = L10n.tr("Localizable", "swapAndPay.getQuote", fallback: "Get a quote")
+    /// Deposit an additional ^[%@ %@](style: 'boldPrimary') to complete this swap before ^[%@](style: 'boldPrimary'), or your deposit will be refunded.
+    public static func incompleteInfo(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
+      return L10n.tr("Localizable", "swapAndPay.incompleteInfo", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "Deposit an additional ^[%@ %@](style: 'boldPrimary') to complete this swap before ^[%@](style: 'boldPrimary'), or your deposit will be refunded.")
+    }
     /// Spendable: %@
     public static func max(_ p1: Any) -> String {
       return L10n.tr("Localizable", "swapAndPay.max", String(describing: p1), fallback: "Spendable: %@")
@@ -1676,6 +1714,10 @@ public enum L10n {
     public static let pendingSwapInfo = L10n.tr("Localizable", "swapAndPay.pendingSwapInfo", fallback: "Your swap is being processed. Follow its status on the transaction screen.")
     /// Swap Pending
     public static let pendingSwapTitle = L10n.tr("Localizable", "swapAndPay.pendingSwapTitle", fallback: "Swap Pending")
+    /// Your swap has been delayed. Swaps typically complete in minutes but may take longer depending on market conditions.
+    public static let processingMsg = L10n.tr("Localizable", "swapAndPay.processingMsg", fallback: "Your swap has been delayed. Swaps typically complete in minutes but may take longer depending on market conditions.")
+    /// Swap Processing
+    public static let processingTitle = L10n.tr("Localizable", "swapAndPay.processingTitle", fallback: "Swap Processing")
     /// Quote Unavailable
     public static let quoteUnavailable = L10n.tr("Localizable", "swapAndPay.quoteUnavailable", fallback: "Quote Unavailable")
     /// Rate
@@ -1686,10 +1728,10 @@ public enum L10n {
     public static let recipientGets = L10n.tr("Localizable", "swapAndPay.recipientGets", fallback: "Recipient gets")
     /// Refunded amount
     public static let refundedAmount = L10n.tr("Localizable", "swapAndPay.refundedAmount", fallback: "Refunded amount")
-    /// Your deposit transaction was sent but the swap was unsuccessful. The transaction amount has been refunded, minus transaction fees.
-    public static let refundInfo = L10n.tr("Localizable", "swapAndPay.refundInfo", fallback: "Your deposit transaction was sent but the swap was unsuccessful. The transaction amount has been refunded, minus transaction fees.")
-    /// Transaction Refunded
-    public static let refundTitle = L10n.tr("Localizable", "swapAndPay.refundTitle", fallback: "Transaction Refunded")
+    /// Your deposit was detected but the swap could not be completed. Your funds have been returned, minus transaction fees. If you haven't received them, contact the Zodl support team.
+    public static let refundInfo = L10n.tr("Localizable", "swapAndPay.refundInfo", fallback: "Your deposit was detected but the swap could not be completed. Your funds have been returned, minus transaction fees. If you haven't received them, contact the Zodl support team.")
+    /// Funds Returned
+    public static let refundTitle = L10n.tr("Localizable", "swapAndPay.refundTitle", fallback: "Funds Returned")
     /// Search by name or ticker...
     public static let search = L10n.tr("Localizable", "swapAndPay.search", fallback: "Search by name or ticker...")
     /// Select...

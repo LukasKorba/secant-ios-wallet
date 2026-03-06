@@ -712,7 +712,7 @@
 "swapAndPay.slippageTolerance" = "Tolerancia de deslizamiento";
 "swapAndPay.youPay" = "Tú pagas";
 "swapAndPay.slippageDesc" = "Esta configuración determina la diferencia máxima permitida entre el precio esperado de un intercambio y el precio real que pagas, lo cual está fuera del control de Zodl.";
-"swapAndPay.smallSlippageWarn" = "^[Warning:](style: 'boldPrimary') Slippage ^[under %@%%](style: 'boldPrimary') increases the chance your swap will be unsuccessful and refunded. Consider using ^[%@%% or higher](style: 'boldPrimary'), especially for larger amounts.";
+"swapAndPay.smallSlippageWarn" = "^[Advertencia:](style: 'boldPrimary') Un deslizamiento menor ^[al %@%%](style: 'boldPrimary') aumenta la probabilidad de que tu intercambio no se complete y sea reembolsado. Considera usar ^[%@%% o más](style: 'boldPrimary'), especialmente para montos mayores.";
 "swapAndPay.quoteUnavailable" = "Cotización no disponible";
 "swapAndPay.cancelPayment" = "Cancelar pago";
 "swapAndPay.editPayment" = "Editar pago";
@@ -784,15 +784,21 @@
 "swapAndPay.optIn.warn" = "Nota para los más conscientes de la privacidad: Las transacciones ejecutadas a través de la API de NEAR son transparentes, lo que significa que toda la información de la transacción es pública.";
 "swapAndPay.forcedOptIn.optionOne" = "Entiendo que Zodl realiza solicitudes a la API de NEAR cada vez que interactúo con una transacción de Intercambio/Pago.";
 "swapAndPay.forcedOptIn.optionTwo" = "Entiendo que al no habilitar Tor, mi dirección IP será expuesta por la API de NEAR.";
-"swapAndPay.refundTitle" = "Transacción reembolsada";
-"swapAndPay.refundInfo" = "Tu transacción de depósito fue enviada pero el intercambio no tuvo éxito. El monto ha sido reembolsado, menos las comisiones de transacción.";
+"swapAndPay.refundTitle" = "Fondos devueltos";
+"swapAndPay.refundInfo" = "Tu depósito fue detectado pero el intercambio no pudo completarse. Tus fondos han sido devueltos, descontando las tarifas de transacción. Si aún no los recibiste, contacta al equipo de soporte de Zodl.";
+"swapAndPay.expiredTitle" = "Intercambio vencido";
+"swapAndPay.expiredMsg" = "Este intercambio venció tras su ventana de validez de 24 horas. Si no enviaste fondos, no es necesario hacer nada. Si enviaste fondos, contacta a soporte para que podamos ayudarte.";
+"swapAndPay.failedTitle" = "Intercambio fallido";
+"swapAndPay.failedMsg" = "Este intercambio no pudo completarse. Si depositaste fondos y no recibiste tu intercambio, contacta a soporte para que podamos resolverlo.";
+"swapAndPay.processingTitle" = "Intercambio en proceso";
+"swapAndPay.processingMsg" = "Tu intercambio se ha demorado. Los intercambios generalmente se completan en minutos, pero pueden tardar más según las condiciones del mercado.";
 "swapAndPay.recipient" = "Destinatario";
 "swapAndPay.addressBookSelectChain" = "Seleccionar cadena";
 "swapAndPay.addressBookSelect" = "Seleccionar...";
 "swapAndPay.addressBookNewContact" = "Agregar nuevo contacto";
 "swapAndPay.addressBookZcash" = "Dirección de Zcash no permitida";
 "swapAndPay.totalFees" = "Comisiones totales";
-
+"swapAndPay.incompleteInfo" = "Deposita ^[%@ %@](style: 'boldPrimary') adicionales para completar este intercambio antes del ^[%@](style: 'boldPrimary'), o tu depósito será reembolsado.";
 "swapAndPay.failure.retryTitle" = "Error inesperado";
 "swapAndPay.failure.retryDesc" = "Por favor revisa tu conexión e inténtalo de nuevo.";
 "swapAndPay.failure.laterTitle" = "El servicio no está disponible";
@@ -848,6 +854,7 @@
 "swapToZec.info3" = " wallet para depositar fondos. Depositar otros activos puede resultar en la pérdida de fondos.";
 "swapToZec.swapDetails" = "Detalles del swap";
 "swapToZec.swapPending" = "Swap pendiente";
+"swapToZec.swapIncomplete" = "Intercambio incompleto";
 "swapToZec.swapProcessing" = "Procesando swap";
 "swapToZec.swapCompleted" = "Swap completado";
 "swapToZec.swapRefunded" = "Swap reembolsado";
@@ -860,6 +867,7 @@
 "swapAndPay.status.pendingDeposit" = "Depósito pendiente";
 "swapAndPay.status.processing" = "Procesando";
 "swapAndPay.status.expired" = "Expirado";
+"swapAndPay.status.incompleteDeposit" = "Depósito incompleto";
 
 "swapToZec.share.title" = "Dirección de depósito para swap";
 "swapToZec.share.msg" = "Dirección de depósito para %@ %@ en Near swap a ZEC en Zodl.";
@@ -877,6 +885,8 @@
 
 "swapStatus.swapping" = "Haciendo swap";
 "swapStatus.paying" = "Pagando";
+"swapStatus.paymentIncomplete" = "Pago incompleto";
+"swapStatus.swapIncomplete" = "Intercambio incompleto";
 "swapStatus.swapRefunded" = "Swap reembolsado";
 "swapStatus.paymentRefunded" = "Pago reembolsado";
 "swapStatus.swapFailed" = "Swap fallido";
@@ -976,3 +986,24 @@
 "newZodl.sameMission" = "La misma misión";
 "newZodl.sameApp" = "La misma app";
 "newZodl.allSame" = "Misma billetera, diferente nombre y logotipo.";
+
+// MARK: Deposit funds
+"depositFunds.title" = "Depositar fondos";
+"depositFunds.desc" = "Haz swap a ZEC con cualquier activo compatible con NEAR.";
+"depositFunds.bulletPoint1" = "Envía el monto exacto del activo que se muestra. Enviar menos resultará en un reembolso.";
+"depositFunds.bulletPoint2" = "Verifica que estás enviando el activo correcto en la red correcta (por ej., USDC en Solana).";
+"depositFunds.bulletPoint3" = "Es mejor enviar desde una wallet que sea tuya. Enviar desde un exchange puede causar demoras o reembolsos.";
+"depositFunds.alert.title" = "¿Estás seguro de que deseas salir?";
+"depositFunds.alert.message" = "Si ya enviaste los fondos o tienes intención de hacerlo, toca ’Ya envié los fondos.’ O cancela el swap para volver a la pantalla anterior.";
+"depositFunds.alert.cancel" = "Cancelar swap";
+
+"deposits.info" = "Los depósitos pueden tardar varios minutos en confirmarse.";
+"reportSwap.title" = "Reportar problema con swap";
+"reportSwap.msg" = "Al tocar el botón de abajo, se enviarán detalles de este swap (como la dirección de depósito y el activo destino) al equipo de soporte de Zodl para que puedan ayudarte a resolver tu problema. La información de la transacción se incluye automáticamente.";
+"reportSwap.report" = "Reportar problema";
+"reportSwap.contact" = "Contactar soporte";
+"reportSwap.please" = "Por favor describe tu problema aquí: ";
+"reportSwap.swapDetails" = "Detalles del swap:";
+"reportSwap.depositAddress" = "Dirección de depósito: ";
+"reportSwap.sourceAsset" = "Activo de origen: %@ en %@\n";
+"reportSwap.targetAsset" = "Activo destino: %@ en %@\n";

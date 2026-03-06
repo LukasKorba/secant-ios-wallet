@@ -12,6 +12,36 @@ import SwapAndPay
 import Models
 
 extension TransactionDetailsView {
+    @ViewBuilder func reportSwapSheetContent() -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Asset.Assets.Icons.alertOutline.image
+                .zImage(size: 20, style: Design.Utility.ErrorRed._500)
+                .background {
+                    Circle()
+                        .fill(Design.Utility.ErrorRed._100.color(colorScheme))
+                        .frame(width: 44, height: 44)
+                }
+                .padding(.top, 48)
+
+            Text(L10n.ReportSwap.title)
+                .zFont(.semiBold, size: 24, style: Design.Text.primary)
+                .padding(.top, 16)
+                .padding(.bottom, 12)
+            
+            Text(L10n.ReportSwap.msg)
+                .zFont(size: 14, style: Design.Text.tertiary)
+                .fixedSize(horizontal: false, vertical: true)
+                .multilineTextAlignment(.leading)
+                .lineSpacing(2)
+                .padding(.bottom, 32)
+
+            ZashiButton(L10n.ReportSwap.report) {
+                store.send(.reportSwapTapped)
+            }
+            .padding(.bottom, Design.Spacing.sheetBottomSpace)
+        }
+    }
+    
     @ViewBuilder func swapRefundInfoView() -> some View {
         HStack(alignment: .top, spacing: 0) {
             Asset.Assets.infoOutline.image
@@ -33,7 +63,105 @@ extension TransactionDetailsView {
             RoundedRectangle(cornerRadius: Design.Radius._xl)
                 .fill(Design.Utility.WarningYellow._50.color(colorScheme))
         }
-        .padding(.horizontal, 16)
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 22)
+    }
+    
+    @ViewBuilder func swapProcessingInfoView() -> some View {
+        HStack(alignment: .top, spacing: 0) {
+            Asset.Assets.infoOutline.image
+                .zImage(size: 20, style: Design.Utility.HyperBlue._500)
+                .padding(.trailing, 12)
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(L10n.SwapAndPay.processingTitle)
+                    .zFont(.medium, size: 14, style: Design.Utility.HyperBlue._700)
+
+                Text(L10n.SwapAndPay.processingMsg)
+                    .zFont(size: 12, style: Design.Utility.HyperBlue._800)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(16)
+        .background {
+            RoundedRectangle(cornerRadius: Design.Radius._xl)
+                .fill(Design.Utility.HyperBlue._50.color(colorScheme))
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 22)
+    }
+    
+    @ViewBuilder func swapExpiredOrFailedInfoView(failed: Bool) -> some View {
+        HStack(alignment: .top, spacing: 0) {
+            Asset.Assets.infoOutline.image
+                .zImage(size: 20, style: Design.Utility.ErrorRed._500)
+                .padding(.trailing, 12)
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(failed
+                     ? L10n.SwapAndPay.failedTitle
+                     : L10n.SwapAndPay.expiredTitle
+                )
+                .zFont(.medium, size: 14, style: Design.Utility.ErrorRed._700)
+
+                Text(failed
+                     ? L10n.SwapAndPay.failedMsg
+                     : L10n.SwapAndPay.expiredMsg
+                )
+                .zFont(size: 12, style: Design.Utility.ErrorRed._800)
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(16)
+        .background {
+            RoundedRectangle(cornerRadius: Design.Radius._xl)
+                .fill(Design.Utility.ErrorRed._50.color(colorScheme))
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 22)
+    }
+
+    @ViewBuilder func swapIncompleteInfoView() -> some View {
+        HStack(alignment: .top, spacing: 0) {
+            Asset.Assets.infoOutline.image
+                .zImage(size: 20, style: Design.Utility.WarningYellow._500)
+                .padding(.trailing, 12)
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(L10n.SwapAndPay.Status.incompleteDeposit)
+                    .zFont(.medium, size: 14, style: Design.Utility.WarningYellow._700)
+
+                if let incompleteSwapData = store.incompleteSwapData {
+                    if let attrText = try? AttributedString(
+                        markdown: L10n.SwapAndPay.incompleteInfo(
+                            incompleteSwapData.missingFunds,
+                            incompleteSwapData.tokenName,
+                            incompleteSwapData.date
+                        ),
+                        including: \.zashiApp
+                    ) {
+                        ZashiText(
+                            withAttributedString: attrText,
+                            colorScheme: colorScheme,
+                            textColor: Design.Utility.WarningYellow._900.color(colorScheme),
+                            textSize: 12
+                        )
+                        .zFont(size: 12, style: Design.Utility.WarningYellow._800)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+            }
+        }
+        .padding(16)
+        .background {
+            RoundedRectangle(cornerRadius: Design.Radius._xl)
+                .fill(Design.Utility.WarningYellow._50.color(colorScheme))
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 22)
     }
     
     @ViewBuilder func swapAssetsView() -> some View {
@@ -201,6 +329,7 @@ extension TransactionDetailsView {
                 zecTickerLogo(colorScheme, shield: store.isShielded)
                     .scaleEffect(1.25)
                     .padding(.leading, Design.Spacing._xl)
+                    .padding(.trailing, 5)
             } else {
                 if let swapToAsset = store.swapToAsset {
                     VStack(alignment: .trailing, spacing: 0) {
@@ -216,6 +345,7 @@ extension TransactionDetailsView {
                     tokenTicker(asset: swapToAsset, colorScheme)
                         .scaleEffect(1.25)
                         .padding(.leading, Design.Spacing._xl)
+                        .padding(.trailing, 9)
                 } else {
                     VStack(alignment: .trailing, spacing: 0) {
                         unknownValue()

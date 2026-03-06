@@ -1,5 +1,5 @@
 // MARK: - Plain Onboarding Flow
-"plainOnboarding.title" = "Zcash-powered mobile wallet built for financial sovereignty."; // trans
+"plainOnboarding.title" = "Zcash-powered mobile wallet built for financial sovereignty.";
 "plainOnboarding.button.createNewWallet" = "Create new wallet";
 "plainOnboarding.button.restoreWallet" = "Restore existing wallet";
 
@@ -201,7 +201,7 @@
 "settings.buyZecCB" = "Buy ZEC with Coinbase";
 "settings.coinbaseDesc" = "A hassle-free way to buy ZEC and get it directly into your Zodl wallet.";
 "settings.flexa" = "Pay with Flexa";
-"settings.flexaDesc" = "Spend ZEC at thousands of retail locations."; // trans
+"settings.flexaDesc" = "Spend ZEC at thousands of retail locations.";
 "settings.restoreWarning" = "During the Restore process, it is not possible to use payment integrations.";
 "settings.deleteZashi" = "Reset Zodl";
 "settings.deleteZashiWarning" = "You will be asked to confirm on the next screen";
@@ -413,7 +413,7 @@
 "keystone.drawer.title" = "Wallets & Hardware";
 "keystone.connect" = "Connect Hardware Wallet";
 "keystone.drawer.banner.title" = "Keystone Hardware Wallet";
-"keystone.drawer.banner.desc" = "Get 5%% off airgapped hardware wallet. Promo code \"Zashi\"."; // trans
+"keystone.drawer.banner.desc" = "Get 5%% off airgapped hardware wallet. Promo code \"Zashi\".";
 "keystone.addHWWallet.title" = "Confirm Account to Access";
 "keystone.addHWWallet.desc" = "Select the wallet you'd like to connect to proceed. Once connected, you’ll be able to wirelessly sign transactions with your hardware wallet.";
 "keystone.addHWWallet.connect" = "Connect";
@@ -424,7 +424,7 @@
 "keystone.addHWWallet.step1" = "Unlock your Keystone";
 "keystone.addHWWallet.step2" = "Tap the menu icon";
 "keystone.addHWWallet.step3" = "Tap on Connect Software Wallet";
-"keystone.addHWWallet.step4" = "Select Zashi app and scan QR code"; // trans
+"keystone.addHWWallet.step4" = "Select Zashi app and scan QR code";
 "keystone.addHWWallet.readyToScan" = "Ready to Scan";
 "keystone.confirm" = "Confirm with Keystone";
 "keystone.signWith.hardware" = "Hardware";
@@ -505,7 +505,7 @@
 "filter.at" = "at"; // example: Nov 29 at 4:15pm
 "filter.daysAgo" = "%@ days ago";
 "settings.keystone" = "Connect Keystone";
-"settings.keystoneDesc" = "Connect airgapped hardware wallet to store shielded ZEC."; // trans
+"settings.keystoneDesc" = "Connect airgapped hardware wallet to store shielded ZEC.";
 
 // More actions
 "more.options" = "More Options";
@@ -514,7 +514,7 @@
 "homeScreen.scan" = "Scan";
 "homeScreen.more" = "More";
 "homeScreen.buy" = "Buy";
-"homeScreen.moreWarning" = "Information you share with Zodl integration partners is subject to their privacy policies."; // trans
+"homeScreen.moreWarning" = "Information you share with Zodl integration partners is subject to their privacy policies.";
 
 // Onboarding: Restore Wallet
 "restoreWallet.title" = "Secret Recovery Phrase";
@@ -712,7 +712,7 @@
 "swapAndPay.slippageTolerance" = "Slippage tolerance";
 "swapAndPay.youPay" = "You pay";
 "swapAndPay.slippageDesc" = "This setting determines the maximum allowable difference between the expected price of a swap and the actual price you pay, which is outside of Zodl's control.";
-"swapAndPay.smallSlippageWarn" = "^[Warning:](style: 'boldPrimary') Slippage ^[under %@%%](style: 'boldPrimary') increases the chance your swap will be unsuccessful and refunded. Consider using ^[%@%% or higher](style: 'boldPrimary'), especially for larger amounts."; // trans
+"swapAndPay.smallSlippageWarn" = "^[Warning:](style: 'boldPrimary') Slippage ^[under %@%%](style: 'boldPrimary') increases the chance your swap will be unsuccessful and refunded. Consider using ^[%@%% or higher](style: 'boldPrimary'), especially for larger amounts.";
 "swapAndPay.quoteUnavailable" = "Quote Unavailable";
 "swapAndPay.cancelPayment" = "Cancel payment";
 "swapAndPay.editPayment" = "Edit payment";
@@ -784,15 +784,21 @@
 "swapAndPay.optIn.warn" = "Note for the super privacy-conscious: Transactions executed via the NEAR API are transparent which means all transaction information is public.";
 "swapAndPay.forcedOptIn.optionOne" = "I understand that Zodl makes API requests to the NEAR API every time I interact with a Swap/Pay transaction.";
 "swapAndPay.forcedOptIn.optionTwo" = "I understand that by not enabling Tor, my IP address will be leaked by the NEAR API.";
-"swapAndPay.refundTitle" = "Transaction Refunded";
-"swapAndPay.refundInfo" = "Your deposit transaction was sent but the swap was unsuccessful. The transaction amount has been refunded, minus transaction fees.";
+"swapAndPay.refundTitle" = "Funds Returned";
+"swapAndPay.refundInfo" = "Your deposit was detected but the swap could not be completed. Your funds have been returned, minus transaction fees. If you haven't received them, contact the Zodl support team.";
+"swapAndPay.expiredTitle" = "Swap Expired";
+"swapAndPay.expiredMsg" = "This swap expired after its 24-hour validity window. If you didn't send funds, no action is needed. If you did send funds, contact support so we can help.";
+"swapAndPay.failedTitle" = "Swap Failed";
+"swapAndPay.failedMsg" = "This swap could not be completed. If you deposited funds and didn't receive your swap, contact support so we can help resolve it.";
+"swapAndPay.processingTitle" = "Swap Processing";
+"swapAndPay.processingMsg" = "Your swap has been delayed. Swaps typically complete in minutes but may take longer depending on market conditions.";
 "swapAndPay.recipient" = "Recipient";
 "swapAndPay.addressBookSelectChain" = "Select Chain";
 "swapAndPay.addressBookSelect" = "Select...";
 "swapAndPay.addressBookNewContact" = "Add new contact";
 "swapAndPay.addressBookZcash" = "Zcash address is not allowed";
 "swapAndPay.totalFees" = "Total fees";
-
+"swapAndPay.incompleteInfo" = "Deposit an additional ^[%@ %@](style: 'boldPrimary') to complete this swap before ^[%@](style: 'boldPrimary'), or your deposit will be refunded.";
 "swapAndPay.failure.retryTitle" = "Unexpected error";
 "swapAndPay.failure.retryDesc" = "Please check your connection and try again.";
 "swapAndPay.failure.laterTitle" = "The service is unavailable";
@@ -831,10 +837,10 @@
 
 // MARK: - About
 "about.info" = "Zodl is a Zcash-powered mobile wallet, built for unstoppable private payments. It’s optimized for storage and real-world use of shielded $ZEC—the truly private cryptocurrency.";
-"about.additionalInfo" = "Developed by the team that set the industry standard for onchain privacy, the original developers of the Zcash protocol."; // trans
+"about.additionalInfo" = "Developed by the team that set the industry standard for onchain privacy, the original developers of the Zcash protocol.";
 "about.title" = "Introducing Zodl";
 "about.privacyPolicy" = "Privacy Policy";
-"about.termsOfUse" = "Terms of Service"; // trans
+"about.termsOfUse" = "Terms of Service";
 
 // MARK: - Swap to ZEC
 "swapToZec.address" = "%@ address...";
@@ -848,7 +854,7 @@
 "swapToZec.info3" = " wallet to deposit funds. Depositing other assets may result in loss of funds.";
 "swapToZec.swapDetails" = "Swap Details";
 "swapToZec.swapPending" = "Swap Pending";
-"swapToZec.swapIncomplete" = "Swap Incomplete"; // trans
+"swapToZec.swapIncomplete" = "Swap Incomplete";
 "swapToZec.swapProcessing" = "Swap Processing";
 "swapToZec.swapCompleted" = "Swap Completed";
 "swapToZec.swapRefunded" = "Swap Refunded";
@@ -861,7 +867,7 @@
 "swapAndPay.status.pendingDeposit" = "Pending Deposit";
 "swapAndPay.status.processing" = "Processing";
 "swapAndPay.status.expired" = "Expired";
-"swapAndPay.status.incompleteDeposit" = "Incomplete Deposit"; // trans
+"swapAndPay.status.incompleteDeposit" = "Incomplete Deposit";
 
 "swapToZec.share.title" = "Swap Deposit Address";
 "swapToZec.share.msg" = "Deposit address for %@ %@ on Near swap to ZEC in Zodl.";
@@ -879,8 +885,8 @@
 
 "swapStatus.swapping" = "Swapping";
 "swapStatus.paying" = "Paying";
-"swapStatus.paymentIncomplete" = "Payment Incomplete"; // trans
-"swapStatus.swapIncomplete" = "Swap Incomplete"; // trans
+"swapStatus.paymentIncomplete" = "Payment Incomplete";
+"swapStatus.swapIncomplete" = "Swap Incomplete";
 "swapStatus.swapRefunded" = "Swap Refunded";
 "swapStatus.paymentRefunded" = "Payment Refunded";
 "swapStatus.swapFailed" = "Swap Failed";
@@ -983,7 +989,7 @@
 
 // MARK: Deposit funds
 "depositFunds.title" = "Deposit Funds";
-"depositFunds.desc" = "Swap into ZEC with any NEAR-supported asset. ";
+"depositFunds.desc" = "Swap into ZEC with any NEAR-supported asset.";
 "depositFunds.bulletPoint1" = "Send the exact amount of the asset displayed. Sending less will result in a refund.";
 "depositFunds.bulletPoint2" = "Double-check that you are sending the correct asset on the correct network (e.g., USDC on Solana).";
 "depositFunds.bulletPoint3" = "It’s best to send from a wallet you own. Sending from an exchange may result in delays or refunds.";
@@ -992,3 +998,12 @@
 "depositFunds.alert.cancel" = "Cancel swap";
 
 "deposits.info" = "Deposits may take several minutes to confirm.";
+"reportSwap.title" = "Report Swap Issue";
+"reportSwap.msg" = "Tapping the button below will send details about this swap (like the deposit address and target asset) to the Zodl support team so they can help resolve your issue. The transaction info is included automatically.";
+"reportSwap.report" = "Report Issue";
+"reportSwap.contact" = "Contact Support";
+"reportSwap.please" = "Please describe your issue here: ";
+"reportSwap.swapDetails" = "Swap Details:";
+"reportSwap.depositAddress" = "Deposit Address: ";
+"reportSwap.sourceAsset" = "Source Asset: %@ on %@\n";
+"reportSwap.targetAsset" = "Target Asset: %@ on %@\n";
