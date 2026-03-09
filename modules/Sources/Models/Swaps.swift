@@ -138,6 +138,7 @@ public struct UMSwapId: Codable, Equatable {
         case expired
         case failed
         case pending
+        case incomplete
         case refunded
     }
     
@@ -169,7 +170,11 @@ public struct UMSwapId: Codable, Equatable {
             return .completed
         }
 
-        if status == SwapConstants.pendingDeposit || status == SwapConstants.processing || status == SwapConstants.incompleteDeposit {
+        if status == SwapConstants.incompleteDeposit {
+            return .incomplete
+        }
+
+        if status == SwapConstants.pendingDeposit || status == SwapConstants.processing {
             return .pending
         }
         

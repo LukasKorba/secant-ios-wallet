@@ -271,9 +271,9 @@ public struct SwapAndPayForm: View {
     }
     
     public func slippageWarnBcgColor(_ colorScheme: ColorScheme) -> Color {
-        if store.slippageInSheet <= 1.0 {
+        if store.slippageInSheet <= 2.0 {
             return Design.Utility.Gray._100.color(colorScheme)
-        } else if store.slippageInSheet > 1.0 && store.slippageInSheet <= 2.0 {
+        } else if store.slippageInSheet > 2.0 && store.slippageInSheet <= 3.0 {
             return Design.Utility.WarningYellow._50.color(colorScheme)
         } else {
             return Design.Utility.ErrorRed._100.color(colorScheme)
@@ -281,9 +281,9 @@ public struct SwapAndPayForm: View {
     }
 
     public func slippageWarnTextStyle() -> Colorable {
-        if store.slippageInSheet <= 1.0 {
+        if store.slippageInSheet <= 2.0 {
             return Design.Utility.Gray._900
-        } else if store.slippageInSheet > 1.0 && store.slippageInSheet <= 2.0 {
+        } else if store.slippageInSheet > 2.0 && store.slippageInSheet <= 3.0 {
             return Design.Utility.WarningYellow._900
         } else {
             return Design.Utility.ErrorRed._900

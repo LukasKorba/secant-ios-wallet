@@ -224,7 +224,7 @@ extension SwapAndPayForm {
                 .padding(.top, 24)
                 
                 Group {
-                    if store.isSwapExperienceEnabled {
+                    if store.isSwapExperienceEnabled || store.isSwapToZecExperienceEnabled {
                         if store.slippageInSheet > 30.0 {
                             Text(L10n.SwapAndPay.maxAllowedSlippage1)
                             + Text(L10n.SwapAndPay.maxAllowedSlippage2(Constants.maxAllowedSlippage)).bold()

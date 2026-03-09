@@ -99,73 +99,28 @@ public struct TransactionDetailsView: View {
                             .screenHorizontalPadding()
                     }
 
-                    if store.isSwap && store.swapStatus == .refunded {
-                        swapRefundInfoView()
+                    if store.isSwap {
+                        if store.isProcessingTooLong {
+                            swapProcessingInfoView()
+                        } else if store.swapStatus == .refunded {
+                            swapRefundInfoView()
+                        } else if store.swapStatus == .incompleteDeposit {
+                            swapIncompleteInfoView()
+                        } else if store.swapStatus == .expired {
+                            swapExpiredOrFailedInfoView(failed: false)
+                        } else if store.swapStatus == .failed {
+                            swapExpiredOrFailedInfoView(failed: true)
+                        }
                     }
                 }
                 .padding(.vertical, 1)
                 
                 Spacer()
                 
-                if let retryFailure = store.swapAssetFailedWithRetry, store.transaction.isNonZcashActivity {
-                    VStack(alignment: .center, spacing: 0) {
-                        Asset.Assets.infoOutline.image
-                            .zImage(size: 16, style: Design.Text.error)
-                            .padding(.bottom, 8)
-                            .padding(.top, 32)
-                        
-                        Text(retryFailure
-                             ? L10n.SwapAndPay.Failure.retryTitle
-                             : L10n.SwapAndPay.Failure.laterTitle
-                        )
-                        .zFont(.medium, size: 14, style: Design.Text.error)
-                        .padding(.bottom, 8)
-                        
-                        Text(retryFailure
-                             ? L10n.SwapAndPay.Failure.retryDesc
-                             : L10n.SwapAndPay.Failure.laterDesc
-                        )
-                        .zFont(size: 14, style: Design.Text.error)
-                        .padding(.bottom, 24)
-                        
-                        if retryFailure {
-                            ZashiButton(
-                                L10n.SwapAndPay.Failure.tryAgain,
-                                type: .destructive1
-                            ) {
-                                store.send(.trySwapsAssetsAgainTapped)
-                            }
-                            .padding(.bottom, 24)
-                        }
-                    }
-                    .frame(maxWidth: .infinity)
-                    .screenHorizontalPadding()
-                } else if !store.transaction.isSwapToZec {
-                    HStack(spacing: 12) {
-                        ZashiButton(
-                            store.annotation.isEmpty
-                            ? L10n.Annotation.addArticle
-                            : L10n.Annotation.edit,
-                            type: .tertiary
-                        ) {
-                            store.send(.noteButtonTapped)
-                        }
-                        
-                        if store.transaction.isSentTransaction && !store.transaction.isShieldingTransaction && !store.isSwap {
-                            if store.alias == nil {
-                                ZashiButton(L10n.TransactionHistory.saveAddress) {
-                                    store.send(.saveAddressTapped)
-                                }
-                            } else {
-                                ZashiButton(L10n.TransactionHistory.sendAgain) {
-                                    store.send(.sendAgainTapped)
-                                }
-                            }
-                        }
-                    }
-                    .padding(.bottom, 24)
-                    .screenHorizontalPadding()
-                }
+                footer()
+            }
+            .zashiSheet(isPresented: $store.isReportSwapSheetEnabled) {
+                reportSwapSheetContent()
             }
             .zashiBack(hidden: store.isCloseButtonRequired) {
                 store.send(.closeDetailTapped)
@@ -189,6 +144,111 @@ public struct TransactionDetailsView: View {
         .navigationBarTitleDisplayMode(.inline)
         .applyDefaultGradientScreenBackground()
     }
+    
+    @ViewBuilder func footer() -> some View {
+        if store.footerState == .providerFailure {
+            if let retryFailure = store.swapAssetFailedWithRetry {
+                VStack(alignment: .center, spacing: 0) {
+                    Asset.Assets.infoOutline.image
+                        .zImage(size: 16, style: Design.Text.error)
+                        .padding(.bottom, 8)
+                        .padding(.top, 32)
+                    
+                    Text(retryFailure
+                         ? L10n.SwapAndPay.Failure.retryTitle
+                         : L10n.SwapAndPay.Failure.laterTitle
+                    )
+                    .zFont(.medium, size: 14, style: Design.Text.error)
+                    .padding(.bottom, 8)
+                    
+                    Text(retryFailure
+                         ? L10n.SwapAndPay.Failure.retryDesc
+                         : L10n.SwapAndPay.Failure.laterDesc
+                    )
+                    .zFont(size: 14, style: Design.Text.error)
+                    .padding(.bottom, 24)
+                    
+                    if retryFailure {
+                        ZashiButton(
+                            L10n.SwapAndPay.Failure.tryAgain,
+                            type: .destructive1
+                        ) {
+                            store.send(.trySwapsAssetsAgainTapped)
+                        }
+                        .padding(.bottom, 24)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .screenHorizontalPadding()
+            }
+        } else if store.footerState == .contactSupport {
+            if store.isSwap {
+                if store.swapStatus == .refunded || store.swapStatus == .expired || store.swapStatus == .failed || store.swapStatus == .processing {
+                    ZashiButton(
+                        L10n.ReportSwap.contact,
+                        type: .tertiary
+                    ) {
+                        store.send(.contactSupportTapped)
+                    }
+                    .padding(.bottom, 24)
+                    .screenHorizontalPadding()
+                }
+            }
+        } else if store.footerState == .depositInfo {
+            VStack(alignment: .center, spacing: 0) {
+                HStack(spacing: 0) {
+                    Asset.Assets.infoOutline.image
+                        .zImage(size: 16, style: Design.Text.tertiary)
+                        .padding(.trailing, 12)
+                    
+                    Text(L10n.Deposits.info)
+                        .zFont(size: 12, style: Design.Text.tertiary)
+                }
+                .padding(.bottom, 20)
+                .screenHorizontalPadding()
+            }
+            .frame(maxWidth: .infinity)
+        } else if store.footerState == .addNote {
+            HStack(spacing: 12) {
+                ZashiButton(
+                    store.annotation.isEmpty
+                    ? L10n.Annotation.addArticle
+                    : L10n.Annotation.edit,
+                    type: .tertiary
+                ) {
+                    store.send(.noteButtonTapped)
+                }
+                
+                if store.transaction.isSentTransaction && !store.transaction.isShieldingTransaction && !store.isSwap {
+                    if store.alias == nil {
+                        ZashiButton(L10n.TransactionHistory.saveAddress) {
+                            store.send(.saveAddressTapped)
+                        }
+                    } else {
+                        ZashiButton(L10n.TransactionHistory.sendAgain) {
+                            store.send(.sendAgainTapped)
+                        }
+                    }
+                }
+            }
+            .padding(.bottom, 24)
+            .screenHorizontalPadding()
+        }
+
+        if let supportData = store.supportData {
+            UIMailDialogView(
+                supportData: supportData,
+                completion: {
+                    store.send(.sendSupportMailFinished)
+                }
+            )
+            // UIMailDialogView only wraps MFMailComposeViewController presentation
+            // so frame is set to 0 to not break SwiftUI's layout
+            .frame(width: 0, height: 0)
+        }
+        
+        shareView()
+    }
 }
 
 extension TransactionDetailsView {
@@ -207,6 +267,25 @@ extension TransactionDetailsView {
                     .padding(4)
                     .tint(Asset.Colors.primary.color)
             }
+        }
+    }
+    
+    @ViewBuilder func shareView() -> some View {
+        if let message = store.messageToBeShared {
+            UIShareDialogView(activityItems: [
+                ShareableMessage(
+                    title: L10n.SendFeedback.Share.title,
+                    message: message,
+                    desc: L10n.SendFeedback.Share.desc
+                ),
+            ]) {
+                store.send(.shareFinished)
+            }
+            // UIShareDialogView only wraps UIActivityViewController presentation
+            // so frame is set to 0 to not break SwiftUI's layout
+            .frame(width: 0, height: 0)
+        } else {
+            EmptyView()
         }
     }
 }
@@ -248,7 +327,7 @@ extension TransactionDetailsView {
             .offset(x: 2)
             .padding(.top, 24)
 
-            Text(store.transaction.title)
+            Text(store.transaction.title(true))
                 .zFont(.medium, size: 18, style: Design.Text.tertiary)
                 .padding(.top, 10)
             
@@ -332,39 +411,19 @@ extension TransactionDetailsView {
                     unknownAsset()
                         .offset(x: -8)
                 }
-                
-//                // ZEC icon
-//                Asset.Assets.Brandmarks.brandmarkMax.image
-//                    .zImage(size: 48, style: Design.Surfaces.brandPrimary)
-//                    .offset(x: -8)
             }
             .offset(x: 4)
             .padding(.top, 24)
 
-//            if let swapTitle = store.swapToZecTitle, (store.transaction.type == .swapToZec || store.transaction.type == .swapFromZec) {
-            if !store.transaction.title.isEmpty {
-                Text(store.transaction.title)
+            if !store.transaction.title(true).isEmpty {
+                Text(store.transaction.title(true))
                     .zFont(.medium, size: 18, style: Design.Text.tertiary)
                     .padding(.top, 10)
             } else {
                 unknownValue()
                     .padding(.top, 10)
             }
-            
-//            Group {
-//                if store.isSensitiveContentHidden {
-//                    Text(L10n.General.hideBalancesMost)
-//                } else {
-//                    if let amount = store.swapAmountOut {
-//                        Text(amount)
-//                        + Text(" \(tokenName)")
-//                            .foregroundColor(Design.Text.quaternary.color(colorScheme))
-//                    } else {
-//                        unknownAmount()
-//                            .padding(.vertical, 2)
-//                    }
-//                }
-//            }
+
             Group {
                 if store.isSensitiveContentHidden {
                     Text(L10n.General.hideBalancesMost)

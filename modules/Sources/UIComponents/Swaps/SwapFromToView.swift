@@ -99,6 +99,7 @@ public struct SwapFromToView: View {
                 zecTickerBadge(colorScheme)
                     .scaleEffect(1.25)
                     .padding(.leading, Design.Spacing._xl)
+                    .padding(.trailing, 4)
             } else {
                 // left side
                 zecTickerBadge(colorScheme)
@@ -164,6 +165,7 @@ public struct SwapFromToView: View {
                 tokenTickerSelector(asset: selectedAsset, colorScheme)
                     .scaleEffect(1.25)
                     .padding(.leading, Design.Spacing._xl)
+                    .padding(.trailing, 6)
             } else {
                 // left side
                 tokenTickerSelector(asset: selectedAsset, colorScheme)

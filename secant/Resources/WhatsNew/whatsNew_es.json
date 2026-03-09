@@ -1,6 +1,37 @@
 {
     "releases": [
         {
+            "version": "3.1.0",
+            "date": "10-03-2026",
+            "timestamp": 1773133320,
+            "sections": [
+                {
+                    "title": "Añadido:",
+                    "bulletpoints": [
+                        "Creamos un mecanismo en la aplicación para contactar con el soporte en caso de problemas con el Swap/Pago.",
+                        "Añadimos una advertencia de deslizamiento bajo para evitar reembolsos.",
+                        "Implementamos la gestión de depósitos incompletos.",
+                        "También añadimos más información a los flujos de estado del Swap/Pago."
+                    ]
+                },
+                {
+                    "title": "Cambiado:",
+                    "bulletpoints": [
+                        "Actualizamos el deslizamiento predeterminado al 2% para una ejecución más rápida de los swaps.",
+                        "Cambiamos el servidor predeterminado.",
+                        "También mejoramos la experiencia de usuario (UX) de la pantalla de depósito de Swap a ZEC.",
+                        "Realizamos otras mejoras de UX/UI."
+                    ]
+                },
+                {
+                    "title": "Corregido:",
+                    "bulletpoints": [
+                        "Corregimos un error en el árbol de compromiso de notas."
+                    ]
+                }
+            ]
+        },
+        {
             "version": "3.0.1",
             "date": "03-03-2026",
             "timestamp": 1772534007,

@@ -216,6 +216,7 @@ public struct SwapAndPay {
         case balances(Balances.Action)
         case binding(BindingAction<SwapAndPay.State>)
         case cancelPaymentTapped
+        case cancelSwapRequired
         case cancelSwapTapped
         case closeAssetsSheetTapped
         case closeSlippageSheetTapped
@@ -415,8 +416,14 @@ public struct SwapAndPay {
             case .customBackRequired:
                 return .none
 
-            case .cancelSwapTapped:
+            case .cancelSwapRequired:
                 state.alert = nil
+                return .run { send in
+                    try? await Task.sleep(for: .seconds(0.1))
+                    await send(.cancelSwapTapped)
+                }
+                
+            case .cancelSwapTapped:
                 state.isCancelSheetVisible = false
                 state.isSwapCanceled = true
                 return .concatenate(
@@ -1834,7 +1841,7 @@ extension AlertState where Action == SwapAndPay.Action {
         AlertState {
             TextState(L10n.DepositFunds.Alert.title)
         } actions: {
-            ButtonState(role: .destructive, action: .cancelSwapTapped) {
+            ButtonState(role: .destructive, action: .cancelSwapRequired) {
                 TextState(L10n.DepositFunds.Alert.cancel)
             }
             ButtonState(role: .cancel, action: .sentTheFundsButtonTapped) {

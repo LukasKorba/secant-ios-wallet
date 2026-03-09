@@ -54,7 +54,9 @@ struct Near1Click {
         static let amountOutFormatted = "amountOutFormatted"
         static let recipient = "recipient"
         static let deadline = "deadline"
+        static let timestamp = "timestamp"
         static let refundTo = "refundTo"
+        static let depositedAmountFormatted = "depositedAmountFormatted"
 
         // params
         static let exactInput = "EXACT_INPUT"
@@ -341,12 +343,13 @@ extension Near1Click {
                 case SwapConstants.refunded: .refunded
                 case SwapConstants.success: .success
                 case SwapConstants.failed: .failed
-                case SwapConstants.incompleteDeposit: .pendingDeposit
+                case SwapConstants.incompleteDeposit: .incompleteDeposit
                 case SwapConstants.processing: .processing
                 default: .pending
                 }
             } else {
                 status = switch statusStr {
+                case SwapConstants.incompleteDeposit: .incompleteDeposit
                 case SwapConstants.pendingDeposit: .pending
                 case SwapConstants.refunded: .refunded
                 case SwapConstants.success: .success
@@ -392,7 +395,12 @@ extension Near1Click {
                     slippage = Decimal(slippageInt) * 0.01
                 }
             }
-            
+
+            var depositedAmountFormattedDecimal: Decimal?
+            if let depositedAmountFormatted = swapDetailsDict[Constants.depositedAmountFormatted] as? String, status == .incompleteDeposit {
+                depositedAmountFormattedDecimal = depositedAmountFormatted.usDecimal
+            }
+
             var refundedAmountFormattedDecimal: Decimal?
             if let refundedAmountFormatted = swapDetailsDict[Constants.refundedAmountFormatted] as? String, status == .refunded {
                 refundedAmountFormattedDecimal = refundedAmountFormatted.usDecimal
@@ -422,7 +430,13 @@ extension Near1Click {
                 refundTo = refundToAddress
             }
 
-            if status == .pending || status == .refunded || status == .pendingDeposit || status == .failed || status == .processing {
+            if status == .pending
+                || status == .refunded
+                || status == .pendingDeposit
+                || status == .failed
+                || status == .processing
+                || status == .incompleteDeposit
+            {
                 if let quoteDict = quoteResponseDict[Constants.quote] as? [String: Any] {
                     if let amountInFormatted = quoteDict[Constants.amountInFormatted] as? String {
                         amountInFormattedDecimal = amountInFormatted.usDecimal
@@ -437,6 +451,20 @@ extension Near1Click {
                 }
             }
             
+            // dates
+            var deadline = ""
+            
+            if let quoteDict = quoteResponseDict[Constants.quote] as? [String: Any] {
+                if let deadlineStr = quoteDict[Constants.deadline] as? String {
+                    deadline = deadlineStr
+                }
+            }
+
+            var whenInitiated = ""
+            if let whenInitiatedStr = quoteResponseDict[Constants.timestamp] as? String {
+                whenInitiated = whenInitiatedStr
+            }
+
             // expired?
             if statusStr == SwapConstants.pendingDeposit {
                 if let quoteDict = quoteResponseDict[Constants.quote] as? [String: Any] {
@@ -467,7 +495,10 @@ extension Near1Click {
                 status: status,
                 refundedAmountFormatted: refundedAmountFormattedDecimal,
                 swapRecipient: swapRecipient,
-                addressToCheckShield: (isSwapToZec ? swapRecipient : refundTo) ?? ""
+                addressToCheckShield: (isSwapToZec ? swapRecipient : refundTo) ?? "",
+                whenInitiated: whenInitiated,
+                deadline: deadline,
+                depositedAmountFormatted: depositedAmountFormattedDecimal
             )
         }
     )
