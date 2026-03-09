@@ -6,6 +6,8 @@ directly impact users rather than highlighting other crucial architectural updat
 
 ## [Unreleased]
 
+## 3.1.0 build 2 (2026-03-09)
+
 ### Added
 - Warning about slippage being less then recommended threshold.
 - A confirmation dialog when leaving the swap to ZEC deposit screen.
