@@ -35,7 +35,6 @@ extension RestoreWalletCoordFlow {
                     
                     // store the wallet to the keychain
                     try walletStorage.importWallet(newRandomPhrase, birthday, .english, false)
-                    try? walletStorage.importZodlAnnouncementFlag(true)
 
                     return .send(.newWalletSuccessfulyCreated)
                 } catch {
@@ -66,7 +65,6 @@ extension RestoreWalletCoordFlow {
                     
                     // update the backup phrase validation flag
                     try walletStorage.markUserPassedPhraseBackupTest(true)
-                    try? walletStorage.importZodlAnnouncementFlag(true)
 
                     state.path.append(.restoreInfo(RestoreInfo.State.initial))
 

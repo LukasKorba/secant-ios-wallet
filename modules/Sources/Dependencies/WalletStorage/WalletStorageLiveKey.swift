@@ -86,12 +86,6 @@ extension WalletStorageClient: DependencyKey {
             },
             exportTorSetupFlag: {
                 walletStorage.exportTorSetupFlag()
-            },
-            importZodlAnnouncementFlag: { enabled in
-                try walletStorage.importZodlAnnouncementFlag(enabled)
-            },
-            exportZodlAnnouncementFlag: {
-                walletStorage.exportZodlAnnouncementFlag()
             }
         )
     }

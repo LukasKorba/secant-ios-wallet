@@ -104,8 +104,4 @@ public struct WalletStorageClient {
     /// Tor setup flag
     public var importTorSetupFlag: (Bool) throws -> Void
     public var exportTorSetupFlag: () -> Bool? = { nil }
-    
-    /// Zodl Announcement flag
-    public var importZodlAnnouncementFlag: (Bool) throws -> Void
-    public var exportZodlAnnouncementFlag: () -> Bool? = { nil }
 }

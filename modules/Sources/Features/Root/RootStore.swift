@@ -32,7 +32,6 @@ import AudioServices
 import ShieldingProcessor
 import SupportDataGenerator
 import SwapAndPay
-import ZodlAnnouncement
 
 // Path
 import CurrencyConversionSetup
@@ -122,8 +121,7 @@ public struct Root {
         public var wasRestoringWhenDisconnected = false
         public var welcomeState: Welcome.State
         @Shared(.inMemory(.zashiWalletAccount)) public var zashiWalletAccount: WalletAccount? = nil
-        public var zodlAnnouncementState = ZodlAnnouncement.State.initial
-        
+
         // Auto-update swaps
         public var autoUpdateCandidate: TransactionState? = nil
         public var autoUpdateLatestAttemptedTimestamp: TimeInterval = 0
@@ -217,8 +215,7 @@ public struct Root {
         case updateStateAfterConfigUpdate(WalletConfig)
         case walletConfigLoaded(WalletConfig)
         case welcome(Welcome.Action)
-        case zodlAnnouncement(ZodlAnnouncement.Action)
-        
+
         // Path
         case addKeystoneHWWalletCoordFlow(AddKeystoneHWWalletCoordFlow.Action)
         case currencyConversionSetup(CurrencyConversionSetup.Action)
@@ -393,10 +390,6 @@ public struct Root {
 
         Scope(state: \.swapAndPayCoordFlowState, action: \.swapAndPayCoordFlow) {
             SwapAndPayCoordFlow()
-        }
-        
-        Scope(state: \.zodlAnnouncementState, action: \.zodlAnnouncement) {
-            ZodlAnnouncement()
         }
 
         initializationReduce()

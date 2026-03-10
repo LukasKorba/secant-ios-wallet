@@ -31,9 +31,7 @@ extension WalletStorageClient: TestDependencyKey {
         importShieldingAcknowledged: unimplemented("\(Self.self).importShieldingAcknowledged"),
         exportShieldingAcknowledged: unimplemented("\(Self.self).exportShieldingAcknowledged", placeholder: false),
         importTorSetupFlag: unimplemented("\(Self.self).importTorSetupFlag"),
-        exportTorSetupFlag: unimplemented("\(Self.self).exportTorSetupFlag", placeholder: nil),
-        importZodlAnnouncementFlag: unimplemented("\(Self.self).importZodlAnnouncementFlag"),
-        exportZodlAnnouncementFlag: unimplemented("\(Self.self).exportZodlAnnouncementFlag", placeholder: nil)
+        exportTorSetupFlag: unimplemented("\(Self.self).exportTorSetupFlag", placeholder: nil)
     )
 }
 
@@ -60,8 +58,6 @@ extension WalletStorageClient {
         importShieldingAcknowledged: { _ in },
         exportShieldingAcknowledged: { false },
         importTorSetupFlag: { _ in },
-        exportTorSetupFlag: { false },
-        importZodlAnnouncementFlag: { _ in },
-        exportZodlAnnouncementFlag: { false }
+        exportTorSetupFlag: { false }
     )
 }

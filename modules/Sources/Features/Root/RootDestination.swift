@@ -23,11 +23,9 @@ extension Root {
             case notEnoughFreeSpace
             case onboarding
             case osStatusError
-            //case phraseDisplay
             case startup
             case home
             case welcome
-            case zodlAnnouncement
         }
         
         public var internalDestination: Destination = .welcome

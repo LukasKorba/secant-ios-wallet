@@ -10,7 +10,6 @@ import ZcashLightClientKit
 import UIComponents
 import DeeplinkWarning
 import OSStatusError
-import ZodlAnnouncement
 
 // Path
 import CurrencyConversionSetup
@@ -310,17 +309,6 @@ private extension RootView {
                             action: \.welcome
                         )
                     )
-                    
-                case .zodlAnnouncement:
-                    ZodlAnnouncementView(
-                        store: store.scope(
-                            state: \.zodlAnnouncementState,
-                            action: \.zodlAnnouncement
-                        )
-                    )
-                    .overlayedWithSplash(store.splashAppeared) {
-                        store.send(.splashRemovalRequested)
-                    }
                 }
             }
             .onOpenURL(perform: { store.goToDeeplink($0) })

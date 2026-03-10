@@ -92,8 +92,7 @@ let package = Package(
         .library(name: "WhatsNew", targets: ["WhatsNew"]),
         .library(name: "WhatsNewProvider", targets: ["WhatsNewProvider"]),
         .library(name: "ZcashSDKEnvironment", targets: ["ZcashSDKEnvironment"]),
-        .library(name: "ZecKeyboard", targets: ["ZecKeyboard"]),
-        .library(name: "ZodlAnnouncement", targets: ["ZodlAnnouncement"])
+        .library(name: "ZecKeyboard", targets: ["ZecKeyboard"])
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.23.1"),
@@ -688,7 +687,6 @@ let package = Package(
                 "WhatsNew",
                 "ZcashSDKEnvironment",
                 "ZecKeyboard",
-                "ZodlAnnouncement",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "ZcashLightClientKit", package: "zcash-swift-wallet-sdk")
             ],
@@ -1196,18 +1194,6 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Features/ZecKeyboard"
-        ),
-        .target(
-            name: "ZodlAnnouncement",
-            dependencies: [
-                "Generated",
-                "Models",
-                "UIComponents",
-                "Utils",
-                "WalletStorage",
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
-            ],
-            path: "Sources/Features/ZodlAnnouncement"
         )
     ]
 )

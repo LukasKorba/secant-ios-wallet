@@ -9,6 +9,9 @@ directly impact users rather than highlighting other crucial architectural updat
 ### Fixed
 - Transaction detail row corners.
 
+### Removed
+- Zodl Announcement screen.
+
 ## 3.1.0 build 2 (2026-03-09)
 
 ### Added
