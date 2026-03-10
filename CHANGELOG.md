@@ -6,6 +6,9 @@ directly impact users rather than highlighting other crucial architectural updat
 
 ## [Unreleased]
 
+### Fixed
+- Transaction detail row corners.
+
 ## 3.1.0 build 2 (2026-03-09)
 
 ### Added
