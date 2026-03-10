@@ -529,9 +529,7 @@ extension TransactionDetailsView {
                         : store.alias ?? store.transaction.address.zip316,
                         icon: Asset.Assets.copy.image,
                         rowAppereance: store.isSwap
-                        ? (
-                            (!store.annotation.isEmpty || !store.areDetailsExpanded) ? .bottom : .middle
-                        )
+                        ? (!store.annotation.isEmpty ? .middle : .bottom)
                         : (!store.annotation.isEmpty || store.areDetailsExpanded) ? .top : .full
                     )
                     .onTapGesture {
