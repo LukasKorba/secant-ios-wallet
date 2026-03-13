@@ -192,7 +192,8 @@ public struct AddressBookView: View {
                         iconText: record.name.initials,
                         tickerIcon: AddressBook.contactTicker(chainId: record.chainId),
                         title: record.name,
-                        desc: record.address.trailingZip316
+                        desc: record.address.trailingZip316,
+                        descIsAddress: true
                     ) {
                         store.send(.editId(record.address, record.id))
                     }
