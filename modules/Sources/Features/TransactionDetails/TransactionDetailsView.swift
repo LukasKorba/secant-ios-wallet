@@ -527,6 +527,7 @@ extension TransactionDetailsView {
                         value: isSensitiveContentHidden
                         ? L10n.General.hideBalancesMost
                         : store.alias ?? store.transaction.address.zip316,
+                        addressFont: isSensitiveContentHidden ? false : store.alias == nil,
                         icon: Asset.Assets.copy.image,
                         rowAppereance: store.isSwap
                         ? (!store.annotation.isEmpty ? .middle : .bottom)
@@ -544,6 +545,7 @@ extension TransactionDetailsView {
                             value: isSensitiveContentHidden
                             ? L10n.General.hideBalancesMost
                             : recipient.zip316,
+                            addressFont: !isSensitiveContentHidden,
                             icon: Asset.Assets.copy.image,
                             rowAppereance: .middle
                         )
@@ -691,6 +693,7 @@ extension TransactionDetailsView {
     @ViewBuilder func detailView(
         title: String,
         value: String,
+        addressFont: Bool = false,
         icon: Image? = nil,
         rowAppereance: RowAppereance = .full
     ) -> some View {
@@ -701,7 +704,7 @@ extension TransactionDetailsView {
             Spacer()
             
             Text(value)
-                .zFont(.medium, size: 14, style: Design.Text.primary)
+                .zFont(.medium, fontFamily: addressFont ? .robotoMono : .inter, size: 14, style: Design.Text.primary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
             

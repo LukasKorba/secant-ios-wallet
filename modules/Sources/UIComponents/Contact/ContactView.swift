@@ -15,6 +15,7 @@ public struct ContactView: View {
     var tickerIcon: Image?
     var title: String
     var desc: String?
+    var descIsAddress: Bool
     var action: () -> Void
     
     public init(
@@ -22,12 +23,14 @@ public struct ContactView: View {
         tickerIcon: Image? = nil,
         title: String,
         desc: String? = nil,
+        descIsAddress: Bool = false,
         action: @escaping () -> Void
     ) {
         self.iconText = iconText
         self.tickerIcon = tickerIcon
         self.title = title
         self.desc = desc
+        self.descIsAddress = descIsAddress
         self.action = action
     }
     
@@ -70,8 +73,7 @@ public struct ContactView: View {
                         
                         if let desc {
                             Text(desc)
-                                .font(.custom(FontFamily.Inter.regular.name, size: 14))
-                                .zForegroundColor(Design.Text.tertiary)
+                                .zFont(fontFamily: descIsAddress ? .robotoMono : .inter, size: 14, style: Design.Text.tertiary)
                                 .lineLimit(1)
                                 .truncationMode(.middle)
                                 .padding(.top, 2)

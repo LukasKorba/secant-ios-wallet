@@ -424,7 +424,8 @@ extension SwapAndPayForm {
                     store.isSwapExperienceEnabled
                     ? L10n.SwapAndPay.swapTo
                     : L10n.SwapAndPay.payTo,
-                    store.address.zip316
+                    store.address.zip316,
+                    addressFont: true
                 )
                 .padding(.bottom, 12)
 
@@ -572,7 +573,8 @@ extension SwapAndPayForm {
     
     @ViewBuilder private func quoteLineContent(
         _ info: String,
-        _ value: String
+        _ value: String,
+        addressFont: Bool = false
     ) -> some View {
         HStack(spacing: 0) {
             Text(info)
@@ -581,7 +583,7 @@ extension SwapAndPayForm {
             Spacer()
 
             Text(value)
-                .zFont(.medium, size: 14, style: Design.Text.primary)
+                .zFont(.medium, fontFamily: addressFont ? .robotoMono : .inter, size: 14, style: Design.Text.primary)
         }
     }
     

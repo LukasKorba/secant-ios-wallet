@@ -8,6 +8,7 @@ directly impact users rather than highlighting other crucial architectural updat
 
 ### Fixed
 - Transaction detail row corners.
+- Address font at several places.
 
 ### Removed
 - Zodl Announcement screen.
