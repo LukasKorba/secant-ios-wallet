@@ -6,6 +6,9 @@ directly impact users rather than highlighting other crucial architectural updat
 
 ## [Unreleased]
 
+### Changed
+- Swap to ZEC's swap type updated to FLEX_INPUT, reducing number of occurences of INCOMPLETE_DEPOSIT states.
+ 
 ### Fixed
 - Transaction detail row corners.
 - Address font at several places.

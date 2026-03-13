@@ -63,6 +63,7 @@ struct Near1Click {
         static let exactOutput = "EXACT_OUTPUT"
         static let originChain = "ORIGIN_CHAIN"
         static let destinationChain = "DESTINATION_CHAIN"
+        static let flexInput = "FLEX_INPUT"
 
         // zec asset
         static let nearZecAssetId = "nep141:zec.omft.near"
@@ -243,7 +244,7 @@ extension Near1Click {
             
             let requestData = SwapQuoteRequest(
                 dry: dry,
-                swapType: isSwapToZec ? Constants.exactInput : exactInput ? Constants.exactInput : Constants.exactOutput,
+                swapType: isSwapToZec ? Constants.flexInput : exactInput ? Constants.exactInput : Constants.exactOutput,
                 slippageTolerance: slippageTolerance,
                 originAsset: isSwapToZec ? toAsset.assetId : zecAsset.assetId,
                 depositType: Constants.originChain,
