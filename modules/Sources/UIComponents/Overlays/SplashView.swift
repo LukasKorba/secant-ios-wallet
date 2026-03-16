@@ -178,6 +178,12 @@ struct SplashView: View {
         }
     }
     
+    var hiIconYOffset: CGFloat {
+        splashManager.authenticationDidntSucceed
+        ? 100.0
+        : 0.0
+    }
+
     var hiHeight: CGFloat {
         var potentialCountryCode: String?
         
@@ -197,54 +203,63 @@ struct SplashView: View {
     var body: some View {
         if splashManager.isOn && !isHidden {
             ZStack {
-                GeometryReader { proxy in
-                    Asset.Assets.welcomeScreenLogo.image
-                        .zImage(height: 60, color: .white)
-                        .position(
-                            x: proxy.frame(in: .local).midX,
-                            y: proxy.frame(in: .local).midY
-                        )
-                }
-                .background(Asset.Colors.splash.color)
-                .mask {
-                    SplashManager.SplashShape(points: splashManager.points)
-                }
-                .ignoresSafeArea()
-                .onChange(of: isHidden) { value in
-                    if value {
-                        splashManager.preparePoints()
-                    }
-                }
-                if splashManager.authenticationDidntSucceed {
-                    VStack(spacing: 0) {
-                        Spacer()
-                        
-                        Button {
-                            splashManager.authenticate()
-                        } label: {
-                            authenticationIcon
-                                .renderingMode(.template)
-                                .resizable()
-                                .frame(width: 64, height: 64)
-                                .foregroundColor(.white)
-                        }
-
-                        Text(L10n.Splash.authTitle)
-                            .font(.custom(FontFamily.Inter.semiBold.name, size: 20))
-                            .foregroundColor(.white)
-                            .multilineTextAlignment(.center)
-                            .padding(.top, 24)
-
-                        Text(authenticationDesc)
-                            .font(.custom(FontFamily.Inter.regular.name, size: 14))
-                            .foregroundColor(.white)
-                            .multilineTextAlignment(.center)
-                            .padding(.top, 8)
-                    }
-                    .padding(.bottom, 120)
-                    .screenHorizontalPadding()
-                }
+                hiIcon()
+                lockedIcons()
             }
+            .ignoresSafeArea(.keyboard)
+        }
+    }
+    
+    @ViewBuilder func hiIcon() -> some View {
+        GeometryReader { proxy in
+            Asset.Assets.welcomeScreenLogo.image
+                .zImage(height: 60, color: .white)
+                .position(
+                    x: proxy.frame(in: .local).midX,
+                    y: proxy.frame(in: .local).midY - hiIconYOffset
+                )
+        }
+        .background(Asset.Colors.splash.color)
+        .mask {
+            SplashManager.SplashShape(points: splashManager.points)
+        }
+        .ignoresSafeArea()
+        .onChange(of: isHidden) { value in
+            if value {
+                splashManager.preparePoints()
+            }
+        }
+    }
+    
+    @ViewBuilder func lockedIcons() -> some View {
+        if splashManager.authenticationDidntSucceed {
+            VStack(spacing: 0) {
+                Spacer()
+                
+                Button {
+                    splashManager.authenticate()
+                } label: {
+                    authenticationIcon
+                        .renderingMode(.template)
+                        .resizable()
+                        .frame(width: 64, height: 64)
+                        .foregroundColor(.white)
+                }
+
+                Text(L10n.Splash.authTitle)
+                    .font(.custom(FontFamily.Inter.semiBold.name, size: 20))
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 24)
+
+                Text(authenticationDesc)
+                    .font(.custom(FontFamily.Inter.regular.name, size: 14))
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 8)
+            }
+            .padding(.bottom, 160)
+            .screenHorizontalPadding()
         }
     }
 }
