@@ -73,6 +73,7 @@ struct Near1Click {
     let swapAssets: () async throws -> IdentifiedArrayOf<SwapAsset>
     let quote: (Bool, Bool, Bool, Int, SwapAsset, SwapAsset, String, String, String) async throws -> SwapQuote
     let status: (String, Bool) async throws -> SwapDetails
+    let serviceCheck: () async throws -> SwapAndPayClient.ServiceCheckResult
 
     static func getCall(urlString: String, includeJwtKey: Bool = false) async throws -> (Data, URLResponse) {
         @Dependency(\.sdkSynchronizer) var sdkSynchronizer
@@ -501,6 +502,45 @@ extension Near1Click {
                 deadline: deadline,
                 depositedAmountFormatted: depositedAmountFormattedDecimal
             )
+        },
+        serviceCheck: {
+            let now = Int(Date().timeIntervalSince1970)
+            let since = (now - 86400) * 1000
+            let until = now * 1000
+            
+//            let since = 1763397025000 - 32000000
+//            let until = 1763484960000 - 3600000
+            
+            let serviceCheckUrl = "https://status.near-intents.org/api/posts?since=\(since)&until=\(until)"
+            
+            let (data, response) = try await Near1Click.getCall(urlString: serviceCheckUrl)
+            
+            // Optional: validate HTTP code
+            guard let http = response as? HTTPURLResponse,
+                  200..<300 ~= http.statusCode else {
+                throw URLError(.badServerResponse)
+            }
+            
+            let decoder = JSONDecoder()
+            let systemStatus = try decoder.decode(NearSystemStatusResponse.self, from: data)
+            
+//            guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+//                throw SwapAndPayClient.EndpointError.message("Service Check: Cannot parse response")
+//            }
+
+            let isMaintenance = systemStatus.posts.contains { $0.postType == "maintenance" }
+            let isIncident = systemStatus.posts.contains { $0.postType == "incident" }
+
+            switch (isMaintenance, isIncident) {
+                case (true, false):
+                return .maintenance
+            case (false, true):
+                return .incident
+            case (false, false):
+                return .noIssues
+            case (true, true):
+                return .incidentAndMaintenance
+            }
         }
     )
 }

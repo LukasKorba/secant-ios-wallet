@@ -19,6 +19,24 @@ public enum SwapConstants {
     public static let zecAssetIdOnNear = "near.zec.zec"
 }
 
+public struct NearSystemStatusResponse: Codable, Equatable, Hashable {
+    enum CodingKeys: String, CodingKey {
+        case posts
+    }
+    
+    public let posts: [NearSystemStatusPosts]
+}
+
+public struct NearSystemStatusPosts: Codable, Equatable, Hashable {
+    enum CodingKeys: String, CodingKey {
+        //case latestUpdate = "latest_update"
+        case postType = "post_type"
+    }
+    
+    //let latestUpdate: NearSystemStatusLatestUpdate
+    public let postType: String
+}
+
 public struct UserMetadata: Codable {
     public enum Constants {
         public static let version = 3

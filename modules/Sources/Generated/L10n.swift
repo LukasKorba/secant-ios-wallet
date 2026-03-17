@@ -1881,6 +1881,14 @@ public enum L10n {
       public static let success = L10n.tr("Localizable", "swapAndPay.status.success", fallback: "Completed")
     }
   }
+  public enum SwapServiceUnavailable {
+    /// NEAR Protocol swap services are currently under maintenance. Expected resolution time is being determined.
+    public static let desc = L10n.tr("Localizable", "swapServiceUnavailable.desc", fallback: "NEAR Protocol swap services are currently under maintenance. Expected resolution time is being determined.")
+    /// Service Status
+    public static let status = L10n.tr("Localizable", "swapServiceUnavailable.status", fallback: "Service Status")
+    /// Swaps Temporarily Unavailable
+    public static let title = L10n.tr("Localizable", "swapServiceUnavailable.title", fallback: "Swaps Temporarily Unavailable")
+  }
   public enum SwapStatus {
     /// Paid
     public static let paid = L10n.tr("Localizable", "swapStatus.paid", fallback: "Paid")

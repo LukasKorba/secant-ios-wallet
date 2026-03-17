@@ -229,6 +229,9 @@ public extension SwapAndPayForm {
             .zashiSheet(isPresented: $store.isQuoteUnavailablePresented) {
                 quoteUnavailableContent(colorScheme)
             }
+            .zashiSheet(isPresented: $store.isServiceUnavailableSheetVisible) {
+                serviceUnavailableContent(colorScheme)
+            }
             .zashiSheet(isPresented: $store.isCancelSheetVisible) {
                 cancelSheetContent(colorScheme)
             }

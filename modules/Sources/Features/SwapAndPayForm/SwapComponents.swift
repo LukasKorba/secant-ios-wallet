@@ -389,6 +389,57 @@ extension SwapAndPayForm {
         }
     }
     
+    @ViewBuilder func serviceUnavailableContent(_ colorScheme: ColorScheme) -> some View {
+        WithPerceptionTracking {
+            VStack(alignment: .leading, spacing: 0) {
+                Asset.Assets.infoOutline.image
+                    .zImage(size: 24, style: Design.Utility.ErrorRed._500)
+                    .padding(12)
+                    .background {
+                        RoundedRectangle(cornerRadius: Design.Radius._full)
+                            .fill(Design.Utility.ErrorRed._50.color(colorScheme))
+                    }
+                    .padding(.top, 24)
+                    .padding(.bottom, 12)
+
+                Text(L10n.SwapServiceUnavailable.title)
+                    .zFont(.semiBold, size: 24, style: Design.Text.primary)
+                    .padding(.bottom, Design.Spacing._2xl)
+
+                HStack(alignment: .top, spacing: 0) {
+                    Circle()
+                        .fill(Design.Surfaces.brandPrimary.color(colorScheme))
+                        .frame(width: 12, height: 12)
+                        .padding(.trailing, 12)
+
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text(L10n.SwapServiceUnavailable.status)
+                            .zFont(.semiBold, size: 16, style: Design.Text.primary)
+                            .padding(.bottom, 6)
+
+                        Text(L10n.SwapServiceUnavailable.desc)
+                            .zFont(size: 14, style: Design.Text.primary)
+                            .multilineTextAlignment(.leading)
+                            .lineSpacing(1.5)
+                    }
+                }
+                .padding(.horizontal, Design.Spacing._2xl)
+                .padding(.vertical, Design.Spacing._xl)
+                .fixedSize(horizontal: false, vertical: true)
+                .background {
+                    RoundedRectangle(cornerRadius: Design.Radius._2xl)
+                        .fill(Design.Surfaces.bgSecondary.color(colorScheme))
+                }
+                .padding(.bottom, 32)
+
+                ZashiButton(L10n.General.ok.uppercased()) {
+                    store.send(.serviceUnavailableSheetOkTapped)
+                }
+                .padding(.bottom, Design.Spacing.sheetBottomSpace)
+            }
+        }
+    }
+    
     @ViewBuilder func quoteContent(_ colorScheme: ColorScheme) -> some View {
         WithPerceptionTracking {
             VStack(spacing: 0) {

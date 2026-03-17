@@ -1007,3 +1007,8 @@
 "reportSwap.depositAddress" = "Deposit Address: ";
 "reportSwap.sourceAsset" = "Source Asset: %@ on %@\n";
 "reportSwap.targetAsset" = "Target Asset: %@ on %@\n";
+
+// Swap Service unavailable
+"swapServiceUnavailable.title" = "Swaps Temporarily Unavailable"; // trans
+"swapServiceUnavailable.status" = "Service Status"; // trans
+"swapServiceUnavailable.desc" = "NEAR Protocol swap services are currently under maintenance. Expected resolution time is being determined."; // trans

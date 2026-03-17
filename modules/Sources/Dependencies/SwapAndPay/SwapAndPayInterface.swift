@@ -21,6 +21,13 @@ public struct SwapAndPayClient {
         case message(String)
     }
     
+    public enum ServiceCheckResult: Equatable {
+        case incident
+        case incidentAndMaintenance
+        case maintenance
+        case noIssues
+    }
+    
     public enum Constants {
         /// Affiliate fee in basis points
         static public let zashiFeeBps = 67
@@ -30,4 +37,5 @@ public struct SwapAndPayClient {
     public let swapAssets: () async throws -> IdentifiedArrayOf<SwapAsset>
     public let quote: (Bool, Bool, Bool, Int, SwapAsset, SwapAsset, String, String, String) async throws -> SwapQuote
     public let status: (String, Bool) async throws -> SwapDetails
+    public let serviceCheck: () async throws -> ServiceCheckResult
 }

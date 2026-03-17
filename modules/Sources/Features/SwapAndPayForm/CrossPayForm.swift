@@ -179,6 +179,9 @@ public extension SwapAndPayForm {
             .zashiSheet(isPresented: $store.isCancelSheetVisible) {
                 cancelSheetContent(colorScheme)
             }
+            .zashiSheet(isPresented: $store.isServiceUnavailableSheetVisible) {
+                serviceUnavailableContent(colorScheme)
+            }
             .sheet(isPresented: $store.isSlippagePresented) {
                 slippageContent(colorScheme)
                     .screenHorizontalPadding()

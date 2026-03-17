@@ -62,6 +62,7 @@ public struct SwapAndPay {
         public var isQuoteToZecPresented = false
         public var isQuoteUnavailablePresented = false
         public var isRefundAddressExplainerEnabled = false
+        public var isServiceUnavailableSheetVisible = false
         public var isSlippagePresented = false
         public var isSwapCanceled = false
         public var isSwapExperienceEnabled = true
@@ -77,6 +78,7 @@ public struct SwapAndPay {
         public var quoteUnavailableErrorMsg = ""
         public var searchTerm = ""
         public var selectedAsset: SwapAsset?
+        public var serviceCheckResult = SwapAndPayClient.ServiceCheckResult.noIssues
         public var sheetHeight: CGFloat = 0.0
         public var slippage: Decimal = Constants.defaultSlippage
         public var slippageInSheet: Decimal = Constants.defaultSlippage
@@ -295,6 +297,11 @@ public struct SwapAndPay {
         case closeDepositHelpSheetTapped
         case depositFundsBackTapped
         case openDepositHelpSheetTapped
+        
+        // service check
+        case checkServiceStatus
+        case serviceCheckResultUpdated(SwapAndPayClient.ServiceCheckResult)
+        case serviceUnavailableSheetOkTapped
     }
 
     @Dependency(\.addressBook) var addressBook
@@ -330,7 +337,8 @@ public struct SwapAndPay {
                     .send(.walletBalances(.onAppear)),
                     .concatenate(
                         .send(.updateAssetsAccordingToSearchTerm),
-                        .send(.refreshSwapAssets)
+                        .send(.refreshSwapAssets),
+                        .send(.checkServiceStatus)
                     )
                 )
                 
@@ -1129,6 +1137,29 @@ public struct SwapAndPay {
 
             case .closeDepositHelpSheetTapped:
                 state.isDepositHelpSheetVisible = false
+                return .none
+                
+            // MARK: - Service Check
+                
+            case .checkServiceStatus:
+                return .run { send in
+                    do {
+                        let serviceCheckResult = try await swapAndPay.serviceCheck()
+//                        print("__LD isServiceAvailable \(isServiceAvailable)")
+                        try? await Task.sleep(for: .seconds(0.5))
+                        await send(.serviceCheckResultUpdated(serviceCheckResult))
+                    } catch {
+                        // do nothing
+                    }
+                }
+                
+            case .serviceCheckResultUpdated(let newState):
+                state.serviceCheckResult = newState
+                state.isServiceUnavailableSheetVisible = newState != .noIssues
+                return .none
+                
+            case .serviceUnavailableSheetOkTapped:
+                state.isServiceUnavailableSheetVisible = false
                 return .none
             }
         }
