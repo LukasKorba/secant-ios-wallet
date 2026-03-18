@@ -142,11 +142,11 @@ public struct TorSetupView: View {
 extension TorSetupView {
     private func icons() -> some View {
         RoundedRectangle(cornerRadius: Design.Radius._full)
-            .fill(Design.Text.primary.color(colorScheme))
+            .fill(Color(red: 0.2, green: 0.23, blue: 0.25))
             .frame(width: 64, height: 64)
             .overlay {
                 Asset.Assets.Partners.torLogo.image
-                    .zImage(width: 36, height: 24, style: Design.Text.opposite)
+                    .zImage(width: 36, height: 24, color: .white)
             }
             .padding(.top, 24)
     }
