@@ -84,7 +84,7 @@
 
 // MARK: - Server Setup
 "serverSetup.title" = "Server";
-"serverSetup.custom" = "custom server";
+"serverSetup.custom" = "custom";
 "serverSetup.default" = "Default";
 "serverSetup.placeholder" = "<hostname>:<port>";
 "serverSetup.alert.failed.title" = "Invalid endpoint";
@@ -626,7 +626,7 @@
 "transactionHistory.status" = "Status";
 
 // MARK: - Secret Recovery Phrase Display
-"recoveryPhraseDisplay.screenTitle" = "Wallet Backup";
+"recoveryPhraseDisplay.screenTitle" = "Recovery Phrase";
 "recoveryPhraseDisplay.title" = "Secret Recovery Phrase";
 "recoveryPhraseDisplay.description" = "These words are the only way to recover your funds! Make sure to save them in the correct order.";
 "recoveryPhraseDisplay.button.wroteItDown" = "I've saved it";

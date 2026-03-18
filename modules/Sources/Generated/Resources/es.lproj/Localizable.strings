@@ -84,7 +84,7 @@
 
 // MARK: - Server Setup
 "serverSetup.title" = "Servidor";
-"serverSetup.custom" = "Servidor personalizado";
+"serverSetup.custom" = "personalizado";
 "serverSetup.default" = "Predeterminado";
 "serverSetup.placeholder" = "<nombre del host>:<puerto>";
 "serverSetup.alert.failed.title" = "Punto final no válido";
@@ -410,7 +410,7 @@
 
 // MARK: Keystone integration
 "keystone.wallet" = "Billetera Keystone";
-"keystone.drawer.title" = "Billeteras y Hardware";
+"keystone.drawer.title" = "Billeteras y Dispositivos";
 "keystone.connect" = "Conectar Billetera de Hardware";
 "keystone.drawer.banner.title" = "Billetera de Hardware Keystone";
 "keystone.drawer.banner.desc" = "Obtén un 5%% de descuento en una billetera de hardware aislada. Código promocional: 'Zashi'.";
@@ -626,7 +626,7 @@
 "transactionHistory.status" = "Estado";
 
 // MARK: - Secret Recovery Phrase Display
-"recoveryPhraseDisplay.screenTitle" = "Respaldo de Billetera";
+"recoveryPhraseDisplay.screenTitle" = "Frase de Recuperación";
 "recoveryPhraseDisplay.title" = "Frase de Recuperación Secreta";
 "recoveryPhraseDisplay.description" = "¡Estas palabras son la única manera de recuperar tus fondos! Asegúrate de guardarlas en el orden correcto.";
 "recoveryPhraseDisplay.button.wroteItDown" = "Lo he guardado";
