@@ -96,7 +96,8 @@ public struct SwapAndPay {
         // Swap to ZEC
         public var addressToShare: RedactableString?
         public var isAddressExpanded = false
-        public var isQRCodeAppreanceFlipped = false
+        public var isQRCodeEnlarged = false
+        public var storedEnlargedQR: CGImage?
         public var storedQR: CGImage?
         @Shared(.inMemory(.toast)) public var toast: Toast.Edge? = nil
 
@@ -282,10 +283,12 @@ public struct SwapAndPay {
         case copyDepositAddressToPastboard
         case copySwapToZecAmountTapped
         case enableSwapToZecExperience
+        case generateEnlargedQRCode
         case generateQRCode(Bool)
         case qrCodeTapped
         case refundAddressCloseTapped
         case refundAddressTapped
+        case rememberEnlargedQR(CGImage?)
         case rememberQR(CGImage?)
         case sentTheFundsButtonTapped
         case shareFinished
@@ -1028,7 +1031,7 @@ public struct SwapAndPay {
                 
             case .confirmToZecButtonTapped:
                 state.isQuoteToZecPresented = false
-                return .none
+                return .send(.generateEnlargedQRCode)
 
             case .copySwapToZecAmountTapped:
                 guard let quote = state.quote else {
@@ -1042,11 +1045,18 @@ public struct SwapAndPay {
                 guard state.storedQR != nil else {
                     return .none
                 }
-                state.isQRCodeAppreanceFlipped.toggle()
-                return .send(.generateQRCode(true))
+                state.isQRCodeEnlarged = true
+                guard state.storedEnlargedQR != nil else {
+                    return .send(.generateEnlargedQRCode)
+                }
+                return .none
 
             case let .rememberQR(image):
                 state.storedQR = image
+                return .none
+                
+            case let .rememberEnlargedQR(image):
+                state.storedEnlargedQR = image
                 return .none
 
             case .copyDepositAddressToPastboard:
@@ -1061,16 +1071,30 @@ public struct SwapAndPay {
                 guard let depositAddress = state.quote?.depositAddress else {
                     return .none
                 }
-                return .run { [state] send in
+                return .run { send in
                     for await image in QRCodeGenerator.generate(
                         from: depositAddress,
                         vendor: .zashi,
-                        color: state.isQRCodeAppreanceFlipped
-                        ? .black
-                        : Asset.Colors.primary.systemColor,
+                        color: Asset.Colors.primary.systemColor,
                         overlayedWithZcashLogo: false
                     ).values {
                         await send(.rememberQR(image))
+                    }
+                }
+                .cancellable(id: state.QRCancelId)
+                
+            case .generateEnlargedQRCode:
+                guard let depositAddress = state.quote?.depositAddress else {
+                    return .none
+                }
+                return .run { send in
+                    for await image in QRCodeGenerator.generate(
+                        from: depositAddress,
+                        vendor: .zashi,
+                        color: .black,
+                        overlayedWithZcashLogo: false
+                    ).values {
+                        await send(.rememberEnlargedQR(image))
                     }
                 }
                 .cancellable(id: state.QRCancelId)

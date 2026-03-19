@@ -59,23 +59,19 @@ public struct SwapToZecSummaryView: View {
                     .frame(maxWidth: .infinity)
                 }
 
-                Button {
-                    store.send(.qrCodeTapped)
-                } label: {
-                    qrCode(store.quote?.depositAddress ?? "")
-                        .frame(width: 216, height: 216)
-                        .onAppear {
-                            store.send(.generateQRCode(colorScheme == .dark ? true : false))
-                        }
-                        .padding(24)
-                        .background {
-                            RoundedRectangle(cornerRadius: Design.Radius._xl)
-                                .fill(store.isQRCodeAppreanceFlipped
-                                      ? Asset.Colors.ZDesign.Base.bone.color
-                                      : Design.screenBackground.color(colorScheme)
-                                )
-                        }
-                }
+                qrCode(store.quote?.depositAddress ?? "")
+                    .frame(width: 216, height: 216)
+                    .onAppear {
+                        store.send(.generateQRCode(colorScheme == .dark ? true : false))
+                    }
+                    .padding(24)
+                    .background {
+                        RoundedRectangle(cornerRadius: Design.Radius._xl)
+                            .fill(Design.screenBackground.color(colorScheme))
+                    }
+                    .onTapGesture {
+                        store.send(.qrCodeTapped, animation: .easeInOut)
+                    }
                 
                 if let depositAddress = store.quote?.depositAddress {
                     Text(depositAddress.truncateMiddle10)
@@ -149,6 +145,18 @@ public struct SwapToZecSummaryView: View {
             .zashiBack() { store.send(.depositFundsBackTapped) }
             .screenTitle(L10n.SwapAndPay.swap.uppercased())
             .applyScreenBackground()
+            .enlargeQR(isPresented: $store.isQRCodeEnlarged) {
+                qrEnlargedCode(store.quote?.depositAddress ?? "")
+                    .aspectRatio(1, contentMode: .fit)
+                    .padding(48)
+                    .background {
+                        if store.storedEnlargedQR != nil {
+                            RoundedRectangle(cornerRadius: Design.Radius._xl)
+                                .fill(Asset.Colors.ZDesign.Base.bone.color)
+                                .padding(24)
+                        }
+                    }
+            }
         }
     }
     
@@ -219,6 +227,17 @@ public struct SwapToZecSummaryView: View {
     @ViewBuilder public func qrCode(_ qrText: String = "") -> some View {
         Group {
             if let storedImg = store.storedQR {
+                Image(storedImg, scale: 1, label: Text(L10n.qrCodeFor(qrText)))
+                    .resizable()
+            } else {
+                ProgressView()
+            }
+        }
+    }
+    
+    @ViewBuilder public func qrEnlargedCode(_ qrText: String = "") -> some View {
+        Group {
+            if let storedImg = store.storedEnlargedQR {
                 Image(storedImg, scale: 1, label: Text(L10n.qrCodeFor(qrText)))
                     .resizable()
             } else {

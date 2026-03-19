@@ -24,12 +24,10 @@ public struct AddressDetailsView: View {
     
     public var body: some View {
         WithPerceptionTracking {
-            VStack(spacing: 0) {
-                ScrollView {
-                    VStack(spacing: 0) {
-                        Button {
-                            store.send(.qrCodeTapped)
-                        } label: {
+            WithPerceptionTracking {
+                VStack(spacing: 0) {
+                    ScrollView {
+                        VStack(spacing: 0) {
                             qrCode(store.address.data)
                                 .frame(width: 216, height: 216)
                                 .onAppear {
@@ -38,73 +36,85 @@ public struct AddressDetailsView: View {
                                 .padding(24)
                                 .background {
                                     RoundedRectangle(cornerRadius: Design.Radius._xl)
-                                        .fill(store.isQRCodeAppreanceFlipped
-                                               ? Asset.Colors.ZDesign.Base.bone.color
-                                               : Design.screenBackground.color(colorScheme)
-                                        )
+                                        .fill(Design.screenBackground.color(colorScheme))
                                         .background {
                                             RoundedRectangle(cornerRadius: Design.Radius._xl)
                                                 .stroke(Design.Surfaces.strokeSecondary.color(colorScheme))
                                         }
                                 }
                                 .padding(.top, 40)
+                                .onTapGesture {
+                                    store.send(.qrCodeTapped, animation: .easeInOut)
+                                }
+                            
+                            PrivacyBadge(store.maxPrivacy ? .max : .low)
+                                .padding(.top, 32)
+                            
+                            Text(store.addressTitle)
+                                .zFont(.semiBold, size: 20, style: Design.Text.primary)
+                                .padding(.top, 12)
+                            
+                            Text(store.address.data)
+                                .zFont(fontFamily: .robotoMono, size: 14, style: Design.Text.tertiary)
+                                .lineLimit(store.isAddressExpanded ? nil : 2)
+                                .truncationMode(.middle)
+                                .padding(.top, 8)
+                                .onTapGesture {
+                                    store.send(.addressTapped)
+                                }
+                                .onLongPressGesture {
+                                    store.send(.copyToPastboard)
+                                }
                         }
-                        
-                        PrivacyBadge(store.maxPrivacy ? .max : .low)
-                            .padding(.top, 32)
-                        
-                        Text(store.addressTitle)
-                            .zFont(.semiBold, size: 20, style: Design.Text.primary)
-                            .padding(.top, 12)
-                        
-                        Text(store.address.data)
-                            .zFont(fontFamily: .robotoMono, size: 14, style: Design.Text.tertiary)
-                            .lineLimit(store.isAddressExpanded ? nil : 2)
-                            .truncationMode(.middle)
-                            .padding(.top, 8)
-                            .onTapGesture {
-                                store.send(.addressTapped)
-                            }
-                            .onLongPressGesture {
-                                store.send(.copyToPastboard)
-                            }
                     }
-                }
-
-                Spacer()
-                
-                ZashiButton(
-                    L10n.AddressDetails.shareQR,
-                    prefixView:
-                        Asset.Assets.Icons.share.image
+                    
+                    Spacer()
+                    
+                    ZashiButton(
+                        L10n.AddressDetails.shareQR,
+                        prefixView:
+                            Asset.Assets.Icons.share.image
                             .zImage(size: 20, style: Design.Btns.Primary.fg)
-                ) {
-                    store.send(.shareQR)
-                }
-                .padding(.bottom, 8)
-                .disabled(store.addressToShare != nil)
-
-                ZashiButton(
-                    L10n.AddressDetails.copyAddress,
-                    type: .ghost,
-                    prefixView:
-                        Asset.Assets.copy.image
+                    ) {
+                        store.send(.shareQR)
+                    }
+                    .padding(.bottom, 8)
+                    .disabled(store.addressToShare != nil)
+                    
+                    ZashiButton(
+                        L10n.AddressDetails.copyAddress,
+                        type: .ghost,
+                        prefixView:
+                            Asset.Assets.copy.image
                             .zImage(size: 20, style: Design.Btns.Ghost.fg)
-                ) {
-                    store.send(.copyToPastboard)
+                    ) {
+                        store.send(.copyToPastboard)
+                    }
+                    .padding(.bottom, 20)
+                    
+                    shareView()
                 }
-                .padding(.bottom, 20)
-
-                shareView()
+                .frame(maxWidth: .infinity)
+                .padding(.top, 20)
+                .onAppear { store.send(.onAppear) }
+                .onDisappear { store.send(.onDisappear) }
             }
-            .frame(maxWidth: .infinity)
-            .padding(.top, 20)
-            .onAppear { store.send(.onAppear) }
-            .onDisappear { store.send(.onDisappear) }
+            .screenHorizontalPadding()
+            .applyScreenBackground()
+            .zashiBack(hidden: store.isQRCodeEnlarged)
+            .enlargeQR(isPresented: $store.isQRCodeEnlarged) {
+                qrEnlargedCode(store.address.data)
+                    .aspectRatio(1, contentMode: .fit)
+                    .padding(48)
+                    .background {
+                        if store.storedEnlargedQR != nil {
+                            RoundedRectangle(cornerRadius: Design.Radius._xl)
+                                .fill(Asset.Colors.ZDesign.Base.bone.color)
+                                .padding(24)
+                        }
+                    }
+            }
         }
-        .screenHorizontalPadding()
-        .applyScreenBackground()
-        .zashiBack()
     }
 }
 
@@ -112,6 +122,17 @@ extension AddressDetailsView {
     @ViewBuilder public func qrCode(_ qrText: String) -> some View {
         Group {
             if let storedImg = store.storedQR {
+                Image(storedImg, scale: 1, label: Text(L10n.qrCodeFor(qrText)))
+                    .resizable()
+            } else {
+                ProgressView()
+            }
+        }
+    }
+    
+    @ViewBuilder public func qrEnlargedCode(_ qrText: String) -> some View {
+        Group {
+            if let storedImg = store.storedEnlargedQR {
                 Image(storedImg, scale: 1, label: Text(L10n.qrCodeFor(qrText)))
                     .resizable()
             } else {

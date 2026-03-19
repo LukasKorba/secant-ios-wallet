@@ -27,23 +27,27 @@ public struct RequestZec {
         public var address: RedactableString = .empty
         public var encryptedOutput: String?
         public var encryptedOutputToBeShared: String?
-        public var isQRCodeAppreanceFlipped = false
+        public var isQRCodeEnlarged = false
         public var maxPrivacy = false
         public var memoState: MessageEditor.State = .initial
         public var requestedZec: Zatoshi = .zero
         @Shared(.inMemory(.selectedWalletAccount)) public var selectedWalletAccount: WalletAccount? = nil
+        public var storedEnlargedQR: CGImage?
         public var storedQR: CGImage?
 
         public init() {}
     }
 
-    public enum Action: Equatable {
+    public enum Action: BindableAction, Equatable {
+        case binding(BindingAction<RequestZec.State>)
         case cancelRequestTapped
+        case generateEnlargedQRCode
         case generateQRCode(Bool)
         case memo(MessageEditor.Action)
         case onAppear
         case onDisappear
         case qrCodeTapped
+        case rememberEnlargedQR(CGImage?)
         case rememberQR(CGImage?)
         case requestTapped
         case shareFinished
@@ -55,6 +59,8 @@ public struct RequestZec {
     public init() { }
 
     public var body: some Reducer<State, Action> {
+        BindingReducer()
+        
         Scope(state: \.memoState, action: \.memo) {
             MessageEditor()
         }
@@ -64,14 +70,16 @@ public struct RequestZec {
             case .onAppear:
                 // __LD TESTED
                 state.memoState.charLimit = zcashSDKEnvironment.memoCharLimit
-                state.isQRCodeAppreanceFlipped = false
                 state.encryptedOutput = nil
-                return .none
+                return .send(.generateEnlargedQRCode)
 
             case .onDisappear:
                 // __LD2 TESTing
                 return .cancel(id: state.cancelId)
 
+            case .binding:
+                return .none
+                
             case .cancelRequestTapped:
                 return .none
                 
@@ -82,14 +90,18 @@ public struct RequestZec {
                 return .none
 
             case .qrCodeTapped:
-                guard state.storedQR != nil else {
-                    return .none
+                state.isQRCodeEnlarged = true
+                guard state.storedEnlargedQR != nil else {
+                    return .send(.generateEnlargedQRCode)
                 }
-                state.isQRCodeAppreanceFlipped.toggle()
-                return .send(.generateQRCode(true))
+                return .none
                 
             case let .rememberQR(image):
                 state.storedQR = image
+                return .none
+                
+            case let .rememberEnlargedQR(image):
+                state.storedEnlargedQR = image
                 return .none
 
             case .generateQRCode:
@@ -112,11 +124,39 @@ public struct RequestZec {
                                 from: encryptedOutput,
                                 maxPrivacy: state.maxPrivacy,
                                 vendor: .zashi,
-                                color: state.isQRCodeAppreanceFlipped
-                                ? .black
-                                : Asset.Colors.primary.systemColor
+                                color: Asset.Colors.primary.systemColor
                             )
                             .map(Action.rememberQR)
+                        }
+                        .cancellable(id: state.cancelId)
+                    } catch {
+                        return .none
+                    }
+                }
+                return .none
+                
+            case .generateEnlargedQRCode:
+                if let recipient = RecipientAddress(value: state.address.data, context: ParserContext.from(networkType: zcashSDKEnvironment.network.networkType)) {
+                    do {
+                        let payment = try Payment(
+                            recipientAddress: recipient,
+                            amount: try Amount(value: state.requestedZec.decimalValue.doubleValue),
+                            memo: state.memoState.text.isEmpty ? nil : try MemoBytes(utf8String: state.memoState.text),
+                            label: nil,
+                            message: nil,
+                            otherParams: nil
+                        )
+                        
+                        let encryptedOutput = ZIP321.request(payment, formattingOptions: .useEmptyParamIndex(omitAddressLabel: true))
+                        state.encryptedOutput = encryptedOutput
+                        return .publisher {
+                            QRCodeGenerator.generate(
+                                from: encryptedOutput,
+                                maxPrivacy: state.maxPrivacy,
+                                vendor: .zashi,
+                                color: .black
+                            )
+                            .map(Action.rememberEnlargedQR)
                         }
                         .cancellable(id: state.cancelId)
                     } catch {

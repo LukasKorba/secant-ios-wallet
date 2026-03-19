@@ -27,23 +27,21 @@ public struct RequestZecSummaryView: View {
     
     public var body: some View {
         WithPerceptionTracking {
-            VStack(spacing: 0) {
-                PrivacyBadge(store.maxPrivacy ? .max : .low)
-                    .padding(.top, 24)
-
-                Group {
-                    Text(store.requestedZec.decimalString())
-                    + Text(" \(tokenName)")
-                        .foregroundColor(Design.Text.quaternary.color(colorScheme))
-                }
-                .zFont(.semiBold, size: 56, style: Design.Text.primary)
-                .minimumScaleFactor(0.1)
-                .lineLimit(1)
-                .padding(.top, 8)
-
-                Button {
-                    store.send(.qrCodeTapped)
-                } label: {
+            WithPerceptionTracking {
+                VStack(spacing: 0) {
+                    PrivacyBadge(store.maxPrivacy ? .max : .low)
+                        .padding(.top, 24)
+                    
+                    Group {
+                        Text(store.requestedZec.decimalString())
+                        + Text(" \(tokenName)")
+                            .foregroundColor(Design.Text.quaternary.color(colorScheme))
+                    }
+                    .zFont(.semiBold, size: 56, style: Design.Text.primary)
+                    .minimumScaleFactor(0.1)
+                    .lineLimit(1)
+                    .padding(.top, 8)
+                    
                     qrCode()
                         .frame(width: 216, height: 216)
                         .onAppear {
@@ -52,50 +50,62 @@ public struct RequestZecSummaryView: View {
                         .padding(24)
                         .background {
                             RoundedRectangle(cornerRadius: Design.Radius._xl)
-                                .fill(store.isQRCodeAppreanceFlipped
-                                      ? Asset.Colors.ZDesign.Base.bone.color
-                                      : Design.screenBackground.color(colorScheme)
-                                )
+                                .fill(Design.screenBackground.color(colorScheme))
                                 .background {
                                     RoundedRectangle(cornerRadius: Design.Radius._xl)
                                         .stroke(Design.Surfaces.strokeSecondary.color(colorScheme))
                                 }
                         }
                         .padding(.top, 32)
+                        .onTapGesture {
+                            store.send(.qrCodeTapped, animation: .easeInOut)
+                        }
+                    
+                    Spacer()
+                    
+                    ZashiButton(
+                        L10n.General.close,
+                        type: .ghost
+                    ) {
+                        store.send(.cancelRequestTapped)
+                    }
+                    .padding(.bottom, 8)
+                    
+                    ZashiButton(
+                        L10n.RequestZec.Summary.shareQR,
+                        prefixView:
+                            Asset.Assets.Icons.share.image
+                            .zImage(size: 20, style: Design.Btns.Primary.fg)
+                    ) {
+                        store.send(.shareQR)
+                    }
+                    .padding(.bottom, 20)
+                    .disabled(store.encryptedOutputToBeShared != nil)
+                    
+                    shareView()
                 }
-
-                Spacer()
-
-                ZashiButton(
-                    L10n.General.close,
-                    type: .ghost
-                ) {
-                    store.send(.cancelRequestTapped)
-                }
-                .padding(.bottom, 8)
-
-                ZashiButton(
-                    L10n.RequestZec.Summary.shareQR,
-                    prefixView:
-                        Asset.Assets.Icons.share.image
-                        .zImage(size: 20, style: Design.Btns.Primary.fg)
-                ) {
-                    store.send(.shareQR)
-                }
-                .padding(.bottom, 20)
-                .disabled(store.encryptedOutputToBeShared != nil)
-
-                shareView()
+                .frame(maxWidth: .infinity)
+                .padding(.top, 20)
+                .onAppear { store.send(.onAppear) }
+                .onDisappear { store.send(.onDisappear) }
             }
-            .frame(maxWidth: .infinity)
-            .padding(.top, 20)
-            .onAppear { store.send(.onAppear) }
-            .onDisappear { store.send(.onDisappear) }
+            .screenTitle(L10n.General.request)
+            .screenHorizontalPadding()
+            .applyScreenBackground()
+            .zashiBack(hidden: store.isQRCodeEnlarged)
+            .enlargeQR(isPresented: $store.isQRCodeEnlarged) {
+                qrEnlargedCode()
+                    .aspectRatio(1, contentMode: .fit)
+                    .padding(48)
+                    .background {
+                        if store.storedEnlargedQR != nil {
+                            RoundedRectangle(cornerRadius: Design.Radius._xl)
+                                .fill(Asset.Colors.ZDesign.Base.bone.color)
+                                .padding(24)
+                        }
+                    }
+            }
         }
-        .screenTitle(L10n.General.request)
-        .screenHorizontalPadding()
-        .applyScreenBackground()
-        .zashiBack()
     }
 }
 
@@ -103,6 +113,17 @@ extension RequestZecSummaryView {
     @ViewBuilder public func qrCode(_ qrText: String = "") -> some View {
         Group {
             if let storedImg = store.storedQR {
+                Image(storedImg, scale: 1, label: Text(L10n.qrCodeFor(qrText)))
+                    .resizable()
+            } else {
+                ProgressView()
+            }
+        }
+    }
+    
+    @ViewBuilder public func qrEnlargedCode(_ qrText: String = "") -> some View {
+        Group {
+            if let storedImg = store.storedEnlargedQR {
                 Image(storedImg, scale: 1, label: Text(L10n.qrCodeFor(qrText)))
                     .resizable()
             } else {
