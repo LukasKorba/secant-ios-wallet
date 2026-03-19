@@ -8,6 +8,7 @@ directly impact users rather than highlighting other crucial architectural updat
 
 ### Changed
 - Swap to ZEC's swap type updated to FLEX_INPUT, reducing number of occurences of INCOMPLETE_DEPOSIT states.
+- Tap to enlarge a QR code implemented for: Receive, Request ZEC, Swap to ZEC, Sign with Keystone. 
  
 ### Fixed
 - Transaction detail row corners.

@@ -167,6 +167,7 @@ public struct ReceiveView: View {
                         .padding(.bottom, 24)
                         .padding(.horizontal, 48)
                 }
+                .padding(.horizontal, 4)
                 .applyScreenBackground()
                 .screenTitle(L10n.Tabs.receiveZec)
                 .zashiBack() { store.send(.backToHomeTapped) }
@@ -187,8 +188,6 @@ public struct ReceiveView: View {
                 explainerContent()
             }
         }
-        .padding(.horizontal, 4)
-        .applyScreenBackground()
     }
     
     @ViewBuilder private func explainerContent() -> some View {

@@ -25,10 +25,11 @@ public struct AddressDetails {
         public var addressTitle: String
         public var addressToShare: RedactableString?
         public var isAddressExpanded = false
-        public var isQRCodeAppreanceFlipped = false
+        public var isQRCodeEnlarged = false
         public var maxPrivacy = false
         @Shared(.inMemory(.selectedWalletAccount)) public var selectedWalletAccount: WalletAccount? = nil
         public var storedQR: CGImage?
+        public var storedEnlargedQR: CGImage?
         @Shared(.inMemory(.toast)) public var toast: Toast.Edge? = nil
 
         public init(
@@ -42,13 +43,16 @@ public struct AddressDetails {
         }
     }
 
-    public enum Action: Equatable {
+    public enum Action: BindableAction, Equatable {
         case addressTapped
+        case binding(BindingAction<AddressDetails.State>)
         case copyToPastboard
+        case generateEnlargedQRCode
         case generateQRCode(Bool)
         case onAppear
         case onDisappear
         case qrCodeTapped
+        case rememberEnlargedQR(CGImage?)
         case rememberQR(CGImage?)
         case shareFinished
         case shareQR
@@ -59,31 +63,39 @@ public struct AddressDetails {
     public init() { }
 
     public var body: some Reducer<State, Action> {
+        BindingReducer()
+        
         Reduce { state, action in
             switch action {
-            case .addressTapped:
-                state.isAddressExpanded.toggle()
-                return .none
-
             case .onAppear:
                 // __LD TESTED
                 state.isAddressExpanded = false
-                state.isQRCodeAppreanceFlipped = false
-                return .none
+                return .send(.generateEnlargedQRCode)
 
             case .onDisappear:
                 // __LD2 TESTing
                 return .cancel(id: state.cancelId)
+                
+            case .binding:
+                return .none
+
+            case .addressTapped:
+                state.isAddressExpanded.toggle()
+                return .none
 
             case .qrCodeTapped:
-                guard state.storedQR != nil else {
-                    return .none
+                state.isQRCodeEnlarged = true
+                guard state.storedEnlargedQR != nil else {
+                    return .send(.generateEnlargedQRCode)
                 }
-                state.isQRCodeAppreanceFlipped.toggle()
-                return .send(.generateQRCode(true))
+                return .none
 
             case let .rememberQR(image):
                 state.storedQR = image
+                return .none
+
+            case let .rememberEnlargedQR(image):
+                state.storedEnlargedQR = image
                 return .none
 
             case .copyToPastboard:
@@ -97,11 +109,21 @@ public struct AddressDetails {
                         from: state.address.data,
                         maxPrivacy: state.maxPrivacy,
                         vendor: .zashi,
-                        color: state.isQRCodeAppreanceFlipped
-                        ? .black
-                        : Asset.Colors.primary.systemColor
+                        color: Asset.Colors.primary.systemColor
                     )
                     .map(Action.rememberQR)
+                }
+                .cancellable(id: state.cancelId)
+                
+            case .generateEnlargedQRCode:
+                return .publisher {
+                    QRCodeGenerator.generate(
+                        from: state.address.data,
+                        maxPrivacy: state.maxPrivacy,
+                        vendor: .zashi,
+                        color: .black
+                    )
+                    .map(Action.rememberEnlargedQR)
                 }
                 .cancellable(id: state.cancelId)
 

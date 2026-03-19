@@ -65,6 +65,7 @@ public struct SendConfirmation {
         public var feeRequired: Zatoshi
         public var isAddressExpanded = false
         public var isKeystoneCodeFound = false
+        public var isQRCodeEnlarged = false
         public var isSending = false
         public var isShielding = false
         public var isTransparentAddress = false
@@ -152,6 +153,7 @@ public struct SendConfirmation {
         case cancelTapped
         case closeTapped
         case confirmWithKeystoneTapped
+        case enlargeQRCodeTapped
         case getSignatureTapped
         case goBackTappedFromRequestZec
         case onAppear
@@ -241,6 +243,10 @@ public struct SendConfirmation {
             case .binding:
                 return .none
 
+            case .enlargeQRCodeTapped:
+                state.isQRCodeEnlarged = true
+                return .none
+                
             case .saveAddressTapped:
                 return .none
 
