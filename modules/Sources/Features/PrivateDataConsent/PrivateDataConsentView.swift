@@ -22,79 +22,78 @@ public struct PrivateDataConsentView: View {
 
     public var body: some View {
         WithPerceptionTracking {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(L10n.PrivateDataConsent.title)
-                        .zFont(.semiBold, size: 24, style: Design.Text.primary)
-                        .padding(.top, 40)
-                    
-                    Text(L10n.PrivateDataConsent.message1)
-                        .zFont(size: 14, style: Design.Text.primary)
-                        .padding(.top, 12)
-                    
-                    Text(L10n.PrivateDataConsent.message2)
-                        .zFont(size: 14, style: Design.Text.primary)
-                        .padding(.top, 8)
-                    
-                    Text(L10n.PrivateDataConsent.message3)
-                        .zFont(size: 14, style: Design.Text.primary)
-                        .padding(.top, 8)
-                    
-                    Text(L10n.PrivateDataConsent.message4)
-                        .zFont(size: 14, style: Design.Text.primary)
-                        .padding(.top, 8)
-
-                    ZashiToggle(
-                        isOn: $store.isAcknowledged,
-                        label: L10n.PrivateDataConsent.confirmation
-                    )
-                    .padding(.vertical, 24)
-                    .padding(.leading, 1)
-                    
-                    if store.isExportingData {
-                        ZashiButton(
-                            L10n.Settings.exportPrivateData,
-                            type: .secondary,
-                            accessoryView: ProgressView()
-                        ) {
-                            store.send(.exportRequested)
-                        }
-                        .disabled(true)
-                        .padding(.bottom, 8)
-                    } else {
-                        ZashiButton(
-                            L10n.Settings.exportPrivateData,
-                            type: .secondary
-                        ) {
-                            store.send(.exportRequested)
-                        }
-                        .disabled(!store.isExportPossible)
-                        .padding(.bottom, 8)
+            VStack(alignment: .leading, spacing: 0) {
+                Text(L10n.PrivateDataConsent.title)
+                    .zFont(.semiBold, size: 24, style: Design.Text.primary)
+                    .padding(.top, 40)
+                
+                Text(L10n.PrivateDataConsent.message1)
+                    .zFont(size: 14, style: Design.Text.primary)
+                    .padding(.top, 12)
+                
+                Text(L10n.PrivateDataConsent.message2)
+                    .zFont(size: 14, style: Design.Text.primary)
+                    .padding(.top, 8)
+                
+                Text(L10n.PrivateDataConsent.message3)
+                    .zFont(size: 14, style: Design.Text.primary)
+                    .padding(.top, 8)
+                
+                Text(L10n.PrivateDataConsent.message4)
+                    .zFont(size: 14, style: Design.Text.primary)
+                    .padding(.top, 8)
+                
+                Spacer()
+                
+                ZashiToggle(
+                    isOn: $store.isAcknowledged,
+                    label: L10n.PrivateDataConsent.confirmation
+                )
+                .padding(.vertical, 24)
+                .padding(.leading, 1)
+                
+                if store.isExportingData {
+                    ZashiButton(
+                        L10n.Settings.exportPrivateData,
+                        type: .secondary,
+                        accessoryView: ProgressView()
+                    ) {
+                        store.send(.exportRequested)
                     }
-                    
-#if DEBUG
-                    if store.isExportingLogs {
-                        ZashiButton(
-                            L10n.Settings.exportLogsOnly,
-                            accessoryView: ProgressView()
-                        ) {
-                            store.send(.exportLogsRequested)
-                        }
-                        .disabled(true)
-                        .padding(.bottom, 20)
-                    } else {
-                        ZashiButton(
-                            L10n.Settings.exportLogsOnly
-                        ) {
-                            store.send(.exportLogsRequested)
-                        }
-                        .disabled(!store.isExportPossible)
-                        .padding(.bottom, 20)
+                    .disabled(true)
+                    .padding(.bottom, 8)
+                } else {
+                    ZashiButton(
+                        L10n.Settings.exportPrivateData,
+                        type: .secondary
+                    ) {
+                        store.send(.exportRequested)
                     }
-#endif
+                    .disabled(!store.isExportPossible)
+                    .padding(.bottom, 8)
                 }
+                
+#if DEBUG
+                if store.isExportingLogs {
+                    ZashiButton(
+                        L10n.Settings.exportLogsOnly,
+                        accessoryView: ProgressView()
+                    ) {
+                        store.send(.exportLogsRequested)
+                    }
+                    .disabled(true)
+                    .padding(.bottom, 20)
+                } else {
+                    ZashiButton(
+                        L10n.Settings.exportLogsOnly
+                    ) {
+                        store.send(.exportLogsRequested)
+                    }
+                    .disabled(!store.isExportPossible)
+                    .padding(.bottom, 20)
+                }
+#endif
             }
-            .padding(.vertical, 1)
             .zashiBack()
             .onAppear { store.send(.onAppear)}
 
