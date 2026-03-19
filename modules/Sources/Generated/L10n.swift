@@ -1118,14 +1118,14 @@ public enum L10n {
   public enum Scan {
     /// The camera is not authorized. Please go to the system settings of Zodl and turn it on.
     public static let cameraSettings = L10n.tr("Localizable", "scan.cameraSettings", fallback: "The camera is not authorized. Please go to the system settings of Zodl and turn it on.")
-    /// This image doesn't hold a valid Zcash address.
-    public static let invalidImage = L10n.tr("Localizable", "scan.invalidImage", fallback: "This image doesn't hold a valid Zcash address.")
-    /// This QR code doesn't hold a valid Zcash address.
-    public static let invalidQR = L10n.tr("Localizable", "scan.invalidQR", fallback: "This QR code doesn't hold a valid Zcash address.")
+    /// This image doesn't contain a valid Zcash address.
+    public static let invalidImage = L10n.tr("Localizable", "scan.invalidImage", fallback: "This image doesn't contain a valid Zcash address.")
+    /// This QR code doesn't contain a valid Zcash address.
+    public static let invalidQR = L10n.tr("Localizable", "scan.invalidQR", fallback: "This QR code doesn't contain a valid Zcash address.")
     /// Open settings
     public static let openSettings = L10n.tr("Localizable", "scan.openSettings", fallback: "Open settings")
-    /// This image holds several valid Zcash addresses.
-    public static let severalCodesFound = L10n.tr("Localizable", "scan.severalCodesFound", fallback: "This image holds several valid Zcash addresses.")
+    /// This image contains several valid Zcash addresses.
+    public static let severalCodesFound = L10n.tr("Localizable", "scan.severalCodesFound", fallback: "This image contains several valid Zcash addresses.")
   }
   public enum Send {
     /// Add contact by tapping on Address Book icon.
@@ -2148,6 +2148,10 @@ public enum L10n {
     public static let shieldedFunds = L10n.tr("Localizable", "transaction.shieldedFunds", fallback: "Shielded")
     /// Shielding
     public static let shieldingFunds = L10n.tr("Localizable", "transaction.shieldingFunds", fallback: "Shielding")
+  }
+  public enum TransactionDetail {
+    /// Fee
+    public static let feeSummary = L10n.tr("Localizable", "transactionDetail.feeSummary", fallback: "Fee")
   }
   public enum TransactionHistory {
     /// Address

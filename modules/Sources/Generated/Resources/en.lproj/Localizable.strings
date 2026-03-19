@@ -110,9 +110,9 @@
 "balances.restoringWalletWarning" = "The restore process can take several hours on lower-powered devices, and even on powerful devices is likely to take more than an hour.";
 
 // MARK: - Scan
-"scan.invalidQR" = "This QR code doesn't hold a valid Zcash address.";
-"scan.invalidImage" = "This image doesn't hold a valid Zcash address.";
-"scan.severalCodesFound" = "This image holds several valid Zcash addresses.";
+"scan.invalidQR" = "This QR code doesn't contain a valid Zcash address.";
+"scan.invalidImage" = "This image doesn't contain a valid Zcash address.";
+"scan.severalCodesFound" = "This image contains several valid Zcash addresses.";
 "scan.cameraSettings" = "The camera is not authorized. Please go to the system settings of Zodl and turn it on.";
 "scan.openSettings" = "Open settings";
 
@@ -1007,3 +1007,5 @@
 "reportSwap.depositAddress" = "Deposit Address: ";
 "reportSwap.sourceAsset" = "Source Asset: %@ on %@\n";
 "reportSwap.targetAsset" = "Target Asset: %@ on %@\n";
+
+"transactionDetail.feeSummary" = "Fee";
