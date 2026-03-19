@@ -598,7 +598,7 @@
 "smartBanner.content.shield.titleShorter" = "Saldo Transparente";
 "smartBanner.content.shield.button" = "Proteger";
 
-"smartBanner.content.tor.title" = "Beta: Activar protección Tor";
+"smartBanner.content.tor.title" = "Activar protección Tor";
 "smartBanner.content.tor.info" = "Protege tu dirección IP";
 "smartBanner.content.tor.button" = "Revisar";
 
@@ -656,18 +656,18 @@
 
 "recoveryPhraseDisplay.proceedWarning" = "Mantén esta frase de manera segura oculta. ¡No tomes capturas de pantalla ni la guardes en tu teléfono!";
 
-"torSetup.title" = "Beta: Protección Tor";
-"torSetup.learn.desc" = "Esta función beta brinda protección adicional a tu dirección IP. Si el uso de Tor está permitido en tu región, te recomendamos activarla. Puedes gestionarlo en Configuración avanzada.";
+"torSetup.title" = "Protección Tor";
+"torSetup.learn.desc" = "Esta función brinda protección adicional a tu dirección IP. Si el uso de Tor está permitido en tu región, te recomendamos activarla. Puedes gestionarlo en Configuración avanzada.";
 
 "torSetup.settings.desc1" = "Esta función beta brinda protección adicional para tu dirección IP. Utiliza Tor para obtener tasas de cambio, enviar transacciones, recuperar datos de transacciones y conectarse a APIs de terceros.";
-"torSetup.settings.desc2" = "Al ser una función beta, podría afectar el rendimiento. Si el uso de Tor está permitido en tu región, te recomendamos habilitarlo.";
+"torSetup.settings.desc2" = "Si el uso de Tor está permitido en tu región, te recomendamos habilitarlo.";
 "torSetup.option1.title" = "Conversión de moneda";
 "torSetup.option1.desc" = "Obtén tasas de cambio desde servidores de terceros sin revelar tu dirección IP. (Disponible solo con Tor activado.)";
 "torSetup.option2.title" = "Transacciones";
 "torSetup.option2.desc" = "Envía y recupera datos de transacciones a través de Tor para mayor privacidad.";
 "torSetup.option3.title" = "Integraciones";
 "torSetup.option3.desc" = "Accede a APIs de terceros (por ejemplo, NEAR) a través de Tor para mayor privacidad.";
-"settings.private" = "Beta: Protección Tor";
+"settings.private" = "Protección Tor";
 "torSetup.enableDesc" = "Conectarse mediante Tor.";
 "torSetup.disableDesc" = "No conectarse mediante Tor.";
 

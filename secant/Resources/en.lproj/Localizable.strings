@@ -598,7 +598,7 @@
 "smartBanner.content.shield.titleShorter" = "Transparent Balance";
 "smartBanner.content.shield.button" = "Shield";
 
-"smartBanner.content.tor.title" = "Beta: Enable Tor Protection";
+"smartBanner.content.tor.title" = "Enable Tor Protection";
 "smartBanner.content.tor.info" = "Protect your IP address";
 "smartBanner.content.tor.button" = "Review";
 
@@ -656,18 +656,18 @@
 
 "recoveryPhraseDisplay.proceedWarning" = "Keep this phrase securely hidden. Don’t take screenshots of it or store it on your phone!";
 
-"torSetup.title" = "Beta: Tor Protection";
-"torSetup.learn.desc" = "This beta feature provides additional protections for your IP address. If Tor is permitted in your region, we recommend enabling it. You can manage this in Advanced Settings.";
+"torSetup.title" = "Tor Protection";
+"torSetup.learn.desc" = "This feature provides additional protections for your IP address. If Tor is permitted in your region, we recommend enabling it. You can manage this in Advanced Settings.";
 
 "torSetup.settings.desc1" = "Tor provides additional protections for your IP address. This feature uses Tor network to fetch exchange rates, send transactions, retrieve transaction data, and connect to third party APIs.";
-"torSetup.settings.desc2" = "As a beta feature, it may affect performance. If Tor is permitted in your region, we recommend enabling it.";
+"torSetup.settings.desc2" = "If Tor is permitted in your region, we recommend enabling it.";
 "torSetup.option1.title" = "Currency Conversion";
 "torSetup.option1.desc" = "Fetch exchange rates from third-party servers without revealing your IP address. (Only available with Tor enabled.)";
 "torSetup.option2.title" = "Transactions";
 "torSetup.option2.desc" = "Send and retrieve transaction data over Tor for added privacy.";
 "torSetup.option3.title" = "Integrations";
 "torSetup.option3.desc" = "Access third-party APIs (e.g. NEAR) over Tor for added privacy.";
-"settings.private" = "Beta: Tor Protection";
+"settings.private" = "Tor Protection";
 "torSetup.enableDesc" = "Connect over Tor.";
 "torSetup.disableDesc" = "Don’t connect over Tor.";
 
