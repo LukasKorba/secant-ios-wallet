@@ -176,6 +176,8 @@ public struct CurrencyConversionSetup {
                     } catch {
                         await send(.torInitFailed)
                     }
+                    
+                    await send(.backToHomeTapped)
                 }
 
             case .skipTapped:

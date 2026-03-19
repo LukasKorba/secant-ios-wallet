@@ -171,6 +171,8 @@ public struct TorSetup {
                     } else {
                         try? await sdkSynchronizer.torEnabled(newFlag)
                     }
+                    
+                    await send(.backToHomeTapped)
                 }
 
             case .disableTapped:
