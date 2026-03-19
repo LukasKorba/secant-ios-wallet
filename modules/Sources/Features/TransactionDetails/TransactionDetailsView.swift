@@ -571,7 +571,7 @@ extension TransactionDetailsView {
                     if store.transaction.isSentTransaction {
                         if store.isSensitiveContentHidden {
                             detailView(
-                                title: L10n.Send.feeSummary,
+                                title: L10n.TransactionDetail.feeSummary,
                                 value: L10n.General.hideBalancesMost,
                                 rowAppereance: .middle
                             )

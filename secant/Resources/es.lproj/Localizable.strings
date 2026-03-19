@@ -110,9 +110,9 @@
 "balances.restoringWalletWarning" = "El proceso de restauración puede llevar varias horas en dispositivos de menor potencia, e incluso en dispositivos potentes es probable que lleve más de una hora.";
 
 // MARK: - Scan
-"scan.invalidQR" = "Este código QR no contiene una dirección válida de Zcash.";
-"scan.invalidImage" = "Esta imagen no contiene una dirección válida de Zcash.";
-"scan.severalCodesFound" = "Esta imagen contiene varias direcciones válidas de Zcash.";
+"scan.invalidQR" = "Este código QR no contiene una dirección Zcash válida.";
+"scan.invalidImage" = "Esta imagen no contiene una dirección Zcash válida.";
+"scan.severalCodesFound" = "Esta imagen contiene varias direcciones Zcash válidas.";
 "scan.cameraSettings" = "La cámara no está autorizada. Por favor, ve a la configuración del sistema de Zodl y actívala.";
 "scan.openSettings" = "Abrir configuración";
 
@@ -479,7 +479,7 @@
 "transactionHistory.threeDots" = "%@...";
 "transactionHistory.defaultFee" = "0.001";
 "annotation.edit" = "Editar nota";
-"annotation.addArticle" = "Agregar una nota";
+"annotation.addArticle" = "Agregar nota";
 "annotation.add" = "Agregar nota";
 "annotation.delete" = "Eliminar nota";
 "annotation.save" = "Guardar nota";
@@ -1007,3 +1007,5 @@
 "reportSwap.depositAddress" = "Dirección de depósito: ";
 "reportSwap.sourceAsset" = "Activo de origen: %@ en %@\n";
 "reportSwap.targetAsset" = "Activo destino: %@ en %@\n";
+
+"transactionDetail.feeSummary" = "Comisión";
