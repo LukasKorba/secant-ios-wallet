@@ -13,7 +13,7 @@ import UIComponents
 extension HomeView {
     @ViewBuilder func accountSwitchContent() -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text(L10n.Keystone.Drawer.title)
+            Text(localizable: .keystoneDrawerTitle)
                 .zFont(.semiBold, size: 20, style: Design.Text.primary)
                 .padding(.top, 32)
                 .padding(.bottom, 24)
@@ -23,7 +23,7 @@ extension HomeView {
                 walletAccountView(
                     icon: walletAccount.vendor.icon(),
                     title: walletAccount.vendor.name(),
-                    address: walletAccount.unifiedAddress ?? L10n.Receive.Error.cantExtractUnifiedAddress,
+                    address: walletAccount.unifiedAddress ?? String(localizable: .receiveErrorCantExtractUnifiedAddress),
                     selected: store.selectedWalletAccount == walletAccount
                 ) {
                     store.send(.walletAccountTapped(walletAccount))
@@ -38,7 +38,7 @@ extension HomeView {
                     }
 
                 ZashiButton(
-                    L10n.Keystone.connect,
+                    String(localizable: .keystoneConnect),
                     type: .secondary
                 ) {
                     store.send(.addKeystoneHWWalletTapped)
@@ -114,10 +114,10 @@ extension HomeView {
                         .padding(.trailing, 12)
                     
                     VStack(alignment: .leading, spacing: 0) {
-                        Text(L10n.Keystone.Drawer.Banner.title)
+                        Text(localizable: .keystoneDrawerBannerTitle)
                             .zFont(.semiBold, size: 14, style: Design.Text.primary)
                         
-                        Text(L10n.Keystone.Drawer.Banner.desc)
+                        Text(localizable: .keystoneDrawerBannerDesc)
                             .zFont(size: 14, style: Design.Text.tertiary)
                             .fixedSize(horizontal: false, vertical: true)
                             .lineSpacing(2)
@@ -144,10 +144,10 @@ extension HomeView {
         WithPerceptionTracking {
             VStack(spacing: 0) {
                 VStack(alignment: .leading, spacing: 0) {
-                    Text(L10n.Keystone.Drawer.Banner.title)
+                    Text(localizable: .keystoneDrawerBannerTitle)
                         .zFont(.semiBold, size: 18, style: Design.Text.primary)
                     
-                    Text(L10n.Keystone.Drawer.Banner.desc)
+                    Text(localizable: .keystoneDrawerBannerDesc)
                         .zFont(size: 12, style: Design.Text.tertiary)
                         .fixedSize(horizontal: false, vertical: true)
                         .lineSpacing(2)

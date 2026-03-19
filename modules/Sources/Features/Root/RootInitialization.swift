@@ -319,8 +319,8 @@ extension Root {
                                 seedBytes,
                                 birthday,
                                 walletMode,
-                                L10n.Accounts.zashi,
-                                L10n.Accounts.zashi.lowercased()
+                                String(localizable: .accountsZashi),
+                                String(localizable: .accountsZashi).lowercased()
                             )
 
                             await send(.fetchTransactionsForTheSelectedAccount)

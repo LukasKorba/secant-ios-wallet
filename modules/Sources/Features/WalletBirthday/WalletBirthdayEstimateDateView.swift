@@ -27,15 +27,15 @@ public struct WalletBirthdayEstimateDateView: View {
                         .padding(.top, 16)
                 }
 
-                Text(L10n.RestoreWallet.Birthday.EstimateDate.title)
+                Text(localizable: .restoreWalletBirthdayEstimateDateTitle)
                     .zFont(.semiBold, size: 24, style: Design.Text.primary)
                     .padding(.top, 40)
                     .padding(.bottom, 8)
 
                 Text(
                     store.isKeystoneFlow
-                    ? L10n.Keystone.Birthday.EstimateDate.info
-                    : L10n.RestoreWallet.Birthday.EstimateDate.info
+                    ? String(localizable: .keystoneBirthdayEstimateDateInfo)
+                    : String(localizable: .restoreWalletBirthdayEstimateDateInfo)
                 )
                 .zFont(size: 14, style: Design.Text.primary)
                 .padding(.bottom, 32)
@@ -65,8 +65,8 @@ public struct WalletBirthdayEstimateDateView: View {
                         Asset.Assets.infoOutline.image
                             .zImage(size: 20, style: Design.Utility.Indigo._500)
                             .padding(.trailing, 12)
-                        
-                        Text(L10n.RestoreWallet.dateTip)
+
+                        Text(localizable: .restoreWalletDateTip)
                             .zFont(.medium, size: 12, style: Design.Utility.Indigo._700)
                     }
                     .padding(.bottom, 20)
@@ -75,7 +75,7 @@ public struct WalletBirthdayEstimateDateView: View {
 
                 if store.isKeystoneFlow {
                     ZashiButton(
-                        L10n.Keystone.AddHWWallet.enterManually,
+                        String(localizable: .keystoneAddHWWalletEnterManually),
                         type: .ghost
                     ) {
                         store.send(.enterManuallyTapped)
@@ -83,7 +83,7 @@ public struct WalletBirthdayEstimateDateView: View {
                     .padding(.bottom, 12)
                 }
 
-                ZashiButton(L10n.General.next) {
+                ZashiButton(String(localizable: .generalNext)) {
                     store.send(.estimateHeightRequested)
                 }
                 .padding(.bottom, 24)
@@ -104,7 +104,7 @@ public struct WalletBirthdayEstimateDateView: View {
         )
         .screenHorizontalPadding()
         .applyScreenBackground()
-        .screenTitle(store.isKeystoneFlow ? "" : L10n.ImportWallet.Button.restoreWallet)
+        .screenTitle(store.isKeystoneFlow ? "" : String(localizable: .importWalletButtonRestoreWallet))
     }
 }
 
