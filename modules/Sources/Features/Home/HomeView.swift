@@ -28,6 +28,8 @@ public struct HomeView: View {
     public var body: some View {
         WithPerceptionTracking {
             VStack(spacing: 0) {
+                Text(localizable: .settingsAbout)
+                
                 WalletBalancesView(
                     store: store.scope(
                         state: \.walletBalancesState,
