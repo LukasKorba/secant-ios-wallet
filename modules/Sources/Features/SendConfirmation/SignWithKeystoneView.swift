@@ -167,7 +167,7 @@ public struct SignWithKeystoneView: View {
         }
         .screenHorizontalPadding()
         .applyScreenBackground()
-        .zashiBack(hidden: true)
+        .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
         .screenTitle(L10n.Keystone.SignWith.signTransaction)
         .enlargeQR(isPresented: $store.isQRCodeEnlarged) {

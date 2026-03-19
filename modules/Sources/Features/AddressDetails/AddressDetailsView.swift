@@ -101,7 +101,7 @@ public struct AddressDetailsView: View {
             }
             .screenHorizontalPadding()
             .applyScreenBackground()
-            .zashiBack(hidden: store.isQRCodeEnlarged)
+            .zashiBack()
             .enlargeQR(isPresented: $store.isQRCodeEnlarged) {
                 qrEnlargedCode(store.address.data)
                     .aspectRatio(1, contentMode: .fit)
