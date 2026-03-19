@@ -59,7 +59,7 @@ public struct Home {
         }
 
         public var inAppBrowserURLKeystone: String {
-            "https://keyst.one/shop/products/keystone-3-pro?discount=Zashi"
+            "https://keyst.one/shop/products/keystone-3-pro?discount=Zodl"
         }
 
         public init(

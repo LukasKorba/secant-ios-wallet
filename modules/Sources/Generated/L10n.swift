@@ -569,8 +569,8 @@ public enum L10n {
       public static let step2 = L10n.tr("Localizable", "keystone.addHWWallet.step2", fallback: "Tap the menu icon")
       /// Tap on Connect Software Wallet
       public static let step3 = L10n.tr("Localizable", "keystone.addHWWallet.step3", fallback: "Tap on Connect Software Wallet")
-      /// Select Zashi app and scan QR code
-      public static let step4 = L10n.tr("Localizable", "keystone.addHWWallet.step4", fallback: "Select Zashi app and scan QR code")
+      /// Select Zodl (Zashi) app and scan QR code
+      public static let step4 = L10n.tr("Localizable", "keystone.addHWWallet.step4", fallback: "Select Zodl (Zashi) app and scan QR code")
       /// Confirm Account to Access
       public static let title = L10n.tr("Localizable", "keystone.addHWWallet.title", fallback: "Confirm Account to Access")
       /// View Keystone tutorial
@@ -580,8 +580,8 @@ public enum L10n {
       /// Wallets & Hardware
       public static let title = L10n.tr("Localizable", "keystone.drawer.title", fallback: "Wallets & Hardware")
       public enum Banner {
-        /// Get 5%% off airgapped hardware wallet. Promo code "Zashi".
-        public static let desc = L10n.tr("Localizable", "keystone.drawer.banner.desc", fallback: "Get 5%% off airgapped hardware wallet. Promo code \"Zashi\".")
+        /// Get 5%% off airgapped hardware wallet. Promo code "Zodl".
+        public static let desc = L10n.tr("Localizable", "keystone.drawer.banner.desc", fallback: "Get 5%% off airgapped hardware wallet. Promo code \"Zodl\".")
         /// Keystone Hardware Wallet
         public static let title = L10n.tr("Localizable", "keystone.drawer.banner.title", fallback: "Keystone Hardware Wallet")
       }
@@ -823,8 +823,8 @@ public enum L10n {
     public static let proceedWarning = L10n.tr("Localizable", "recoveryPhraseDisplay.proceedWarning", fallback: "Keep this phrase securely hidden. Don’t take screenshots of it or store it on your phone!")
     /// Reveal security details
     public static let reveal = L10n.tr("Localizable", "recoveryPhraseDisplay.reveal", fallback: "Reveal security details")
-    /// Wallet Backup
-    public static let screenTitle = L10n.tr("Localizable", "recoveryPhraseDisplay.screenTitle", fallback: "Wallet Backup")
+    /// Recovery Phrase
+    public static let screenTitle = L10n.tr("Localizable", "recoveryPhraseDisplay.screenTitle", fallback: "Recovery Phrase")
     /// Secret Recovery Phrase
     public static let title = L10n.tr("Localizable", "recoveryPhraseDisplay.title", fallback: "Secret Recovery Phrase")
     /// Your secret recovery phrase is a unique set of 24 words, appearing in a precise order. It protects access to your funds.
@@ -1278,8 +1278,8 @@ public enum L10n {
     public static let allServers = L10n.tr("Localizable", "serverSetup.allServers", fallback: "Browse all servers")
     /// This may take a moment...
     public static let couldTakeTime = L10n.tr("Localizable", "serverSetup.couldTakeTime", fallback: "This may take a moment...")
-    /// custom server
-    public static let custom = L10n.tr("Localizable", "serverSetup.custom", fallback: "custom server")
+    /// custom
+    public static let custom = L10n.tr("Localizable", "serverSetup.custom", fallback: "custom")
     /// Default
     public static let `default` = L10n.tr("Localizable", "serverSetup.default", fallback: "Default")
     /// Fastest servers
