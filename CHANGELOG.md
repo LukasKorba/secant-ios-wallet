@@ -12,6 +12,7 @@ directly impact users rather than highlighting other crucial architectural updat
 ### Fixed
 - Transaction detail row corners.
 - Address font at several places.
+- Splash screen layout in different states.
 
 ### Removed
 - Zodl Announcement screen.
