@@ -92,7 +92,7 @@ public struct RequestZecSummaryView: View {
             .screenTitle(L10n.General.request)
             .screenHorizontalPadding()
             .applyScreenBackground()
-            .zashiBack(hidden: store.isQRCodeEnlarged)
+            .zashiBack()
             .enlargeQR(isPresented: $store.isQRCodeEnlarged) {
                 qrEnlargedCode()
                     .aspectRatio(1, contentMode: .fit)
