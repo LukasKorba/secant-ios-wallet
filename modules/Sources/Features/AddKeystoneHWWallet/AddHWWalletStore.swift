@@ -119,8 +119,8 @@ public struct AddKeystoneHWWallet {
                             AddKeystoneHWWallet.hexStringToBytes(account.seedFingerprint),
                             Zip32AccountIndex(firstAccount.index),
                             AccountPurpose.spending,
-                            L10n.Accounts.keystone,
-                            L10n.Accounts.keystone.lowercased()
+                            String(localizable: .accountsKeystone),
+                            String(localizable: .accountsKeystone).lowercased()
                         )
                         if let uuid {
                             await send(.accountImported(uuid))
