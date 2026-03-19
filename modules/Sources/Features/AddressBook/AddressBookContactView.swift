@@ -49,7 +49,7 @@ public struct AddressBookContactView: View {
                 if store.context != .send || store.isEditingContactWithChain {
                     if store.isValidZcashAddress && store.context != .swap {
                         VStack(alignment: .leading, spacing: 0) {
-                            Text(String(localizable: .swapAndPayAddressBookSelectChain))
+                            Text(localizable: .swapAndPayAddressBookSelectChain)
                                 .zFont(.medium, size: 14, style: Design.Dropdowns.Default.label)
                                 .padding(.bottom, 6)
                             
@@ -81,7 +81,7 @@ public struct AddressBookContactView: View {
                         .padding(.top, 20)
                     } else {
                         VStack(alignment: .leading, spacing: 0) {
-                            Text(String(localizable: .swapAndPayAddressBookSelectChain))
+                            Text(localizable: .swapAndPayAddressBookSelectChain)
                                 .zFont(.medium, size: 14, style: Design.Dropdowns.Default.label)
                                 .padding(.bottom, 6)
                             
@@ -98,7 +98,7 @@ public struct AddressBookContactView: View {
                                         Text(selectedChain.chainName)
                                             .zFont(size: 16, style: Design.Dropdowns.Default.text)
                                     } else {
-                                        Text(String(localizable: .swapAndPayAddressBookSelect))
+                                        Text(localizable: .swapAndPayAddressBookSelect)
                                             .zFont(size: 16, style: Design.Dropdowns.Default.text)
                                     }
                                     
