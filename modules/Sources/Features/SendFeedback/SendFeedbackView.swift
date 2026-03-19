@@ -16,96 +16,149 @@ public struct SendFeedbackView: View {
     
     @Perception.Bindable var store: StoreOf<SendFeedback>
     
+    @FocusState public var isFieldFocused: Bool
+    @State private var keyboardVisible: Bool = false
+
     public init(store: StoreOf<SendFeedback>) {
         self.store = store
     }
 
     public var body: some View {
         WithPerceptionTracking {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(L10n.SendFeedback.title)
-                        .zFont(.semiBold, size: 24, style: Design.Text.primary)
-                        .padding(.top, 40)
-                    
-                    Text(L10n.SendFeedback.desc)
-                        .zFont(size: 14, style: Design.Text.primary)
-                        .padding(.top, 8)
-                    
-                    Text(L10n.SendFeedback.ratingQuestion)
-                        .zFont(.medium, size: 14, style: Design.Text.primary)
-                        .padding(.top, 32)
-                    
-                    HStack(spacing: 12) {
-                        ForEach(0..<5) { rating in
-                            WithPerceptionTracking {
-                                Button {
-                                    store.send(.ratingTapped(rating))
-                                } label: {
-                                    Text(store.ratings[rating])
-                                        .padding(.vertical, 12)
-                                        .frame(maxWidth: .infinity)
-                                        .background {
-                                            RoundedRectangle(cornerRadius: Design.Radius._xl)
-                                                .fill(Design.Surfaces.bgSecondary.color(colorScheme))
-                                        }
-                                        .padding(3)
-                                        .overlay {
-                                            if let selectedRating = store.selectedRating, selectedRating == rating {
-                                                RoundedRectangle(cornerRadius: 14)
-                                                    .stroke(Design.Text.primary.color(colorScheme))
+            ZStack {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text(L10n.SendFeedback.title)
+                            .zFont(.semiBold, size: 24, style: Design.Text.primary)
+                            .padding(.top, 40)
+                        
+                        Text(L10n.SendFeedback.desc)
+                            .zFont(size: 14, style: Design.Text.primary)
+                            .padding(.top, 8)
+                        
+                        Text(L10n.SendFeedback.ratingQuestion)
+                            .zFont(.medium, size: 14, style: Design.Text.primary)
+                            .padding(.top, 32)
+                        
+                        HStack(spacing: 12) {
+                            ForEach(0..<5) { rating in
+                                WithPerceptionTracking {
+                                    Button {
+                                        store.send(.ratingTapped(rating))
+                                    } label: {
+                                        Text(store.ratings[rating])
+                                            .padding(.vertical, 12)
+                                            .frame(maxWidth: .infinity)
+                                            .background {
+                                                RoundedRectangle(cornerRadius: Design.Radius._xl)
+                                                    .fill(Design.Surfaces.bgSecondary.color(colorScheme))
                                             }
-                                        }
+                                            .padding(3)
+                                            .overlay {
+                                                if let selectedRating = store.selectedRating, selectedRating == rating {
+                                                    RoundedRectangle(cornerRadius: 14)
+                                                        .stroke(Design.Text.primary.color(colorScheme))
+                                                }
+                                            }
+                                    }
                                 }
                             }
                         }
-                    }
-                    .padding(.top, 12)
-                    
-                    Text(L10n.SendFeedback.howCanWeHelp)
-                        .zFont(.medium, size: 14, style: Design.Text.primary)
-                        .padding(.top, 24)
-                    
-                    MessageEditorView(
-                        store: store.memoStore(),
-                        title: "",
-                        placeholder: L10n.SendFeedback.hcwhPlaceholder
-                    )
-                    .frame(height: 155)
-                    
-                    if let supportData = store.supportData {
-                        UIMailDialogView(
-                            supportData: supportData,
-                            completion: {
-                                store.send(.sendSupportMailFinished)
-                            }
+                        .padding(.top, 12)
+                        
+                        Text(L10n.SendFeedback.howCanWeHelp)
+                            .zFont(.medium, size: 14, style: Design.Text.primary)
+                            .padding(.top, 24)
+                        
+                        MessageEditorView(
+                            store: store.memoStore(),
+                            title: "",
+                            placeholder: L10n.SendFeedback.hcwhPlaceholder
                         )
-                        // UIMailDialogView only wraps MFMailComposeViewController presentation
-                        // so frame is set to 0 to not break SwiftUI's layout
-                        .frame(width: 0, height: 0)
+                        .frame(height: 155)
+                        .autocorrectionDisabled()
+                        .autocapitalization(.none)
+                        .focused($isFieldFocused)
+                        .onAppear {
+                            isFieldFocused = true
+                        }
+                        
+                        if let supportData = store.supportData {
+                            UIMailDialogView(
+                                supportData: supportData,
+                                completion: {
+                                    store.send(.sendSupportMailFinished)
+                                }
+                            )
+                            // UIMailDialogView only wraps MFMailComposeViewController presentation
+                            // so frame is set to 0 to not break SwiftUI's layout
+                            .frame(width: 0, height: 0)
+                        }
+                        
+                        Spacer()
+                        
+                        ZashiButton(
+                            L10n.General.share
+                        ) {
+                            store.send(.sendTapped)
+                        }
+                        .disabled(store.invalidForm)
+                        .padding(.bottom, keyboardVisible ? 48 : 24)
+                        
+                        shareView()
                     }
-                    
-                    Spacer()
-                    
-                    ZashiButton(
-                        L10n.General.share
-                    ) {
-                        store.send(.sendTapped)
-                    }
-                    .disabled(store.invalidForm)
-                    .padding(.bottom, 20)
-                    
-                    shareView()
+                    .screenHorizontalPadding()
                 }
-                .screenHorizontalPadding()
+                .padding(.vertical, 1)
+                .zashiBack()
+                .onAppear {
+                    store.send(.onAppear)
+                    observeKeyboardNotifications()
+                }
             }
-            .padding(.vertical, 1)
-            .zashiBack()
-            .onAppear { store.send(.onAppear) }
+            .overlay(
+                VStack(spacing: 0) {
+                    Spacer()
+
+                    Asset.Colors.primary.color
+                        .frame(height: 1)
+                        .opacity(0.1)
+                    
+                    HStack(alignment: .center) {
+                        Spacer()
+                        
+                        Button {
+                            isFieldFocused = false
+                        } label: {
+                            Text(L10n.General.done.uppercased())
+                                .zFont(.regular, size: 14, style: Design.Text.primary)
+                        }
+                        .padding(.bottom, 4)
+                    }
+                    .applyScreenBackground()
+                    .padding(.horizontal, 20)
+                    .frame(height: keyboardVisible ? 38 : 0)
+                    .frame(maxWidth: .infinity)
+                    .opacity(keyboardVisible ? 1 : 0)
+                }
+            )
         }
         .navigationBarTitleDisplayMode(.inline)
         .applyScreenBackground()
         .screenTitle(L10n.SendFeedback.screenTitle.uppercased())
+    }
+    
+    private func observeKeyboardNotifications() {
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { _ in
+            withAnimation {
+                keyboardVisible = true
+            }
+        }
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
+            withAnimation {
+                keyboardVisible = false
+            }
+        }
     }
 }
 

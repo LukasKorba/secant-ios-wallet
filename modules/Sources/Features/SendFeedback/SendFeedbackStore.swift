@@ -55,7 +55,7 @@ public struct SendFeedback {
             case .onAppear:
                 // __LD TESTED
                 state.memoState.text = ""
-                state.selectedRating = nil
+                state.selectedRating = 4
                 state.canSendMail = MFMailComposeViewController.canSendMail()
                 return .none
 
