@@ -90,7 +90,7 @@ extension Root {
                         .map(Root.Action.flexaOnTransactionRequest)
                         .receive(on: mainQueue)
                 }
-                .cancellable(id: CancelFlexaId, cancelInFlight: true)
+                .cancellable(id: state.CancelFlexaId, cancelInFlight: true)
                 
                 // MARK: - Currency Conversion Setup
                 

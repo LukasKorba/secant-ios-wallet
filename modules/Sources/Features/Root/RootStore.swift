@@ -50,14 +50,6 @@ public struct Root {
         static let maxResetZashiSDKAttempts = 3
     }
 
-    let CancelId = UUID()
-    let CancelStateId = UUID()
-    let CancelBatteryStateId = UUID()
-    let SynchronizerCancelId = UUID()
-    let WalletConfigCancelId = UUID()
-    let DidFinishLaunchingId = UUID()
-    let CancelFlexaId = UUID()
-
     @ObservableState
     public struct State {
         public enum Path {
@@ -76,7 +68,13 @@ public struct Root {
         }
         
         public var CancelEventId = UUID()
+        public var CancelId = UUID()
         public var CancelStateId = UUID()
+        public var CancelBatteryStateId = UUID()
+        public var SynchronizerCancelId = UUID()
+        public var WalletConfigCancelId = UUID()
+        public var DidFinishLaunchingId = UUID()
+        public var CancelFlexaId = UUID()
         public var shieldingProcessorCancelId = UUID()
 
         @Shared(.inMemory(.addressBookContacts)) public var addressBookContacts: AddressBookContacts = .empty
@@ -441,12 +439,12 @@ public struct Root {
                 
             case .cancelAllRunningEffects:
                 return .concatenate(
-                    .cancel(id: CancelId),
-                    .cancel(id: CancelStateId),
-                    .cancel(id: CancelBatteryStateId),
-                    .cancel(id: SynchronizerCancelId),
-                    .cancel(id: WalletConfigCancelId),
-                    .cancel(id: DidFinishLaunchingId)
+                    .cancel(id: state.CancelId),
+                    .cancel(id: state.CancelStateId),
+                    .cancel(id: state.CancelBatteryStateId),
+                    .cancel(id: state.SynchronizerCancelId),
+                    .cancel(id: state.WalletConfigCancelId),
+                    .cancel(id: state.DidFinishLaunchingId)
                 )
 
             case .onboarding(.newWalletSuccessfulyCreated):

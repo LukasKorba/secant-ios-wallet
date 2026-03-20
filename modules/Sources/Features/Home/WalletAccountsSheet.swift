@@ -98,48 +98,7 @@ extension HomeView {
             }
         }
     }
-    
-    @ViewBuilder func addKeystoneBannerViewOldDesign() -> some View {
-        WithPerceptionTracking {
-            HStack(spacing: 0) {
-                HStack(alignment: .top, spacing: 0) {
-                    Asset.Assets.Partners.keystoneLogo.image
-                        .resizable()
-                        .frame(width: 32, height: 32)
-                        .padding(4)
-                        .background {
-                            Circle()
-                                .fill(Design.Surfaces.bgAlt.color(colorScheme))
-                        }
-                        .padding(.trailing, 12)
-                    
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text(localizable: .keystoneDrawerBannerTitle)
-                            .zFont(.semiBold, size: 14, style: Design.Text.primary)
-                        
-                        Text(localizable: .keystoneDrawerBannerDesc)
-                            .zFont(size: 14, style: Design.Text.tertiary)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .lineSpacing(2)
-                            .padding(.top, 2)
-                    }
-                    .padding(.trailing, 12)
-                }
 
-                Spacer()
-                
-                Asset.Assets.chevronRight.image
-                    .zImage(size: 24, style: Design.Text.primary)
-            }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 12)
-            .background {
-                RoundedRectangle(cornerRadius: Design.Radius._4xl)
-                    .stroke(Design.Surfaces.strokeSecondary.color(colorScheme))
-            }
-        }
-    }
-    
     @ViewBuilder func addKeystoneBannerView() -> some View {
         WithPerceptionTracking {
             VStack(spacing: 0) {
