@@ -58,7 +58,7 @@ extension Root {
                         try await mainQueue.sleep(for: .seconds(0.5))
                         await send(.initialization(.initialSetups))
                     }
-                    .cancellable(id: DidFinishLaunchingId, cancelInFlight: true)
+                    .cancellable(id: state.DidFinishLaunchingId, cancelInFlight: true)
 
             case .initialization(.appDelegate(.willEnterForeground)):
                 if state.featureFlags.appLaunchBiometric {
@@ -82,7 +82,7 @@ extension Root {
                 state.bgTask = nil
                 state.appStartState = .didEnterBackground
                 state.isLockedInKeychainUnavailableState = false
-                return .cancel(id: CancelStateId)
+                return .cancel(id: state.CancelStateId)
                 
             case .initialization(.appDelegate(.backgroundTask(let task))):
                 let keysPresent: Bool = (try? walletStorage.areKeysPresent()) ?? false
@@ -94,7 +94,7 @@ extension Root {
                     } else {
                         state.isLockedInKeychainUnavailableState = true
                         task.setTaskCompleted(success: false)
-                        return .cancel(id: DidFinishLaunchingId)
+                        return .cancel(id: state.DidFinishLaunchingId)
                     }
                 } else {
                     state.bgTask = task
@@ -152,7 +152,7 @@ extension Root {
                     LoggerProxy.event("BGTask setTaskCompleted(success: \(successOfBGTask)) from TCA")
                     state.bgTask?.setTaskCompleted(success: successOfBGTask)
                     state.bgTask = nil
-                    return .cancel(id: CancelStateId)
+                    return .cancel(id: state.CancelStateId)
                 }
                 
                 return .send(.initialization(.checkRestoreWalletFlag(snapshot.syncStatus)))
@@ -202,7 +202,7 @@ extension Root {
                         .map { $0.redacted }
                         .map(Root.Action.synchronizerStateChanged)
                 }
-                .cancellable(id: CancelStateId, cancelInFlight: true)
+                .cancellable(id: state.CancelStateId, cancelInFlight: true)
                 if state.bgTask != nil {
                     return stateStreamEffect
                 } else {
@@ -218,7 +218,7 @@ extension Root {
                         .receive(on: mainQueue)
                         .map(Root.Action.walletConfigLoaded)
                 }
-                .cancellable(id: WalletConfigCancelId, cancelInFlight: true)
+                .cancellable(id: state.WalletConfigCancelId, cancelInFlight: true)
 
             case .walletConfigLoaded(let walletConfig):
                 if walletConfig == WalletConfig.initial {
@@ -296,7 +296,7 @@ extension Root {
                         try await mainQueue.sleep(for: .seconds(0.5))
                         await send(.destination(.updateDestination(.onboarding)))
                     }
-                    .cancellable(id: CancelId, cancelInFlight: true)
+                    .cancellable(id: state.CancelId, cancelInFlight: true)
                 }
                 
                 /// Stored wallet is present, database files may or may not be present, trying to initialize app state variables and environments.
@@ -381,7 +381,7 @@ extension Root {
                         autolockHandler.batteryStatePublisher()
                             .map(Root.Action.batteryStateChanged)
                     }
-                    .cancellable(id: CancelBatteryStateId, cancelInFlight: true),
+                    .cancellable(id: state.CancelBatteryStateId, cancelInFlight: true),
                     .send(.batteryStateChanged(nil)),
                     .send(.observeTransactions),
                     .send(.observeShieldingProcessor),
@@ -458,7 +458,7 @@ extension Root {
                         await send(.destination(.updateDestination(Root.DestinationState.Destination.home)))
                     }
                 }
-                .cancellable(id: CancelId, cancelInFlight: true)
+                .cancellable(id: state.CancelId, cancelInFlight: true)
                 
             case .initialization(.resetZashiRequest(let areMetadataPreserved)):
                 state.areMetadataPreserved = areMetadataPreserved
@@ -484,7 +484,7 @@ extension Root {
                         .replaceError(with: Root.Action.resetZashiSDKFailed)
                         .receive(on: mainQueue)
                 }
-                .cancellable(id: SynchronizerCancelId, cancelInFlight: true)
+                .cancellable(id: state.SynchronizerCancelId, cancelInFlight: true)
 
             case .resetZashiSDKSucceeded:
                 state.splashAppeared = true
@@ -597,7 +597,7 @@ extension Root {
 //                    )
 //                }
                 return .concatenate(
-                    .cancel(id: SynchronizerCancelId),
+                    .cancel(id: state.SynchronizerCancelId),
                     .send(.initialization(.checkWalletInitialization))
                 )
 
@@ -609,7 +609,7 @@ extension Root {
                     }
                 }
                 state.alert = AlertState.wipeKeychainFailed(errMsg)
-                return .cancel(id: SynchronizerCancelId)
+                return .cancel(id: state.SynchronizerCancelId)
 
             case .resetZashiKeychainFailed(let osStatus):
                 guard state.maxResetZashiAppAttempts == 0 else {
@@ -624,13 +624,13 @@ extension Root {
                     }
                 }
                 state.alert = AlertState.wipeFailed(osStatus)
-                return .cancel(id: SynchronizerCancelId)
+                return .cancel(id: state.SynchronizerCancelId)
 
             case .resetZashiSDKFailed:
                 guard state.maxResetZashiSDKAttempts == 0 else {
                     state.maxResetZashiSDKAttempts -= 1
                     return .concatenate(
-                        .cancel(id: SynchronizerCancelId),
+                        .cancel(id: state.SynchronizerCancelId),
                         .send(.initialization(.resetZashi))
                     )
                 }
@@ -642,7 +642,7 @@ extension Root {
                     }
                 }
                 state.alert = AlertState.wipeFailed(Int32.max)
-                return .cancel(id: SynchronizerCancelId)
+                return .cancel(id: state.SynchronizerCancelId)
 
             case .phraseDisplay(.finishedTapped), .onboarding(.newWalletSuccessfulyCreated):
                 state.destinationState.destination = .home
@@ -650,7 +650,7 @@ extension Root {
                 
             case .welcome(.debugMenuStartup):
                 return .concatenate(
-                    Effect.cancel(id: CancelId),
+                    Effect.cancel(id: state.CancelId),
                     .send(.destination(.updateDestination(.startup)))
                 )
 
