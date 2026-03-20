@@ -129,7 +129,7 @@
 "send.amount" = "Monto";
 "send.toSummary" = "Enviando a";
 "send.to" = "Enviar a";
-"send.feeSummary" = "Tarifa";
+"send.feeSummary" = "Comisión";
 "send.confirmationTitle" = "Confirmación";
 "send.goBack" = "Cancelar";
 "send.review" = "Revisar";
@@ -264,7 +264,7 @@
 "general.show" = "Mostrar";
 "qrCodeFor" = "Código QR para %@";
 "general.tapToCopy" = "Toca para copiar";
-"general.fee" = "Tarifa Típica < %@";
+"general.fee" = "Comisión Típica < %@";
 "general.feeShort" = "< %@";
 "general.hideBalancesMost" = "-----";
 "general.hideBalancesMostStandalone" = "-----";
@@ -284,7 +284,7 @@
 "transactionList.messageTitle" = "Mensaje";
 "transactionList.messageTitlePlural" = "Mensajes";
 "transactionList.noMessageIncluded" = "No se incluyó ningún mensaje en la transacción";
-"transactionList.transactionFee" = "Tarifa de Transacción";
+"transactionList.transactionFee" = "Comisión de Transacción";
 "transactionList.transactionId" = "ID de Transacción";
 "transactionList.noTransactions" = "Sin historial de transacciones";
 
@@ -564,7 +564,7 @@
 
 "smartBanner.help.shield.title" = "Protege Siempre los Fondos Transparentes";
 "smartBanner.help.shield.info1" = "Para proteger la privacidad del usuario, Zodl no admite el gasto de ZEC transparente. Toca el botón \"Proteger\" abajo para hacer que tus fondos transparentes sean gastables y tu saldo total en Zodl sea privado.";
-"smartBanner.help.shield.info2" = "Esto creará una transacción de protección en la billetera, consolidando tus fondos transparentes y protegidos. (Tarifa típica: %@)";
+"smartBanner.help.shield.info2" = "Esto creará una transacción de protección en la billetera, consolidando tus fondos transparentes y protegidos. (Comisión típica: %@)";
 "smartBanner.help.shield.transparent" = "Transparente";
 
 "smartBanner.help.shield.notNow" = "Ahora no";
@@ -616,7 +616,7 @@
 "balances.spendableBalance.title" = "Balance Gastable";
 "balances.spendableBalance" = "Protegido (Gastable)";
 "balances.infoSyncing" = "Zodl está escaneando la blockchain para asegurarse de que tus balances se muestren correctamente.";
-"balances.infoShielding" = "Protege tus ZEC transparentes para hacerlos gastables y privados. Esto creará una transacción de protección en la billetera, consolidando tus fondos transparentes y protegidos. (Tarifa típica: %@)";
+"balances.infoShielding" = "Protege tus ZEC transparentes para hacerlos gastables y privados. Esto creará una transacción de protección en la billetera, consolidando tus fondos transparentes y protegidos. (Comisión típica: %@)";
 "balances.everythingDone" = "Todos tus fondos están protegidos y son gastables.";
 
 "shieldFunds.error.title" = "Error de Protección";
@@ -785,7 +785,7 @@
 "swapAndPay.forcedOptIn.optionOne" = "Entiendo que Zodl realiza solicitudes a la API de NEAR cada vez que interactúo con una transacción de Intercambio/Pago.";
 "swapAndPay.forcedOptIn.optionTwo" = "Entiendo que al no habilitar Tor, mi dirección IP será expuesta por la API de NEAR.";
 "swapAndPay.refundTitle" = "Fondos devueltos";
-"swapAndPay.refundInfo" = "Tu depósito fue detectado pero el intercambio no pudo completarse. Tus fondos han sido devueltos, descontando las tarifas de transacción. Si aún no los recibiste, contacta al equipo de soporte de Zodl.";
+"swapAndPay.refundInfo" = "Tu depósito fue detectado pero el intercambio no pudo completarse. Tus fondos han sido devueltos, descontando las comisiones de transacción. Si aún no los recibiste, contacta al equipo de soporte de Zodl.";
 "swapAndPay.expiredTitle" = "Intercambio vencido";
 "swapAndPay.expiredMsg" = "Este intercambio venció tras su ventana de validez de 24 horas. Si no enviaste fondos, no es necesario hacer nada. Si enviaste fondos, contacta a soporte para que podamos ayudarte.";
 "swapAndPay.failedTitle" = "Intercambio fallido";

@@ -1,6 +1,32 @@
 {
     "releases": [
         {
+            "version": "3.2.0",
+            "date": "26-03-2026",
+            "timestamp": 1774522800,
+            "sections": [
+                {
+                    "title": "Añadido:",
+                    "bulletpoints": [
+                        "Mejoramos las opciones de visualización de códigos QR para permitir ampliarlos."
+                    ]
+                },
+                {
+                    "title": "Cambiado:",
+                    "bulletpoints": [
+                        "Cambiamos la función de intercambio de ZEC a FLEXIBLE_INPUT para que se puedan ejecutar los intercambios no recibidos.",
+                        "Actualizamos y unificamos los elementos y el comportamiento de la interfaz de usuario en ambas plataformas."
+                    ]
+                },
+                {
+                    "title": "Corregido:",
+                    "bulletpoints": [
+                        "Corregimos otros problemas de inconsistencia."
+                    ]
+                }
+            ]
+        },
+        {
             "version": "3.1.0",
             "date": "10-03-2026",
             "timestamp": 1773133320,
