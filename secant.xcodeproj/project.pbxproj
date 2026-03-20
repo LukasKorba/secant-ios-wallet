@@ -219,6 +219,7 @@
 		9E5BF643281FEC9900BA3F17 /* SendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTests.swift; sourceTree = "<group>"; };
 		9E5CFBB12CE38EF000C95713 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		9E5CFBB42CE38EF000C95713 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Localizable.strings; sourceTree = "<group>"; };
+		9E5CFBB72CE38EF000C95713 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = Localizable.strings; sourceTree = "<group>"; };
 		9E5CFD0E2CE61B7200C95713 /* sending.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sending.json; sourceTree = "<group>"; };
 		9E5CFD142CE6215500C95713 /* sending-dark.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "sending-dark.json"; sourceTree = "<group>"; };
 		9E60E3D32C65F49F00B16C3E /* secant-distrib.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "secant-distrib.entitlements"; sourceTree = "<group>"; };
@@ -599,6 +600,14 @@
 			path = es.lproj;
 			sourceTree = "<group>";
 		};
+		9E5CFBB82CE38EF000C95713 /* cs.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				9E5CFBB72CE38EF000C95713 /* Localizable.strings */,
+			);
+			path = cs.lproj;
+			sourceTree = "<group>";
+		};
 		9E612C7729913F2300D09B09 /* SensitiveDataTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -661,6 +670,7 @@
 			children = (
 				9E5CFBB32CE38EF000C95713 /* en.lproj */,
 				9E5CFBB62CE38EF000C95713 /* es.lproj */,
+				9E5CFBB82CE38EF000C95713 /* cs.lproj */,
 				9EBAAAB52CD14889005B026F /* Lotties */,
 				9E6C98482BF4C65F00EACDCB /* WhatsNew */,
 				9E90751D2A269BE300269308 /* Assets.xcassets */,
@@ -980,6 +990,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				cs,
 				Base,
 				es,
 			);
@@ -1426,7 +1437,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "cp modules/Sources/Generated/Resources/en.lproj/Localizable.strings secant/Resources/en.lproj/\ncp modules/Sources/Generated/Resources/es.lproj/Localizable.strings secant/Resources/es.lproj/\n";
+			shellScript = "cp modules/Sources/Generated/Resources/en.lproj/Localizable.strings secant/Resources/en.lproj/\ncp modules/Sources/Generated/Resources/es.lproj/Localizable.strings secant/Resources/es.lproj/\ncp modules/Sources/Generated/Resources/cs.lproj/Localizable.strings secant/Resources/cs.lproj/\n";
 		};
 		9E89DF8A2CD3971E002E5317 /* Localizations */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1445,7 +1456,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "cp modules/Sources/Generated/Resources/en.lproj/Localizable.strings secant/Resources/en.lproj/\ncp modules/Sources/Generated/Resources/es.lproj/Localizable.strings secant/Resources/es.lproj/\n";
+			shellScript = "cp modules/Sources/Generated/Resources/en.lproj/Localizable.strings secant/Resources/en.lproj/\ncp modules/Sources/Generated/Resources/es.lproj/Localizable.strings secant/Resources/es.lproj/\ncp modules/Sources/Generated/Resources/cs.lproj/Localizable.strings secant/Resources/cs.lproj/\n";
 		};
 		9E89DF8B2CD3972F002E5317 /* Localizations */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1464,7 +1475,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "cp modules/Sources/Generated/Resources/en.lproj/Localizable.strings secant/Resources/en.lproj/\ncp modules/Sources/Generated/Resources/es.lproj/Localizable.strings secant/Resources/es.lproj/\n";
+			shellScript = "cp modules/Sources/Generated/Resources/en.lproj/Localizable.strings secant/Resources/en.lproj/\ncp modules/Sources/Generated/Resources/es.lproj/Localizable.strings secant/Resources/es.lproj/\ncp modules/Sources/Generated/Resources/cs.lproj/Localizable.strings secant/Resources/cs.lproj/\n";
 		};
 		9E89DF8C2CD39740002E5317 /* Localizations */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1483,7 +1494,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "cp modules/Sources/Generated/Resources/en.lproj/Localizable.strings secant/Resources/en.lproj/\ncp modules/Sources/Generated/Resources/es.lproj/Localizable.strings secant/Resources/es.lproj/\n";
+			shellScript = "cp modules/Sources/Generated/Resources/en.lproj/Localizable.strings secant/Resources/en.lproj/\ncp modules/Sources/Generated/Resources/es.lproj/Localizable.strings secant/Resources/es.lproj/\ncp modules/Sources/Generated/Resources/cs.lproj/Localizable.strings secant/Resources/cs.lproj/\n";
 		};
 		9E89DF8D2CD39751002E5317 /* Localizations */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1502,7 +1513,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "cp modules/Sources/Generated/Resources/en.lproj/Localizable.strings secant/Resources/en.lproj/\ncp modules/Sources/Generated/Resources/es.lproj/Localizable.strings secant/Resources/es.lproj/\n";
+			shellScript = "cp modules/Sources/Generated/Resources/en.lproj/Localizable.strings secant/Resources/en.lproj/\ncp modules/Sources/Generated/Resources/es.lproj/Localizable.strings secant/Resources/es.lproj/\ncp modules/Sources/Generated/Resources/cs.lproj/Localizable.strings secant/Resources/cs.lproj/\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1645,6 +1656,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				9E5CFBB42CE38EF000C95713 /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		9E5CFBB92CE38EF000C95713 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9E5CFBB72CE38EF000C95713 /* cs */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

@@ -7,7 +7,13 @@
 		<string>co.electriccoin.power_wifi_sync</string>
 		<string>co.electriccoin.scheduler</string>
 	</array>
-	<key>CFBundleDevelopmentRegion</key>
+    <key>CFBundleLocalizations</key>
+    <array>
+        <string>en</string>
+        <string>cs</string>
+        <string>es</string>
+    </array>
+    <key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>Zodl Internal</string>

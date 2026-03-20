@@ -1,0 +1,1011 @@
+// MARK: - Plain Onboarding Flow
+"plainOnboarding.title" = "Mobilní peněženka na bázi Zcash pro finanční svobodu.";
+"plainOnboarding.button.createNewWallet" = "Vytvořit novou peněženku";
+"plainOnboarding.button.restoreWallet" = "Obnovit existující peněženku";
+
+// MARK: - Error Pages
+"errorPage.action.contactSupport" = "Kontaktovat podporu";
+
+// MARK: - Proposal Partial Error
+"proposalPartial.title" = "Odeslání selhalo";
+"proposalPartial.message1" = "Odeslání tomuto příjemci vyžadovalo více transakcí, ale pouze část z nich proběhla úspěšně a zbytek selhal. Vaše prostředky jsou v bezpečí, ale je třeba je obnovit s naší pomocí.";
+"proposalPartial.message2" = "Použijte prosím tlačítko níže pro kontaktování nás. Automaticky připraví všechna data, která potřebujeme, abychom vám pomohli obnovit vaše prostředky.";
+"proposalPartial.transactionIds" = "ID transakcí";
+"proposalPartial.copyIds" = "Zkopírovat ID transakcí";
+"proposalPartial.mailSubject" = "Chyba TEX transakce";
+"proposalPartial.mailPart1" = "Ahoj tým Zodl,";
+"proposalPartial.mailPart2" = "Při odesílání transakce na TEX adresu jsem narazil/a na chybový stav. Obracím se na vás pro radu, jak obnovit mé prostředky.";
+"proposalPartial.mailPart3" = "Děkuji.";
+"proposalPartial.transactionStatuses" = "Stavy transakcí:";
+
+// MARK: OSStatusError
+"osStatusError.title" = "To není váš problém, to jsme my.";
+"osStatusError.message" = "Vaše prostředky jsou v bezpečí, ale něco se stalo při pokusu o načtení dat z Klíčenky. Zavřete aplikaci Zodl a spusťte ji znovu – zkusíme to znovu.";
+"osStatusError.error" = "Kód chyby: %@";
+
+// MARK: - Import Wallet Screen
+"importWallet.description" = "Zadejte tajnou\nobnovovací frázi";
+"importWallet.message" = "Zadejte svou 24-slovnou seed frázi pro obnovení přidružené peněženky.";
+"importWallet.button.restoreWallet" = "Obnovit";
+"importWallet.birthday.title" = "Výška narozenin peněženky";
+"importWallet.seed.valid" = "PLATNÁ SEED FRÁZE";
+"importWallet.alert.success.message" = "Vaše peněženka byla úspěšně obnovena! Během prvotní synchronizace nelze vaše prostředky utratit ani odeslat. V závislosti na stáří vaší peněženky může úplná synchronizace trvat několik hodin.";
+"importWallet.alert.failed.title" = "Obnovení peněženky selhalo";
+"importWallet.alert.failed.message" = "Chyba: %@";
+"importWallet.optionalBirthday" = "(volitelné)";
+"importWallet.enterPlaceholder" = "soukromí důstojnost svoboda ...";
+
+// MARK: - Restore Info
+"restoreInfo.title" = "Nechte Zodl otevřený!";
+"restoreInfo.subTitle" = "Vaše peněženka se obnovuje.";
+"restoreInfo.tips" = "Zodl prochází blockchain a hledá vaše transakce. Starší peněženky mohou trvat hodiny na obnovení. Postupujte podle těchto kroků, abyste předešli přerušení:";
+"restoreInfo.tip1" = "Nechte aplikaci Zodl otevřenou na aktivní obrazovce telefonu.";
+"restoreInfo.tip2" = "Aby se obrazovka telefonu nevypnula, vypněte úsporný režim a nechte telefon nabíjet.";
+"restoreInfo.note" = "Poznámka: ";
+"restoreInfo.noteInfo" = "Vaše prostředky nelze v Zodlu utratit, dokud není peněženka plně obnovena.";
+"restoreInfo.gotIt" = "Rozumím!";
+
+// MARK: - Tabs
+"tabs.account" = "Účet";
+"tabs.send" = "Odeslat";
+"tabs.receive" = "Přijmout";
+"tabs.receiveZec" = "Přijmout ZEC";
+"tabs.balances" = "Zůstatky";
+
+// MARK: - Home Screen
+"home.migratingDatabases" = "Aktualizuji databáze…";
+
+// MARK: - Address Details
+"addressDetails.shareTitle" = "Moje ZEC adresa v Zodlu";
+"addressDetails.shareDesc" = "Ahoj, naskenuj tento QR kód a pošli mi platbu v ZEC!";
+"addressDetails.shareQR" = "Sdílet QR kód";
+"addressDetails.copyAddress" = "Zkopírovat adresu";
+
+// MARK: - Request ZEC
+"requestZec.title" = "Žádost o platbu";
+"requestZec.whatFor" = "K čemu to je?";
+"requestZec.summary.shareQR" = "Sdílet QR kód";
+"requestZec.summary.shareTitle" = "Požádat o ZEC";
+"requestZec.summary.shareDesc" = "Ahoj, vygeneroval/a jsem pro tebe žádost o platbu v ZEC pomocí aplikace Zodl!";
+"requestZec.summary.shareMsg" = "(odkaz ke stažení: https://apps.apple.com/app/zashi-zcash-wallet/id1672392439)";
+
+// MARK: - Receive
+"receive.ua" = "Unifikovaná adresa";
+"receive.sa" = "Sapling adresa";
+"receive.ta" = "Transparentní adresa";
+"receive.error.cantExtractUnifiedAddress" = "nelze extrahovat UA";
+"receive.error.cantExtractTransparentAddress" = "nelze extrahovat transparentní přijímač z UA";
+"receive.error.cantExtractSaplingAddress" = "nelze extrahovat Sapling přijímač z UA";
+"receive.saplingAddress" = "Zcash Sapling adresa";
+"receive.warning" = "Pro soukromí vždy používejte stíněnou adresu.";
+"receive.copy" = "Kopírovat";
+"receive.qrCode" = "QR kód";
+"receive.request" = "Požádat";
+
+// MARK: - Server Setup
+"serverSetup.title" = "Server";
+"serverSetup.custom" = "vlastní";
+"serverSetup.default" = "Výchozí";
+"serverSetup.placeholder" = "<hostname>:<port>";
+"serverSetup.alert.failed.title" = "Neplatný endpoint";
+"serverSetup.alert.failed.message" = "Chyba: %@";
+"serverSetup.save" = "Uložit výběr";
+"serverSetup.active" = "Aktivní";
+"serverSetup.performingTest" = "Testování serveru";
+"serverSetup.couldTakeTime" = "Může to chvíli trvat...";
+"serverSetup.fastestServers" = "Nejrychlejší servery";
+"serverSetup.otherServers" = "Ostatní servery";
+"serverSetup.allServers" = "Procházet všechny servery";
+"serverSetup.refresh" = "Obnovit";
+
+// MARK: - Balances
+"balances.transparentBalance" = "Transparentní zůstatek";
+"balances.shieldButtonTitle" = "Zastínit a konsolidovat prostředky";
+"balances.shieldingInProgress" = "Zastínění";
+"balances.synced" = "Synchronizováno";
+"balances.syncing" = "Synchronizuji";
+"balances.syncingError" = "Zodl narazil na chybu při synchronizaci, pokouším se ji vyřešit...";
+"balances.hintBox.message" = "Zodl používá nejnovější síťový upgrade a nepodporuje odesílání transparentního (nestíněného) ZEC. Použijte tlačítko Zastínit a konsolidovat k zastínění vašich prostředků, což je přidá k vašemu dostupnému zůstatku a zpřístupní váš ZEC k útratě.";
+"balances.hintBox.dismiss" = "Rozumím!";
+"balances.restoringWalletWarning" = "Proces obnovy může trvat několik hodin na méně výkonných zařízeních, a dokonce i na výkonných zařízeních pravděpodobně trvá více než hodinu.";
+
+// MARK: - Scan
+"scan.invalidQR" = "Tento QR kód neobsahuje platnou Zcash adresu.";
+"scan.invalidImage" = "Tento obrázek neobsahuje platnou Zcash adresu.";
+"scan.severalCodesFound" = "Tento obrázek obsahuje několik platných Zcash adres.";
+"scan.cameraSettings" = "Kamera není povolena. Přejděte do nastavení systému aplikace Zodl a povolte ji.";
+"scan.openSettings" = "Otevřít nastavení";
+
+// MARK: - Send
+"send.sending" = "Odesílám";
+"send.message" = "Zpráva";
+"send.memoPlaceholder" = "Napište zde šifrovanou zprávu...";
+"send.error.insufficientFunds" = "Nedostatek prostředků";
+"send.error.invalidAmount" = "Neplatná částka";
+"send.error.invalidAddress" = "Neplatná adresa";
+"send.info.memo" = "Transparentní transakce nemohou mít zprávy";
+"send.addressNotInBook" = "Přidejte kontakt klepnutím na ikonu Adresáře.";
+"send.amountSummary" = "Celková částka";
+"send.amount" = "Částka";
+"send.toSummary" = "Odeslat na";
+"send.to" = "Odeslat na";
+"send.feeSummary" = "Poplatek";
+"send.confirmationTitle" = "Potvrzení";
+"send.goBack" = "Zrušit";
+"send.review" = "Zkontrolovat";
+"send.alert.failure.title" = "Odeslání prostředků selhalo";
+"send.alert.failure.message" = "Chyba: %@";
+"send.addressPlaceholder" = "Zcash adresa";
+"send.currencyPlaceholder" = "CZK";
+"send.requestPayment.requestedBy" = "Požadováno od";
+"send.requestPayment.for" = "Za:";
+"send.requestPayment.total" = "Celkem";
+"send.requestPayment.title" = "Žádost o platbu";
+"send.sending" = "Odesílám...";
+"send.sendingInfo" = "Vaše mince jsou odesílány na";
+"send.viewTransaction" = "Zobrazit transakci";
+"send.success" = "Odesláno!";
+"send.successInfo" = "Vaše mince byly úspěšně odeslány na";
+"send.failure" = "Nelze odeslat";
+"send.failureInfo" = "Při pokusu o odeslání mincí došlo k chybě. Zkuste to prosím znovu.";
+"send.resubmissionInfo" = "Zodl narazil na problémy s připojením při odesílání transakce. Zkusí to znovu v příštích několika minutách.";
+"send.report" = "Nahlásit";
+"send.shielding" = "Zastínění";
+"send.shieldingInfo" = "Vaše mince jsou zastíňovány";
+"send.successShielding" = "Zastíněno!";
+"send.successShieldingInfo" = "Vaše mince byly úspěšně zastíněny";
+"send.failureShielding" = "Nelze zastínit";
+"send.failureShieldingInfo" = "Při pokusu o zastínění vašich mincí došlo k chybě. Zkuste to prosím znovu.";
+
+// MARK: - Message Editor
+"messageEditor.addUA" = "Odpovědět na: Zahrnout mou adresu do zprávy";
+"messageEditor.removeUA" = "Vaše adresa je zahrnuta ve zprávě";
+"messageEditor.addUAformat" = "\n>>> odpovědět na: %@";
+
+// MARK: - ZEC Keyboard
+"zecKeyboard.invalid" = "Tato částka transakce je neplatná.";
+
+// MARK: - Delete Wallet
+"deleteWallet.title" = "Resetovat Zodl";
+"deleteWallet.message1" = "Resetování aplikace může vést k úplné ztrátě přístupu k vašim prostředkům! ⚠️";
+"deleteWallet.message2" = "Ujistěte se, že máte uloženou svou tajnou obnovovací frázi i výšku narozenin peněženky, než budete pokračovat.";
+"deleteWallet.message3" = "Resetování aplikace Zodl smaže databázi aplikace a uložená data, a odpojí všechny připojené hardwarové peněženky.";
+"deleteWallet.message4" = "Po resetování Zodlu je jediný způsob přístupu k vašim prostředkům obnovení peněženky, které vyžaduje vaši obnovovací frázi Zodl a výšku narozenin peněženky.";
+"deleteWallet.iUnderstand" = "Rozumím";
+"deleteWallet.actionButtonTitle" = "Resetovat Zodl";
+"deleteWallet.screenTitle" = "Resetovat";
+
+// MARK: - Not Enogh Free Space
+"notEnoughFreeSpace.title" = "Nedostatek volného místa";
+"notEnoughFreeSpace.messagePre" = "Zodl vyžaduje %@ GB místa pro synchronizaci Zcash blockchainu, ale je k dispozici pouze ";
+"notEnoughFreeSpace.dataAvailable" = "%@ MB. ";
+"notEnoughFreeSpace.messagePost" = "Synchronizace zůstane pozastavena, dokud nebude k dispozici více místa.";
+"notEnoughFreeSpace.requiredSpace" = "~%@ MB dalšího místa potřebného pro pokračování";
+
+// MARK: - What's new
+"whatsNew.version" = "Zodl verze %@";
+
+// MARK: - Settings
+"settings.title" = "Nastavení";
+"settings.addressBook" = "Adresář";
+"settings.advanced" = "Pokročilá nastavení";
+"settings.about" = "O aplikaci";
+"settings.feedback" = "Pošlete nám zpětnou vazbu";
+"settings.integrations" = "Integrace";
+"settings.recoveryPhrase" = "Obnovovací fráze Zodl";
+"settings.exportPrivateData" = "Exportovat soukromá data";
+"settings.exportLogsOnly" = "Exportovat pouze logy";
+"settings.chooseServer" = "Vybrat server";
+"settings.currencyConversion" = "Převod měn";
+"settings.whatsNew" = "Co je nového";
+"settings.buyZecCB" = "Koupit ZEC přes Coinbase";
+"settings.coinbaseDesc" = "Snadný způsob, jak koupit ZEC a dostat ho přímo do vaší peněženky Zodl.";
+"settings.flexa" = "Platit přes Flexa";
+"settings.flexaDesc" = "Utrácejte ZEC na tisících maloobchodních místech.";
+"settings.restoreWarning" = "Během procesu obnovy není možné používat platební integrace.";
+"settings.deleteZashi" = "Resetovat Zodl";
+"settings.deleteZashiWarning" = "Budete požádáni o potvrzení na další obrazovce";
+"settings.version" = "Verze %@ (%@)";
+"settings.alert.cantSendEmail.title" = "Ó ne!";
+"settings.alert.cantSendEmail.message" = "Zdá se, že nemáte nakonfigurovanou výchozí e-mailovou aplikaci ve vašem zařízení. Zkopírujte níže uvedenou adresu a použijte svého oblíbeného e-mailového klienta pro zaslání zprávy.";
+"settings.alert.cantSendEmail.copyEmail" = "Kopírovat %@";
+
+// MARK: - Integrations
+"integrations.info" = "Integrace Zodlu poskytují přístup ke službám třetích stran. Funkce a informace sdílené s nimi jsou mimo naši kontrolu a podléhají jejich zásadám ochrany soukromí.";
+
+// MARK: - Send Feedback
+"sendFeedback.title" = "Pošlete nám zpětnou vazbu";
+"sendFeedback.screenTitle" = "Podpora";
+"sendFeedback.desc" = "Dejte nám prosím vědět o jakýchkoli problémech, které jste měli, nebo o funkcích, které chcete v budoucnu vidět.";
+"sendFeedback.ratingQuestion" = "Jaké je vaše zkušenosti se Zodlem?";
+"sendFeedback.howCanWeHelp" = "Jak vám můžeme pomoci?";
+"sendFeedback.hcwhPlaceholder" = "Chtěl/a bych se zeptat na...";
+"sendFeedback.share.title" = "Zpráva podpory";
+"sendFeedback.share.desc" = "Zodl";
+"sendFeedback.share.notAppleMailInfo" = "Vaše zařízení nemá nastavený Apple e-mail, takže jsme tuto zprávu připravili pro vás, abyste ji mohli odeslat pomocí preferovaného e-mailového klienta. Pošlete prosím tuto zprávu na:";
+
+// MARK: - Private Data Consent
+"privateDataConsent.title" = "Souhlas s exportem soukromých dat";
+"privateDataConsent.message1" = "Kliknutím na \"Souhlasím\" níže dáváte souhlas k exportu všech soukromých dat vašich peněženek, jako je celá historie vaší peněženky (peněženek), včetně všech připojených hardwarových peněženek. Veškeré soukromé informace, zprávy, částky a adresy příjemců, dokonce i pro vaše stíněné aktivity, budou exportovány.*";
+"privateDataConsent.message2" = "Soukromá data také umožňují zobrazit určité budoucí akce, které provedete se Zodlem.";
+"privateDataConsent.message3" = "Sdílení těchto soukromých dat je neodvolatelné – jakmile sdílíte tato soukromá data s někým, není možné odvolat jejich přístup.";
+"privateDataConsent.message4" = "*Upozorňujeme, že tato soukromá data jim nedávají schopnost utratit vaše prostředky, pouze možnost vidět, co s vašimi prostředky děláte.";
+"privateDataConsent.confirmation" = "Souhlasím se zásadami exportu soukromých dat a zásadami ochrany soukromí Zodlu";
+"privateDataConsent.screenTitle" = "Export dat";
+
+// MARK: - Sync message
+"sync.message.uptodate" = "Aktuální";
+"sync.message.unprepared" = "Nepřipraveno";
+"sync.message.error" = "Chyba: %@";
+"sync.message.stopped" = "Zastaveno";
+"sync.message.sync" = "%@%% Synchronizováno";
+"sync.alert.title" = "Chyba";
+
+// MARK: - Common & Shared
+"general.back" = "Zpět";
+"general.next" = "Další";
+"general.send" = "Odeslat";
+"general.share" = "Sdílet";
+"general.close" = "Zavřít";
+"general.max" = "Max";
+"general.ok" = "OK";
+"general.yes" = "Ano";
+"general.no" = "Ne";
+"general.cancel" = "Zrušit";
+"general.success" = "Úspěch";
+"general.unknown" = "Neznámé";
+"general.loading" = "Načítám";
+"general.delete" = "Smazat";
+"general.confirm" = "Potvrdit";
+"general.done" = "Hotovo";
+"general.save" = "Uložit";
+"general.request" = "Požádat";
+"general.hide" = "Skrýt";
+"general.show" = "Zobrazit";
+"qrCodeFor" = "QR kód pro %@";
+"general.tapToCopy" = "Klepněte pro kopírování";
+"general.fee" = "Typický poplatek < %@";
+"general.feeShort" = "< %@";
+"general.hideBalancesMost" = "-----";
+"general.hideBalancesMostStandalone" = "-----";
+"general.hideBalancesLeast" = "";
+"general.alert.warning" = "Varování";
+"general.alert.continue" = "Pokračovat";
+"general.alert.caution" = "Pozor";
+"general.alert.ignore" = "Ignorovat";
+"general.copiedToTheClipboard" = "Zkopírováno do schránky!";
+
+// MARK: - Wallet Status
+"walletStatus.restoringWallet" = "OBNOVUJI VAŠI PENĚŽENKU…";
+"walletStatus.disconnected" = "ODPOJENO…";
+
+// MARK: - Transaction List
+"transactionList.collapse" = "Sbalit transakci";
+"transactionList.messageTitle" = "Zpráva";
+"transactionList.messageTitlePlural" = "Zprávy";
+"transactionList.noMessageIncluded" = "Transakce neobsahuje žádnou zprávu";
+"transactionList.transactionFee" = "Poplatek za transakci";
+"transactionList.transactionId" = "ID transakce";
+"transactionList.noTransactions" = "Žádná historie transakcí";
+
+// MARK: - Transactions
+"transaction.sent" = "Odesláno";
+"transaction.sending" = "Odesílám";
+"transaction.receiving" = "Přijímám";
+"transaction.received" = "Přijato";
+"transaction.failedSend" = "Odeslání selhalo";
+"transaction.failedReceive" = "Přijetí selhalo";
+"transaction.shieldingFunds" = "Zastínění";
+"transaction.failedShieldedFunds" = "Zastínění selhalo";
+"transaction.saveAddress" = "Uložit adresu";
+"transaction.selectText" = "Vybrat text";
+"transaction.shieldedFunds" = "Zastíněno";
+
+// MARK: - Local authentication
+"localAuthentication.reason" = "Následující obsah vyžaduje ověření.";
+
+// MARK: - Support Data
+"supportData.timeItem.time" = "Aktuální čas";
+"supportData.appVersionItem.bundleIdentifier" = "Identifikátor aplikace";
+"supportData.appVersionItem.version" = "Verze aplikace";
+"supportData.systemVersionItem.version" = "Verze iOS";
+"supportData.deviceModelItem.device" = "Zařízení";
+"supportData.localeItem.locale" = "Místní nastavení";
+"supportData.localeItem.groupingSeparator" = "Oddělovač skupin měny";
+"supportData.localeItem.decimalSeparator" = "Desetinný oddělovač měny";
+"supportData.freeDiskSpaceItem.freeDiskSpace" = "Využitelné úložiště";
+"supportData.permissionItem.permissions" = "Oprávnění";
+"supportData.permissionItem.camera" = "Přístup ke kameře";
+"supportData.permissionItem.faceID" = "FaceID dostupné";
+"supportData.permissionItem.touchID" = "TouchID dostupné";
+
+// MARK: - Root
+"root.initialization.alert.failed.title" = "Inicializace peněženky selhala.";
+"root.initialization.alert.error.message" = "Chyba: %@";
+"root.initialization.alert.sdkInitFailed.title" = "Selhala inicializace SDK";
+"root.initialization.alert.walletStateFailed.message" = "Stav inicializace aplikace: %@.";
+"root.initialization.alert.cantLoadSeedPhrase.message" = "Nelze načíst seed frázi z lokálního úložiště.";
+"root.initialization.alert.cantCreateNewWallet.message" = "Nelze vytvořit novou peněženku. Chyba: %@";
+"root.initialization.alert.cantStoreThatUserPassedPhraseBackupTest.message" = "Nelze uložit informaci, že uživatel prošel testem zálohy fráze. Chyba: %@";
+"root.initialization.alert.wipe.title" = "Vymazání peněženky";
+"root.initialization.alert.wipe.message" = "Jste si jisti?";
+"root.initialization.alert.wipeFailed.title" = "Smazání peněženky selhalo.";
+"root.initialization.alert.wipeFailed.message" = "Smazání peněženky proběhlo pouze částečně. Zkuste to prosím znovu pro dokončení procesu resetování.";
+
+"root.destination.alert.failedToProcessDeeplink.title" = "Zpracování deeplinku selhalo.";
+"root.destination.alert.failedToProcessDeeplink.message" = "Deeplink: \(%@))\nChyba: \(%@) (kód: %@)";
+
+"root.debug.title" = "Možnosti podpory";
+"root.debug.navigationTitle" = "Spuštění";
+"root.debug.option.rescanBlockchain" = "Znovu prohledat blockchain";
+"root.debug.option.copySeed" = "Kopírovat seed do schránky";
+"root.debug.option.nukeWallet" = "[Buďte opatrní] Zničit peněženku";
+"root.debug.option.exportLogs" = "Exportovat logy";
+"root.debug.option.appReview" = "Ohodnotit aplikaci";
+"root.debug.dialog.rescan.title" = "Znovu prohledat";
+"root.debug.dialog.rescan.message" = "Vyberte typ prohledání";
+"root.debug.dialog.rescan.option.quick" = "Rychlé prohledání";
+"root.debug.dialog.rescan.option.full" = "Úplné prohledání";
+"root.debug.alert.rewind.failed.title" = "Vrácení zpět selhalo";
+"root.debug.alert.rewind.failed.message" = "Chyba: %@";
+"root.debug.alert.rewind.cantStartSync.title" = "Nelze spustit synchronizaci po vrácení zpět";
+"root.debug.alert.rewind.cantStartSync.message" = "Chyba: %@";
+
+"root.seedPhrase.differentSeed.tryAgain" = "Zkusit znovu";
+"root.seedPhrase.differentSeed.message" = "Tato obnovovací fráze neodpovídá záloze databáze Zodl uložené na tomto zařízení. Pokud budete pokračovat, ztratíte přístup k této záloze databáze a při pozdějším pokusu o obnovu mohou být některé informace ztraceny.";
+
+"root.existingWallet.restore" = "Obnovit";
+"root.existingWallet.Message" = "Zjistili jsme zálohu databáze Zodl na tomto zařízení. Pokud vytvoříte novou peněženku, ztratíte přístup k této záloze databáze a při pozdějším pokusu o obnovu mohou být některé informace ztraceny.";
+
+"root.serviceUnavailable.switchServer" = "Přepnout server";
+"root.serviceUnavailable.Message" = "Váš aktuální server má potíže. Zkontrolujte připojení zařízení a/nebo přejděte do Pokročilých nastavení pro výběr jiného serveru.";
+
+// MARK: - Export logs
+"exportLogs.alert.failed.title" = "Chyba při exportu logů";
+"exportLogs.alert.failed.message" = "Chyba: %@";
+
+// MARK: - Address Book
+"addressBook.title" = "Adresář";
+"addressBook.newContact.title" = "Přidat novou adresu";
+"addressBook.newContact.address" = "Adresa peněženky";
+"addressBook.newContact.addressPlaceholder" = "Zadejte adresu peněženky...";
+"addressBook.newContact.name" = "Jméno kontaktu";
+"addressBook.newContact.namePlaceholder" = "Zadejte jméno kontaktu...";
+"addressBook.error.nameExists" = "Toto jméno kontaktu je již používáno. Vyberte prosím jiné jméno.";
+"addressBook.error.nameLength" = "Toto jméno kontaktu překračuje limit 32 znaků. Zkraťte prosím jméno.";
+"addressBook.error.invalidAddress" = "Neplatná adresa.";
+"addressBook.alert.title" = "Jste si jisti?";
+"addressBook.alert.message" = "Chystáte se smazat tento kontakt. Tuto akci nelze vrátit zpět.";
+"addressBook.empty" = "Váš adresář je prázdný";
+"addressBook.selectRecipient" = "Vybrat příjemce";
+"addressBook.scanAddress" = "Naskenovat QR kód";
+"addressBook.manualEntry" = "Ruční zadání";
+"addressBook.addNewContact" = "Přidat nový kontakt";
+"addressBook.savedAddress" = "Uložená adresa";
+
+// MARK: - Deeplink Warning
+"deeplinkWarning.title" = "Vypadá to, že jste použili aplikaci třetí strany pro skenování platby.";
+"deeplinkWarning.desc" = "Pro lepší bezpečnost znovu naskenujte QR kód v Zodlu.";
+"deeplinkWarning.cta" = "Znovu skenovat v Zodlu";
+"deeplinkWarning.screenTitle" = "Ahoj!";
+
+// MARK: - Splash Screen
+"splash.authTitle" = "Váš účet Zodl je zabezpečen.";
+"splash.authFaceID" = "Klepněte na ikonu obličeje pro použití Face ID a odemkněte ho.";
+"splash.authTouchID" = "Klepněte na ikonu otisku pro použití Touch ID a odemkněte ho.";
+"splash.authPasscode" = "Klepněte na ikonu klíče pro zadání přístupového kódu a odemkněte ho.";
+
+// MARK: - Tooltips
+"tooltip.exchangeRate.title" = "Směnný kurz není dostupný";
+"tooltip.exchangeRate.desc" = "Pokoušeli jsme se, ale nepodařilo se nám aktualizovat směnný kurz. Zkontrolujte připojení, restartujte aplikaci a zkusíme to znovu.";
+
+// MARK: - UI Components
+"component.maxPrivacy" = "Soukromé";
+"component.lowPrivacy" = "Nesoukromé";
+
+// MARK: - Partners
+"partners.coinbaseOnrampUrl" = "https://pay.coinbase.com/buy/select-asset?appId=%@&addresses={\"%@\":[\"zcash\"]}";
+"partners.flexa.transactionFailedTitle" = "Transakce selhala";
+"partners.flexa.transactionFailedMessage" = "Omlouváme se, ale něco selhalo. Zkuste to prosím znovu.";
+
+// MARK: Keystone integration
+"keystone.wallet" = "Keystone peněženka";
+"keystone.drawer.title" = "Peněženky a hardware";
+"keystone.connect" = "Připojit hardwarovou peněženku";
+"keystone.drawer.banner.title" = "Keystone hardwarová peněženka";
+"keystone.drawer.banner.desc" = "Získejte 5%% slevu na hardwarovou peněženku bez vzduchové mezery. Promo kód \"Zodl\".";
+"keystone.addHWWallet.title" = "Potvrdit účet pro přístup";
+"keystone.addHWWallet.desc" = "Vyberte peněženku, kterou chcete připojit. Po připojení budete moci bezdrátově podepisovat transakce s vaší hardwarovou peněženkou.";
+"keystone.addHWWallet.connect" = "Připojit";
+"keystone.addHWWallet.forgetDevice" = "Zapomenout toto zařízení";
+"keystone.addHWWallet.scan" = "Naskenujte QR kód vašeho zařízení pro připojení.";
+"keystone.addHWWallet.tutorial" = "Zobrazit Keystone tutoriál";
+"keystone.addHWWallet.howTo" = "Instrukce:";
+"keystone.addHWWallet.step1" = "Odemkněte svůj Keystone";
+"keystone.addHWWallet.step2" = "Klepněte na ikonu nabídky";
+"keystone.addHWWallet.step3" = "Klepněte na Připojit softwarovou peněženku";
+"keystone.addHWWallet.step4" = "Vyberte aplikaci Zodl (Zashi) a naskenujte QR kód";
+"keystone.addHWWallet.readyToScan" = "Připraveno ke skenování";
+"keystone.confirm" = "Potvrdit s Keystonem";
+"keystone.signWith.hardware" = "Hardware";
+"keystone.signWith.title" = "Skenovat vaší Keystone peněženkou";
+"keystone.signWith.desc" = "Po podpisu Keystonem klepněte na tlačítko Získat podpis níže.";
+"keystone.signWith.getSignature" = "Získat podpis";
+"keystone.signWith.reject" = "Odmítnout";
+"keystone.signWith.signTransaction" = "Podepsat transakci";
+"keystone.scanInfo" = "Naskenovat QR kód Keystone peněženky";
+"keystone.scanInfoTransaction" = "Naskenovat Keystone QR kód pro podpis transakce";
+"keystone.settings" = "Přepněte z Keystonu na Zodl pro použití integrací.";
+"accounts.sendingFrom" = "Odeslat z";
+"accounts.addressBook.your" = "Vaše peněženky";
+"accounts.addressBook.contacts" = "Kontakty adresáře";
+"accounts.keystone" = "Keystone";
+"accounts.zashi" = "Zodl";
+"accounts.zashi.shieldedAddress" = "Zcash stíněná adresa";
+"accounts.zashi.transparentAddress" = "Zcash transparentní adresa";
+"accounts.keystone.shieldedAddress" = "Zcash stíněná adresa";
+"accounts.keystone.transparentAddress" = "Zcash transparentní adresa";
+
+// Keystone iteration 1
+"keystoneTransactionReject.title" = "Jste si jisti?";
+"keystoneTransactionReject.msg" = "Odmítnutím podpisu zrušíte transakci a budete muset začít znovu, pokud chcete pokračovat.";
+"keystoneTransactionReject.goBack" = "Zpět";
+"keystoneTransactionReject.rejectSig" = "Odmítnout podpis";
+
+// Transaction History Tax Export
+"taxExport.fileName" = "%@_historie_transakci_%@.csv";
+"taxExport.download" = "Stáhnout";
+"taxExport.title" = "Export dat";
+"taxExport.taxFile" = "Exportovat daňový soubor";
+"taxExport.desc" = "Stáhněte historii transakcí %@ z předchozího kalendářního roku ve formátu .csv.";
+"taxExport.shareDesc" = "%@ historie transakcí";
+
+// transaction history redesign
+"transactionHistory.title" = "Transakce";
+"transactionHistory.seeAll" = "Zobrazit vše";
+"transactionHistory.nothingHere" = "Zatím tu nic není.";
+"transactionHistory.makeTransaction" = "Udělejte první krok...";
+"transactionHistory.getSomeZec" = "Získejte nějaký ZEC";
+"transactionHistory.saveAddress" = "Uložit adresu";
+"transactionHistory.sendAgain" = "Odeslat znovu";
+"transactionHistory.details" = "Podrobnosti transakce";
+"transactionHistory.sentTo" = "Odesláno na";
+"transactionHistory.address" = "Adresa";
+"transactionHistory.pending" = "Čekající";
+"transactionHistory.completed" = "Dokončeno";
+"transactionHistory.viewMore" = "Zobrazit více";
+"transactionHistory.viewLess" = "Zobrazit méně";
+"transactionHistory.noMessage" = "Žádná zpráva";
+"transactionHistory.threeDots" = "%@...";
+"transactionHistory.defaultFee" = "0.001";
+"annotation.edit" = "Upravit poznámku";
+"annotation.addArticle" = "Přidat poznámku";
+"annotation.add" = "Přidat poznámku";
+"annotation.delete" = "Smazat poznámku";
+"annotation.save" = "Uložit poznámku";
+"annotation.placeholder" = "Napište volitelnou poznámku k popisu této transakce...";
+"annotation.chars" = "%@/%@ znaků";
+"annotation.title" = "Poznámka";
+"filter.title" = "Filtr";
+"filter.sent" = "Odesláno";
+"filter.received" = "Přijato";
+"filter.memos" = "Zprávy";
+"filter.notes" = "Poznámky";
+"filter.bookmarked" = "Záložkované";
+"filter.contact" = "Kontakt";
+"filter.reset" = "Resetovat";
+"filter.apply" = "Použít";
+"filter.today" = "Dnes";
+"filter.yesterday" = "Včera";
+"filter.previous7days" = "Předchozích 7 dní";
+"filter.previous30days" = "Předchozích 30 dní";
+"filter.search" = "Hledat";
+"filter.noResults" = "Žádné výsledky";
+"filter.weTried" = "Zkoušeli jsme, ale nic jsme nenašli.";
+"filter.at" = "v"; // příklad: 29. listopadu v 16:15
+"filter.daysAgo" = "Před %@ dny";
+"settings.keystone" = "Připojit Keystone";
+"settings.keystoneDesc" = "Připojte hardwarovou peněženku bez vzduchové mezery pro uložení stíněného ZEC.";
+
+// More actions
+"more.options" = "Další možnosti";
+
+// Home screen
+"homeScreen.scan" = "Skenovat";
+"homeScreen.more" = "Více";
+"homeScreen.buy" = "Koupit";
+"homeScreen.moreWarning" = "Informace, které sdílíte s integračními partnery Zodlu, podléhají jejich zásadám ochrany soukromí.";
+
+// Onboarding: Restore Wallet
+"restoreWallet.title" = "Tajná obnovovací fráze";
+"restoreWallet.info" = "Zadejte prosím svou 24-slovnou tajnou obnovovací frázi ve správném pořadí.";
+"restoreWallet.help.title" = "Potřebujete vědět více?";
+"restoreWallet.help.phrase" = "^[Tajná obnovovací fráze](style: 'boldPrimary') je jedinečná sada 24 slov v přesném pořadí. Lze ji použít k získání plné kontroly nad vašimi prostředky z jakéhokoli zařízení prostřednictvím libovolné Zcash peněženky. Považujte ji za hlavní klíč k vaší peněžence. Je uložena v Pokročilých nastavení Zodlu.";
+"restoreWallet.help.birthday" = "^[Výška narozenin peněženky](style: 'boldPrimary') je výška bloku (číslo bloku v blockchainu), ve kterém byla vaše peněženka vytvořena. Pokud někdy ztratíte přístup k vaší aplikaci Zodl a potřebujete obnovit prostředky, poskytnutí výšky bloku spolu s vaší obnovovací frází může výrazně urychlit tento proces.";
+"restoreWallet.birthday.placeholder" = "Zadejte číslo";
+"restoreWallet.birthday.title" = "Výška bloku";
+"restoreWallet.birthday.info" = "Zadání výšky narozenin peněženky pomáhá urychlit proces obnovy.";
+"restoreWallet.birthday.fieldInfo" = "Výška narozenin peněženky je okamžik, kdy byla vaše peněženka vytvořena.";
+"restoreWallet.birthday.estimate" = "Odhadnout výšku mého bloku";
+"restoreWallet.birthday.estimateDate.title" = "První transakce peněženky";
+"restoreWallet.birthday.estimateDate.info" = "Zadání výšky bloku, ve kterém byla vaše peněženka vytvořena, snižuje počet bloků, které je třeba prohledat pro obnovu peněženky.";
+"restoreWallet.birthday.estimateDate.warning" = "Pokud si nejste jisti, vyberte dřívější datum.";
+"restoreWallet.birthday.estimated.title" = "Odhadovaná výška bloku";
+"restoreWallet.birthday.estimated.info" = "Zodl prohledá a obnoví všechny transakce provedené po následujícím čísle bloku.";
+"restoreInfo.checkbox" = "Udržet obrazovku zapnutou při obnově";
+"restoreWallet.dateTip" = "Pokud si nejste jisti, vyberte dřívější datum.";
+
+// Smart Banner
+"smartBanner.help.diconnected.title" = "Peněženka odpojena";
+"smartBanner.help.diconnected.info" = "Zdá se, že jste offline. Obnovte prosím připojení k internetu pro použití peněženky Zodl.";
+
+"smartBanner.help.syncError.title" = "Chyba synchronizace";
+
+"smartBanner.help.restore.title" = "Obnova peněženky probíhá";
+"smartBanner.help.restore.info" = "Zodl prochází blockchain a hledá vaše transakce. Starší peněženky mohou trvat hodiny na obnovení. Postupujte podle těchto kroků, abyste předešli přerušení:";
+"smartBanner.help.restore.point1" = "Nechte aplikaci Zodl otevřenou na aktivní obrazovce telefonu.";
+"smartBanner.help.restore.point2" = "Aby se obrazovka telefonu nevypnula, vypněte úsporný režim a nechte telefon nabíjet.";
+"smartBanner.help.restore.warning" = "Prostředky nelze utratit, dokud nebude vaše peněženka obnovena.";
+
+"smartBanner.help.sync.title" = "Synchronizace peněženky probíhá";
+"smartBanner.help.sync.info" = "Zodl prochází blockchain a hledá vaše nejnovější transakce, aby zajistil správné zobrazení vašich zůstatků. Nechte aplikaci Zodl otevřenou na aktivní obrazovce telefonu, abyste předešli přerušení.";
+
+"smartBanner.help.updatingBalance.title" = "Aktualizuji zůstatek";
+"smartBanner.help.updatingBalance.info" = "Vaše poslední transakce je těžena a potvrzována.";
+
+"smartBanner.help.backup.title" = "Záloha je vyžadována";
+"smartBanner.help.backup.info1" = "Předejděte potenciální ztrátě prostředků tím, že bezpečně zálohujete svou peněženku.";
+"smartBanner.help.backup.info2" = "Zálohujte přístup k vašim prostředkům zálohou:";
+"smartBanner.help.backup.point1" = "Tajná obnovovací fráze (jedinečná sada 24 slov v přesném pořadí) ";
+"smartBanner.help.backup.point2" = "Výška narozenin peněženky (výška bloku, při které byla vaše peněženka vytvořena)";
+"smartBanner.help.backup.info3" = "V případě ztráty přístupu k aplikaci nebo zařízení je znalost tajné obnovovací fráze jediným způsobem, jak obnovit vaše prostředky. Nemůžeme ji vidět ani vám pomoci ji obnovit.";
+"smartBanner.help.backup.info4" = "Kdokoli s přístupem k vaší tajné obnovovací frázi bude mít plnou kontrolu nad vaší peněženkou, takže ji uchovávejte v bezpečí a nikdy ji nikomu neukazujte.";
+"smartBanner.help.backup.acknowledge" = "Přečetl/a jsem si a rozumím rizikům nezálohování peněženky.";
+
+"smartBanner.help.shield.title" = "Vždy zastíněte transparentní prostředky";
+"smartBanner.help.shield.info1" = "Pro ochranu soukromí uživatelů Zodl nepodporuje utrácení transparentního ZEC. Klepněte na tlačítko \"Zastínit\" níže pro zpřístupnění vašich transparentních prostředků k útratě a zachování soukromí celkového zůstatku Zodlu. ";
+"smartBanner.help.shield.info2" = "Tím se vytvoří transakce zastínění v peněžence, která konsoliduje vaše transparentní a stíněné prostředky. (Typický poplatek: %@)";
+"smartBanner.help.shield.transparent" = "Transparentní";
+
+"smartBanner.help.shield.notNow" = "Teď ne";
+"smartBanner.help.shield.doNotShowAgain" = "Tuto zprávu nezobrazovat znovu";
+
+"smartBanner.help.remindMePhase1" = "Připomenout za 2 dny";
+"smartBanner.help.remindMePhase2" = "Připomenout za 2 týdny";
+"smartBanner.help.remindMePhase3" = "Připomenout příští měsíc";
+
+"smartBanner.content.disconnected.title" = "Peněženka odpojena";
+"smartBanner.content.disconnected.info" = "Zkontrolujte připojení a znovu načtěte Zodl";
+
+"smartBanner.content.syncingError.title" = "Chyba při synchronizaci";
+"smartBanner.content.syncingError.info" = "Pokouším se vyřešit";
+
+"smartBanner.content.restore.title" = "Obnova peněženky • %@ dokončeno";
+"smartBanner.content.restore.info" = "Nechte Zodl otevřený na aktivní obrazovce telefonu";
+"smartBanner.content.restore.infoSpendable" = "Vaše prostředky jsou nyní připraveny k použití";
+
+"smartBanner.content.sync.title" = "Synchronizuji • %@ dokončeno";
+"smartBanner.content.sync.info" = "Vaše peněženka se aktualizuje";
+
+"smartBanner.content.updatingBalance.title" = "Aktualizuji zůstatek...";
+"smartBanner.content.updatingBalance.info" = "Čekám na zpracování poslední transakce";
+
+"smartBanner.content.backup.title" = "Záloha peněženky je vyžadována";
+"smartBanner.content.backup.info" = "Předejděte potenciální ztrátě prostředků";
+"smartBanner.content.backup.button" = "Začít";
+
+"smartBanner.content.shield.title" = "Zjištěn transparentní zůstatek";
+"smartBanner.content.shield.titleShorter" = "Transparentní zůstatek";
+"smartBanner.content.shield.button" = "Zastínit";
+
+"smartBanner.content.tor.title" = "Povolit Tor ochranu";
+"smartBanner.content.tor.info" = "Chraňte svou IP adresu";
+"smartBanner.content.tor.button" = "Zkontrolovat";
+
+"smartBanner.content.currencyConversion.title" = "Převod měn";
+"smartBanner.content.currencyConversion.info" = "Povolit zobrazení hodnot v CZK";
+"smartBanner.content.currencyConversion.button" = "Začít";
+
+"smartBanner.content.autoShielding.title" = "Automatické zastínění";
+"smartBanner.content.autoShielding.info" = "Povolit automatické zastínění";
+"smartBanner.content.autoShielding.button" = "Začít";
+
+"balance.availableTitle" = "K dispozici:";
+"balances.pending" = "Čekající";
+"balances.dismiss" = "Zavřít";
+"balances.spendableBalance.title" = "Použitelný zůstatek";
+"balances.spendableBalance" = "Stíněné (použitelné)";
+"balances.infoSyncing" = "Zodl prochází blockchain, aby zajistil správné zobrazení vašich zůstatků.";
+"balances.infoShielding" = "Zastíněte svůj transparentní ZEC, aby byl použitelný a soukromý. Tím se vytvoří transakce zastínění v peněžence, která konsoliduje vaše transparentní a stíněné prostředky. (Typický poplatek: %@)";
+"balances.everythingDone" = "Všechny vaše prostředky jsou zastíněny a použitelné.";
+
+"shieldFunds.error.title" = "Chyba zastínění";
+"shieldFunds.error.failure.message" = "Při poslední transakci zastínění došlo k chybě. Můžete to zkusit znovu nebo nahlásit tento problém, pokud přetrvává. \n\n %@";
+"shieldFunds.error.gprc.message" = "Při poslední transakci zastínění došlo k chybě. Pokusíme se transakci odeslat znovu. Pokud se nepodaří, možná budete muset pokus o zastínění zopakovat.";
+
+"transactionHistory.status" = "Stav";
+
+// MARK: - Secret Recovery Phrase Display
+"recoveryPhraseDisplay.screenTitle" = "Obnovovací fráze";
+"recoveryPhraseDisplay.title" = "Tajná obnovovací fráze";
+"recoveryPhraseDisplay.description" = "Tato slova jsou jediným způsobem, jak obnovit vaše prostředky! Ujistěte se, že je uložíte ve správném pořadí.";
+"recoveryPhraseDisplay.button.wroteItDown" = "Uložil/a jsem ji";
+"recoveryPhraseDisplay.button.remindMeLater" = "Připomenout později";
+
+"recoveryPhraseDisplay.noWords" = "Klíče chybí. V klíčence není uložena žádná záložní fráze.";
+"recoveryPhraseDisplay.birthdayTitle" = "Výška narozenin peněženky";
+"recoveryPhraseDisplay.reveal" = "Odhalit bezpečnostní detaily";
+"recoveryPhraseDisplay.hide" = "Skrýt bezpečnostní detaily";
+"recoveryPhraseDisplay.alert.failed.title" = "Načtení uložené peněženky selhalo";
+"recoveryPhraseDisplay.alert.failed.message" = "Pokus o načtení uložené peněženky z klíčenky selhal. Chyba: %@";
+
+"recoveryPhraseDisplay.warningTitle" = "Vaše tajná obnovovací fráze";
+"recoveryPhraseDisplay.warningInfo" = "Vaše tajná obnovovací fráze je jedinečná sada 24 slov v přesném pořadí. Chrání přístup k vašim prostředkům.";
+
+"recoveryPhraseDisplay.warningControl.title" = "Kontrolujte svou peněženku";
+"recoveryPhraseDisplay.warningControl.info" = "Použijte ji pro přístup k vašim prostředkům z jiných zařízení a Zcash peněženek.";
+
+"recoveryPhraseDisplay.warningKeep.title" = "Udržujte ji v soukromí";
+"recoveryPhraseDisplay.warningKeep.info" = "Nesdílejte ji s nikým! Lze ji použít k získání plné kontroly nad vašimi prostředky.";
+
+"recoveryPhraseDisplay.warningStore.title" = "Uložte ji bezpečně";
+"recoveryPhraseDisplay.warningStore.info" = "Nemáme k ní přístup a nikdy si ji nevyžádáme. Pokud ji ztratíte, nelze ji obnovit.";
+
+"recoveryPhraseDisplay.warningHeight.title" = "Výška narozenin peněženky";
+"recoveryPhraseDisplay.warningHeight.info" = "Výška bloku, ve kterém byla vaše peněženka vytvořena, může výrazně urychlit proces obnovy peněženky.";
+
+"recoveryPhraseDisplay.proceedWarning" = "Uchovávejte tuto frázi bezpečně skrytou. Nepořizujte snímky obrazovky ani ji neukládejte do telefonu!";
+
+"torSetup.title" = "Tor ochrana";
+"torSetup.learn.desc" = "Tato funkce poskytuje dodatečnou ochranu vaší IP adresy. Pokud je Tor povolen ve vaší oblasti, doporučujeme jej povolit. Toto můžete spravovat v Pokročilých nastaveních.";
+
+"torSetup.settings.desc1" = "Tor poskytuje dodatečnou ochranu vaší IP adresy. Tato funkce používá síť Tor pro načítání směnných kurzů, odesílání transakcí, získávání dat transakcí a připojení k API třetích stran.";
+"torSetup.settings.desc2" = "Pokud je Tor povolen ve vaší oblasti, doporučujeme jej povolit.";
+"torSetup.option1.title" = "Převod měn";
+"torSetup.option1.desc" = "Načítat směnné kurzy ze serverů třetích stran bez odhalení vaší IP adresy. (Dostupné pouze s povoleným Torem.)";
+"torSetup.option2.title" = "Transakce";
+"torSetup.option2.desc" = "Odesílat a získávat data transakcí přes Tor pro větší soukromí.";
+"torSetup.option3.title" = "Integrace";
+"torSetup.option3.desc" = "Přistupovat k API třetích stran (např. NEAR) přes Tor pro větší soukromí.";
+"settings.private" = "Tor ochrana";
+"torSetup.enableDesc" = "Připojit přes Tor.";
+"torSetup.disableDesc" = "Nepřipojovat přes Tor.";
+
+"torSetup.learn.btnIn" = "Přihlásit se";
+"torSetup.learn.btnOut" = "Odhlásit se";
+
+"torSetup.ccSheet.title" = "Tor je vyžadován pro převod měn";
+"torSetup.ccSheet.desc1" = "Tor ochrana je beta funkce, která poskytuje dodatečnou ochranu vaší IP adresy. USD směnné kurzy jsou dostupné pouze pokud je povolena.";
+"torSetup.ccSheet.desc2" = "Pokud je Tor povolen ve vaší oblasti, doporučujeme jej povolit. Můžete jej spravovat v Pokročilých nastaveních.";
+"torSetup.ccSheet.later" = "Udělat to později";
+"torSetup.ccSheet.enable" = "Povolit";
+
+"torSetup.alert.title" = "Zakázat Tor?";
+"torSetup.alert.msg" = "Byly zjištěny problémy s připojením Toru. Pro zlepšení výkonu zkuste Tor zakázat. Tím se zastaví aktualizace směnných kurzů. Můžete jej znovu povolit v Pokročilých nastaveních.";
+"torSetup.alert.disable" = "Zakázat";
+"torSetup.alert.dontDisable" = "Nezakazovat";
+
+// Receive help
+"receive.help.shielded.title" = "Zcash stíněná adresa (rotující)";
+"receive.help.shielded.desc1" = "Tuto adresu použijte pro soukromé přijímání a ukládání ZEC. Transparentní a stíněný ZEC odeslaný na tuto adresu bude přijat a uložen jako stíněný ZEC.";
+"receive.help.shielded.desc2" = "Nová Zcash stíněná adresa je generována pokaždé, když otevřete obrazovku Přijmout.";
+"receive.help.shielded.desc3" = "Všechny transakce odeslané na vaše různé rotující stíněné adresy zůstanou součástí jednoho zůstatku peněženky pod stejnou seed frází.";
+"receive.help.shielded.desc4" = "I když doporučujeme pokaždé používat novou adresu, každou jedinečnou adresu lze znovu použít.";
+"receive.help.transparent.title" = "Zcash transparentní adresa (statická)";
+"receive.help.transparent.desc1" = "Tento typ adresy funguje stejně jako Bitcoin adresy a nenabízí ŽÁDNÉ SOUKROMÍ. Podrobnosti transakcí odeslaných na tuto adresu budou veřejné a viditelné na blockchainu.";
+"receive.help.transparent.desc2" = "Nedoporučujeme používat tento typ adresy, pokud peněženka nebo burza, ze které je ZEC odesílán, nepodporuje odesílání prostředků na stíněné Zcash adresy.";
+"receive.help.transparent.desc3" = "Pro ochranu vašeho soukromí vás Zodl provede zastíněním jakéhokoli transparentního ZEC, který přijmete, jediným klepnutím.";
+"receive.help.transparent.desc4" = "Nebudete moci utratit svůj transparentní ZEC, dokud jej nezastíníte.";
+"receive.ua.rotateInfo" = "Rotuje pokaždé, když ji použijete";
+
+// MARK: - Swap and Pay
+"swapAndPay.title" = "Vyměnit nebo zaplatit přes";
+"sendSelect.zashi.send" = "Zaplatit v ZEC";
+"sendSelect.zashi.send.desc" = "Plaťte komukoli odesláním ZEC.";
+"sendSelect.swapWithNear" = "Vyměnit ZEC za NEAR Intents";
+"swapAndPay.selectToken" = "Vybrat aktivo";
+"swapAndPay.enterAddress" = "Zadat adresu...";
+"swapAndPay.select" = "Vybrat...";
+"swapAndPay.getQuote" = "Získat nabídku";
+"swapAndPay.recipientGets" = "Příjemce dostane";
+"swapAndPay.slippage" = "Skluz";
+"swapAndPay.slippageTolerance" = "Tolerance skluzu";
+"swapAndPay.youPay" = "Zaplatíte";
+"swapAndPay.slippageDesc" = "Toto nastavení určuje maximální přípustný rozdíl mezi očekávanou cenou směny a skutečnou cenou, kterou zaplatíte, což je mimo kontrolu Zodlu.";
+"swapAndPay.smallSlippageWarn" = "^[Varování:](style: 'boldPrimary') Skluz ^[pod %@%%](style: 'boldPrimary') zvyšuje šanci, že vaše výměna bude neúspěšná a vrácena. Zvažte použití ^[%@%% nebo vyššího](style: 'boldPrimary'), zejména pro větší částky.";
+"swapAndPay.quoteUnavailable" = "Nabídka není dostupná";
+"swapAndPay.cancelPayment" = "Zrušit platbu";
+"swapAndPay.editPayment" = "Upravit platbu";
+"swapAndPay.swapNow" = "Vyměnit nyní";
+"swapAndPay.swapFrom" = "Vyměnit z";
+"swapAndPay.swapTo" = "Vyměnit na";
+"swapAndPay.payNow" = "Zaplatit nyní";
+"swapAndPay.payFrom" = "Zaplatit z";
+"swapAndPay.payTo" = "Zaplatit na";
+"swapAndPay.fee" = "Poplatek za ZEC transakci";
+"swapAndPay.maxSlippage" = "Max. skluz %@%";
+"swapAndPay.maxSlippageTitle" = "Maximální skluz";
+"swapAndPay.refundedAmount" = "Vrácená částka";
+"swapAndPay.totalAmount" = "Celková částka";
+"swapAndPay.search" = "Hledat podle názvu nebo tickeru...";
+"swapAndPay.slippageSet1" = "Můžete obdržet až o ";
+"swapAndPay.slippageSet2a" = "%@% (%@)";
+"swapAndPay.slippageSet2b" = "%@%";
+"swapAndPay.slippageSet3" = " méně, než bylo nabídnuto.";
+"swapAndPay.maxAllowedSlippage1" = "Zadejte prosím maximální skluz";
+"swapAndPay.maxAllowedSlippage2" = " %@.";
+"swapAndPay.slippageWarn" = "Jakákoli nevyužitá část poplatku za skluz bude vrácena, pokud se výměna provede s nižším skluzem, než bylo očekáváno.";
+"swapAndPay.customSlippage" = "Zadat vlastní skluz";
+"swapAndPay.from" = "Z";
+"swapAndPay.max" = "Použitelné: %@";
+"swapAndPay.to" = "Na";
+"swapAndPay.swap" = "Vyměnit";
+"swapAndPay.pay" = "Zaplatit";
+"swapAndPay.oneZecRate" = "1 ZEC = %@ %@";
+"swapAndPay.rate" = "Kurz";
+"swapAndPay.address" = "Adresa";
+"swapAndPay.help.swapWith" = "Vyměnit přes";
+"swapAndPay.help.payWith" = "Zaplatit přes";
+"swapAndPay.help.swapWithNear" = "Vyměnit přes NEAR";
+"swapAndPay.help.payWithNear" = "Zaplatit přes NEAR";
+"swapAndPay.help.swapDesc" = "Vyměňte ZEC za jakýkoli token podporovaný NEAR. ";
+"swapAndPay.help.swapDesc1" = "Pokud vyměňujete NA ZEC, odešlete prostředky z peněženky třetí strany a zadejte adresu, kam lze vrátit změnu.";
+"swapAndPay.help.swapDesc2" = "Pokud vyměňujete ZE ZEC, musíte poskytnout platnou adresu pro aktivo, na které vyměňujete.";
+"swapAndPay.help.payDesc1" = "Provádějte meziřetězcové platby v jakékoli minci nebo tokenu podporovaném NEAR.";
+"swapAndPay.help.payDesc2" = "Pokud skutečný skluz a síťové podmínky způsobí, že příjemce obdrží méně, než bylo slíbeno, vaše transakce bude zrušena. Obdržíte plnou náhradu minus síťové poplatky.";
+"swapAndPay.quote.zashi" = "Zodl";
+"swapAndPay.sendingInfo" = "Vaše mince jsou odesílány na depositní adresu...";
+"swapAndPay.successSwapInfo" = "Úspěšně jste zahájili výměnu. Sledujte její stav na obrazovce transakcí.";
+"swapAndPay.successPayInfo" = "Úspěšně jste zahájili meziřetězcovou platbu. Sledujte její stav na obrazovce transakcí.";
+"swapAndPay.failureSwapInfo" = "Při zahájení výměny došlo k chybě. Zkuste to prosím znovu.";
+"swapAndPay.failurePayInfo" = "Při zahájení meziřetězcové platby došlo k chybě. Zkuste to prosím znovu.";
+"swapAndPay.checkStatus" = "Zkontrolovat stav";
+"swapAndPay.custom" = "Vlastní";
+"swapAndPay.status" = "Stav";
+"swapAndPay.status.pending" = "Čekající";
+"swapAndPay.status.success" = "Dokončeno";
+"swapAndPay.status.refunded" = "Vráceno";
+"swapAndPay.zashiFee" = "Poplatek Zodl";
+"swapAndPay.emptyAssets.title" = "Žádné výsledky";
+"swapAndPay.emptyAssets.subtitle" = "Zkoušeli jsme, ale nic jsme nenašli.";
+"swapAndPay.swapQuoteSlippageWarn" = "Mohli byste obdržet až o %@ méně na základě %@ skluzu, který jste nastavili.";
+"swapAndPay.executedSlippage" = "Realizovaný skluz";
+"swapAndPay.canceltitle" = "Jste si jisti?";
+"swapAndPay.cancelMsg" = "Pokud opustíte tuto obrazovku, všechny zadané informace budou ztraceny.";
+"swapAndPay.cancelSwap" = "Zrušit výměnu";
+"swapAndPay.editSwap" = "Upravit výměnu";
+"swapAndPay.cancelDont" = "Nezrušit";
+"swapAndPay.optIn.title" = "Vyměnit nebo zaplatit přes";
+"swapAndPay.optIn.desc" = "Tato funkce je poháněna API třetí strany NEAR. Zodl potřebuje navázat síťová připojení pro načítání kurzů, nabídek, provádění transakcí a kontrolu jejich stavu v historii transakcí, což může odhalit vaši IP adresu. Doporučujeme vám povolit Tor připojení pro ochranu vaší IP adresy.";
+"swapAndPay.optIn.optionOneTitle" = "Povolit požadavky třetích stran";
+"swapAndPay.optIn.optionOneSubtitle" = "Povolit volání API na NEAR API.";
+"swapAndPay.optIn.optionTwoTitle" = "Zapnout ochranu IP adresy";
+"swapAndPay.optIn.optionTwoSubtitle" = "Chránit IP adresu přes Tor.";
+"swapAndPay.optIn.warn" = "Poznámka pro milovníky soukromí: Transakce prováděné přes NEAR API jsou transparentní, což znamená, že všechny informace o transakcích jsou veřejné.";
+"swapAndPay.forcedOptIn.optionOne" = "Rozumím, že Zodl provádí API požadavky na NEAR API pokaždé, když interaguji s transakcí Swap/Pay.";
+"swapAndPay.forcedOptIn.optionTwo" = "Rozumím, že bez povolení Toru bude moje IP adresa odhalena přes NEAR API.";
+"swapAndPay.refundTitle" = "Prostředky vráceny";
+"swapAndPay.refundInfo" = "Vaše depozitum bylo zjištěno, ale výměnu nebylo možné dokončit. Vaše prostředky byly vráceny, minus transakční poplatky. Pokud jste je neobdrželi, kontaktujte tým podpory Zodl.";
+"swapAndPay.expiredTitle" = "Výměna expirovala";
+"swapAndPay.expiredMsg" = "Tato výměna expirovala po 24hodinovém platnostním okně. Pokud jste neposlali prostředky, není třeba nic podnikat. Pokud jste prostředky poslali, kontaktujte podporu, aby vám mohli pomoci.";
+"swapAndPay.failedTitle" = "Výměna selhala";
+"swapAndPay.failedMsg" = "Tuto výměnu nebylo možné dokončit. Pokud jste vložili prostředky a neobdrželi jste výměnu, kontaktujte podporu pro vyřešení problému.";
+"swapAndPay.processingTitle" = "Zpracovávám výměnu";
+"swapAndPay.processingMsg" = "Vaše výměna se zpožďuje. Výměny jsou obvykle dokončeny za minuty, ale mohou trvat déle v závislosti na tržních podmínkách.";
+"swapAndPay.recipient" = "Příjemce";
+"swapAndPay.addressBookSelectChain" = "Vybrat řetězec";
+"swapAndPay.addressBookSelect" = "Vybrat...";
+"swapAndPay.addressBookNewContact" = "Přidat nový kontakt";
+"swapAndPay.addressBookZcash" = "Zcash adresa není povolena";
+"swapAndPay.totalFees" = "Celkové poplatky";
+"swapAndPay.incompleteInfo" = "Vložte dalších ^[%@ %@](style: 'boldPrimary') pro dokončení této výměny před ^[%@](style: 'boldPrimary'), jinak bude vaše depozitum vráceno.";
+"swapAndPay.failure.retryTitle" = "Neočekávaná chyba";
+"swapAndPay.failure.retryDesc" = "Zkontrolujte prosím připojení a zkuste to znovu.";
+"swapAndPay.failure.laterTitle" = "Služba není dostupná";
+"swapAndPay.failure.laterDesc" = "Zkuste to prosím znovu později.";
+"swapAndPay.failure.tryAgain" = "Zkusit znovu";
+"swapAndPay.failure.wrong" = "Něco se pokazilo";
+"swapAndPay.failure.wrongDesc" = "Nepodařilo se nám načíst aktiva. Zkontrolujte prosím připojení a zkuste to znovu.";
+
+"general.more" = "Více";
+"general.less" = "Méně";
+"filter.swap" = "Výměny";
+"transactionHistory.timestamp" = "Časové razítko";
+
+// CrossPay
+"sendSelect.payWithNear" = "CrossPay přes Near";
+"sendSelect.payWithNear.desc" = "Používejte stíněný ZEC pro soukromé meziřetězcové platby.";
+"crosspay.title" = "CrossPay";
+"crosspay.help.desc1" = "Provádějte meziřetězcové platby v jakékoli minci nebo tokenu podporovaném NEAR.";
+"crosspay.help.desc2" = "Pokud skutečný skluz a síťové podmínky způsobí, že příjemce obdrží méně, než bylo slíbeno, vaše transakce bude zrušena. Obdržíte plnou náhradu minus síťové poplatky.";
+"crosspay.paymentAmount" = "Částka platby";
+"crosspay.sendingFrom" = "Odeslat z";
+"crosspay.pay" = "Zaplatit";
+"crosspay.total" = "Celkem";
+"crosspay.slippageSet1" = "Můžete zaplatit až o ";
+"crosspay.slippageSet2a" = "%@% (%@)";
+"crosspay.slippageSet2b" = "%@%";
+"crosspay.slippageSet3" = " více, navíc k transakčním poplatkům.";
+"crosspay.sendZec" = "Odeslat ZEC";
+"crosspay.sendZecDesc" = "Používejte stíněný ZEC pro soukromé Zcash platby.";
+"crosspay.sendPayDesc" = "Používejte stíněný ZEC pro meziřetězcové platby.";
+"balances.infoPending" = "Čekající přijetí změny z předchozí transakce.";
+"keystone.confirmSwap" = "Vyměnit přes Keystone";
+"keystone.confirmPay" = "Zaplatit přes Keystone";
+"crosspay.help.payWith" = "CrossPay přes";
+"send.resubmission" = "Problém s připojením";
+
+// MARK: - About
+"about.info" = "Zodl je mobilní peněženka na bázi Zcash, vytvořená pro nezastavitelné soukromé platby. Je optimalizována pro ukládání a reálné použití stíněného $ZEC – skutečně soukromé kryptoměny.";
+"about.additionalInfo" = "Vyvinuta týmem, který nastavil průmyslový standard pro onchain soukromí, původními vývojáři protokolu Zcash.";
+"about.title" = "Představujeme Zodl";
+"about.privacyPolicy" = "Zásady ochrany soukromí";
+"about.termsOfUse" = "Podmínky použití";
+
+// MARK: - Swap to ZEC
+"swapToZec.address" = "Adresa %@...";
+"swapToZec.refundAddress" = "Adresa pro vrácení";
+"swapToZec.review" = "Zkontrolovat nabídku";
+"swapToZec.deposit" = "Vložená částka";
+"swapToZec.shareQR" = "Sdílet QR";
+"swapToZec.sentTheFunds" = "Odeslal/a jsem prostředky";
+"swapToZec.info1" = "Použijte svůj ";
+"swapToZec.info2" = "%@ na %@";
+"swapToZec.info3" = " peněženku pro vložení prostředků. Vložení jiných aktiv může mít za následek ztrátu prostředků.";
+"swapToZec.swapDetails" = "Podrobnosti výměny";
+"swapToZec.swapPending" = "Výměna čeká";
+"swapToZec.swapIncomplete" = "Výměna neúplná";
+"swapToZec.swapProcessing" = "Výměna se zpracovává";
+"swapToZec.swapCompleted" = "Výměna dokončena";
+"swapToZec.swapRefunded" = "Výměna vrácena";
+"swapToZec.swapFailed" = "Výměna selhala";
+"swapToZec.swapExpired" = "Výměna expirovala";
+"swapToZec.depositTo" = "Vložit na";
+
+"sendSelect.swapWithNear.desc" = "Vyměňujte ZEC za jiné kryptoměny.";
+"swapAndPay.status.failed" = "Selhalo";
+"swapAndPay.status.pendingDeposit" = "Čekající vklad";
+"swapAndPay.status.processing" = "Zpracovává se";
+"swapAndPay.status.expired" = "Expirováno";
+"swapAndPay.status.incompleteDeposit" = "Neúplný vklad";
+
+"swapToZec.share.title" = "Adresa pro vklad výměny";
+"swapToZec.share.msg" = "Adresa pro vklad %@ %@ na Near výměnu na ZEC v Zodlu.";
+"swap.quoteUnavailable" = "Zkoušeli jsme, ale nepodařilo se nám získat nabídku pro platbu s vašimi parametry. Můžete zkusit upravit skluz nebo to zkusit znovu later.";
+"swap.quoteUnavailableSwap" = "Zkoušeli jsme, ale nepodařilo se nám získat nabídku pro výměnu s vašimi parametry. Můžete zkusit upravit skluz nebo to zkusit znovu.";
+
+"general.copiedAmount" = "Zkopírovaná částka";
+"general.copiedAddress" = "Zkopírováno %@";
+
+"swapToZec.refundAddress.title" = "Adresa pro vrácení";
+"swapToZec.refundAddress.msg1" = "Pokud výměna selže nebo se tržní podmínky změní, vaše transakce může být vrácena minus transakční poplatky.";
+"swapToZec.refundAddress.msg2" = "Vrácená částka bude vrácena do vaší peněženky ve zdrojové měně – USDC na NEAR. Zadejte prosím platnou adresu, abyste předešli ztrátě prostředků.";
+"swap.nearProvider" = "near";
+"general.activity" = "Aktivita";
+
+"swapStatus.swapping" = "Vyměňuji";
+"swapStatus.paying" = "Platím";
+"swapStatus.paymentIncomplete" = "Platba neúplná";
+"swapStatus.swapIncomplete" = "Výměna neúplná";
+"swapStatus.swapRefunded" = "Výměna vrácena";
+"swapStatus.paymentRefunded" = "Platba vrácena";
+"swapStatus.swapFailed" = "Výměna selhala";
+"swapStatus.paymentFailed" = "Platba selhala";
+"swapStatus.swapExpired" = "Výměna expirovala";
+"swapStatus.paymentExpired" = "Platba expirovala";
+"swapStatus.swapped" = "Vyměněno";
+"swapStatus.paid" = "Zaplaceno";
+
+"coinbase.disabled" = "Coinbase Onramp je dočasně nedostupný.";
+
+"addressBook.error.addressExists" = "Adresa s tímto řetězcem je již ve vašem Adresáři.";
+
+"deleteWallet.metadataWarn1" = "Zachovat šifrovanou zálohu metadat – která zahrnuje kontakty, poznámky, záložky a podrobnosti o výměně/platbě.";
+"deleteWallet.metadataWarn2" = "Tato data nelze obnovit při procesu Obnovy.";
+
+"deleteWallet.sheet.title" = "Jste si jisti?";
+"deleteWallet.sheet.msg" = "Resetování aplikace nelze vrátit zpět. Budete muset obnovit svou peněženku pomocí tajné obnovovací fráze.";
+
+"recoverFunds.title" = "Objevit prostředky";
+"recoverFunds.msg" = "Pokud potvrdíte, Zodl prohledá transparentní adresu, kterou poskytnete, a objeví její prostředky. Může to trvat několik minut.";
+"recoverFunds.fieldTitle" = "Transparentní adresa";
+"recoverFunds.placeholder" = "Zadat nebo vložit...";
+"recoverFunds.btn" = "Skenovat adresu";
+"recoverFunds.tor" = "Tato operace vyžaduje Tor ochranu. Povolte ji prosím v Pokročilých nastaveních. ";
+
+"torSettingsSheet.title" = "Povolit Tor ochranu";
+"torSettingsSheet.msg" = "Pokud je Tor ve vaší oblasti dostupný, doporučujeme jej povolit pro zvýšené soukromí při obnově peněženky. Tento krok je zcela volitelný.";
+"torSettingsSheet.desc" = "Směruje vaše připojení přes síť Tor pro zvýšenou anonymitu a ochranu soukromí.";
+
+"texKeystone.title" = "Nepodporovaný typ adresy";
+"texKeystone.warn1" = "Keystone v současnosti nepodporuje převody na adresy Binance TEX. ";
+"texKeystone.warn2" = "Použijte prosím níže uvedené kroky pro dokončení transakce.";
+"texKeystone.workaround" = "Alternativní postup";
+"texKeystone.step" = "Krok %@";
+"texKeystone.step1.title" = "Nejprve odeslat do Zodlu";
+"texKeystone.step1.desc" = "Převeďte ZEC na svou stíněnou adresu v Zodlu";
+"texKeystone.step2.title" = "Odeslat ze Zodlu na TEX adresu";
+"texKeystone.step2.desc" = "Po přijetí v Zodlu odešlete tokeny na vaši konečnou TEX cílovou adresu";
+"texKeystone.gotIt" = "Rozumím";
+
+"homeScreen.moreDotted" = "Více...";
+
+"enhanceTransaction.title" = "Obnovit data transakce";
+"enhanceTransaction.msg" = "Pokud potvrdíte, Zodl načte data transakce pro ID transakce, které poskytnete.";
+"enhanceTransaction.fieldTitle" = "ID transakce";
+"enhanceTransaction.placeholder" = "Zadat nebo vložit...";
+"enhanceTransaction.btn" = "Načíst data";
+
+"sheet.insufficientBalance.title" = "Nedostatek prostředků";
+"sheet.insufficientBalance.msg" = "Nepodařilo se nám vytvořit tuto transakci. Vaše peněženka nemá dostatečný zůstatek pro pokrytí jak částky transakce, tak transakčních poplatků. Snižte prosím částku transakce, aby se započítaly poplatky. ";
+
+"sheet.syncTimeout.title" = "Něco se pokazilo";
+"sheet.syncTimeout.desc" = "Při provádění poslední operace došlo k chybě. Zkontrolujte připojení, nastavení VPN, restartujte aplikaci nebo zkuste jedno z následujícího:";
+"sheet.syncTimeout.server" = "Přepnout server";
+"sheet.syncTimeout.tor" = "Zakázat Tor ochranu";
+
+// MARK: Currency Conversion
+"currencyConversion.title" = "Převod měn";
+"currencyConversion.cardTitle" = "Nová funkce";
+"currencyConversion.cardButton" = "Zkontrolovat";
+"currencyConversion.learnMoreDesc" = "Zobrazujte svůj zůstatek a platební částky v CZK. Tuto funkci můžete spravovat v Pokročilých nastaveních.";
+"currencyConversion.settingsDesc" = "Zobrazujte svůj zůstatek a platební částky v CZK.";
+"currencyConversion.enable" = "Povolit";
+"currencyConversion.learnMoreOptionEnableDesc" = "Zobrazit mi převod měn.";
+"currencyConversion.learnMoreOptionDisable" = "Zakázat";
+"currencyConversion.learnMoreOptionDisableDesc" = "Nezobrazovat převod měn.";
+"currencyConversion.note" = "Poznámka pro milovníky soukromí: Protože načítáme kurz z burz, burza může být schopna zjistit, že byl směnný kurz dotázán před uskutečněním transakce.";
+"currencyConversion.saveBtn" = "Uložit změny";
+"currencyConversion.ipTitle" = "Ochrana IP adresy";
+"currencyConversion.ipDesc" = "Pokud je povolena Tor ochrana (Pokročilá nastavení), Zodl chrání vaši IP adresu.";
+"currencyConversion.refresh" = "Obnovení kurzu";
+"currencyConversion.refreshDesc" = "Kurz se automaticky obnovuje a lze jej také obnovit ručně.";
+"currencyConversion.skipBtn" = "Přeskočit prozatím";
+"currencyConversion.torOnInfo" = "Zakázáním Tor ochrany se také zakáže funkce Převod měn, dokud nebude znovu povolena.";
+"currencyConversion.torOffInfo" = "Pokud chcete chránit svou IP adresu, povolte Tor ochranu v Pokročilých nastaveních.";
+
+"send.pendingShieldingInfo" = "Vaše transakce zastínění je zpracovávána.";
+"send.pendingInfo" = "Vaše transakce je zpracovávána.";
+"swapAndPay.pendingSwapInfo" = "Vaše výměna je zpracovávána. Sledujte její stav na obrazovce transakcí.";
+"swapAndPay.pendingPayInfo" = "Vaše meziřetězcová platba je zpracovávána. Sledujte její stav na obrazovce transakcí.";
+"send.pendingShieldingTitle" = "Zastínění čeká";
+"send.pendingTitle" = "Transakce čeká";
+"swapAndPay.pendingSwapTitle" = "Výměna čeká";
+"swapAndPay.pendingPayTitle" = "Platba čeká";
+
+"tokenOnChain" = "na";
+
+// MARK: Zashi -> Zodl
+"newZodl.title" = "Zashi je nyní Zodl";
+"newZodl.learnMore" = "Zjistit více";
+"newZodl.goTo" = "Přejít do Zodlu";
+"newZodl.desc" = "Přejmenovali jsme se, ale vše, co milujete, zůstává stejné. Zodl je stejná aplikace pod novým názvem.";
+"newZodl.safeFunds" = "Vaše prostředky a seed fráze zůstávají bezpečné a nezměněné.";
+"newZodl.likeBefore" = "Vše funguje stejně jako předtím:";
+"newZodl.sameTeam" = "Stejný vývojový tým";
+"newZodl.sameMission" = "Stejné poslání";
+"newZodl.sameApp" = "Stejná aplikace";
+"newZodl.allSame" = "Stejná peněženka, jiný název a logo.";
+
+// MARK: Deposit funds
+"depositFunds.title" = "Vložit prostředky";
+"depositFunds.desc" = "Vyměňte za ZEC s jakýmkoli aktivem podporovaným NEAR.";
+"depositFunds.bulletPoint1" = "Odešlete přesnou zobrazenou částku aktiva. Odeslání menší částky bude mít za následek vrácení.";
+"depositFunds.bulletPoint2" = "Zkontrolujte, že odesíláte správné aktivum na správné síti (např. USDC na Solana).";
+"depositFunds.bulletPoint3" = "Nejlepší je odesílat z peněženky, kterou vlastníte. Odesílání z burzy může mít za následek zpoždění nebo vrácení.";
+"depositFunds.alert.title" = "Opravdu chcete ukončit?";
+"depositFunds.alert.message" = "Pokud jste odeslali nebo máte v úmyslu odeslat prostředky, klepněte na 'Odeslal/a jsem prostředky.' Nebo zrušte výměnu pro návrat na předchozí obrazovku.";
+"depositFunds.alert.cancel" = "Zrušit výměnu";
+
+"deposits.info" = "Potvrzení vkladů může trvat několik minut.";
+"reportSwap.title" = "Nahlásit problém s výměnou";
+"reportSwap.msg" = "Klepnutím na tlačítko níže odešlete podrobnosti o této výměně (jako je adresa vkladu a cílové aktivum) týmu podpory Zodl, aby vám mohli pomoci vyřešit problém. Informace o transakci jsou zahrnuty automaticky.";
+"reportSwap.report" = "Nahlásit problém";
+"reportSwap.contact" = "Kontaktovat podporu";
+"reportSwap.please" = "Popište prosím svůj problém zde: ";
+"reportSwap.swapDetails" = "Podrobnosti výměny:";
+"reportSwap.depositAddress" = "Adresa vkladu: ";
+"reportSwap.sourceAsset" = "Zdrojové aktivum: %@ na %@\n";
+"reportSwap.targetAsset" = "Cílové aktivum: %@ na %@\n";
+
+"transactionDetail.feeSummary" = "Poplatek";
