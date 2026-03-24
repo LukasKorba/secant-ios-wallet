@@ -14,7 +14,7 @@
                 {
                     "title": "Changed:",
                     "bulletpoints": [
-                        "We switched Swap from ZEC to use FLEXIBLE_INPUT to allow for undersent swaps to still be executed.",
+                        "We switched Swap to ZEC to use FLEX_INPUT to allow for undersent swaps to still be executed.",
                         "We updated and unified UX/UI elements and behaviour across both platforms."
                     ]
                 },

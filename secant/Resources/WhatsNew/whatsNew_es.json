@@ -14,7 +14,7 @@
                 {
                     "title": "Cambiado:",
                     "bulletpoints": [
-                        "Cambiamos la función de intercambio de ZEC a FLEXIBLE_INPUT para que se puedan ejecutar los intercambios no recibidos.",
+                        "Cambiamos la función de intercambio a ZEC a FLEX_INPUT para que se puedan ejecutar los intercambios no recibidos.",
                         "Actualizamos y unificamos los elementos y el comportamiento de la interfaz de usuario en ambas plataformas."
                     ]
                 },
