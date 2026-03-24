@@ -12,6 +12,7 @@ import ZcashPaymentURI
 
 import Generated
 import AudioServices
+import Models
 
 // Path
 import AddressBook
@@ -397,12 +398,17 @@ extension ScanCoordFlow {
                 
             case .viewTransactionRequested(let sendConfirmationState):
                 if let txid = sendConfirmationState.txIdToExpand {
+                    var transactionDetailsState = TransactionDetails.State.initial
                     if let index = state.transactions.index(id: txid) {
-                        var transactionDetailsState = TransactionDetails.State.initial
                         transactionDetailsState.transaction = state.transactions[index]
-                        transactionDetailsState.isCloseButtonRequired = true
-                        state.path.append(.transactionDetails(transactionDetailsState))
+                    } else {
+                        transactionDetailsState.transaction = TransactionState(
+                            pendingSendId: txid,
+                            zecAmount: sendConfirmationState.amount
+                        )
                     }
+                    transactionDetailsState.isCloseButtonRequired = true
+                    state.path.append(.transactionDetails(transactionDetailsState))
                 }
                 return .none
                 
