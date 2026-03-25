@@ -17,29 +17,33 @@ struct ZashiBackModifier: ViewModifier {
     let customDismiss: (() -> Void)?
     
     func body(content: Content) -> some View {
-        content
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        if let customDismiss {
-                            customDismiss()
-                        } else {
-                            dismiss()
+        if hidden {
+            content
+                .navigationBarBackButtonHidden(true)
+        } else {
+            content
+                .navigationBarBackButtonHidden(true)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            if let customDismiss {
+                                customDismiss()
+                            } else {
+                                dismiss()
+                            }
+                        } label: {
+                            if #available(iOS 26.0, *) {
+                                backIcon()
+                            } else {
+                                backIcon()
+                                    .padding(.trailing, 24)
+                                    .padding(8)
+                            }
                         }
-                    } label: {
-                        if #available(iOS 26.0, *) {
-                            backIcon()
-                        } else {
-                            backIcon()
-                                .padding(.trailing, 24)
-                                .padding(8)
-                        }
+                        .disabled(disabled)
                     }
-                    .disabled(disabled || hidden)
-                    .opacity(hidden ? 0.0 : 1.0)
                 }
-            }
+        }
     }
     
     @ViewBuilder private func backIcon() -> some View {

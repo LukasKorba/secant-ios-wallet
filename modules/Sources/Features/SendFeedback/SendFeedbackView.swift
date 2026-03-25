@@ -111,9 +111,9 @@ public struct SendFeedbackView: View {
                 }
                 .padding(.vertical, 1)
                 .zashiBack()
+                .trackKeyboardVisibility($keyboardVisible)
                 .onAppear {
                     store.send(.onAppear)
-                    observeKeyboardNotifications()
                 }
             }
             .overlay(
@@ -148,18 +148,6 @@ public struct SendFeedbackView: View {
         .screenTitle(L10n.SendFeedback.screenTitle.uppercased())
     }
     
-    private func observeKeyboardNotifications() {
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { _ in
-            withAnimation {
-                keyboardVisible = true
-            }
-        }
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
-            withAnimation {
-                keyboardVisible = false
-            }
-        }
-    }
 }
 
 extension SendFeedbackView {

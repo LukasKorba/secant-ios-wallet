@@ -197,19 +197,6 @@ public struct SwapAndPayForm: View {
         }
     }
     
-    func observeKeyboardNotifications() {
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { _ in
-            withAnimation {
-                keyboardVisible = true
-            }
-        }
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
-            withAnimation {
-                keyboardVisible = false
-            }
-        }
-    }
-    
     @ViewBuilder func zecTicker(_ colorScheme: ColorScheme, shield: Bool = true) -> some View {
         HStack(spacing: 0) {
             zecTickerLogo(colorScheme, shield: shield)

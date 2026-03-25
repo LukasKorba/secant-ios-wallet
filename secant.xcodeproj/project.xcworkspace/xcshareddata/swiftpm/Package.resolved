@@ -482,8 +482,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/zcash/zcash-swift-wallet-sdk",
       "state" : {
-        "revision" : "6b51130accece668c1a6dad42c770396cfc7ce22",
-        "version" : "2.4.7"
+        "revision" : "0b21282b03eefefc56361760aca2d2aa0d6ffbb4",
+        "version" : "2.4.8"
       }
     }
   ],
