@@ -16,6 +16,8 @@ directly impact users rather than highlighting other crucial architectural updat
 - Transaction detail row corners.
 - Address font at several places.
 - Splash screen layout in different states.
+- Unresponsivness of the View transaction button.
+- Missing pending transaction in the list. 
 
 ### Removed
 - Zodl Announcement screen.
