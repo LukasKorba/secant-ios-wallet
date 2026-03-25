@@ -59,12 +59,17 @@ extension SignWithKeystoneCoordFlow {
                     .path(.element(id: _, action: .sendResultFailure(.viewTransactionTapped))),
                     .path(.element(id: _, action: .sendResultPending(.viewTransactionTapped))):
                 if let txid = state.sendConfirmationState.txIdToExpand {
+                    var transactionDetailsState = TransactionDetails.State.initial
                     if let index = state.transactions.index(id: txid) {
-                        var transactionDetailsState = TransactionDetails.State.initial
                         transactionDetailsState.transaction = state.transactions[index]
-                        transactionDetailsState.isCloseButtonRequired = true
-                        state.path.append(.transactionDetails(transactionDetailsState))
+                    } else {
+                        transactionDetailsState.transaction = TransactionState(
+                            pendingSendId: txid,
+                            zecAmount: state.sendConfirmationState.amount
+                        )
                     }
+                    transactionDetailsState.isCloseButtonRequired = true
+                    state.path.append(.transactionDetails(transactionDetailsState))
                 }
                 return .none
                 

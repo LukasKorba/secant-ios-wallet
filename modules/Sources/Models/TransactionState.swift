@@ -332,6 +332,20 @@ public struct TransactionState: Equatable, Identifiable {
         self.isMarkedAsRead = isMarkedAsRead
     }
     
+    public init(
+        pendingSendId id: String,
+        zecAmount: Zatoshi
+    ) {
+        self.id = id
+        self.status = .sending
+        self.zecAmount = zecAmount
+        self.isSentTransaction = true
+        self.fee = nil
+        self.memoCount = 0
+        self.isShieldingTransaction = false
+        self.isTransparentRecipient = false
+    }
+
     public func confirmationsWith(_ latestMinedHeight: BlockHeight?) -> BlockHeight {
         guard let minedHeight, let latestMinedHeight, minedHeight > 0, latestMinedHeight > 0 else {
             return 0
