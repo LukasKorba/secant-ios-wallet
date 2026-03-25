@@ -491,7 +491,7 @@ extension Near1Click {
                 amountOutUsd: amountOutUsd,
                 fromAsset: fromAsset,
                 toAsset: toAsset,
-                isSwap: swapType == Constants.exactInput,
+                isSwap: swapType == Constants.exactInput || swapType == Constants.flexInput,
                 slippage: slippage,
                 status: status,
                 refundedAmountFormatted: refundedAmountFormattedDecimal,

@@ -6,6 +6,8 @@ directly impact users rather than highlighting other crucial architectural updat
 
 ## [Unreleased]
 
+## 3.2.0 build 5 (2026-03-09)
+
 ### Changed
 - Swap to ZEC's swap type updated to FLEX_INPUT, reducing number of occurences of INCOMPLETE_DEPOSIT states.
 - Tap to enlarge a QR code implemented for: Receive, Request ZEC, Swap to ZEC, Sign with Keystone. 
