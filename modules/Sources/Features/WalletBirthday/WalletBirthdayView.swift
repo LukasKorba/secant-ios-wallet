@@ -13,6 +13,9 @@ import UIComponents
 public struct WalletBirthdayView: View {
     @Perception.Bindable var store: StoreOf<WalletBirthday>
     
+    @State var keyboardVisible: Bool = false
+    @FocusState var isBirthdayFocused
+
     public init(store: StoreOf<WalletBirthday>) {
         self.store = store
     }
@@ -38,6 +41,7 @@ public struct WalletBirthdayView: View {
                 .keyboardType(.numberPad)
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
+                .focused($isBirthdayFocused)
                 
                 Text(L10n.RestoreWallet.Birthday.fieldInfo)
                     .zFont(size: 12, style: Design.Text.tertiary)
@@ -61,6 +65,9 @@ public struct WalletBirthdayView: View {
             .zashiBack()
         }
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            observeKeyboardNotifications()
+        }
         .navigationBarItems(
             trailing:
                 Button {
@@ -74,6 +81,47 @@ public struct WalletBirthdayView: View {
         .screenHorizontalPadding()
         .applyScreenBackground()
         .screenTitle(L10n.ImportWallet.Button.restoreWallet)
+        .overlay {
+            if keyboardVisible {
+                VStack(spacing: 0) {
+                    Spacer()
+                    
+                    Asset.Colors.primary.color
+                        .frame(height: 1)
+                        .opacity(0.1)
+                    
+                    HStack(alignment: .center) {
+                        Spacer()
+                        
+                        Button {
+                            isBirthdayFocused = false
+                        } label: {
+                            Text(L10n.General.done.uppercased())
+                                .zFont(.regular, size: 14, style: Design.Text.primary)
+                        }
+                        .padding(.bottom, 4)
+                    }
+                    .applyScreenBackground()
+                    .padding(.horizontal, 20)
+                    .frame(height: keyboardVisible ? 38 : 0)
+                    .frame(maxWidth: .infinity)
+                    .opacity(keyboardVisible ? 1 : 0)
+                }
+            }
+        }
+    }
+    
+    private func observeKeyboardNotifications() {
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { _ in
+            withAnimation {
+                keyboardVisible = true
+            }
+        }
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
+            withAnimation {
+                keyboardVisible = false
+            }
+        }
     }
 }
 

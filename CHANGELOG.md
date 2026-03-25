@@ -18,6 +18,7 @@ directly impact users rather than highlighting other crucial architectural updat
 - Splash screen layout in different states.
 - Unresponsivness of the View transaction button.
 - Missing pending transaction in the list. 
+- Missing Done button in a numberic keypad.
 
 ### Removed
 - Zodl Announcement screen.
