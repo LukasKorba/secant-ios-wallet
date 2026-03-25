@@ -293,7 +293,10 @@ public struct RecoverySeedPhraseEntryView: View {
                 .ignoresSafeArea(.keyboard, edges: .bottom)
             }
             .frame(maxWidth: .infinity)
-            .onAppear { observeKeyboardNotifications() }
+            .trackKeyboardVisibility($keyboardVisible)
+            .onChange(of: keyboardVisible) { value in
+                store.send(.updateKeyboardFlag(value))
+            }
             .onChange(of: focusedField) { handle in
                 if case .field(let index) = handle {
                     store.send(.selectedIndex(index))
@@ -384,21 +387,6 @@ public struct RecoverySeedPhraseEntryView: View {
                     .opacity(keyboardVisible ? 1 : 0)
                 }
             )
-        }
-    }
-    
-    private func observeKeyboardNotifications() {
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { _ in
-            withAnimation {
-                keyboardVisible = true
-                store.send(.updateKeyboardFlag(true))
-            }
-        }
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
-            withAnimation {
-                keyboardVisible = false
-                store.send(.updateKeyboardFlag(false))
-            }
         }
     }
     

@@ -65,9 +65,7 @@ public struct WalletBirthdayView: View {
             .zashiBack()
         }
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            observeKeyboardNotifications()
-        }
+        .trackKeyboardVisibility($keyboardVisible)
         .navigationBarItems(
             trailing:
                 Button {
@@ -107,19 +105,6 @@ public struct WalletBirthdayView: View {
                     .frame(maxWidth: .infinity)
                     .opacity(keyboardVisible ? 1 : 0)
                 }
-            }
-        }
-    }
-    
-    private func observeKeyboardNotifications() {
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { _ in
-            withAnimation {
-                keyboardVisible = true
-            }
-        }
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
-            withAnimation {
-                keyboardVisible = false
             }
         }
     }

@@ -116,9 +116,7 @@ public extension SwapAndPayForm {
                 .screenHorizontalPadding()
             }
             .padding(.top, 1)
-            .onAppear {
-                observeKeyboardNotifications()
-            }
+            .trackKeyboardVisibility($keyboardVisible)
             .onChange(of: store.keyboardDismissCounter) { _ in
                 isAmountFocused = false
                 isAddressFocused = false

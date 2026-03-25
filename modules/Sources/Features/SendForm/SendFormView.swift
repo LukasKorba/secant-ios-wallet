@@ -194,9 +194,9 @@ public struct SendFormView: View {
                                 }
                             }
                         }
+                        .trackKeyboardVisibility($keyboardVisible)
                         .onAppear {
                             store.send(.onAppear)
-                            observeKeyboardNotifications()
                             if store.requestsAddressFocus {
                                 isAddressFocused = true
                                 store.send(.requestsAddressFocusResolved)
@@ -301,19 +301,6 @@ public struct SendFormView: View {
         }
     }
 
-    private func observeKeyboardNotifications() {
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { _ in
-            withAnimation {
-                keyboardVisible = true
-            }
-        }
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
-            withAnimation {
-                keyboardVisible = false
-            }
-        }
-    }
-    
     @ViewBuilder private func helpSheetContent() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Asset.Assets.Icons.alertOutline.image

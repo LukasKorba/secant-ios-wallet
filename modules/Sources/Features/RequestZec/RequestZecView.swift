@@ -83,9 +83,7 @@ public struct RequestZecView: View {
                 .zashiBack()
                 .screenHorizontalPadding()
                 .applyScreenBackground()
-                .onAppear {
-                    observeKeyboardNotifications()
-                }
+                .trackKeyboardVisibility($keyboardVisible)
             }
             .overlay(
                 VStack(spacing: 0) {
@@ -116,18 +114,6 @@ public struct RequestZecView: View {
         }
     }
     
-    private func observeKeyboardNotifications() {
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { _ in
-            withAnimation {
-                keyboardVisible = true
-            }
-        }
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
-            withAnimation {
-                keyboardVisible = false
-            }
-        }
-    }
 }
 
 #Preview {
