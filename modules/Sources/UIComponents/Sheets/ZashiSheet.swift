@@ -62,7 +62,6 @@ public struct ZashiSheetModifier<SheetContent: View>: ViewModifier {
             .sheet(isPresented: $isPresented) {
                 if #available(iOS 26.0, *) {
                     mainBody26()
-                        .id(sheetHeight)
                         .presentationDetents([.height(sheetHeight)])
                         .presentationDragIndicator(.visible)
                         .padding(.horizontal, horizontalPadding)

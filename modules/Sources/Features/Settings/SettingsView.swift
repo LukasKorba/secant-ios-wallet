@@ -87,21 +87,23 @@ public struct SettingsView: View {
                     .onAppear { store.send(.onAppear) }
                     
                     Spacer()
-                    
-                    Asset.Assets.zashiLogo.image
-                        .zImage(width: 41, height: 41, color: Asset.Colors.primary.color)
-                        .padding(.bottom, 7)
-                    
-                    Asset.Assets.zashiTitle.image
-                        .zImage(width: 73, height: 20, color: Asset.Colors.primary.color)
-                        .padding(.bottom, 16)
-                        .onLongPressGesture {
-                            store.send(.enableRecoverFundsMode)
-                        }
-                        .onTapGesture(count: 3) {
-                            store.send(.enableEnhanceTransactionMode)
-                        }
-                    
+
+                    Group {
+                        Asset.Assets.zashiLogo.image
+                            .zImage(width: 41, height: 41, color: Asset.Colors.primary.color)
+                            .padding(.bottom, 7)
+                        
+                        Asset.Assets.zashiTitle.image
+                            .zImage(width: 73, height: 20, color: Asset.Colors.primary.color)
+                            .padding(.bottom, 16)
+                    }
+                    .onLongPressGesture {
+                        store.send(.enableRecoverFundsMode)
+                    }
+                    .onTapGesture(count: 3) {
+                        store.send(.enableEnhanceTransactionMode)
+                    }
+
                     Text(L10n.Settings.version(store.appVersion, store.appBuild))
                         .zFont(size: 16, style: Design.Text.tertiary)
                         .padding(.bottom, 24)
