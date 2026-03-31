@@ -74,7 +74,7 @@ public struct TransactionRowView: View {
                     VStack(alignment: .leading, spacing: 0) {
                         HStack(spacing: 0) {
                             Text(transaction.isPending
-                                 ? L10n.TransactionHistory.threeDots(transaction.title())
+                                 ? String(localizable: .transactionHistoryThreeDots(transaction.title()))
                                  : transaction.title()
                             )
                             .zFont(.semiBold, size: 14, style: Design.Text.primary)
@@ -108,7 +108,7 @@ public struct TransactionRowView: View {
     @ViewBuilder private func balanceView() -> some View {
         Group {
             if isSensitiveContentHidden {
-                Text(L10n.General.hideBalancesMost)
+                Text(localizable: .generalHideBalancesMost)
                     .foregroundColor(Design.Text.primary.color(colorScheme))
             } else if let swapToZecAmount = transaction.swapToZecAmount {
                 if !swapToZecAmount.isEmpty {
