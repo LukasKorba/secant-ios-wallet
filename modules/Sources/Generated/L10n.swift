@@ -551,10 +551,26 @@ public enum L10n {
     /// Keystone Wallet
     public static let wallet = L10n.tr("Localizable", "keystone.wallet", fallback: "Keystone Wallet")
     public enum AddHWWallet {
+      /// Close
+      public static let close = L10n.tr("Localizable", "keystone.addHWWallet.close", fallback: "Close")
       /// Connect
       public static let connect = L10n.tr("Localizable", "keystone.addHWWallet.connect", fallback: "Connect")
+      /// Connect active device
+      public static let connectActive = L10n.tr("Localizable", "keystone.addHWWallet.connectActive", fallback: "Connect active device")
+      /// Connected!
+      public static let connected = L10n.tr("Localizable", "keystone.addHWWallet.connected", fallback: "Connected!")
+      /// Your Keystone Hardware Wallet has been successfully connected.
+      public static let connectedDesc = L10n.tr("Localizable", "keystone.addHWWallet.connectedDesc", fallback: "Your Keystone Hardware Wallet has been successfully connected.")
+      /// Connect new device
+      public static let connectNew = L10n.tr("Localizable", "keystone.addHWWallet.connectNew", fallback: "Connect new device")
       /// Select the wallet you'd like to connect to proceed. Once connected, you’ll be able to wirelessly sign transactions with your hardware wallet.
       public static let desc = L10n.tr("Localizable", "keystone.addHWWallet.desc", fallback: "Select the wallet you'd like to connect to proceed. Once connected, you’ll be able to wirelessly sign transactions with your hardware wallet.")
+      /// Connecting to a hardware wallet that was previously connected to Zodl will require synchronization to discover your transaction history. We'll guide you through it.
+      public static let deviceDesc = L10n.tr("Localizable", "keystone.addHWWallet.deviceDesc", fallback: "Connecting to a hardware wallet that was previously connected to Zodl will require synchronization to discover your transaction history. We'll guide you through it.")
+      /// New or Active Device?
+      public static let deviceQuestion = L10n.tr("Localizable", "keystone.addHWWallet.deviceQuestion", fallback: "New or Active Device?")
+      /// Enter block height manually
+      public static let enterManually = L10n.tr("Localizable", "keystone.addHWWallet.enterManually", fallback: "Enter block height manually")
       /// Forget this device
       public static let forgetDevice = L10n.tr("Localizable", "keystone.addHWWallet.forgetDevice", fallback: "Forget this device")
       /// Instructions:
@@ -563,6 +579,8 @@ public enum L10n {
       public static let readyToScan = L10n.tr("Localizable", "keystone.addHWWallet.readyToScan", fallback: "Ready to Scan")
       /// Scan your device’s QR code to connect.
       public static let scan = L10n.tr("Localizable", "keystone.addHWWallet.scan", fallback: "Scan your device’s QR code to connect.")
+      /// Set Up Wallet Birthday
+      public static let setBirthday = L10n.tr("Localizable", "keystone.addHWWallet.setBirthday", fallback: "Set Up Wallet Birthday")
       /// Unlock your Keystone
       public static let step1 = L10n.tr("Localizable", "keystone.addHWWallet.step1", fallback: "Unlock your Keystone")
       /// Tap the menu icon
@@ -575,6 +593,12 @@ public enum L10n {
       public static let title = L10n.tr("Localizable", "keystone.addHWWallet.title", fallback: "Confirm Account to Access")
       /// View Keystone tutorial
       public static let tutorial = L10n.tr("Localizable", "keystone.addHWWallet.tutorial", fallback: "View Keystone tutorial")
+    }
+    public enum Birthday {
+      public enum EstimateDate {
+        /// Entering the block height at which your wallet was created ensures that correct number of blocks will be scanned. If you’re not sure, choose an earlier date.
+        public static let info = L10n.tr("Localizable", "keystone.birthday.estimateDate.info", fallback: "Entering the block height at which your wallet was created ensures that correct number of blocks will be scanned. If you’re not sure, choose an earlier date.")
+      }
     }
     public enum Drawer {
       /// Wallets & Hardware

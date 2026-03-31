@@ -41,9 +41,9 @@ public struct AccountsSelectionView: View {
                 Spacer()
 
                 ZashiButton(
-                    L10n.Keystone.AddHWWallet.connect
+                    L10n.General.next
                 ) {
-                    store.send(.unlockTapped)
+                    store.send(.nextTapped)
                 }
                 .padding(.bottom, 24)
                 .disabled(!store.isKSAccountSelected)

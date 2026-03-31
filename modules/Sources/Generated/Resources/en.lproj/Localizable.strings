@@ -426,6 +426,17 @@
 "keystone.addHWWallet.step3" = "Tap on Connect Software Wallet";
 "keystone.addHWWallet.step4" = "Select Zodl (Zashi) app and scan QR code";
 "keystone.addHWWallet.readyToScan" = "Ready to Scan";
+"keystone.addHWWallet.setBirthday" = "Set Up Wallet Birthday";
+"keystone.addHWWallet.connected" = "Keystone Connected";
+"keystone.addHWWallet.connectedDesc" = "Your Keystone hardware wallet has been successfully connected. You can now sign transactions wirelessly.";
+"keystone.addHWWallet.close" = "Close";
+"keystone.addHWWallet.connectActive" = "Connect active device";
+"keystone.addHWWallet.connectNew" = "Connect new device";
+"keystone.addHWWallet.deviceDesc" = "Connecting to a hardware wallet that was previously connected to Zodl will require synchronization to discover your transaction history. We'll guide you through it.";
+"keystone.addHWWallet.deviceQuestion" = "New or Active Device?";
+"keystone.addHWWallet.enterManually" = "Enter block height"; // trans
+"keystone.addHWWallet.connected" = "Connected!"; // trans
+"keystone.addHWWallet.connectedDesc" = "Your Keystone Hardware Wallet has been successfully connected."; // trans
 "keystone.confirm" = "Confirm with Keystone";
 "keystone.signWith.hardware" = "Hardware";
 "keystone.signWith.title" = "Scan with your Keystone wallet";
@@ -1009,3 +1020,6 @@
 "reportSwap.targetAsset" = "Target Asset: %@ on %@\n";
 
 "transactionDetail.feeSummary" = "Fee";
+
+// keystone updates
+"keystone.birthday.estimateDate.info" = "Entering the block height at which your wallet was created ensures that correct number of blocks will be scanned. If you’re not sure, choose an earlier date.";

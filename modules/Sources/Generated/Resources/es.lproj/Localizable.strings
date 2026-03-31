@@ -426,6 +426,15 @@
 "keystone.addHWWallet.step3" = "Selecciona 'Conectar Billetera de Software'";
 "keystone.addHWWallet.step4" = "Selecciona la app Zodl (Zashi) y escanea el código QR";
 "keystone.addHWWallet.readyToScan" = "Listo para Escanear";
+"keystone.addHWWallet.setBirthday" = "Configurar Cumpleaños de la Billetera";
+"keystone.addHWWallet.connected" = "Keystone Conectado";
+"keystone.addHWWallet.connectedDesc" = "Tu billetera de hardware Keystone se ha conectado exitosamente. Ahora puedes firmar transacciones de forma inalámbrica.";
+"keystone.addHWWallet.close" = "Cerrar";
+"keystone.addHWWallet.connectActive" = "Conectar dispositivo activo";
+"keystone.addHWWallet.connectNew" = "Conectar nuevo dispositivo";
+"keystone.addHWWallet.deviceDesc" = "Conectar a una billetera de hardware que fue previamente conectada a Zodl requerirá sincronización para descubrir tu historial de transacciones. Te guiaremos.";
+"keystone.addHWWallet.deviceQuestion" = "¿Dispositivo Nuevo o Activo?";
+"keystone.addHWWallet.enterManually" = "Ingresar altura de bloque";
 "keystone.confirm" = "Confirma con Keystone";
 "keystone.signWith.hardware" = "Hardware";
 "keystone.signWith.title" = "Escanea con tu billetera Keystone";

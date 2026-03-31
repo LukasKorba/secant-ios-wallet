@@ -48,8 +48,18 @@ public struct WalletBirthdayEstimatedHeightView: View {
                 .frame(maxWidth: .infinity)
 
                 Spacer()
-                
-                ZashiButton(L10n.ImportWallet.Button.restoreWallet) {
+
+                if store.isKeystoneFlow {
+                    ZashiButton(
+                        L10n.Keystone.AddHWWallet.enterManually,
+                        type: .ghost
+                    ) {
+                        store.send(.enterManuallyTapped)
+                    }
+                    .padding(.bottom, 12)
+                }
+
+                ZashiButton(store.isKeystoneFlow ? L10n.Keystone.AddHWWallet.connect : L10n.ImportWallet.Button.restoreWallet) {
                     store.send(.restoreTapped)
                 }
                 .padding(.bottom, 24)
@@ -69,7 +79,7 @@ public struct WalletBirthdayEstimatedHeightView: View {
         )
         .screenHorizontalPadding()
         .applyScreenBackground()
-        .screenTitle(L10n.ImportWallet.Button.restoreWallet)
+        .screenTitle(store.isKeystoneFlow ? L10n.Keystone.connect : L10n.ImportWallet.Button.restoreWallet)
     }
 }
 
