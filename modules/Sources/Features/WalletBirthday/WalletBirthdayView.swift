@@ -23,15 +23,27 @@ public struct WalletBirthdayView: View {
     public var body: some View {
         WithPerceptionTracking {
             VStack(alignment: .leading, spacing: 0) {
+                if store.isKeystoneFlow {
+                    Asset.Assets.Partners.keystoneTitleLogo.image
+                        .resizable()
+                        .frame(width: 193, height: 32)
+                        .padding(.top, 16)
+                }
+                
                 Text(localizable: .importWalletBirthdayTitle)
                     .zFont(.semiBold, size: 24, style: Design.Text.primary)
                     .padding(.top, 40)
                     .padding(.bottom, 8)
-
-                Text(localizable: .restoreWalletBirthdayInfo)
-                    .zFont(size: 14, style: Design.Text.primary)
-                    .padding(.bottom, 32)
-
+                
+                Text(
+                    localizable:
+                        store.isKeystoneFlow
+                    ? .addHWWalletBirthdayInfo
+                    : .restoreWalletBirthdayInfo
+                )
+                .zFont(size: 14, style: Design.Text.primary)
+                .padding(.bottom, 32)
+                
                 ZashiTextField(
                     text: $store.birthday,
                     placeholder: String(localizable: .restoreWalletBirthdayPlaceholder),
@@ -45,9 +57,9 @@ public struct WalletBirthdayView: View {
                 
                 Text(localizable: .restoreWalletBirthdayFieldInfo)
                     .zFont(size: 12, style: Design.Text.tertiary)
-
+                
                 Spacer()
-
+                
                 if !store.isKeystoneFlow {
                     ZashiButton(
                         String(localizable: .restoreWalletBirthdayEstimate),
@@ -57,55 +69,56 @@ public struct WalletBirthdayView: View {
                     }
                     .padding(.bottom, 12)
                 }
-
+                
                 ZashiButton(store.isKeystoneFlow ? String(localizable: .keystoneAddHWWalletConnect) : String(localizable: .importWalletButtonRestoreWallet)) {
                     store.send(.restoreTapped)
                 }
                 .disabled(!store.isValidBirthday)
-                .padding(.bottom, 24)
+                .padding(.bottom, keyboardVisible ? 48 : 24)
             }
             .zashiBack()
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .trackKeyboardVisibility($keyboardVisible)
-        .navigationBarItems(
-            trailing:
-                Button {
-                    store.send(.helpSheetRequested)
-                } label: {
-                    Asset.Assets.Icons.help.image
-                        .zImage(size: 24, style: Design.Text.primary)
-                        .padding(Design.Spacing.navBarButtonPadding)
-                }
-        )
-        .screenHorizontalPadding()
-        .applyScreenBackground()
-        .screenTitle(store.isKeystoneFlow ? String(localizable: .keystoneConnect) : String(localizable: .importWalletButtonRestoreWallet))
-        .overlay {
-            if keyboardVisible {
-                VStack(spacing: 0) {
-                    Spacer()
-                    
-                    Asset.Colors.primary.color
-                        .frame(height: 1)
-                        .opacity(0.1)
-                    
-                    HStack(alignment: .center) {
+            .onAppear { isBirthdayFocused = true }
+            .navigationBarTitleDisplayMode(.inline)
+            .trackKeyboardVisibility($keyboardVisible)
+            .navigationBarItems(
+                trailing:
+                    Button {
+                        store.send(.helpSheetRequested)
+                    } label: {
+                        Asset.Assets.Icons.help.image
+                            .zImage(size: 24, style: Design.Text.primary)
+                            .padding(Design.Spacing.navBarButtonPadding)
+                    }
+            )
+            .screenHorizontalPadding()
+            .applyScreenBackground()
+            .screenTitle(store.isKeystoneFlow ? "" : String(localizable: .importWalletButtonRestoreWallet))
+            .overlay {
+                if keyboardVisible {
+                    VStack(spacing: 0) {
                         Spacer()
                         
-                        Button {
-                            isBirthdayFocused = false
-                        } label: {
-                            Text(String(localizable: .generalDone).uppercased())
-                                .zFont(.regular, size: 14, style: Design.Text.primary)
+                        Asset.Colors.primary.color
+                            .frame(height: 1)
+                            .opacity(0.1)
+                        
+                        HStack(alignment: .center) {
+                            Spacer()
+                            
+                            Button {
+                                isBirthdayFocused = false
+                            } label: {
+                                Text(String(localizable: .generalDone).uppercased())
+                                    .zFont(.regular, size: 14, style: Design.Text.primary)
+                            }
+                            .padding(.bottom, 4)
                         }
-                        .padding(.bottom, 4)
+                        .applyScreenBackground()
+                        .padding(.horizontal, 20)
+                        .frame(height: keyboardVisible ? 38 : 0)
+                        .frame(maxWidth: .infinity)
+                        .opacity(keyboardVisible ? 1 : 0)
                     }
-                    .applyScreenBackground()
-                    .padding(.horizontal, 20)
-                    .frame(height: keyboardVisible ? 38 : 0)
-                    .frame(maxWidth: .infinity)
-                    .opacity(keyboardVisible ? 1 : 0)
                 }
             }
         }

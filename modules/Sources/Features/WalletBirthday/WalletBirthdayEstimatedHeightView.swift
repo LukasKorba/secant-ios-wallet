@@ -20,6 +20,13 @@ public struct WalletBirthdayEstimatedHeightView: View {
     public var body: some View {
         WithPerceptionTracking {
             VStack(alignment: .leading, spacing: 0) {
+                if store.isKeystoneFlow {
+                    Asset.Assets.Partners.keystoneTitleLogo.image
+                        .resizable()
+                        .frame(width: 193, height: 32)
+                        .padding(.top, 16)
+                }
+
                 Text(localizable: .restoreWalletBirthdayEstimatedTitle)
                     .zFont(.semiBold, size: 24, style: Design.Text.primary)
                     .padding(.top, 40)
@@ -49,37 +56,27 @@ public struct WalletBirthdayEstimatedHeightView: View {
 
                 Spacer()
 
-                if store.isKeystoneFlow {
-                    ZashiButton(
-                        String(localizable: .keystoneAddHWWalletEnterManually),
-                        type: .ghost
-                    ) {
-                        store.send(.enterManuallyTapped)
-                    }
-                    .padding(.bottom, 12)
-                }
-
                 ZashiButton(store.isKeystoneFlow ? String(localizable: .keystoneAddHWWalletConnect) : String(localizable: .importWalletButtonRestoreWallet)) {
                     store.send(.restoreTapped)
                 }
                 .padding(.bottom, 24)
             }
             .zashiBack()
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(
+                trailing:
+                    Button {
+                        store.send(.helpSheetRequested)
+                    } label: {
+                        Asset.Assets.Icons.help.image
+                            .zImage(size: 24, style: Design.Text.primary)
+                            .padding(Design.Spacing.navBarButtonPadding)
+                    }
+            )
+            .screenHorizontalPadding()
+            .applyScreenBackground()
+            .screenTitle(store.isKeystoneFlow ? "" : String(localizable: .importWalletButtonRestoreWallet))
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(
-            trailing:
-                Button {
-                    store.send(.helpSheetRequested)
-                } label: {
-                    Asset.Assets.Icons.help.image
-                        .zImage(size: 24, style: Design.Text.primary)
-                        .padding(Design.Spacing.navBarButtonPadding)
-                }
-        )
-        .screenHorizontalPadding()
-        .applyScreenBackground()
-        .screenTitle(store.isKeystoneFlow ? String(localizable: .keystoneConnect) : String(localizable: .importWalletButtonRestoreWallet))
     }
 }
 
