@@ -94,7 +94,7 @@ public struct WalletBirthdayView: View {
                         Button {
                             isBirthdayFocused = false
                         } label: {
-                            Text(L10n.General.done.uppercased())
+                            Text(localizable: .generalDone)
                                 .zFont(.regular, size: 14, style: Design.Text.primary)
                         }
                         .padding(.bottom, 4)

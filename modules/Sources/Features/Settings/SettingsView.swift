@@ -9,6 +9,7 @@ import AddKeystoneHWWallet
 import AddressBook
 import CurrencyConversionSetup
 import DeleteWallet
+import DisconnectHWWallet
 import ExportTransactionHistory
 import PrivateDataConsent
 import RecoveryPhraseDisplay
@@ -128,6 +129,8 @@ public struct SettingsView: View {
                     AdvancedSettingsView(store: store)
                 case let .chooseServerSetup(store):
                     ServerSetupView(store: store)
+                case let .disconnectHWWallet(store):
+                    DisconnectHWWalletView(store: store)
                 case let .currencyConversionSetup(store):
                     CurrencyConversionSetupView(store: store)
                 case let .exportPrivateData(store):

@@ -39,7 +39,8 @@ public struct SDKSynchronizerClient {
     public let isSyncing: () -> Bool
     public let isInitialized: () -> Bool
     public let importAccount: (String, [UInt8]?, Zip32AccountIndex?, AccountPurpose, String, String?) async throws -> AccountUUID?
-    
+    public var deleteAccount: (AccountUUID) async throws -> Void
+
     public let rewind: (RewindPolicy) -> AnyPublisher<Void, Error>
     
     public var getAllTransactions: (AccountUUID?) async throws -> IdentifiedArrayOf<TransactionState>

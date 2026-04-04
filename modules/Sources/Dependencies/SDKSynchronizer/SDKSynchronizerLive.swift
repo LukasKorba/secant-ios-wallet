@@ -87,6 +87,9 @@ extension SDKSynchronizerClient: DependencyKey {
                     keySource: keySource
                 )
             },
+            deleteAccount: { accountUUID in
+                try await synchronizer.deleteAccount(accountUUID)
+            },
             rewind: { synchronizer.rewind($0) },
             getAllTransactions: { accountUUID in
                 let clearedTransactions = try await synchronizer.allTransactions()

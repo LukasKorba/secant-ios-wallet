@@ -59,10 +59,19 @@ public struct AdvancedSettingsView: View {
 
                         ActionRow(
                             icon: Asset.Assets.Icons.shieldZap.image,
-                            title: String(localizable: .settingsPrivate),
-                            divider: false
+                            title: String(localizable: .settingsPrivate)
                         ) {
                             store.send(.operationAccessCheck(.torSetup))
+                        }
+                        
+                        if store.isKeystoneConnected {
+                            ActionRow(
+                                icon: Asset.Assets.Icons.hardDrive.image,
+                                title: String(localizable: .disconnectHWWalletCta),
+                                divider: false
+                            ) {
+                                store.send(.operationAccessCheck(.disconnectHWWallet))
+                            }
                         }
                     }
                     .listRowInsets(EdgeInsets())

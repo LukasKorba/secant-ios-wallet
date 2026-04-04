@@ -114,6 +114,7 @@ public enum Asset {
       public static let filter = ImageAsset(name: "filter")
       public static let flashOff = ImageAsset(name: "flashOff")
       public static let flashOn = ImageAsset(name: "flashOn")
+      public static let hardDrive = ImageAsset(name: "hardDrive")
       public static let help = ImageAsset(name: "help")
       public static let imageLibrary = ImageAsset(name: "imageLibrary")
       public static let integrations = ImageAsset(name: "integrations")
