@@ -6,6 +6,11 @@ directly impact users rather than highlighting other crucial architectural updat
 
 ## [Unreleased]
 
+## 3.3.0 build 2 (2026-04-07)
+
+### Added
+- We added a feature to for disconnecting a Keystone hardware wallet.
+
 ## 3.2.0 build 5 (2026-03-09)
 
 ### Changed
