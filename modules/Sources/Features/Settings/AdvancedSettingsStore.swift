@@ -12,6 +12,7 @@ public struct AdvancedSettings {
     public struct State: Equatable {
         public enum Operation: Equatable {
             case chooseServer
+            case disconnectHWWallet
             case exportPrivateData
             case exportTaxFile
             case recoveryPhrase
@@ -21,6 +22,16 @@ public struct AdvancedSettings {
         
         public var isEnoughFreeSpaceMode = true
         @Shared(.inMemory(.walletAccounts)) public var walletAccounts: [WalletAccount] = []
+
+        public var isKeystoneConnected: Bool {
+            for account in walletAccounts {
+                if account.vendor == .keystone {
+                    return true
+                }
+            }
+            
+            return false
+        }
 
         public init() { }
     }
@@ -39,7 +50,7 @@ public struct AdvancedSettings {
             switch action {
             case .operationAccessCheck(let operation):
                 switch operation {
-                case .chooseServer, .torSetup:
+                case .chooseServer, .disconnectHWWallet, .torSetup:
                     return .send(.operationAccessGranted(operation))
                 case .recoveryPhrase, .exportPrivateData, .exportTaxFile, .resetZashi:
                     return .run { send in

@@ -13,6 +13,7 @@ import AddKeystoneHWWallet
 import AddressBook
 import CurrencyConversionSetup
 import DeleteWallet
+import DisconnectHWWallet
 import ExportTransactionHistory
 import PrivateDataConsent
 import RecoveryPhraseDisplay
@@ -89,6 +90,8 @@ extension Settings {
                     state.path.append(.exportTransactionHistory(ExportTransactionHistory.State.initial))
                 case .chooseServer:
                     state.path.append(.chooseServerSetup(ServerSetup.State.initial))
+                case .disconnectHWWallet:
+                    state.path.append(.disconnectHWWallet(DisconnectHWWallet.State.initial))
                 case .torSetup:
                     var torSetupState = TorSetup.State.initial
                     torSetupState.isSettingsView = true

@@ -37,6 +37,7 @@ extension SDKSynchronizerClient: TestDependencyKey {
         isSyncing: unimplemented("\(Self.self).isSyncing", placeholder: false),
         isInitialized: unimplemented("\(Self.self).isInitialized", placeholder: false),
         importAccount: unimplemented("\(Self.self).importAccount", placeholder: nil),
+        deleteAccount: unimplemented("\(Self.self).deleteAccount"),
         rewind: unimplemented("\(Self.self).rewind", placeholder: Fail(error: "Error").eraseToAnyPublisher()),
         getAllTransactions: unimplemented("\(Self.self).getAllTransactions", placeholder: []),
         transactionStatesFromZcashTransactions: unimplemented("\(Self.self).transactionStatesFromZcashTransactions", placeholder: []),
@@ -91,6 +92,7 @@ extension SDKSynchronizerClient {
         isSyncing: { false },
         isInitialized: { false },
         importAccount: { _, _, _, _, _, _ in nil },
+        deleteAccount: { _ in },
         rewind: { _ in Empty<Void, Error>().eraseToAnyPublisher() },
         getAllTransactions: { _ in [] },
         transactionStatesFromZcashTransactions: { _, _ in [] },
@@ -147,6 +149,7 @@ extension SDKSynchronizerClient {
         isSyncing: @escaping () -> Bool = { false },
         isInitialized: @escaping () -> Bool = { false },
         importAccount: @escaping (String, [UInt8]?, Zip32AccountIndex?, AccountPurpose, String, String?) async throws -> AccountUUID? = { _, _, _, _, _, _ in nil },
+        deleteAccount: @escaping (AccountUUID) async throws -> Void = { _ in },
         rewind: @escaping (RewindPolicy) -> AnyPublisher<Void, Error> = { _ in return Empty<Void, Error>().eraseToAnyPublisher() },
         getAllTransactions: @escaping (AccountUUID?) -> IdentifiedArrayOf<TransactionState> = { _ in
             let mockedCleared: [TransactionStateMockHelper] = [
@@ -265,6 +268,7 @@ extension SDKSynchronizerClient {
             isSyncing: isSyncing,
             isInitialized: isInitialized,
             importAccount: importAccount,
+            deleteAccount: deleteAccount,
             rewind: rewind,
             getAllTransactions: getAllTransactions,
             transactionStatesFromZcashTransactions: transactionStatesFromZcashTransactions,

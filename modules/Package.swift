@@ -28,6 +28,7 @@ let package = Package(
         .library(name: "Deeplink", targets: ["Deeplink"]),
         .library(name: "DeeplinkWarning", targets: ["DeeplinkWarning"]),
         .library(name: "DeleteWallet", targets: ["DeleteWallet"]),
+        .library(name: "DisconnectHWWallet", targets: ["DisconnectHWWallet"]),
         .library(name: "DerivationTool", targets: ["DerivationTool"]),
         .library(name: "DiskSpaceChecker", targets: ["DiskSpaceChecker"]),
         .library(name: "ExchangeRate", targets: ["ExchangeRate"]),
@@ -99,7 +100,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-case-paths", from: "1.7.2"),
         .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.2"),
         .package(url: "https://github.com/zcash-hackworks/MnemonicSwift", from: "2.2.5"),
-        .package(url: "https://github.com/zcash/zcash-swift-wallet-sdk", from: "2.4.8"),
+        .package(url: "https://github.com/zcash/zcash-swift-wallet-sdk", from: "2.4.9"),
         .package(url: "https://github.com/flexa/flexa-ios.git", exact: "1.1.4"),
         .package(url: "https://github.com/pacu/zcash-swift-payment-uri", from: "1.0.1"),
         .package(url: "https://github.com/airbnb/lottie-spm.git", from: "4.5.2"),
@@ -333,6 +334,20 @@ let package = Package(
                 .product(name: "ZcashLightClientKit", package: "zcash-swift-wallet-sdk")
             ],
             path: "Sources/Features/DeleteWallet"
+        ),
+        .target(
+            name: "DisconnectHWWallet",
+            dependencies: [
+                "Generated",
+                "Models",
+                "SDKSynchronizer",
+                "SupportDataGenerator",
+                "UIComponents",
+                "WalletStorage",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "ZcashLightClientKit", package: "zcash-swift-wallet-sdk")
+            ],
+            path: "Sources/Features/DisconnectHWWallet"
         ),
         .target(
             name: "DerivationTool",
@@ -822,6 +837,7 @@ let package = Package(
                 "AudioServices",
                 "CurrencyConversionSetup",
                 "DeleteWallet",
+                "DisconnectHWWallet",
                 "ExportTransactionHistory",
                 "Generated",
                 "LocalAuthenticationHandler",

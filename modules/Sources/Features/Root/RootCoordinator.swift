@@ -200,6 +200,22 @@ extension Root {
 
                 // MARK: - Reset Zashi
 
+            case .settings(.path(.element(id: _, action: .disconnectHWWallet(.disconnectFinished)))):
+                state.path = nil
+                state.$selectedWalletAccount.withLock { $0 = nil }
+                return .run { send in
+                    let walletAccounts = try await sdkSynchronizer.walletAccounts()
+                    await send(.initialization(.loadedWalletAccounts(walletAccounts)))
+                    await send(.fetchTransactionsForTheSelectedAccount)
+                    await send(.home(.walletBalances(.updateBalances)))
+                    /// The TCA spins an async Task in `fetchTransactionsForTheSelectedAccount` and it's needed to run
+                    /// before next code here therefore Task is asleep for 0.01s. The purpose is also to not block the main thread
+                    /// so await of mainQueue is not used.
+                    try? await Task.sleep(nanoseconds: 10_000_000)
+                    await send(.resolveMetadataEncryptionKeys)
+                    await send(.loadUserMetadata)
+                }
+
             case .settings(.path(.element(id: _, action: .resetZashi(.deleteTapped(let areMetadataPreserved))))):
                 return .send(.initialization(.resetZashiRequest(areMetadataPreserved)))
 

@@ -15,6 +15,7 @@ import AddKeystoneHWWallet
 import AddressBook
 import CurrencyConversionSetup
 import DeleteWallet
+import DisconnectHWWallet
 import ExportTransactionHistory
 import PrivateDataConsent
 import RecoveryPhraseDisplay
@@ -35,6 +36,7 @@ public struct Settings {
         case addressBookContact(AddressBook)
         case advancedSettings(AdvancedSettings)
         case chooseServerSetup(ServerSetup)
+        case disconnectHWWallet(DisconnectHWWallet)
         case currencyConversionSetup(CurrencyConversionSetup)
         case exportPrivateData(PrivateDataConsent)
         case exportTransactionHistory(ExportTransactionHistory)
