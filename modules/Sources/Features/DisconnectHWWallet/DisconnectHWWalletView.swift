@@ -108,7 +108,7 @@ public struct DisconnectHWWalletView: View {
                             .offset(x: 18, y: 18)
                             .background {
                                 Circle()
-                                    .fill(Design.Surfaces.bgPrimary.color(colorScheme))
+                                    .fill(Design.Surfaces.fgPrimary.color(colorScheme))
                                     .frame(width: 18, height: 18)
                                     .offset(x: 18, y: 18)
                             }
@@ -130,10 +130,10 @@ public struct DisconnectHWWalletView: View {
             .padding(.vertical, Design.Spacing._xl)
             .background {
                 RoundedRectangle(cornerRadius: Design.Radius._xl)
-                    .fill(Design.Surfaces.bgPrimary.color(colorScheme))
+                    .fill(Design.Surfaces.fgPrimary.color(colorScheme))
                     .overlay {
                         RoundedRectangle(cornerRadius: Design.Radius._xl)
-                            .fill(Design.Surfaces.strokeSecondary.color(colorScheme))
+                            .stroke(Design.Surfaces.strokeSecondary.color(colorScheme))
                     }
             }
 

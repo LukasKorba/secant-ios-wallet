@@ -104,7 +104,7 @@ public struct DisconnectHWWallet {
 
             case .dismissSheet:
                 state.isSheetUp = false
-                state.isProcessing = true
+                state.isProcessing = false
                 return .none
                 
             case .tryAgain:

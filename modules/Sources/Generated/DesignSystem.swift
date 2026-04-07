@@ -19,6 +19,7 @@ public enum Design: Colorable {
     // MARK: Color Variables
     
     public enum Surfaces: Colorable {
+        case fgPrimary
         case bgPrimary
         case bgAdjust
         case bgSecondary
@@ -439,6 +440,7 @@ public extension Design {
 public extension Design.Surfaces {
     func color(_ colorScheme: ColorScheme) -> Color {
         switch self {
+        case .fgPrimary: return Design.col(Asset.Colors.ZDesign.Base.bone.color, Asset.Colors.ZDesign.shark800.color, colorScheme)
         case .bgPrimary: return Design.col(Asset.Colors.ZDesign.Base.bone.color, Asset.Colors.ZDesign.Base.midnight.color, colorScheme)
         case .bgAdjust: return Design.col(Asset.Colors.ZDesign.Base.concrete.color, Asset.Colors.ZDesign.sharkShades02dp.color, colorScheme)
         case .bgSecondary: return Design.col(Asset.Colors.ZDesign.gray50.color, Asset.Colors.ZDesign.shark900.color, colorScheme)
