@@ -50,9 +50,9 @@ public struct AdvancedSettings {
             switch action {
             case .operationAccessCheck(let operation):
                 switch operation {
-                case .chooseServer, .disconnectHWWallet, .torSetup:
+                case .chooseServer, .torSetup:
                     return .send(.operationAccessGranted(operation))
-                case .recoveryPhrase, .exportPrivateData, .exportTaxFile, .resetZashi:
+                case .recoveryPhrase, .exportPrivateData, .exportTaxFile, .resetZashi, .disconnectHWWallet:
                     return .run { send in
                         if await localAuthentication.authenticate() {
                             await send(.operationAccessGranted(operation))
