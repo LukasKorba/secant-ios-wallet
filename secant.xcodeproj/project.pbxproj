@@ -1108,7 +1108,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "swiftgen_version=\"SwiftGen v6.6.2 (Stencil v0.15.1, StencilSwiftKit v2.10.1, SwiftGenKit v6.6.2)\"\n\nif which swiftgen >/dev/null; then\n  if [[ $(swiftgen --version) != $swiftgen_version ]]; then\n    echo \"warning: Compatible SwiftGen version not installed, download version $swiftgen_version. Currently installed version is $(swiftgen --version)\"\n  fi\n  \n  echo \"Running swiftgen\" \n  swiftgen config run --config modules/swiftgen.yml\nelse\n  echo \"warning: swiftgen not installed\"\nfi\n";
+			shellScript = "swiftgen_version=\"SwiftGen v6.6.3 (Stencil v0.15.1, StencilSwiftKit v2.10.1, SwiftGenKit v6.6.3)\"\n\nif which swiftgen >/dev/null; then\n  if [[ $(swiftgen --version) != $swiftgen_version ]]; then\n    echo \"warning: Compatible SwiftGen version not installed, download version $swiftgen_version. Currently installed version is $(swiftgen --version)\"\n  fi\n  \n  echo \"Running swiftgen\" \n  swiftgen config run --config modules/swiftgen.yml\nelse\n  echo \"warning: swiftgen not installed\"\nfi\n";
 		};
 		34968BEE2ABDC6FA0027F495 /* Swiftgen */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1127,7 +1127,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "swiftgen_version=\"SwiftGen v6.6.2 (Stencil v0.15.1, StencilSwiftKit v2.10.1, SwiftGenKit v6.6.2)\"\n\nif which swiftgen >/dev/null; then\n  if [[ $(swiftgen --version) != $swiftgen_version ]]; then\n    echo \"warning: Compatible SwiftGen version not installed, download version $swiftgen_version. Currently installed version is $(swiftgen --version)\"\n  fi\n  \n  echo \"Running swiftgen\" \n  swiftgen config run --config modules/swiftgen.yml\nelse\n  echo \"warning: swiftgen not installed\"\nfi\n";
+			shellScript = "swiftgen_version=\"SwiftGen v6.6.3 (Stencil v0.15.1, StencilSwiftKit v2.10.1, SwiftGenKit v6.6.3)\"\n\nif which swiftgen >/dev/null; then\n  if [[ $(swiftgen --version) != $swiftgen_version ]]; then\n    echo \"warning: Compatible SwiftGen version not installed, download version $swiftgen_version. Currently installed version is $(swiftgen --version)\"\n  fi\n  \n  echo \"Running swiftgen\" \n  swiftgen config run --config modules/swiftgen.yml\nelse\n  echo \"warning: swiftgen not installed\"\nfi\n";
 		};
 		6696BA8726F0B1D200D5C875 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1186,7 +1186,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "swiftgen_version=\"SwiftGen v6.6.2 (Stencil v0.15.1, StencilSwiftKit v2.10.1, SwiftGenKit v6.6.2)\"\n\nif which swiftgen >/dev/null; then\n  if [[ $(swiftgen --version) != $swiftgen_version ]]; then\n    echo \"warning: Compatible SwiftGen version not installed, download version $swiftgen_version. Currently installed version is $(swiftgen --version)\"\n  fi\n  \n  echo \"Running swiftgen\" \n  swiftgen config run --config modules/swiftgen.yml\nelse\n  echo \"warning: swiftgen not installed\"\nfi\n";
+			shellScript = "swiftgen_version=\"SwiftGen v6.6.3 (Stencil v0.15.1, StencilSwiftKit v2.10.1, SwiftGenKit v6.6.3)\"\n\nif which swiftgen >/dev/null; then\n  if [[ $(swiftgen --version) != $swiftgen_version ]]; then\n    echo \"warning: Compatible SwiftGen version not installed, download version $swiftgen_version. Currently installed version is $(swiftgen --version)\"\n  fi\n  \n  echo \"Running swiftgen\" \n  swiftgen config run --config modules/swiftgen.yml\nelse\n  echo \"warning: swiftgen not installed\"\nfi\n";
 		};
 		9E41FFA42CB2814500783CFD /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1224,7 +1224,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "swiftgen_version=\"SwiftGen v6.6.2 (Stencil v0.15.1, StencilSwiftKit v2.10.1, SwiftGenKit v6.6.2)\"\n\nif which swiftgen >/dev/null; then\n  if [[ $(swiftgen --version) != $swiftgen_version ]]; then\n    echo \"warning: Compatible SwiftGen version not installed, download version $swiftgen_version. Currently installed version is $(swiftgen --version)\"\n  fi\n  \n  echo \"Running swiftgen\" \n  swiftgen config run --config modules/swiftgen.yml\nelse\n  echo \"warning: swiftgen not installed\"\nfi\n";
+			shellScript = "swiftgen_version=\"SwiftGen v6.6.3 (Stencil v0.15.1, StencilSwiftKit v2.10.1, SwiftGenKit v6.6.3)\"\n\nif which swiftgen >/dev/null; then\n  if [[ $(swiftgen --version) != $swiftgen_version ]]; then\n    echo \"warning: Compatible SwiftGen version not installed, download version $swiftgen_version. Currently installed version is $(swiftgen --version)\"\n  fi\n  \n  echo \"Running swiftgen\" \n  swiftgen config run --config modules/swiftgen.yml\nelse\n  echo \"warning: swiftgen not installed\"\nfi\n";
 		};
 		9E4AB2A02BA1BEE900F5D6DB /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1346,7 +1346,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "swiftgen_version=\"SwiftGen v6.6.2 (Stencil v0.15.1, StencilSwiftKit v2.10.1, SwiftGenKit v6.6.2)\"\n\nif which swiftgen >/dev/null; then\n  if [[ $(swiftgen --version) != $swiftgen_version ]]; then\n    echo \"warning: Compatible SwiftGen version not installed, download version $swiftgen_version. Currently installed version is $(swiftgen --version)\"\n  fi\n  \n  echo \"Running swiftgen\" \n  swiftgen config run --config modules/swiftgen.yml\nelse\n  echo \"warning: swiftgen not installed\"\nfi\n";
+			shellScript = "swiftgen_version=\"SwiftGen v6.6.3 (Stencil v0.15.1, StencilSwiftKit v2.10.1, SwiftGenKit v6.6.3)\"\n\nif which swiftgen >/dev/null; then\n  if [[ $(swiftgen --version) != $swiftgen_version ]]; then\n    echo \"warning: Compatible SwiftGen version not installed, download version $swiftgen_version. Currently installed version is $(swiftgen --version)\"\n  fi\n  \n  echo \"Running swiftgen\" \n  swiftgen config run --config modules/swiftgen.yml\nelse\n  echo \"warning: swiftgen not installed\"\nfi\n";
 		};
 		9E5AB46B2C94777800065483 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
